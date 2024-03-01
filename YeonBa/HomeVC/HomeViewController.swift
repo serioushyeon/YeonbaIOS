@@ -10,8 +10,8 @@ import SnapKit
 import Then
 
 class HomeViewController: UIViewController {
-
-    override func viewDidLoad() {
+    
+    override func viewDidLoad() { //함수만 작성 !!
         super.viewDidLoad()
         configUI()
         navigationControl()

@@ -1,5 +1,5 @@
 PODS:
-  - SnapKit (5.6.0)
+  - SnapKit (5.7.1)
   - Then (3.0.0)
 
 DEPENDENCIES:
@@ -12,7 +12,7 @@ SPEC REPOS:
     - Then
 
 SPEC CHECKSUMS:
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
 PODFILE CHECKSUM: 2bd2c394812deaa37d725c371b13f6b439d83023

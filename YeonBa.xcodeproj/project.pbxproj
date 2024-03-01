@@ -14,6 +14,7 @@
 		589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32E2B9074E7003F03C5 /* CollectViewController.swift */; };
 		589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3312B90750D003F03C5 /* ChattingViewController.swift */; };
 		589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3342B907528003F03C5 /* SettingViewController.swift */; };
+		589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		589DF32E2B9074E7003F03C5 /* CollectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectViewController.swift; sourceTree = "<group>"; };
 		589DF3312B90750D003F03C5 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		589DF3342B907528003F03C5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,7 +111,6 @@
 				9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */,
 				1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -189,6 +190,7 @@
 				58D15E9D2B90585A00EB74E9 /* LaunchScreen.storyboard */,
 				58D15EA02B90585A00EB74E9 /* Info.plist */,
 				589DF32A2B9074B0003F03C5 /* tabBarController.swift */,
+				589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */,
 			);
 			path = YeonBa;
 			sourceTree = "<group>";
@@ -458,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
 				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
