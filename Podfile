@@ -8,6 +8,7 @@ target 'YeonBa' do
   # Pods for YeonBa
 	pod 'SnapKit'
 	pod 'Then'
+	pod 'Kingfisher'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing
