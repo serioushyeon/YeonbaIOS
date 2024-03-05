@@ -1,17 +1,17 @@
 //
-//  tabbarController.swift
-//  yeonba
+//  tabBarController.swift
+//  YeonBa
 //
-//  Created by 심규민 on 2/29/24.
+//  Created by 김민솔 on 2/29/24.
 //
 
 import UIKit
 
-class tabbarController: UITabBarController {
+class tabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
     }
     

@@ -7,303 +7,320 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CD2E5C4D44F036D19EBBDDE /* Pods_yeonbaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DBB159A14455619B6835215 /* Pods_yeonbaTests.framework */; };
-		679B146CD0D274034139FA8A /* Pods_yeonba.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAD4A534BF4E1C4189DF421 /* Pods_yeonba.framework */; };
-		C180EF7D2B905AD200673C29 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180EF7C2B905AD200673C29 /* HomeViewController.swift */; };
-		C180EF7F2B905AF300673C29 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180EF7E2B905AF300673C29 /* SearchViewController.swift */; };
-		C180EF832B905B4A00673C29 /* CollectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180EF822B905B4A00673C29 /* CollectViewController.swift */; };
-		C180EF852B905B6400673C29 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180EF842B905B6400673C29 /* ChattingViewController.swift */; };
-		C180EF892B905BB000673C29 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180EF882B905BB000673C29 /* SettingViewController.swift */; };
-		C180EF8C2B9064BF00673C29 /* tabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C180EF8B2B9064BF00673C29 /* tabbarController.swift */; };
-		C1C2A5E62B8C6D7E005B0FCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2A5E52B8C6D7E005B0FCC /* AppDelegate.swift */; };
-		C1C2A5E82B8C6D7E005B0FCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2A5E72B8C6D7E005B0FCC /* SceneDelegate.swift */; };
-		C1C2A5EF2B8C6D7F005B0FCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1C2A5EE2B8C6D7F005B0FCC /* Assets.xcassets */; };
-		C1C2A5F22B8C6D7F005B0FCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1C2A5F02B8C6D7F005B0FCC /* LaunchScreen.storyboard */; };
-		C1C2A5FD2B8C6D7F005B0FCC /* yeonbaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2A5FC2B8C6D7F005B0FCC /* yeonbaTests.swift */; };
-		C1C2A6072B8C6D7F005B0FCC /* yeonbaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2A6062B8C6D7F005B0FCC /* yeonbaUITests.swift */; };
-		C1C2A6092B8C6D7F005B0FCC /* yeonbaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2A6082B8C6D7F005B0FCC /* yeonbaUITestsLaunchTests.swift */; };
-		F1B481431A19E3E0FCFDE218 /* Pods_yeonba_yeonbaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B228304055BC0E444311FE /* Pods_yeonba_yeonbaUITests.framework */; };
+		34B37BAFEBEFCEE711013DFA /* Pods_YeonBa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F8400511F4316517C02537 /* Pods_YeonBa.framework */; };
+		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
+		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
+		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
+		589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32E2B9074E7003F03C5 /* CollectViewController.swift */; };
+		589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3312B90750D003F03C5 /* ChattingViewController.swift */; };
+		589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3342B907528003F03C5 /* SettingViewController.swift */; };
+		589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */; };
+		589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */; };
+		589DF37B2B96052A003F03C5 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */; };
+		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
+		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
+		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
+		58D15E9F2B90585A00EB74E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9D2B90585A00EB74E9 /* LaunchScreen.storyboard */; };
+		58D15EAA2B90585B00EB74E9 /* YeonBaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EA92B90585B00EB74E9 /* YeonBaTests.swift */; };
+		58D15EB42B90585B00EB74E9 /* YeonBaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EB32B90585B00EB74E9 /* YeonBaUITests.swift */; };
+		58D15EB62B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */; };
+		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
+		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C1C2A5F92B8C6D7F005B0FCC /* PBXContainerItemProxy */ = {
+		58D15EA62B90585B00EB74E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C1C2A5DA2B8C6D7E005B0FCC /* Project object */;
+			containerPortal = 58D15E872B90585700EB74E9 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C1C2A5E12B8C6D7E005B0FCC;
-			remoteInfo = yeonba;
+			remoteGlobalIDString = 58D15E8E2B90585700EB74E9;
+			remoteInfo = YeonBa;
 		};
-		C1C2A6032B8C6D7F005B0FCC /* PBXContainerItemProxy */ = {
+		58D15EB02B90585B00EB74E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C1C2A5DA2B8C6D7E005B0FCC /* Project object */;
+			containerPortal = 58D15E872B90585700EB74E9 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C1C2A5E12B8C6D7E005B0FCC;
-			remoteInfo = yeonba;
+			remoteGlobalIDString = 58D15E8E2B90585700EB74E9;
+			remoteInfo = YeonBa;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E16C548600C3D3F172F975E /* Pods-yeonba-yeonbaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yeonba-yeonbaUITests.debug.xcconfig"; path = "Target Support Files/Pods-yeonba-yeonbaUITests/Pods-yeonba-yeonbaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		3DF7E8471E631874F1C73097 /* Pods-yeonba.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yeonba.release.xcconfig"; path = "Target Support Files/Pods-yeonba/Pods-yeonba.release.xcconfig"; sourceTree = "<group>"; };
-		5DBB159A14455619B6835215 /* Pods_yeonbaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yeonbaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89D0A6422FE697656CC576F3 /* Pods-yeonbaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yeonbaTests.debug.xcconfig"; path = "Target Support Files/Pods-yeonbaTests/Pods-yeonbaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		978FFE13F4813B455B3EDE49 /* Pods-yeonba.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yeonba.debug.xcconfig"; path = "Target Support Files/Pods-yeonba/Pods-yeonba.debug.xcconfig"; sourceTree = "<group>"; };
-		C180EF7C2B905AD200673C29 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		C180EF7E2B905AF300673C29 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		C180EF822B905B4A00673C29 /* CollectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectViewController.swift; sourceTree = "<group>"; };
-		C180EF842B905B6400673C29 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
-		C180EF882B905BB000673C29 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		C180EF8B2B9064BF00673C29 /* tabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabbarController.swift; sourceTree = "<group>"; };
-		C1C2A5E22B8C6D7E005B0FCC /* yeonba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yeonba.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1C2A5E52B8C6D7E005B0FCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C1C2A5E72B8C6D7E005B0FCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C1C2A5EE2B8C6D7F005B0FCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C1C2A5F12B8C6D7F005B0FCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C1C2A5F32B8C6D7F005B0FCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1C2A5F82B8C6D7F005B0FCC /* yeonbaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yeonbaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1C2A5FC2B8C6D7F005B0FCC /* yeonbaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yeonbaTests.swift; sourceTree = "<group>"; };
-		C1C2A6022B8C6D7F005B0FCC /* yeonbaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yeonbaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1C2A6062B8C6D7F005B0FCC /* yeonbaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yeonbaUITests.swift; sourceTree = "<group>"; };
-		C1C2A6082B8C6D7F005B0FCC /* yeonbaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yeonbaUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		DEAD4A534BF4E1C4189DF421 /* Pods_yeonba.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yeonba.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8B228304055BC0E444311FE /* Pods_yeonba_yeonbaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yeonba_yeonbaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA086D9AEF48419B7C4DD337 /* Pods-yeonbaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yeonbaTests.release.xcconfig"; path = "Target Support Files/Pods-yeonbaTests/Pods-yeonbaTests.release.xcconfig"; sourceTree = "<group>"; };
-		EA60A48507B6957DA77315FA /* Pods-yeonba-yeonbaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yeonba-yeonbaUITests.release.xcconfig"; path = "Target Support Files/Pods-yeonba-yeonbaUITests/Pods-yeonba-yeonbaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		135D41D6288D154A8F7BD06C /* Pods-YeonBa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.debug.xcconfig"; sourceTree = "<group>"; };
+		1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.release.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.release.xcconfig"; sourceTree = "<group>"; };
+		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
+		589DF32E2B9074E7003F03C5 /* CollectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectViewController.swift; sourceTree = "<group>"; };
+		589DF3312B90750D003F03C5 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		589DF3342B907528003F03C5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		58D15E9B2B90585A00EB74E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		58D15E9E2B90585A00EB74E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		58D15EA02B90585A00EB74E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58D15EA52B90585B00EB74E9 /* YeonBaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YeonBaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D15EA92B90585B00EB74E9 /* YeonBaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaTests.swift; sourceTree = "<group>"; };
+		58D15EAF2B90585B00EB74E9 /* YeonBaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YeonBaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D15EB32B90585B00EB74E9 /* YeonBaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaUITests.swift; sourceTree = "<group>"; };
+		58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
+		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa_YeonBaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C1C2A5DF2B8C6D7E005B0FCC /* Frameworks */ = {
+		58D15E8C2B90585700EB74E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				679B146CD0D274034139FA8A /* Pods_yeonba.framework in Frameworks */,
+				34B37BAFEBEFCEE711013DFA /* Pods_YeonBa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1C2A5F52B8C6D7F005B0FCC /* Frameworks */ = {
+		58D15EA22B90585B00EB74E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CD2E5C4D44F036D19EBBDDE /* Pods_yeonbaTests.framework in Frameworks */,
+				AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1C2A5FF2B8C6D7F005B0FCC /* Frameworks */ = {
+		58D15EAC2B90585B00EB74E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1B481431A19E3E0FCFDE218 /* Pods_yeonba_yeonbaUITests.framework in Frameworks */,
+				EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		44B0E2E49A66FE5D0D1DF5BD /* Pods */ = {
+		44FA544D8692B790EA8732E3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				978FFE13F4813B455B3EDE49 /* Pods-yeonba.debug.xcconfig */,
-				3DF7E8471E631874F1C73097 /* Pods-yeonba.release.xcconfig */,
-				2E16C548600C3D3F172F975E /* Pods-yeonba-yeonbaUITests.debug.xcconfig */,
-				EA60A48507B6957DA77315FA /* Pods-yeonba-yeonbaUITests.release.xcconfig */,
-				89D0A6422FE697656CC576F3 /* Pods-yeonbaTests.debug.xcconfig */,
-				EA086D9AEF48419B7C4DD337 /* Pods-yeonbaTests.release.xcconfig */,
+				135D41D6288D154A8F7BD06C /* Pods-YeonBa.debug.xcconfig */,
+				6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */,
+				763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */,
+				467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */,
+				9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */,
+				1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		86722F33F66595439768D89B /* Frameworks */ = {
+		589DF3242B907311003F03C5 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
-				DEAD4A534BF4E1C4189DF421 /* Pods_yeonba.framework */,
-				E8B228304055BC0E444311FE /* Pods_yeonba_yeonbaUITests.framework */,
-				5DBB159A14455619B6835215 /* Pods_yeonbaTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C180EF802B905B0000673C29 /* HomeVC */ = {
-			isa = PBXGroup;
-			children = (
-				C180EF7C2B905AD200673C29 /* HomeViewController.swift */,
+				589DF3252B9073BB003F03C5 /* HomeViewController.swift */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
 		};
-		C180EF812B905B1B00673C29 /* SearchVC */ = {
+		589DF3272B907469003F03C5 /* SearchVC */ = {
 			isa = PBXGroup;
 			children = (
-				C180EF7E2B905AF300673C29 /* SearchViewController.swift */,
+				589DF3282B90747B003F03C5 /* SearchViewController.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
 		};
-		C180EF862B905B6800673C29 /* ChatVC */ = {
+		589DF32C2B9074C5003F03C5 /* CollectVC */ = {
 			isa = PBXGroup;
 			children = (
-				C180EF842B905B6400673C29 /* ChattingViewController.swift */,
-			);
-			path = ChatVC;
-			sourceTree = "<group>";
-		};
-		C180EF872B905B8100673C29 /* CollectVC */ = {
-			isa = PBXGroup;
-			children = (
-				C180EF822B905B4A00673C29 /* CollectViewController.swift */,
+				589DF32E2B9074E7003F03C5 /* CollectViewController.swift */,
 			);
 			path = CollectVC;
 			sourceTree = "<group>";
 		};
-		C180EF8A2B905BE500673C29 /* SetVC */ = {
+		589DF3302B9074FE003F03C5 /* ChatVC */ = {
 			isa = PBXGroup;
 			children = (
-				C180EF882B905BB000673C29 /* SettingViewController.swift */,
+				589DF3312B90750D003F03C5 /* ChattingViewController.swift */,
 			);
-			path = SetVC;
+			path = ChatVC;
 			sourceTree = "<group>";
 		};
-		C1C2A5D92B8C6D7E005B0FCC = {
+		589DF3332B907517003F03C5 /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
-				C1C2A5E42B8C6D7E005B0FCC /* yeonba */,
-				C1C2A5FB2B8C6D7F005B0FCC /* yeonbaTests */,
-				C1C2A6052B8C6D7F005B0FCC /* yeonbaUITests */,
-				C1C2A5E32B8C6D7E005B0FCC /* Products */,
-				44B0E2E49A66FE5D0D1DF5BD /* Pods */,
-				86722F33F66595439768D89B /* Frameworks */,
+				589DF3342B907528003F03C5 /* SettingViewController.swift */,
+			);
+			path = SettingVC;
+			sourceTree = "<group>";
+		};
+		589DF3742B95ECCB003F03C5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */,
+				589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		58D15E862B90585700EB74E9 = {
+			isa = PBXGroup;
+			children = (
+				58D15E912B90585700EB74E9 /* YeonBa */,
+				58D15EA82B90585B00EB74E9 /* YeonBaTests */,
+				58D15EB22B90585B00EB74E9 /* YeonBaUITests */,
+				58D15E902B90585700EB74E9 /* Products */,
+				44FA544D8692B790EA8732E3 /* Pods */,
+				73DBD3DD5A263E9104BB9837 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		C1C2A5E32B8C6D7E005B0FCC /* Products */ = {
+		58D15E902B90585700EB74E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C1C2A5E22B8C6D7E005B0FCC /* yeonba.app */,
-				C1C2A5F82B8C6D7F005B0FCC /* yeonbaTests.xctest */,
-				C1C2A6022B8C6D7F005B0FCC /* yeonbaUITests.xctest */,
+				58D15E8F2B90585700EB74E9 /* YeonBa.app */,
+				58D15EA52B90585B00EB74E9 /* YeonBaTests.xctest */,
+				58D15EAF2B90585B00EB74E9 /* YeonBaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C1C2A5E42B8C6D7E005B0FCC /* yeonba */ = {
+		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
-				C180EF8A2B905BE500673C29 /* SetVC */,
-				C180EF872B905B8100673C29 /* CollectVC */,
-				C180EF862B905B6800673C29 /* ChatVC */,
-				C180EF812B905B1B00673C29 /* SearchVC */,
-				C180EF802B905B0000673C29 /* HomeVC */,
-				C1C2A5E52B8C6D7E005B0FCC /* AppDelegate.swift */,
-				C1C2A5E72B8C6D7E005B0FCC /* SceneDelegate.swift */,
-				C1C2A5EE2B8C6D7F005B0FCC /* Assets.xcassets */,
-				C1C2A5F02B8C6D7F005B0FCC /* LaunchScreen.storyboard */,
-				C1C2A5F32B8C6D7F005B0FCC /* Info.plist */,
-				C180EF8B2B9064BF00673C29 /* tabbarController.swift */,
+				589DF3742B95ECCB003F03C5 /* Fonts */,
+				589DF3332B907517003F03C5 /* SettingVC */,
+				589DF3302B9074FE003F03C5 /* ChatVC */,
+				589DF32C2B9074C5003F03C5 /* CollectVC */,
+				589DF3272B907469003F03C5 /* SearchVC */,
+				589DF3242B907311003F03C5 /* HomeVC */,
+				58D15E922B90585700EB74E9 /* AppDelegate.swift */,
+				58D15E942B90585700EB74E9 /* SceneDelegate.swift */,
+				58D15E9B2B90585A00EB74E9 /* Assets.xcassets */,
+				58D15E9D2B90585A00EB74E9 /* LaunchScreen.storyboard */,
+				58D15EA02B90585A00EB74E9 /* Info.plist */,
+				589DF32A2B9074B0003F03C5 /* tabBarController.swift */,
+				589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */,
 			);
-			path = yeonba;
+			path = YeonBa;
 			sourceTree = "<group>";
 		};
-		C1C2A5FB2B8C6D7F005B0FCC /* yeonbaTests */ = {
+		58D15EA82B90585B00EB74E9 /* YeonBaTests */ = {
 			isa = PBXGroup;
 			children = (
-				C1C2A5FC2B8C6D7F005B0FCC /* yeonbaTests.swift */,
+				58D15EA92B90585B00EB74E9 /* YeonBaTests.swift */,
 			);
-			path = yeonbaTests;
+			path = YeonBaTests;
 			sourceTree = "<group>";
 		};
-		C1C2A6052B8C6D7F005B0FCC /* yeonbaUITests */ = {
+		58D15EB22B90585B00EB74E9 /* YeonBaUITests */ = {
 			isa = PBXGroup;
 			children = (
-				C1C2A6062B8C6D7F005B0FCC /* yeonbaUITests.swift */,
-				C1C2A6082B8C6D7F005B0FCC /* yeonbaUITestsLaunchTests.swift */,
+				58D15EB32B90585B00EB74E9 /* YeonBaUITests.swift */,
+				58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */,
 			);
-			path = yeonbaUITests;
+			path = YeonBaUITests;
+			sourceTree = "<group>";
+		};
+		73DBD3DD5A263E9104BB9837 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87F8400511F4316517C02537 /* Pods_YeonBa.framework */,
+				AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */,
+				FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C1C2A5E12B8C6D7E005B0FCC /* yeonba */ = {
+		58D15E8E2B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C1C2A60C2B8C6D7F005B0FCC /* Build configuration list for PBXNativeTarget "yeonba" */;
+			buildConfigurationList = 58D15EB92B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBa" */;
 			buildPhases = (
-				BC2BD3036B568913F1E9BA30 /* [CP] Check Pods Manifest.lock */,
-				C1C2A5DE2B8C6D7E005B0FCC /* Sources */,
-				C1C2A5DF2B8C6D7E005B0FCC /* Frameworks */,
-				C1C2A5E02B8C6D7E005B0FCC /* Resources */,
-				57AAAF5E7F4B4F0DB21FF081 /* [CP] Embed Pods Frameworks */,
+				1B7A92FE6414AE7B2918BF00 /* [CP] Check Pods Manifest.lock */,
+				58D15E8B2B90585700EB74E9 /* Sources */,
+				58D15E8C2B90585700EB74E9 /* Frameworks */,
+				58D15E8D2B90585700EB74E9 /* Resources */,
+				76E1B181A9E22DF7E94EF563 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = yeonba;
-			productName = yeonba;
-			productReference = C1C2A5E22B8C6D7E005B0FCC /* yeonba.app */;
+			name = YeonBa;
+			productName = YeonBa;
+			productReference = 58D15E8F2B90585700EB74E9 /* YeonBa.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C1C2A5F72B8C6D7F005B0FCC /* yeonbaTests */ = {
+		58D15EA42B90585B00EB74E9 /* YeonBaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C1C2A60F2B8C6D7F005B0FCC /* Build configuration list for PBXNativeTarget "yeonbaTests" */;
+			buildConfigurationList = 58D15EBC2B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBaTests" */;
 			buildPhases = (
-				4A372F3DC1672D6950BF7209 /* [CP] Check Pods Manifest.lock */,
-				C1C2A5F42B8C6D7F005B0FCC /* Sources */,
-				C1C2A5F52B8C6D7F005B0FCC /* Frameworks */,
-				C1C2A5F62B8C6D7F005B0FCC /* Resources */,
+				56C77D31A860C1B40AE168B8 /* [CP] Check Pods Manifest.lock */,
+				58D15EA12B90585B00EB74E9 /* Sources */,
+				58D15EA22B90585B00EB74E9 /* Frameworks */,
+				58D15EA32B90585B00EB74E9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C1C2A5FA2B8C6D7F005B0FCC /* PBXTargetDependency */,
+				58D15EA72B90585B00EB74E9 /* PBXTargetDependency */,
 			);
-			name = yeonbaTests;
-			productName = yeonbaTests;
-			productReference = C1C2A5F82B8C6D7F005B0FCC /* yeonbaTests.xctest */;
+			name = YeonBaTests;
+			productName = YeonBaTests;
+			productReference = 58D15EA52B90585B00EB74E9 /* YeonBaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C1C2A6012B8C6D7F005B0FCC /* yeonbaUITests */ = {
+		58D15EAE2B90585B00EB74E9 /* YeonBaUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C1C2A6122B8C6D7F005B0FCC /* Build configuration list for PBXNativeTarget "yeonbaUITests" */;
+			buildConfigurationList = 58D15EBF2B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBaUITests" */;
 			buildPhases = (
-				A4BFBB11828AEF3FC8D84923 /* [CP] Check Pods Manifest.lock */,
-				C1C2A5FE2B8C6D7F005B0FCC /* Sources */,
-				C1C2A5FF2B8C6D7F005B0FCC /* Frameworks */,
-				C1C2A6002B8C6D7F005B0FCC /* Resources */,
-				D8970BE88DDC8F274CF3DB9F /* [CP] Embed Pods Frameworks */,
+				91C06BE247946B0797A11B65 /* [CP] Check Pods Manifest.lock */,
+				58D15EAB2B90585B00EB74E9 /* Sources */,
+				58D15EAC2B90585B00EB74E9 /* Frameworks */,
+				58D15EAD2B90585B00EB74E9 /* Resources */,
+				919245BE675D92B22F168E41 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C1C2A6042B8C6D7F005B0FCC /* PBXTargetDependency */,
+				58D15EB12B90585B00EB74E9 /* PBXTargetDependency */,
 			);
-			name = yeonbaUITests;
-			productName = yeonbaUITests;
-			productReference = C1C2A6022B8C6D7F005B0FCC /* yeonbaUITests.xctest */;
+			name = YeonBaUITests;
+			productName = YeonBaUITests;
+			productReference = 58D15EAF2B90585B00EB74E9 /* YeonBaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C1C2A5DA2B8C6D7E005B0FCC /* Project object */ = {
+		58D15E872B90585700EB74E9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					C1C2A5E12B8C6D7E005B0FCC = {
-						CreatedOnToolsVersion = 15.1;
+					58D15E8E2B90585700EB74E9 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
-					C1C2A5F72B8C6D7F005B0FCC = {
-						CreatedOnToolsVersion = 15.1;
-						TestTargetID = C1C2A5E12B8C6D7E005B0FCC;
+					58D15EA42B90585B00EB74E9 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 58D15E8E2B90585700EB74E9;
 					};
-					C1C2A6012B8C6D7F005B0FCC = {
-						CreatedOnToolsVersion = 15.1;
-						TestTargetID = C1C2A5E12B8C6D7E005B0FCC;
+					58D15EAE2B90585B00EB74E9 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 58D15E8E2B90585700EB74E9;
 					};
 				};
 			};
-			buildConfigurationList = C1C2A5DD2B8C6D7E005B0FCC /* Build configuration list for PBXProject "yeonba" */;
+			buildConfigurationList = 58D15E8A2B90585700EB74E9 /* Build configuration list for PBXProject "YeonBa" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -311,36 +328,38 @@
 				en,
 				Base,
 			);
-			mainGroup = C1C2A5D92B8C6D7E005B0FCC;
-			productRefGroup = C1C2A5E32B8C6D7E005B0FCC /* Products */;
+			mainGroup = 58D15E862B90585700EB74E9;
+			productRefGroup = 58D15E902B90585700EB74E9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C1C2A5E12B8C6D7E005B0FCC /* yeonba */,
-				C1C2A5F72B8C6D7F005B0FCC /* yeonbaTests */,
-				C1C2A6012B8C6D7F005B0FCC /* yeonbaUITests */,
+				58D15E8E2B90585700EB74E9 /* YeonBa */,
+				58D15EA42B90585B00EB74E9 /* YeonBaTests */,
+				58D15EAE2B90585B00EB74E9 /* YeonBaUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C1C2A5E02B8C6D7E005B0FCC /* Resources */ = {
+		58D15E8D2B90585700EB74E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1C2A5F22B8C6D7F005B0FCC /* LaunchScreen.storyboard in Resources */,
-				C1C2A5EF2B8C6D7F005B0FCC /* Assets.xcassets in Resources */,
+				589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */,
+				589DF37B2B96052A003F03C5 /* Pretendard-Regular.otf in Resources */,
+				58D15E9F2B90585A00EB74E9 /* LaunchScreen.storyboard in Resources */,
+				58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1C2A5F62B8C6D7F005B0FCC /* Resources */ = {
+		58D15EA32B90585B00EB74E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1C2A6002B8C6D7F005B0FCC /* Resources */ = {
+		58D15EAD2B90585B00EB74E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -350,7 +369,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4A372F3DC1672D6950BF7209 /* [CP] Check Pods Manifest.lock */ = {
+		1B7A92FE6414AE7B2918BF00 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -365,146 +384,147 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-yeonbaTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-YeonBa-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		57AAAF5E7F4B4F0DB21FF081 /* [CP] Embed Pods Frameworks */ = {
+		56C77D31A860C1B40AE168B8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yeonba/Pods-yeonba-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YeonBaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76E1B181A9E22DF7E94EF563 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YeonBa/Pods-YeonBa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yeonba/Pods-yeonba-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-YeonBa/Pods-YeonBa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yeonba/Pods-yeonba-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YeonBa/Pods-YeonBa-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A4BFBB11828AEF3FC8D84923 /* [CP] Check Pods Manifest.lock */ = {
+		919245BE675D92B22F168E41 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-yeonba-yeonbaUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BC2BD3036B568913F1E9BA30 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-yeonba-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D8970BE88DDC8F274CF3DB9F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yeonba-yeonbaUITests/Pods-yeonba-yeonbaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yeonba-yeonbaUITests/Pods-yeonba-yeonbaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yeonba-yeonbaUITests/Pods-yeonba-yeonbaUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91C06BE247946B0797A11B65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YeonBa-YeonBaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C1C2A5DE2B8C6D7E005B0FCC /* Sources */ = {
+		58D15E8B2B90585700EB74E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C180EF7F2B905AF300673C29 /* SearchViewController.swift in Sources */,
-				C180EF852B905B6400673C29 /* ChattingViewController.swift in Sources */,
-				C180EF8C2B9064BF00673C29 /* tabbarController.swift in Sources */,
-				C180EF892B905BB000673C29 /* SettingViewController.swift in Sources */,
-				C1C2A5E62B8C6D7E005B0FCC /* AppDelegate.swift in Sources */,
-				C1C2A5E82B8C6D7E005B0FCC /* SceneDelegate.swift in Sources */,
-				C180EF7D2B905AD200673C29 /* HomeViewController.swift in Sources */,
-				C180EF832B905B4A00673C29 /* CollectViewController.swift in Sources */,
+				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
+				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
+				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
+				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
+				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
+				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
+				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
+				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
+				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1C2A5F42B8C6D7F005B0FCC /* Sources */ = {
+		58D15EA12B90585B00EB74E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1C2A5FD2B8C6D7F005B0FCC /* yeonbaTests.swift in Sources */,
+				58D15EAA2B90585B00EB74E9 /* YeonBaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C1C2A5FE2B8C6D7F005B0FCC /* Sources */ = {
+		58D15EAB2B90585B00EB74E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1C2A6092B8C6D7F005B0FCC /* yeonbaUITestsLaunchTests.swift in Sources */,
-				C1C2A6072B8C6D7F005B0FCC /* yeonbaUITests.swift in Sources */,
+				58D15EB62B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift in Sources */,
+				58D15EB42B90585B00EB74E9 /* YeonBaUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C1C2A5FA2B8C6D7F005B0FCC /* PBXTargetDependency */ = {
+		58D15EA72B90585B00EB74E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C1C2A5E12B8C6D7E005B0FCC /* yeonba */;
-			targetProxy = C1C2A5F92B8C6D7F005B0FCC /* PBXContainerItemProxy */;
+			target = 58D15E8E2B90585700EB74E9 /* YeonBa */;
+			targetProxy = 58D15EA62B90585B00EB74E9 /* PBXContainerItemProxy */;
 		};
-		C1C2A6042B8C6D7F005B0FCC /* PBXTargetDependency */ = {
+		58D15EB12B90585B00EB74E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C1C2A5E12B8C6D7E005B0FCC /* yeonba */;
-			targetProxy = C1C2A6032B8C6D7F005B0FCC /* PBXContainerItemProxy */;
+			target = 58D15E8E2B90585700EB74E9 /* YeonBa */;
+			targetProxy = 58D15EB02B90585B00EB74E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C1C2A5F02B8C6D7F005B0FCC /* LaunchScreen.storyboard */ = {
+		58D15E9D2B90585A00EB74E9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C1C2A5F12B8C6D7F005B0FCC /* Base */,
+				58D15E9E2B90585A00EB74E9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -512,11 +532,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C1C2A60A2B8C6D7F005B0FCC /* Debug */ = {
+		58D15EB72B90585B00EB74E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -549,8 +568,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -565,21 +583,19 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		C1C2A60B2B8C6D7F005B0FCC /* Release */ = {
+		58D15EB82B90585B00EB74E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -612,8 +628,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -622,26 +637,26 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		C1C2A60D2B8C6D7F005B0FCC /* Debug */ = {
+		58D15EBA2B90585B00EB74E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 978FFE13F4813B455B3EDE49 /* Pods-yeonba.debug.xcconfig */;
+			baseConfigurationReference = 135D41D6288D154A8F7BD06C /* Pods-YeonBa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QABS9B7G22;
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = yeonba/Info.plist;
+				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -651,7 +666,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = company.yeonba;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -659,17 +674,17 @@
 			};
 			name = Debug;
 		};
-		C1C2A60E2B8C6D7F005B0FCC /* Release */ = {
+		58D15EBB2B90585B00EB74E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DF7E8471E631874F1C73097 /* Pods-yeonba.release.xcconfig */;
+			baseConfigurationReference = 6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QABS9B7G22;
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = yeonba/Info.plist;
+				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -679,7 +694,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = company.yeonba;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -687,126 +702,126 @@
 			};
 			name = Release;
 		};
-		C1C2A6102B8C6D7F005B0FCC /* Debug */ = {
+		58D15EBD2B90585B00EB74E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89D0A6422FE697656CC576F3 /* Pods-yeonbaTests.debug.xcconfig */;
+			baseConfigurationReference = 9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QABS9B7G22;
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = company.yeonbaTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yeonba.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/yeonba";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YeonBa.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YeonBa";
 			};
 			name = Debug;
 		};
-		C1C2A6112B8C6D7F005B0FCC /* Release */ = {
+		58D15EBE2B90585B00EB74E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA086D9AEF48419B7C4DD337 /* Pods-yeonbaTests.release.xcconfig */;
+			baseConfigurationReference = 1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QABS9B7G22;
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = company.yeonbaTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yeonba.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/yeonba";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YeonBa.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YeonBa";
 			};
 			name = Release;
 		};
-		C1C2A6132B8C6D7F005B0FCC /* Debug */ = {
+		58D15EC02B90585B00EB74E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E16C548600C3D3F172F975E /* Pods-yeonba-yeonbaUITests.debug.xcconfig */;
+			baseConfigurationReference = 763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QABS9B7G22;
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = company.yeonbaUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = yeonba;
+				TEST_TARGET_NAME = YeonBa;
 			};
 			name = Debug;
 		};
-		C1C2A6142B8C6D7F005B0FCC /* Release */ = {
+		58D15EC12B90585B00EB74E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA60A48507B6957DA77315FA /* Pods-yeonba-yeonbaUITests.release.xcconfig */;
+			baseConfigurationReference = 467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QABS9B7G22;
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = company.yeonbaUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = yeonba;
+				TEST_TARGET_NAME = YeonBa;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C1C2A5DD2B8C6D7E005B0FCC /* Build configuration list for PBXProject "yeonba" */ = {
+		58D15E8A2B90585700EB74E9 /* Build configuration list for PBXProject "YeonBa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C1C2A60A2B8C6D7F005B0FCC /* Debug */,
-				C1C2A60B2B8C6D7F005B0FCC /* Release */,
+				58D15EB72B90585B00EB74E9 /* Debug */,
+				58D15EB82B90585B00EB74E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C1C2A60C2B8C6D7F005B0FCC /* Build configuration list for PBXNativeTarget "yeonba" */ = {
+		58D15EB92B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C1C2A60D2B8C6D7F005B0FCC /* Debug */,
-				C1C2A60E2B8C6D7F005B0FCC /* Release */,
+				58D15EBA2B90585B00EB74E9 /* Debug */,
+				58D15EBB2B90585B00EB74E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C1C2A60F2B8C6D7F005B0FCC /* Build configuration list for PBXNativeTarget "yeonbaTests" */ = {
+		58D15EBC2B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C1C2A6102B8C6D7F005B0FCC /* Debug */,
-				C1C2A6112B8C6D7F005B0FCC /* Release */,
+				58D15EBD2B90585B00EB74E9 /* Debug */,
+				58D15EBE2B90585B00EB74E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C1C2A6122B8C6D7F005B0FCC /* Build configuration list for PBXNativeTarget "yeonbaUITests" */ = {
+		58D15EBF2B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C1C2A6132B8C6D7F005B0FCC /* Debug */,
-				C1C2A6142B8C6D7F005B0FCC /* Release */,
+				58D15EC02B90585B00EB74E9 /* Debug */,
+				58D15EC12B90585B00EB74E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C1C2A5DA2B8C6D7E005B0FCC /* Project object */;
+	rootObject = 58D15E872B90585700EB74E9 /* Project object */;
 }

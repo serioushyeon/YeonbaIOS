@@ -1,18 +1,16 @@
 //
 //  SearchViewController.swift
-//  yeonba
+//  YeonBa
 //
-//  Created by 심규민 on 2/29/24.
+//  Created by 김민솔 on 2/29/24.
 //
 
 import UIKit
-import SnapKit
+
 class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // Do any additional setup after loading the view.
     }
     
 

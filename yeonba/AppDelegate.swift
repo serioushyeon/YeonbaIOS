@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  yeonba
+//  YeonBa
 //
-//  Created by 심규민 on 2/26/24.
+//  Created by 김민솔 on 2024/02/29.
 //
 
 import UIKit

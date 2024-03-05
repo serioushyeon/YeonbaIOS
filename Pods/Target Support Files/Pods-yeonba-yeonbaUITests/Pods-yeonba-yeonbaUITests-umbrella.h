@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_yeonba_yeonbaUITestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_yeonba_yeonbaUITestsVersionString[];
+FOUNDATION_EXPORT double Pods_YeonBa_YeonBaUITestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_YeonBa_YeonBaUITestsVersionString[];
 

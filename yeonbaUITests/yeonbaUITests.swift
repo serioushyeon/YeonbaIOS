@@ -1,13 +1,13 @@
 //
-//  yeonbaUITests.swift
-//  yeonbaUITests
+//  YeonBaUITests.swift
+//  YeonBaUITests
 //
-//  Created by 심규민 on 2/26/24.
+//  Created by 김민솔 on 2024/02/29.
 //
 
 import XCTest
 
-final class yeonbaUITests: XCTestCase {
+final class YeonBaUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
