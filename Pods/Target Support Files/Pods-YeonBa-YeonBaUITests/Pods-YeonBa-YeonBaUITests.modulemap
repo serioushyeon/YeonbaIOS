@@ -1,0 +1,6 @@
+framework module Pods_YeonBa_YeonBaUITests {
+  umbrella header "Pods-YeonBa-YeonBaUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
