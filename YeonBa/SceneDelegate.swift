@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        window?.backgroundColor = .white
+        window?.backgroundColor = UIColor.tabBack
         
         let firstViewController = UINavigationController(rootViewController: HomeViewController())
         let secondViewController = UINavigationController(rootViewController: SearchViewController())

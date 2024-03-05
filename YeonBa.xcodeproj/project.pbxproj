@@ -16,6 +16,7 @@
 		589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3342B907528003F03C5 /* SettingViewController.swift */; };
 		589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */; };
 		589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */; };
+		589DF37B2B96052A003F03C5 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		589DF3342B907528003F03C5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		589DF3742B95ECCB003F03C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */,
 				589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */,
 			);
 			path = Fonts;
@@ -343,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */,
+				589DF37B2B96052A003F03C5 /* Pretendard-Regular.otf in Resources */,
 				58D15E9F2B90585A00EB74E9 /* LaunchScreen.storyboard in Resources */,
 				58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */,
 			);

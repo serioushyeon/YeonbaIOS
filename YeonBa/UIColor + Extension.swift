@@ -12,4 +12,5 @@ extension UIColor {
     class var primary: UIColor? { return UIColor(named: "primary") }
     
     class var secondary: UIColor? { return UIColor(named: "secondary") }
+    class var tabBack: UIColor? { return UIColor(named: "tabBackground") }
 }
