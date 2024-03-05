@@ -83,6 +83,7 @@ class SettingViewController: UIViewController {
         }
         contentView.snp.makeConstraints {
             $0.width.equalToSuperview()
+            $0.height.equalTo(1100)
             $0.top.bottom.equalToSuperview().inset(70) // 모든 UI 요소를 아래로 100 포인트 내립니다.
         }
         imageView.snp.makeConstraints { make in
@@ -114,39 +115,63 @@ class SettingViewController: UIViewController {
             make.height.equalTo(40)
         }
             
-        // bottomView 내부에 다섯 개의 뷰를 추가하는 코드입니다.
-        let views = (0..<5).map { _ in UIView() }
+        let views = (0..<8).map { _ in UIView() }
         let stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .vertical
-        stackView.spacing = 5
+        stackView.spacing = 0
         stackView.distribution = .fillEqually
+        stackView.backgroundColor = UIColor(named: "SettingColor")
         bottomView.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview() // 수직 스택 뷰의 상단과 하단을 부모 뷰에 맞춥니다.
             make.leading.trailing.equalToSuperview() // 수직 스택 뷰의 좌우를 부모 뷰에 맞춥니다.
         }
         
-        let buttonTitles = ["지인 만나지 않기", "알림 설정", "계정 관리", "차단 관리", "화살 충전"]
+        let labelTitles = ["지인 만나지 않기", "알림 설정", "계정 관리", "차단 관리", "화살 충전", "고객 센터", "이용 약관/개인정보 취급 방침", "공지 사항"]
+        let buttonTitles = ["버튼 1", "버튼 2", "버튼 3", "버튼 4", "버튼 5", "버튼 6", "버튼 7", "버튼 8"]
+
 
         views.enumerated().forEach { index, view in
+            let label = UILabel()
+            let title = labelTitles[index] // 각 버튼에 다른 이름을 할당합니다.
+            label.text = title // 레이블에 텍스트를 설정합니다.
+            label.textColor = .black // 텍스트 색상을 지정합니다.
+            label.backgroundColor = UIColor(named: "SettingColor")
+            view.addSubview(label)
+            
+            label.snp.makeConstraints { make in
+               // make.centerX.centerY.equalToSuperview()
+                make.top.bottom.equalToSuperview() // 버튼을 상하로 가득 채우도록 설정합니다.
+                //make.leading.equalToSuperview() // 버튼을 부모 뷰의 leading edge에 맞춥니다.
+                make.leading.equalToSuperview().offset(20)
+                make.top.equalToSuperview().offset(index * 80) // 상단에서 index * 80만큼 떨어지도록 설정합니다.
+                make.width.equalTo(393)
+                make.height.equalTo(200)
+                
+            }
+            
+            
+            // 버튼 생성 및 설정
             let button = UIButton()
-            let title = buttonTitles[index] // 각 버튼에 다른 이름을 할당합니다.
-            button.setTitle(title, for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.backgroundColor = .lightGray
+            let buttonTitle = buttonTitles[index] // 각 버튼에 다른 이름을 할당합니다.
+            // 이미지 설정
+            let image = UIImage(named: "allow") // 이미지 이름에 따라 수정하세요
+            button.setImage(image, for: .normal)
+
             view.addSubview(button)
             
             button.snp.makeConstraints { make in
-                make.centerX.centerY.equalToSuperview()
-                make.width.equalTo(393)
-                make.height.equalTo(70)
+                make.trailing.equalToSuperview().offset(10)
+                make.centerY.equalToSuperview()
+                make.width.equalTo(80)
+                make.height.equalTo(40)
             }
-        
+            
 
         bottomView.snp.makeConstraints { make in
             make.top.equalTo(button1.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(380)
+            make.height.equalTo(700)
         }
             
         }
