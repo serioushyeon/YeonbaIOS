@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import Kingfisher
+import Charts
 
 class HomeViewController: UIViewController {
     // MARK: - UI Components
@@ -74,6 +75,18 @@ class HomeViewController: UIViewController {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.gray.cgColor
         $0.setTitleColor(.black, for: .normal)
+    }
+    private let similarityLabel = UILabel().then {
+        $0.text = "90%"
+        $0.textColor = UIColor.primary
+        $0.textAlignment = .center
+        $0.font = UIFont.pretendardSemiBold(size: 13.1)
+    }
+    private let similarityLabel2 = UILabel().then {
+        $0.text = "70%"
+        $0.textColor = UIColor.primary
+        $0.textAlignment = .center
+        $0.font = UIFont.pretendardSemiBold(size: 13.1)
     }
     private let cardView = UIView().then {
         $0.backgroundColor = .clear
@@ -182,6 +195,8 @@ class HomeViewController: UIViewController {
     private let cupidFavoriteButton2 = UIButton().then {
         $0.setImage(UIImage(named: "WhiteFavorites"), for: .normal)
     }
+    private let pieChartView = PieChartView() //유사도
+    private let secondPieChartView = PieChartView() //유사도
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
@@ -190,6 +205,8 @@ class HomeViewController: UIViewController {
         secondLoadImage()
         checkfont()
         navigationControl()
+        setupPieChart()
+        setupSecondPieChart()
     }
     // MARK: - Navigation
     func navigationControl() {
@@ -222,6 +239,8 @@ class HomeViewController: UIViewController {
         contentView.addSubview(recommendTitle)
         contentView.addSubview(cardView)
         cardView.addSubview(myImageView)
+        cardView.addSubview(similarityLabel)
+        cardView.addSubview(pieChartView)
         cardView.addSubview(myNameLabel)
         cardView.addSubview(myAgeLabel)
         cardView.addSubview(heartImage)
@@ -231,6 +250,8 @@ class HomeViewController: UIViewController {
         cardView.addSubview(favoriteButton)
         contentView.addSubview(secondCardView)
         secondCardView.addSubview(mySecondImageView)
+        secondCardView.addSubview(similarityLabel2)
+        secondCardView.addSubview(secondPieChartView)
         secondCardView.addSubview(secondMyNameLabel)
         secondCardView.addSubview(secondMyAgeLabel)
         secondCardView.addSubview(secondHeartImage)
@@ -274,6 +295,16 @@ class HomeViewController: UIViewController {
             $0.top.equalTo(cardView.snp.top).offset(10)
             $0.leading.equalTo(cardView.snp.leading).offset(10)
         }
+        similarityLabel.snp.makeConstraints {
+            $0.bottom.equalTo(myImageView.snp.bottom).offset(-25)
+            $0.trailing.equalTo(myImageView.snp.trailing).offset(-15)
+        }
+        pieChartView.snp.makeConstraints {
+            $0.width.equalTo(80)
+            $0.height.equalTo(80)
+            $0.top.equalTo(myImageView.snp.top).offset(70)
+            $0.trailing.equalTo(myImageView.snp.trailing).offset(10)
+        }
         myNameLabel.snp.makeConstraints {
             $0.top.equalTo(cardView.snp.top).offset(15)
             $0.leading.equalTo(myImageView.snp.trailing).offset(15)
@@ -310,11 +341,22 @@ class HomeViewController: UIViewController {
             $0.top.equalTo(cardView.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(20) // 좌측에서 20만큼 떨어진 위치
         }
+        
         mySecondImageView.snp.makeConstraints {
             $0.width.equalTo(142)
             $0.height.equalTo(142)
             $0.top.equalTo(secondCardView.snp.top).offset(10)
             $0.leading.equalTo(secondCardView.snp.leading).offset(10)
+        }
+        similarityLabel2.snp.makeConstraints {
+            $0.bottom.equalTo(mySecondImageView.snp.bottom).offset(-25)
+            $0.trailing.equalTo(mySecondImageView.snp.trailing).offset(-15)
+        }
+        secondPieChartView.snp.makeConstraints {
+            $0.width.equalTo(80)
+            $0.height.equalTo(80)
+            $0.top.equalTo(mySecondImageView.snp.top).offset(70)
+            $0.trailing.equalTo(mySecondImageView.snp.trailing).offset(10)
         }
         secondMyNameLabel.snp.makeConstraints {
             $0.top.equalTo(secondCardView.snp.top).offset(15)
@@ -393,6 +435,42 @@ class HomeViewController: UIViewController {
         
         
     }
+    func setupPieChart() {
+        let entries = [PieChartDataEntry(value: 90), PieChartDataEntry(value: 10)]
+
+        let dataSet = PieChartDataSet(entries: entries)
+        if let customPinkColor = UIColor.primary {
+            let otherColor = UIColor.white
+            dataSet.colors = [customPinkColor, otherColor]
+        }
+        dataSet.drawValuesEnabled = false
+        dataSet.drawIconsEnabled = false
+        let data = PieChartData(dataSet: dataSet)
+        
+        pieChartView.holeRadiusPercent = 0.8
+        pieChartView.holeColor = UIColor.clear // 배경색을 투명하게 설정
+        
+        pieChartView.data = data
+        pieChartView.legend.enabled = false
+    }
+    func setupSecondPieChart() {
+        let entries = [PieChartDataEntry(value: 70), PieChartDataEntry(value: 30)]
+
+        let dataSet = PieChartDataSet(entries: entries)
+        if let customPinkColor = UIColor.primary {
+            let otherColor = UIColor.white
+            dataSet.colors = [customPinkColor, otherColor]
+        }
+        dataSet.drawValuesEnabled = false
+        dataSet.drawIconsEnabled = false
+        let data = PieChartData(dataSet: dataSet)
+        
+        secondPieChartView.holeRadiusPercent = 0.8
+        secondPieChartView.holeColor = UIColor.clear // 배경색을 투명하게 설정
+        
+        secondPieChartView.data = data
+        secondPieChartView.legend.enabled = false
+    }
     private func loadImage() {
         guard let url = URL(string:"https://newsimg.sedaily.com/2023/09/12/29UNLQFQT6_1.jpg") else { return }
         myImageView.kf.setImage(with: url)
@@ -440,5 +518,17 @@ extension UIFont {
             return UIFont.systemFont(ofSize: size, weight: .regular)
         }
         return font
+    }
+}
+extension UIButton {
+    func adjustBorderWidth() {
+        guard let title = self.titleLabel?.text else {
+            return
+        }
+        let titleSize = title.size(withAttributes: [.font: self.titleLabel!.font!])
+        let buttonWidth = titleSize.width + 20 // 여유 공간을 더하여 버튼의 너비 계산
+        let buttonHeight = titleSize.height + 20 // 여유 공간을 더하여 버튼의 높이 계산
+        self.frame.size = CGSize(width: buttonWidth, height: buttonHeight) // 버튼의 크기를 조절
+        self.layer.borderWidth = 1 // 테두리의 너비를 1로 설정
     }
 }
