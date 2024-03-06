@@ -1,6 +1,0 @@
-framework module Pods_YeonBaTests {
-  umbrella header "Pods-YeonBaTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
