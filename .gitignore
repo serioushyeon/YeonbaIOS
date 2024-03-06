@@ -9,6 +9,10 @@ xcuserdata/
 *.xcscmblueprint
 *.xccheckout
 
+### macOS ###
+# General
+.DS_Store
+
 ### Xcode Patch ###
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
