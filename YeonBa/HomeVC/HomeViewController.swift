@@ -150,11 +150,22 @@ class HomeViewController: UIViewController {
         $0.setImage(image, for: .normal)
         $0.semanticContentAttribute = .forceRightToLeft
     }
-    
+    private let cupidGenderView = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 10
+        $0.layer.masksToBounds = true
+        $0.clipsToBounds = true
+    }
+    private let cupidGenderView2 = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 10
+        $0.layer.masksToBounds = true
+        $0.clipsToBounds = true
+    }
     private let barView = UIView().then {
         $0.layer.backgroundColor = UIColor.init(named: "gray")?.cgColor
     }
-    private let sendGender = UILabel().then {
+    private let cupidGenderLabel = UILabel().then {
         $0.text = "최근에 화살을 보낸 이성"
         $0.textColor = UIColor.black
         $0.textAlignment = .center
@@ -164,6 +175,12 @@ class HomeViewController: UIViewController {
         $0.setTitle("더보기", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardRegular(size: 13)
         $0.setTitleColor(UIColor.gray, for: .normal)
+    }
+    private let cupidFavoriteButton = UIButton().then {
+        $0.setImage(UIImage(named: "WhiteFavorites"), for: .normal)
+    }
+    private let cupidFavoriteButton2 = UIButton().then {
+        $0.setImage(UIImage(named: "WhiteFavorites"), for: .normal)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -223,8 +240,12 @@ class HomeViewController: UIViewController {
         secondCardView.addSubview(secondFavoriteButton)
         contentView.addSubview(recommendButton)
         contentView.addSubview(barView)
-        contentView.addSubview(sendGender)
+        contentView.addSubview(cupidGenderLabel)
         contentView.addSubview(plusGenderButton)
+        contentView.addSubview(cupidGenderView)
+        contentView.addSubview(cupidGenderView2)
+        contentView.addSubview(cupidFavoriteButton)
+        contentView.addSubview(cupidFavoriteButton2)
     }
     
     func configUI() {
@@ -337,24 +358,53 @@ class HomeViewController: UIViewController {
             $0.top.equalTo(recommendButton.snp.bottom).offset(30)
             $0.leading.equalToSuperview().offset(21)
         }
-        sendGender.snp.makeConstraints {
+        cupidGenderLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
             $0.top.equalTo(barView.snp.bottom).offset(20)
         }
         plusGenderButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(sendGender.snp.bottom).offset(6)
+            $0.bottom.equalTo(cupidGenderLabel.snp.bottom).offset(6)
         }
+        cupidGenderView.snp.makeConstraints {
+            $0.width.equalTo(172)
+            $0.height.equalTo(174)
+            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalTo(cupidGenderLabel.snp.bottom).offset(20)
+        }
+        cupidGenderView2.snp.makeConstraints {
+            $0.width.equalTo(172)
+            $0.height.equalTo(174)
+            $0.leading.equalTo(cupidGenderView.snp.trailing).offset(10)
+            $0.top.equalTo(cupidGenderLabel.snp.bottom).offset(20)
+        }
+        cupidFavoriteButton.snp.makeConstraints {
+            $0.width.equalTo(16)
+            $0.height.equalTo(20)
+            $0.trailing.equalTo(cupidGenderView.snp.trailing).offset(-10)
+            $0.top.equalTo(cupidGenderView.snp.top).offset(10)
+        }
+        cupidFavoriteButton2.snp.makeConstraints {
+            $0.width.equalTo(16)
+            $0.height.equalTo(20)
+            $0.trailing.equalTo(cupidGenderView2.snp.trailing).offset(-10)
+            $0.top.equalTo(cupidGenderView2.snp.top).offset(10)
+        }
+        
         
     }
     private func loadImage() {
         guard let url = URL(string:"https://newsimg.sedaily.com/2023/09/12/29UNLQFQT6_1.jpg") else { return }
         myImageView.kf.setImage(with: url)
+        cupidGenderView2.kf.setImage(with: url)
     }
     private func secondLoadImage() {
         guard let url = URL(string:"https://img.sportsworldi.com/content/image/2023/10/09/20231009517485.jpg") else { return }
         mySecondImageView.kf.setImage(with: url)
+        cupidGenderView.kf.setImage(with: url)
     }
+    
+    
    
     func checkfont() {
         for family in UIFont.familyNames {
@@ -370,6 +420,10 @@ class HomeViewController: UIViewController {
     }
     @objc func alarmButtonTapped() {
         print("tabbar button tapped")
+    }
+    //새로운 추천 이성 시 팝업
+    @objc func didTapButton() {
+        //let popupViewController = 
     }
    
 

@@ -25,6 +25,8 @@
 		58D15EB42B90585B00EB74E9 /* YeonBaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EB32B90585B00EB74E9 /* YeonBaUITests.swift */; };
 		58D15EB62B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */; };
 		58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */; };
+		58D71EF22B9827C600BC3A56 /* MypopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EF12B9827C600BC3A56 /* MypopupViewController.swift */; };
+		58D71EF42B98282300BC3A56 /* MypopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EF32B98282300BC3A56 /* MypopupView.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,8 @@
 		58D15EB32B90585B00EB74E9 /* YeonBaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaUITests.swift; sourceTree = "<group>"; };
 		58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualGradientButton.swift; sourceTree = "<group>"; };
+		58D71EF12B9827C600BC3A56 /* MypopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypopupViewController.swift; sourceTree = "<group>"; };
+		58D71EF32B98282300BC3A56 /* MypopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypopupView.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +129,8 @@
 			children = (
 				589DF3252B9073BB003F03C5 /* HomeViewController.swift */,
 				58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */,
+				58D71EF12B9827C600BC3A56 /* MypopupViewController.swift */,
+				58D71EF32B98282300BC3A56 /* MypopupView.swift */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
@@ -479,10 +485,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58D71EF22B9827C600BC3A56 /* MypopupViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
 				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
+				58D71EF42B98282300BC3A56 /* MypopupView.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
