@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let firstViewController = UINavigationController(rootViewController: HomeViewController())
         let secondViewController = UINavigationController(rootViewController: SearchViewController())
         let thirdViewController = UINavigationController(rootViewController: CollectViewController())
-        let fourthViewController = UINavigationController(rootViewController: ChattingViewController())
+        let fourthViewController = UINavigationController(rootViewController: VoiceRecordingViewController())
         let fifthViewController = UINavigationController(rootViewController: SettingViewController())
         
         let tabBarController = UITabBarController()
