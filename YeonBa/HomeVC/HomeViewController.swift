@@ -140,7 +140,32 @@ class HomeViewController: UIViewController {
     private let secondFavoriteButton = UIButton().then {
         $0.setImage(UIImage(named: "Favorites"), for: .normal)
     }
-    override func viewDidLoad() { //함수만 작성 !!
+    private let recommendButton = ActualGradientButton().then {
+        $0.setTitle("새로운 추천 이성", for: .normal)
+        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 25
+        $0.layer.masksToBounds = true
+        let image = UIImage(named: "Replay")
+        $0.setImage(image, for: .normal)
+        $0.semanticContentAttribute = .forceRightToLeft
+    }
+    
+    private let barView = UIView().then {
+        $0.layer.backgroundColor = UIColor.init(named: "gray")?.cgColor
+    }
+    private let sendGender = UILabel().then {
+        $0.text = "최근에 화살을 보낸 이성"
+        $0.textColor = UIColor.black
+        $0.textAlignment = .center
+        $0.font = UIFont.pretendardSemiBold(size: 18)
+    }
+    private let plusGenderButton = UIButton().then {
+        $0.setTitle("더보기", for: .normal)
+        $0.titleLabel?.font = UIFont.pretendardRegular(size: 13)
+        $0.setTitleColor(UIColor.gray, for: .normal)
+    }
+    override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
         configUI()
@@ -196,14 +221,20 @@ class HomeViewController: UIViewController {
         secondCardView.addSubview(secondAnimalButton)
         secondCardView.addSubview(secondVoiceButton)
         secondCardView.addSubview(secondFavoriteButton)
+        contentView.addSubview(recommendButton)
+        contentView.addSubview(barView)
+        contentView.addSubview(sendGender)
+        contentView.addSubview(plusGenderButton)
     }
     
     func configUI() {
         mainScrollview.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top) // 네비게이션 바 아래부터 시작하고 40의 마진을 두도록 설정
+            $0.leading.trailing.bottom.equalToSuperview() // 나머지 영역은 부모 뷰와 같도록 설정
         }
         contentView.snp.makeConstraints {
             $0.width.equalToSuperview()
+            $0.height.equalTo(800)
             $0.top.bottom.equalToSuperview()
         }
         recommendTitle.snp.makeConstraints {
@@ -294,6 +325,27 @@ class HomeViewController: UIViewController {
             $0.top.equalTo(secondCardView.snp.top).offset(15)
             $0.trailing.equalTo(secondCardView.snp.trailing).offset(-15)
         }
+        recommendButton.snp.makeConstraints {
+            $0.width.equalTo(163)
+            $0.height.equalTo(46)
+            $0.top.equalTo(secondCardView.snp.bottom).offset(15)
+            $0.centerX.equalToSuperview() // 가운데 정렬
+        }
+        barView.snp.makeConstraints {
+            $0.width.equalTo(353)
+            $0.height.equalTo(1)
+            $0.top.equalTo(recommendButton.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().offset(21)
+        }
+        sendGender.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalTo(barView.snp.bottom).offset(20)
+        }
+        plusGenderButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(sendGender.snp.bottom).offset(6)
+        }
+        
     }
     private func loadImage() {
         guard let url = URL(string:"https://newsimg.sedaily.com/2023/09/12/29UNLQFQT6_1.jpg") else { return }
@@ -303,6 +355,7 @@ class HomeViewController: UIViewController {
         guard let url = URL(string:"https://img.sportsworldi.com/content/image/2023/10/09/20231009517485.jpg") else { return }
         mySecondImageView.kf.setImage(with: url)
     }
+   
     func checkfont() {
         for family in UIFont.familyNames {
             print(family)
