@@ -7,6 +7,7 @@ target 'YeonBa' do
 
   # Pods for YeonBa
 	pod 'SnapKit'
+	pod 'Tabman'
 	pod 'Then'
 	pod 'Kingfisher'
 	pod 'Charts'

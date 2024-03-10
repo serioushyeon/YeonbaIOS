@@ -162,6 +162,7 @@ class HomeViewController: UIViewController {
         let image = UIImage(named: "Replay")
         $0.setImage(image, for: .normal)
         $0.semanticContentAttribute = .forceRightToLeft
+        $0.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     private let cupidGenderView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -188,6 +189,7 @@ class HomeViewController: UIViewController {
         $0.setTitle("더보기", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardRegular(size: 13)
         $0.setTitleColor(UIColor.gray, for: .normal)
+       
     }
     private let cupidFavoriteButton = UIButton().then {
         $0.setImage(UIImage(named: "WhiteFavorites"), for: .normal)
@@ -501,7 +503,9 @@ class HomeViewController: UIViewController {
     }
     //새로운 추천 이성 시 팝업
     @objc func didTapButton() {
-        //let popupViewController = 
+        let popupViewController = MyPopupViewController(title: "다시 해보기", desc: "새로 고침시 5개의 화살이 소진 됩니다. 새로운 추천 이성을 확인해 볼까요?")
+        popupViewController.modalPresentationStyle = .overFullScreen
+        self.present(popupViewController, animated: false)
     }
    
 
