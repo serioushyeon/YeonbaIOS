@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		34B37BAFEBEFCEE711013DFA /* Pods_YeonBa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F8400511F4316517C02537 /* Pods_YeonBa.framework */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
+		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
+		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
+		584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */; };
+		584DCF322B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF312B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift */; };
 		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
@@ -54,6 +58,10 @@
 		1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.release.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.release.xcconfig"; sourceTree = "<group>"; };
 		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCupidViewController.swift; sourceTree = "<group>"; };
+		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
+		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
+		584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecieveCupidViewController.swift; sourceTree = "<group>"; };
+		584DCF312B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecieveCupidCollectionViewCell.swift; sourceTree = "<group>"; };
 		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -129,6 +137,8 @@
 		584DCF272B9CC0650081149F /* SendVC */ = {
 			isa = PBXGroup;
 			children = (
+				584DCF302B9D6C5A0081149F /* Cell */,
+				584DCF2A2B9D55830081149F /* SendCupidViewController.swift */,
 			);
 			path = SendVC;
 			sourceTree = "<group>";
@@ -136,6 +146,7 @@
 		584DCF282B9CC0720081149F /* FavoriteVC */ = {
 			isa = PBXGroup;
 			children = (
+				584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */,
 			);
 			path = FavoriteVC;
 			sourceTree = "<group>";
@@ -143,8 +154,17 @@
 		584DCF292B9CC0800081149F /* RecieveVC */ = {
 			isa = PBXGroup;
 			children = (
+				584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */,
 			);
 			path = RecieveVC;
+			sourceTree = "<group>";
+		};
+		584DCF302B9D6C5A0081149F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				584DCF312B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		589DF3242B907311003F03C5 /* HomeVC */ = {
@@ -512,16 +532,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
 				58D71EF22B9827C600BC3A56 /* MypopupViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
+				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
+				584DCF322B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				58D71EF42B98282300BC3A56 /* MypopupView.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
+				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
