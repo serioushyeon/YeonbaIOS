@@ -12,7 +12,8 @@
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
 		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
 		584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */; };
-		584DCF322B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF312B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift */; };
+		584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF712B9FF1040081149F /* SendCupidCollectionViewCell.swift */; };
+		584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */; };
 		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
@@ -61,7 +62,8 @@
 		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecieveCupidViewController.swift; sourceTree = "<group>"; };
-		584DCF312B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecieveCupidCollectionViewCell.swift; sourceTree = "<group>"; };
+		584DCF712B9FF1040081149F /* SendCupidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidCollectionViewCell.swift; sourceTree = "<group>"; };
+		584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		584DCF282B9CC0720081149F /* FavoriteVC */ = {
 			isa = PBXGroup;
 			children = (
+				584DCF732BA003B40081149F /* Cell */,
 				584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */,
 			);
 			path = FavoriteVC;
@@ -162,7 +165,15 @@
 		584DCF302B9D6C5A0081149F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				584DCF312B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift */,
+				584DCF712B9FF1040081149F /* SendCupidCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		584DCF732BA003B40081149F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -536,11 +547,12 @@
 				58D71EF22B9827C600BC3A56 /* MypopupViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
+				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
-				584DCF322B9D6DD40081149F /* RecieveCupidCollectionViewCell.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
+				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				58D71EF42B98282300BC3A56 /* MypopupView.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
