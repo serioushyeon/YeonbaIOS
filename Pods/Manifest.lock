@@ -1,24 +1,42 @@
 PODS:
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - Kingfisher (7.11.0)
+  - Pageboy (4.0.2)
   - SnapKit (5.7.1)
+  - SwiftAlgorithms (1.0.0)
+  - Tabman (3.0.2):
+    - Pageboy (~> 4.0.2)
   - Then (3.0.0)
 
 DEPENDENCIES:
+  - Charts
   - Kingfisher
   - SnapKit
+  - Tabman
   - Then
 
 SPEC REPOS:
   trunk:
+    - Charts
     - Kingfisher
+    - Pageboy
     - SnapKit
+    - SwiftAlgorithms
+    - Tabman
     - Then
 
 SPEC CHECKSUMS:
+  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
+  Pageboy: 34ff11e8d1041b81769d5bcde9b19a0cb7218bd9
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  Tabman: 6326ec3a792da1c2a6e79c7eddb56af7b591c9d6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 9038c63b61207a4df0f4f76eda4c3b70b32ab90e
+PODFILE CHECKSUM: ec3194e19c4f9287586d0178a4058181a8c0bb2d
 
 COCOAPODS: 1.8.4
