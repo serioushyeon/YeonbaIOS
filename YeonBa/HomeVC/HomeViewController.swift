@@ -523,6 +523,12 @@ extension UIFont {
         }
         return font
     }
+    static func pretendardMedium(size: CGFloat) -> UIFont {
+        guard let font = UIFont(name: "Pretendard-Regular", size: size) else {
+            return UIFont.systemFont(ofSize: size, weight: .regular)
+        }
+        return font
+    }
 }
 extension UIButton {
     func adjustBorderWidth() {

@@ -14,6 +14,7 @@
 		584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */; };
 		584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF712B9FF1040081149F /* SendCupidCollectionViewCell.swift */; };
 		584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */; };
+		584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF7B2BA1A5880081149F /* JKSlider.swift */; };
 		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
@@ -64,6 +65,8 @@
 		584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecieveCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF712B9FF1040081149F /* SendCupidCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidCollectionViewCell.swift; sourceTree = "<group>"; };
 		584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
+		584DCF792BA07A780081149F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		584DCF7B2BA1A5880081149F /* JKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JKSlider.swift; sourceTree = "<group>"; };
 		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				589DF3282B90747B003F03C5 /* SearchViewController.swift */,
+				584DCF7B2BA1A5880081149F /* JKSlider.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -228,6 +232,7 @@
 		589DF3742B95ECCB003F03C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				584DCF792BA07A780081149F /* Pretendard-Medium.otf */,
 				589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */,
 				589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */,
 			);
@@ -550,6 +555,7 @@
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
+				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
