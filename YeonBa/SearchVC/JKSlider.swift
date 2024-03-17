@@ -190,8 +190,8 @@ class ThumbButton: RoundableButton {
        self.layer.shadowOffset = CGSize(width: 0, height: 3)
        self.layer.shadowColor = UIColor.black.cgColor
        self.layer.shadowOpacity = 0.3
-       self.layer.borderWidth = 1.0
-       self.layer.borderColor = UIColor.gray.withAlphaComponent(0.1).cgColor
+       self.layer.borderWidth = 6.0
+        self.layer.borderColor = UIColor.primary?.withAlphaComponent(0.1).cgColor
      }
      required init?(coder: NSCoder) {
        fatalError()

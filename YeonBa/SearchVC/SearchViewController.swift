@@ -10,6 +10,7 @@ import Then
 import SnapKit
 
 class SearchViewController: UIViewController {
+    let locations = ["서울","경기","부산","대구","인천","광주","대전","울산","세종","강원"]
     private let verticalStackview = UIStackView().then {
         $0.axis = .vertical
         $0.alignment = .leading
@@ -102,6 +103,9 @@ class SearchViewController: UIViewController {
         $0.layer.borderWidth = 1
         $0.backgroundColor = .clear
     }
+    private let ageHorizontalStackview = UIStackView().then {
+        $0.axis = .horizontal
+    }
     private let ageLabel = UILabel().then {
         $0.text = "나이"
         $0.textColor = .black
@@ -131,8 +135,17 @@ class SearchViewController: UIViewController {
         $0.lower = 1
         $0.upper = 75
     }
-    private let horizontalStackView = UIStackView().then {
+    private let barView5 = UIView().then {
+        $0.layer.borderColor = UIColor.init(named: "gray")?.cgColor
+        $0.layer.borderWidth = 1
+        $0.backgroundColor = .clear
+    }
+    private let animalHorizontalStackView = UIStackView().then {
         $0.axis = .horizontal
+        $0.distribution = .fill
+       // $0.alignment = .fill
+        $0.spacing = 100
+       
         
     }
     private let meetAnimalLabel = UILabel().then {
@@ -144,9 +157,14 @@ class SearchViewController: UIViewController {
     private let animalCheckBox = UIButton().then {
         $0.setImage(UIImage(named: "checkbox"), for: .normal)
     }
-//    private let findBtn = UIButton().then {
-//        
-//    }
+    private let findButton = ActualGradientButton().then {
+        $0.setTitle("이성 찾기", for: .normal)
+        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 25
+        $0.layer.masksToBounds = true
+        $0.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationControl()
@@ -182,14 +200,19 @@ class SearchViewController: UIViewController {
         verticalStackview.addArrangedSubview(barView3)
         weightView.addSubview(weightChoiceLabel)
         weightView.addSubview(weightChoiceBtn)
-        verticalStackview.addArrangedSubview(ageLabel)
+        verticalStackview.addArrangedSubview(ageHorizontalStackview)
+        ageHorizontalStackview.addArrangedSubview(ageLabel)
+        ageHorizontalStackview.addArrangedSubview(ageRangeLabel)
         verticalStackview.addArrangedSubview(ageSlider)
         verticalStackview.addArrangedSubview(barView4)
         verticalStackview.addArrangedSubview(HeightLabel)
         verticalStackview.addArrangedSubview(heightSlider)
-        verticalStackview.addArrangedSubview(horizontalStackView)
-        horizontalStackView.addArrangedSubview(meetAnimalLabel)
-        horizontalStackView.addArrangedSubview(animalCheckBox)
+        verticalStackview.addArrangedSubview(barView5)
+        verticalStackview.addArrangedSubview(animalHorizontalStackView)
+        animalHorizontalStackView.addArrangedSubview(meetAnimalLabel)
+        animalHorizontalStackView.addArrangedSubview(animalCheckBox)
+        verticalStackview.addArrangedSubview(findButton)
+        
         
     }
     func configUI() {
@@ -198,7 +221,9 @@ class SearchViewController: UIViewController {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
-        
+        locationLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+        }
         locationView.snp.makeConstraints {
             $0.height.equalTo(50)
             $0.leading.equalToSuperview().offset(20)
@@ -268,15 +293,32 @@ class SearchViewController: UIViewController {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
+        
         heightSlider.snp.makeConstraints {
             $0.height.equalTo(40)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
+        barView5.snp.makeConstraints {
+            $0.top.equalTo(heightSlider.snp.bottom).offset(10)
+            $0.height.equalTo(1)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
 //        horizontalStackView.snp.makeConstraints {
 //
 //        }
+        findButton.snp.makeConstraints {
+//            $0.top.equalTo(animalHorizontalStackView.snp.bottom).offset(20)
+            $0.width.equalTo(353)
+            $0.height.equalTo(56)
+        }
                     
+    }
+    @objc func didTapButton() {
+//        let popupViewController = MyPopupViewController(title: "다시 해보기", desc: "새로 고침시 5개의 화살이 소진 됩니다. 새로운 추천 이성을 확인해 볼까요?")
+//        popupViewController.modalPresentationStyle = .overFullScreen
+//        self.present(popupViewController, animated: false)
     }
     
 

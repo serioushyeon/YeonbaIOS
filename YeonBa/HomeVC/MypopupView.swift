@@ -38,6 +38,7 @@ class MyPopupView: UIView {
     $0.setTitleColor(.white, for: .normal)
     $0.setBackgroundImage(UIColor.secondary?.withAlphaComponent(0.9).asImage(), for: .normal)
     $0.setBackgroundImage(UIColor.primary?.asImage(), for: .highlighted)
+    $0.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
   }
   private let rightButton = UIButton().then {
     $0.setTitleColor(.white, for: .normal)
@@ -58,7 +59,7 @@ class MyPopupView: UIView {
       .forEach(self.popupView.addSubview(_:))
     [self.titleLabel, self.descLabel]
       .forEach(self.bodyStackView.addArrangedSubview(_:))
-    
+      
     self.popupView.snp.makeConstraints {
       $0.left.right.equalToSuperview().inset(32)
       $0.centerY.equalToSuperview()
@@ -85,7 +86,12 @@ class MyPopupView: UIView {
       $0.height.equalTo(56)
     }
   }
-  
+    @objc private func cancelButtonTapped() {
+        dismissPopup()
+    }
+    private func dismissPopup() {
+        self.removeFromSuperview()
+    }
   required init?(coder: NSCoder) { fatalError() }
 }
 
