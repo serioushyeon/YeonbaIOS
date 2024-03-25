@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34B37BAFEBEFCEE711013DFA /* Pods_YeonBa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F8400511F4316517C02537 /* Pods_YeonBa.framework */; };
+		580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580AAD2B2BA9375200672050 /* LocationModalViewController.swift */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
 		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
@@ -24,6 +25,7 @@
 		589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */; };
 		589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */; };
 		589DF37B2B96052A003F03C5 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */; };
+		58BB858D2BB1D3F300F90050 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB858C2BB1D3F300F90050 /* ProfileViewController.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -59,6 +61,7 @@
 		135D41D6288D154A8F7BD06C /* Pods-YeonBa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.debug.xcconfig"; sourceTree = "<group>"; };
 		1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.release.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.release.xcconfig"; sourceTree = "<group>"; };
 		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		580AAD2B2BA9375200672050 /* LocationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModalViewController.swift; sourceTree = "<group>"; };
 		584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		58BB858C2BB1D3F300F90050 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			children = (
 				589DF3282B90747B003F03C5 /* SearchViewController.swift */,
 				584DCF7B2BA1A5880081149F /* JKSlider.swift */,
+				580AAD2B2BA9375200672050 /* LocationModalViewController.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -239,6 +244,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		58BB858B2BB1D3D500F90050 /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				58BB858C2BB1D3F300F90050 /* ProfileViewController.swift */,
+			);
+			path = ProfileVC;
+			sourceTree = "<group>";
+		};
 		58D15E862B90585700EB74E9 = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +277,7 @@
 		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
+				58BB858B2BB1D3D500F90050 /* ProfileVC */,
 				589DF3742B95ECCB003F03C5 /* Fonts */,
 				589DF3332B907517003F03C5 /* SettingVC */,
 				589DF3302B9074FE003F03C5 /* ChatVC */,
@@ -559,12 +573,14 @@
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
+				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
 				58D71EF42B98282300BC3A56 /* MypopupView.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
+				58BB858D2BB1D3F300F90050 /* ProfileViewController.swift in Sources */,
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
 			);

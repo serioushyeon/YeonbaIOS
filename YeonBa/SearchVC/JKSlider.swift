@@ -10,33 +10,35 @@ import SnapKit
 import Then
 
 final class JKSlider: UIControl {
-  // MARK: Constant
-  private enum Constant {
-    static let barRatio = 1.0/10.0
-  }
+    // MARK: Constant
+    private enum Constant {
+        static let barRatio = 3.0/10.0
+    }
     // MARK: UI
-  private let lowerThumbButton: ThumbButton = {
-    let button = ThumbButton()
-    button.isUserInteractionEnabled = false
-    return button
-  }()
-  private let upperThumbButton: ThumbButton = {
-    let button = ThumbButton()
-    button.isUserInteractionEnabled = false
-    return button
-  }()
-  private let trackView: UIView = {
-    let view = UIView()
-    view.backgroundColor = .gray
-    view.isUserInteractionEnabled = false
-    return view
-  }()
-    private let trackTintView: UIView = {
+    private let lowerThumbButton: ThumbButton = {
+        let button = ThumbButton()
+        button.isUserInteractionEnabled = false
+        return button
+    }()
+    private let upperThumbButton: ThumbButton = {
+        let button = ThumbButton()
+        button.isUserInteractionEnabled = false
+        return button
+    }()
+    private let trackView: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        view.backgroundColor = UIColor.gray3
         view.isUserInteractionEnabled = false
         return view
-      }()
+    }()
+    private let trackTintView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.primary
+        view.isUserInteractionEnabled = false
+        return view
+    }()
       
       // MARK: Properties
       var minValue = 0.0 {
@@ -179,24 +181,21 @@ class RoundableButton: UIButton {
   }
 }
 class ThumbButton: RoundableButton {
-  override var isSelected: Bool {
-    didSet {
-      self.backgroundColor = self.isSelected ? .lightGray : .white
-    }
-  }
     override init(frame: CGRect) {
-       super.init(frame: frame)
-       self.backgroundColor = .white
-       self.layer.shadowOffset = CGSize(width: 0, height: 3)
-       self.layer.shadowColor = UIColor.black.cgColor
-       self.layer.shadowOpacity = 0.3
-       self.layer.borderWidth = 6.0
-        self.layer.borderColor = UIColor.primary?.withAlphaComponent(0.1).cgColor
-     }
-     required init?(coder: NSCoder) {
-       fatalError()
-     }
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.3
+        self.layer.borderWidth = 7.0
+        self.layer.borderColor = UIColor.primary?.cgColor
+        // 너비 설정
+        
     }
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+}
     private extension Comparable {
       func clamped(to limits: ClosedRange<Self>) -> Self {
         min(max(self, limits.lowerBound), limits.upperBound)
