@@ -26,6 +26,9 @@ class FavoriteCupidViewController: UIViewController {
         configUI()
         initialize()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     func initialize() {
         collectionview.dataSource = self
         collectionview.delegate = self
@@ -63,8 +66,9 @@ extension FavoriteCupidViewController : UICollectionViewDataSource {
 extension FavoriteCupidViewController : UICollectionViewDelegate {
     //셀 클릭 시 이동
     func collectionView(_ collectionview: UICollectionView, didSelectItemAt indexPath : IndexPath) {
-        
+        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
     }
+    
 }
 extension FavoriteCupidViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
