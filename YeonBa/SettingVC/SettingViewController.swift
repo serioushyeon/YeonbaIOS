@@ -3,8 +3,7 @@ import SnapKit
 import Then
 
 class SettingViewController: UIViewController {
-    //심규민
-    
+
     // MARK: - UI Components
     private let scrollview = UIScrollView().then {
         $0.backgroundColor = .clear
