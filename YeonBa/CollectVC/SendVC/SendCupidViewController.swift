@@ -15,6 +15,7 @@ class SendCupidViewController: UIViewController {
             $0.isScrollEnabled = true
             $0.showsHorizontalScrollIndicator = false
             $0.showsVerticalScrollIndicator = false
+            layout.minimumInteritemSpacing = 6
             $0.backgroundColor = .clear
             $0.clipsToBounds = true
         }
@@ -51,9 +52,7 @@ extension SendCupidViewController : UICollectionViewDataSource {
        return 12
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // 셀을 dequeue 하고, SendCupidCollectionViewCell 타입으로 타입 캐스팅합니다.
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SendCupidCell", for: indexPath) as? SendCupidCollectionViewCell else {
-            // 캐스팅에 실패하면 기본 UICollectionViewCell을 반환합니다.
             return UICollectionViewCell()
         }
         return cell
@@ -67,9 +66,9 @@ extension SendCupidViewController : UICollectionViewDelegate {
 }
 extension SendCupidViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 170, height: 200)
-        }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 9
-        }
+        let spacing: CGFloat = 6
+        let width = (collectionView.bounds.width - 10 - 10 - spacing) / 2 // 총 가로길이 - leading - trailing - 간격
+        let height = (collectionView.bounds.height - 60 - spacing * 2) / 3 // 총 세로길이 - top - bottom - 간격
+        return CGSize(width: width, height: height)
+    }
 }

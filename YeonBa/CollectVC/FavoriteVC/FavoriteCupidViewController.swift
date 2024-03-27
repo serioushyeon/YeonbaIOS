@@ -66,7 +66,7 @@ extension FavoriteCupidViewController : UICollectionViewDataSource {
 extension FavoriteCupidViewController : UICollectionViewDelegate {
     //셀 클릭 시 이동
     func collectionView(_ collectionview: UICollectionView, didSelectItemAt indexPath : IndexPath) {
-        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+        self.navigationController?.pushViewController(OtherProfileViewController(), animated: true)
     }
     
 }

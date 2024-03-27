@@ -25,7 +25,11 @@
 		589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */; };
 		589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */; };
 		589DF37B2B96052A003F03C5 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */; };
-		58BB858D2BB1D3F300F90050 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB858C2BB1D3F300F90050 /* ProfileViewController.swift */; };
+		58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85CE2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift */; };
+		58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85D02BB3AC4100F90050 /* OtherProfileViewController.swift */; };
+		58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85D42BB3B02900F90050 /* OtherProfile.swift */; };
+		58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85D82BB3E55B00F90050 /* RecommendTableViewCell.swift */; };
+		58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85DA2BB4230B00F90050 /* HomeCollectionViewCell.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -79,7 +83,11 @@
 		589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
-		58BB858C2BB1D3F300F90050 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		58BB85CE2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		58BB85D02BB3AC4100F90050 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
+		58BB85D42BB3B02900F90050 /* OtherProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfile.swift; sourceTree = "<group>"; };
+		58BB85D82BB3E55B00F90050 /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
+		58BB85DA2BB4230B00F90050 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,7 +196,8 @@
 		589DF3242B907311003F03C5 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
-				589DF3252B9073BB003F03C5 /* HomeViewController.swift */,
+				58BB85D72BB3E50900F90050 /* VC */,
+				58BB85D62BB3E50200F90050 /* Cell */,
 				58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */,
 				58D71EF12B9827C600BC3A56 /* MypopupViewController.swift */,
 				58D71EF32B98282300BC3A56 /* MypopupView.swift */,
@@ -244,12 +253,64 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		58BB858B2BB1D3D500F90050 /* ProfileVC */ = {
+		58BB858B2BB1D3D500F90050 /* OtherProfileVC */ = {
 			isa = PBXGroup;
 			children = (
-				58BB858C2BB1D3F300F90050 /* ProfileViewController.swift */,
+				58BB85D22BB3AFEF00F90050 /* Model */,
+				58BB85CB2BB3169E00F90050 /* VC */,
+				58BB85CA2BB3169600F90050 /* Cell */,
 			);
-			path = ProfileVC;
+			path = OtherProfileVC;
+			sourceTree = "<group>";
+		};
+		58BB85CA2BB3169600F90050 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				58BB85CE2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		58BB85CB2BB3169E00F90050 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				58BB85D02BB3AC4100F90050 /* OtherProfileViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		58BB85D22BB3AFEF00F90050 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				58BB85D42BB3B02900F90050 /* OtherProfile.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		58BB85D32BB3AFFD00F90050 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				58D15E942B90585700EB74E9 /* SceneDelegate.swift */,
+				58D15E922B90585700EB74E9 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		58BB85D62BB3E50200F90050 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				58BB85D82BB3E55B00F90050 /* RecommendTableViewCell.swift */,
+				58BB85DA2BB4230B00F90050 /* HomeCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		58BB85D72BB3E50900F90050 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				589DF3252B9073BB003F03C5 /* HomeViewController.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		58D15E862B90585700EB74E9 = {
@@ -277,15 +338,14 @@
 		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
-				58BB858B2BB1D3D500F90050 /* ProfileVC */,
+				58BB858B2BB1D3D500F90050 /* OtherProfileVC */,
 				589DF3742B95ECCB003F03C5 /* Fonts */,
 				589DF3332B907517003F03C5 /* SettingVC */,
 				589DF3302B9074FE003F03C5 /* ChatVC */,
 				589DF32C2B9074C5003F03C5 /* CollectVC */,
 				589DF3272B907469003F03C5 /* SearchVC */,
+				58BB85D32BB3AFFD00F90050 /* App */,
 				589DF3242B907311003F03C5 /* HomeVC */,
-				58D15E922B90585700EB74E9 /* AppDelegate.swift */,
-				58D15E942B90585700EB74E9 /* SceneDelegate.swift */,
 				58D15E9B2B90585A00EB74E9 /* Assets.xcassets */,
 				58D15E9D2B90585A00EB74E9 /* LaunchScreen.storyboard */,
 				58D15EA02B90585A00EB74E9 /* Info.plist */,
@@ -562,6 +622,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
 				58D71EF22B9827C600BC3A56 /* MypopupViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
@@ -579,8 +640,11 @@
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
+				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
+				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
+				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
+				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
-				58BB858D2BB1D3F300F90050 /* ProfileViewController.swift in Sources */,
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
 			);

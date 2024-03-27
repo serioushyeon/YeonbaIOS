@@ -1,8 +1,8 @@
 //
-//  ProfileViewController.swift
+//  OtherProfileViewController.swift
 //  YeonBa
 //
-//  Created by 김민솔 on 3/26/24.
+//  Created by 김민솔 on 3/27/24.
 //
 
 import UIKit
@@ -11,9 +11,9 @@ import Then
 import Kingfisher
 import Charts
 
-class ProfileViewController: UIViewController {
-    private let scrollview = UIScrollView()
-    
+class OtherProfileViewController: UIViewController {
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -58,19 +58,31 @@ class ProfileViewController: UIViewController {
         $0.backgroundColor = .gray3
         
     }
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 5.0 // <- 셀 간격 설정
+        layout.minimumInteritemSpacing = 0.5
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
+    }()
+    
     private let aboutLabel = UILabel().then {
         $0.text = "About Me"
         $0.textColor = .black
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 20)
     }
-    private let ageLabel = UILabel().then {
-        $0.text = "22살"
+    private let barView2 = UIView().then {
+        $0.backgroundColor = .gray3
+    }
+    private let prferenceLabel = UILabel().then {
+        $0.text = "Preference"
         $0.textColor = .black
         $0.textAlignment = .center
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.black.cgColor
+        $0.font = UIFont.pretendardSemiBold(size: 20)
     }
+    
     private let horizontalStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
@@ -96,14 +108,15 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // 커스텀 탭바를 숨깁니다.
         if let tabBarController = self.tabBarController as? tabBarController {
             tabBarController.tabBar.isHidden = true
         }
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-       
+        
+        // 다른 화면으로 넘어갈 때 커스텀 탭바를 다시 보이게 합니다.
         if let tabBarController = self.tabBarController as? tabBarController {
             tabBarController.tabBar.isHidden = false
         }
@@ -114,35 +127,53 @@ class ProfileViewController: UIViewController {
         addSubviews()
         configUI()
         loadImage()
-       
+        configureCollectionView()
         tabBarController?.tabBar.isHidden = true
         tabBarController?.tabBar.isTranslucent = true
         view.backgroundColor = .white
+//        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+//        contentViewHeight.priority = .defaultLow
+//        contentViewHeight.isActive = true
     }
     func addSubviews() {
-        view.addSubview(cupidImageView)
-        cupidImageView.addSubview(declareBtn)
-        cupidImageView.addSubview(similarityLabel)
-        cupidImageView.addSubview(pieChartView)
-        cupidImageView.addSubview(favoriteBtn)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(cupidImageView)
+        [declareBtn,similarityLabel,pieChartView,favoriteBtn].forEach {
+            cupidImageView.addSubview($0)
+        }
+        [nameLabel, totalLabel, heartImage, heartLabel, barView, aboutLabel, collectionView].forEach {
+            contentView.addSubview($0)
+        }
+        contentView.addSubview(barView2)
         view.addSubview(horizontalStackView)
-        view.addSubview(nameLabel)
-        view.addSubview(totalLabel)
-        view.addSubview(heartImage)
-        view.addSubview(heartLabel)
-        view.addSubview(barView)
-        view.addSubview(aboutLabel)
         horizontalStackView.addArrangedSubview(sendBtn)
         horizontalStackView.addArrangedSubview(sendChatBtn)
         
     }
+    func configureCollectionView() {
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(OtherProfileCollectionViewCell.self, forCellWithReuseIdentifier: OtherProfileCollectionViewCell.reuseIdentifier)
+    }
     func configUI() {
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-45)
+        }
+        contentView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.height.equalTo(800)
+        }
         cupidImageView.snp.makeConstraints { make in
             //make.top.equalToSuperview().inset(45)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(contentView.snp.top)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalTo(400)
+            make.height.equalTo(370)
         }
         declareBtn.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(20)
@@ -189,6 +220,17 @@ class ProfileViewController: UIViewController {
             $0.leading.equalTo(heartImage.snp.trailing).offset(5)
             $0.bottom.equalTo(heartImage.snp.bottom)
         }
+        collectionView.snp.makeConstraints {
+            $0.leading.equalTo(aboutLabel.snp.leading)
+            $0.top.equalTo(aboutLabel.snp.bottom).offset(10)
+            $0.height.equalTo(150)
+            $0.width.equalTo(160)
+        }
+        barView2.snp.makeConstraints {
+            $0.top.equalTo(aboutLabel.snp.bottom).offset(100)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
         horizontalStackView.snp.makeConstraints {
             $0.height.equalTo(45)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
@@ -221,4 +263,30 @@ class ProfileViewController: UIViewController {
         cupidImageView.kf.setImage(with: url)
     }
 
+}
+extension OtherProfileViewController: UICollectionViewDelegate {
+    
+}
+extension OtherProfileViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherProfileCollectionViewCell.reuseIdentifier, for: indexPath) as? OtherProfileCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let profileData = OtherProfile(age: "22살", height: "165cm", location: "서울", voiceType: "중음", animalType: "토끼상")
+
+        cell.configure(with: profileData)
+        return cell
+    }
+   
+}
+extension OtherProfileViewController: UICollectionViewDelegateFlowLayout {
+   
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 50, height: 35)
+    }
+    
 }

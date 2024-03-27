@@ -13,10 +13,10 @@ class SearchViewController: UIViewController {
     let locations = ["서울", "경기도", "인천", "부산", "대전", "광주", "대구", "울산", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "세종", "제주"]
     private let verticalStackview = UIStackView().then {
         $0.axis = .vertical
+        $0.distribution = .fill
         $0.alignment = .leading
         $0.spacing = 10
     }
-
     private let ageSlider = JKSlider().then {
         $0.minValue = 1
         $0.maxValue = 100
@@ -107,7 +107,8 @@ class SearchViewController: UIViewController {
     private let ageHorizontalStackview = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
-        $0.spacing = 250
+        $0.alignment = .fill
+        $0.spacing = 222
     }
     private let ageLabel = UILabel().then {
         $0.text = "나이"
@@ -129,7 +130,7 @@ class SearchViewController: UIViewController {
     private let heightHorizontalStackview = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
-        $0.spacing = 222
+        $0.spacing = 200
     }
     private let HeightLabel = UILabel().then {
         $0.text = "키"
@@ -164,7 +165,7 @@ class SearchViewController: UIViewController {
         $0.text = "선호하는 동물 상 만나기"
         $0.textColor = UIColor.thirdary
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardMedium(size: 16)
+        $0.font = UIFont.pretendardMedium(size: 14)
     }
     private let animalCheckBox = UIButton().then {
         $0.setImage(UIImage(named: "checkbox"), for: .normal)
@@ -199,17 +200,16 @@ class SearchViewController: UIViewController {
         verticalStackview.addArrangedSubview(locationLabel)
         verticalStackview.addArrangedSubview(locationView)
         verticalStackview.addArrangedSubview(barView)
-        locationView.addSubview(locationChoiceLabel)
-        locationView.addSubview(locationChoiceBtn)
         verticalStackview.addArrangedSubview(voiceLabel)
         verticalStackview.addArrangedSubview(voiceView)
         verticalStackview.addArrangedSubview(barView2)
-        voiceView.addSubview(voiceChoiceLabel)
-        voiceView.addSubview(vocieChoiceBtn)
-        
         verticalStackview.addArrangedSubview(weightLabel)
         verticalStackview.addArrangedSubview(weightView)
         verticalStackview.addArrangedSubview(barView3)
+        locationView.addSubview(locationChoiceLabel)
+        locationView.addSubview(locationChoiceBtn)
+        voiceView.addSubview(voiceChoiceLabel)
+        voiceView.addSubview(vocieChoiceBtn)
         weightView.addSubview(weightChoiceLabel)
         weightView.addSubview(weightChoiceBtn)
         verticalStackview.addArrangedSubview(ageHorizontalStackview)
@@ -234,100 +234,116 @@ class SearchViewController: UIViewController {
     func configUI() {
         verticalStackview.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
+        locationLabel.snp.makeConstraints {
+            $0.height.equalTo(20)
+            $0.top.equalToSuperview()
+        }
+        locationView.snp.makeConstraints {
+            $0.height.equalTo(40)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
-        locationLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(20)
-        }
-        locationView.snp.makeConstraints {
-            $0.height.equalTo(50)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
         locationChoiceLabel.snp.makeConstraints {
-               $0.top.equalToSuperview().offset(15)
-               $0.leading.equalToSuperview().offset(20)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
         }
        // locationChoiceBtn의 제약 설정
        locationChoiceBtn.snp.makeConstraints {
-           $0.top.equalToSuperview().offset(15)
+           $0.centerY.equalToSuperview()
            $0.trailing.equalToSuperview().offset(-15)
        }
         barView.snp.makeConstraints {
-            $0.top.equalTo(locationView.snp.bottom).offset(10)
             $0.height.equalTo(1)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
+        voiceLabel.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
         voiceView.snp.makeConstraints {
-            $0.height.equalTo(50)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(40)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         voiceChoiceLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(15)
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
         }
         vocieChoiceBtn.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(15)
+            $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-15)
         }
         barView2.snp.makeConstraints {
-            $0.top.equalTo(voiceView.snp.bottom).offset(10)
             $0.height.equalTo(1)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
+        weightLabel.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
         weightView.snp.makeConstraints {
-            $0.height.equalTo(50)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+           // $0.height.equalTo(40)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         weightChoiceLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(15)
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
         }
         weightChoiceBtn.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(15)
+            $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-15)
         }
         barView3.snp.makeConstraints {
-            $0.top.equalTo(weightView.snp.bottom).offset(10)
             $0.height.equalTo(1)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
+        ageHorizontalStackview.snp.makeConstraints {
+            $0.height.equalTo(20)
+            $0.leading.trailing.equalToSuperview()
+        }
         ageSlider.snp.makeConstraints {
             $0.height.equalTo(40)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         barView4.snp.makeConstraints {
-            $0.top.equalTo(ageSlider.snp.bottom).offset(10)
             $0.height.equalTo(1)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
         
+        heightHorizontalStackview.snp.makeConstraints {
+            $0.height.equalTo(20)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
         heightSlider.snp.makeConstraints {
             $0.height.equalTo(40)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         barView5.snp.makeConstraints {
-            $0.top.equalTo(heightSlider.snp.bottom).offset(10)
             $0.height.equalTo(1)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
-//        horizontalStackView.snp.makeConstraints {
-//
-//        }
+        animalHorizontalStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        animalCheckBox.snp.makeConstraints {
+            $0.height.equalTo(25)
+            $0.width.equalTo(25)
+        }
         findButton.snp.makeConstraints {
-           
-            $0.width.equalTo(353)
-            $0.height.equalTo(56)
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(40)
         }
                     
     }

@@ -1,8 +1,8 @@
 //
-//  SendCupidCollectionViewCell.swift
+//  HomeCollectionViewCell.swift
 //  YeonBa
 //
-//  Created by 김민솔 on 3/12/24.
+//  Created by 김민솔 on 3/27/24.
 //
 
 import UIKit
@@ -11,8 +11,8 @@ import SnapKit
 import Kingfisher
 import Charts
 
-class SendCupidCollectionViewCell: UICollectionViewCell {
-    static let sendCupidIdentifier = "SendCupidCell"
+class HomeCollectionViewCell: UICollectionViewCell {
+    static let sendCupidIdentifier = "HomeCupidCell"
     
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -84,14 +84,14 @@ class SendCupidCollectionViewCell: UICollectionViewCell {
             $0.trailing.equalTo(cupidImageView.snp.trailing).offset(-24)
         }
         pieChartView.snp.makeConstraints {
-            $0.width.equalTo(85)
-            $0.height.equalTo(85)
+            $0.width.equalTo(90)
+            $0.height.equalTo(90)
             $0.bottom.equalToSuperview().inset(-5)
             $0.trailing.equalTo(cupidImageView.snp.trailing).offset(5)
         }
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(cupidImageView.snp.leading).offset(10)
-            $0.bottom.equalTo(heartImage.snp.top).offset(-5)
+            $0.top.equalTo(cupidImageView.snp.top).offset(132)
             
         }
         ageLabel.snp.makeConstraints {
@@ -100,12 +100,10 @@ class SendCupidCollectionViewCell: UICollectionViewCell {
         }
         heartImage.snp.makeConstraints {
             $0.leading.equalTo(nameLabel.snp.leading)
-            $0.bottom.equalToSuperview().inset(10)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
         heartLabel.snp.makeConstraints {
             $0.leading.equalTo(heartImage.snp.trailing).offset(5)
-            $0.bottom.equalToSuperview().inset(10)
             $0.top.equalTo(heartImage.snp.top)
         }
         cupidFavoriteButton.snp.makeConstraints {
