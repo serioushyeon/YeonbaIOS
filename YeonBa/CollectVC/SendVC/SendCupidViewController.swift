@@ -15,7 +15,6 @@ class SendCupidViewController: UIViewController {
             $0.isScrollEnabled = true
             $0.showsHorizontalScrollIndicator = false
             $0.showsVerticalScrollIndicator = false
-            layout.minimumInteritemSpacing = 6
             $0.backgroundColor = .clear
             $0.clipsToBounds = true
         }
@@ -57,17 +56,14 @@ extension SendCupidViewController : UICollectionViewDataSource {
         }
         return cell
     }
-
-    
 }
-
 extension SendCupidViewController : UICollectionViewDelegate {
     
 }
 extension SendCupidViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let spacing: CGFloat = 6
-        let width = (collectionView.bounds.width - 10 - 10 - spacing) / 2 // 총 가로길이 - leading - trailing - 간격
+        let spacing: CGFloat = 5
+        let width = (collectionView.bounds.width - 8 - 8 - spacing) / 2 // 총 가로길이 - leading - trailing - 간격
         let height = (collectionView.bounds.height - 60 - spacing * 2) / 3 // 총 세로길이 - top - bottom - 간격
         return CGSize(width: width, height: height)
     }

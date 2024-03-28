@@ -29,6 +29,7 @@ class FavoriteCupidViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
     func initialize() {
         collectionview.dataSource = self
         collectionview.delegate = self
@@ -49,7 +50,7 @@ class FavoriteCupidViewController: UIViewController {
 }
 extension FavoriteCupidViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 2
+       return 12
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // 셀을 dequeue 하고, SendCupidCollectionViewCell 타입으로 타입 캐스팅합니다.
@@ -72,9 +73,9 @@ extension FavoriteCupidViewController : UICollectionViewDelegate {
 }
 extension FavoriteCupidViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 170, height: 200)
-        }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 9
-        }
+        let spacing: CGFloat = 5
+        let width = (collectionView.bounds.width - 8 - 8 - spacing) / 2 // 총 가로길이 - leading - trailing - 간격
+        let height = (collectionView.bounds.height - 60 - spacing * 2) / 3 // 총 세로길이 - top - bottom - 간격
+        return CGSize(width: width, height: height)
+    }
 }

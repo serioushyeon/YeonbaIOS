@@ -11,6 +11,7 @@ target 'YeonBa' do
 	pod 'Then'
 	pod 'Kingfisher'
 	pod 'Charts'
+	pod 'SCLAlertView'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing

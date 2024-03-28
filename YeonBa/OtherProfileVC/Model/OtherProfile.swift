@@ -13,4 +13,12 @@ struct OtherProfile {
     var location: String
     var voiceType: String
     var animalType: String
+
+    init() {
+        self.age = "22살"
+        self.height = "165cm"
+        self.location = "서울"
+        self.voiceType = "중음"
+        self.animalType = "토끼상"
+    }
 }

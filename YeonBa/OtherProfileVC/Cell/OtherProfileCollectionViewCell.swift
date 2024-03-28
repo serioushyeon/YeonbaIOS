@@ -13,7 +13,7 @@ class OtherProfileCollectionViewCell: UICollectionViewCell {
     private let aboutButton =  UIButton().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("22살", for: .normal)
-        $0.layer.cornerRadius = 19
+        $0.layer.cornerRadius = 15
         $0.clipsToBounds = true
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.layer.borderColor = UIColor.black.cgColor

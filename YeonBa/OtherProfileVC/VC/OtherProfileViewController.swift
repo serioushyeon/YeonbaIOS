@@ -14,6 +14,7 @@ import Charts
 class OtherProfileViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
+    //var aboutProfile: [OtherProfile] = defaultAbout
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -27,6 +28,7 @@ class OtherProfileViewController: UIViewController {
     }
     private let declareBtn = UIButton().then {
         $0.setImage(UIImage(named: "Declaration"), for: .normal)
+        $0.addTarget(self, action: #selector(declarButtonTapped), for: .touchUpInside)
     }
     private let favoriteBtn = UIButton().then {
         $0.setImage(UIImage(named: "PinkFavorites"), for: .normal)
@@ -56,9 +58,9 @@ class OtherProfileViewController: UIViewController {
     
     private let barView = UIView().then {
         $0.backgroundColor = .gray3
-        
     }
-    private lazy var collectionView: UICollectionView = {
+    //aboutme 컬렉션 뷰
+    private lazy var aboutmeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 5.0 // <- 셀 간격 설정
@@ -66,7 +68,6 @@ class OtherProfileViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
-    
     private let aboutLabel = UILabel().then {
         $0.text = "About Me"
         $0.textColor = .black
@@ -76,13 +77,21 @@ class OtherProfileViewController: UIViewController {
     private let barView2 = UIView().then {
         $0.backgroundColor = .gray3
     }
-    private let prferenceLabel = UILabel().then {
+    private let preferenceLabel = UILabel().then {
         $0.text = "Preference"
         $0.textColor = .black
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 20)
     }
-    
+    //선호도 컬렉션 뷰
+    private lazy var preferenceCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 5.0 // <- 셀 간격 설정
+        layout.minimumInteritemSpacing = 0.5
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
+    }()
     private let horizontalStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
@@ -128,12 +137,14 @@ class OtherProfileViewController: UIViewController {
         configUI()
         loadImage()
         configureCollectionView()
+        navigationController()
         tabBarController?.tabBar.isHidden = true
         tabBarController?.tabBar.isTranslucent = true
         view.backgroundColor = .white
-//        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
-//        contentViewHeight.priority = .defaultLow
-//        contentViewHeight.isActive = true
+    }
+    func navigationController() {
+        let backbutton = UIBarButtonItem(image: UIImage(named: "back2"), style: .plain, target: self, action: #selector(back(_:)))
+        navigationItem.leftBarButtonItem = backbutton
     }
     func addSubviews() {
         view.addSubview(scrollView)
@@ -142,10 +153,12 @@ class OtherProfileViewController: UIViewController {
         [declareBtn,similarityLabel,pieChartView,favoriteBtn].forEach {
             cupidImageView.addSubview($0)
         }
-        [nameLabel, totalLabel, heartImage, heartLabel, barView, aboutLabel, collectionView].forEach {
+        [nameLabel, totalLabel, heartImage, heartLabel, barView, aboutLabel, aboutmeCollectionView].forEach {
             contentView.addSubview($0)
         }
-        contentView.addSubview(barView2)
+        [barView2,preferenceLabel,preferenceCollectionView].forEach {
+            contentView.addSubview($0)
+        }
         view.addSubview(horizontalStackView)
         horizontalStackView.addArrangedSubview(sendBtn)
         horizontalStackView.addArrangedSubview(sendChatBtn)
@@ -153,27 +166,28 @@ class OtherProfileViewController: UIViewController {
     }
     func configureCollectionView() {
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(OtherProfileCollectionViewCell.self, forCellWithReuseIdentifier: OtherProfileCollectionViewCell.reuseIdentifier)
+        aboutmeCollectionView.dataSource = self
+        aboutmeCollectionView.delegate = self
+        aboutmeCollectionView.register(OtherProfileCollectionViewCell.self, forCellWithReuseIdentifier: OtherProfileCollectionViewCell.reuseIdentifier)
+        preferenceCollectionView.dataSource = self
+        preferenceCollectionView.delegate = self
+        preferenceCollectionView.register(PreferenceCollectionViewCell.self, forCellWithReuseIdentifier: PreferenceCollectionViewCell.reuseIdentifier)
     }
     func configUI() {
         scrollView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-45)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-55)
         }
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
             $0.height.equalTo(800)
         }
-        cupidImageView.snp.makeConstraints { make in
-            //make.top.equalToSuperview().inset(45)
-            make.top.equalTo(contentView.snp.top)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(370)
+        cupidImageView.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.5)
         }
         declareBtn.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(20)
@@ -200,11 +214,11 @@ class OtherProfileViewController: UIViewController {
             $0.bottom.equalTo(totalLabel.snp.bottom)
         }
         totalLabel.snp.makeConstraints {
-            $0.leading.equalTo(nameLabel.snp.trailing).offset(220)
+            $0.trailing.equalTo(heartImage.snp.leading).offset(-7)
             $0.top.equalTo(cupidImageView.snp.bottom).offset(30)
         }
         heartImage.snp.makeConstraints {
-            $0.leading.equalTo(totalLabel.snp.trailing).offset(5)
+            $0.trailing.equalTo(heartLabel.snp.leading).offset(-5)
             $0.bottom.equalTo(totalLabel.snp.bottom)
         }
         barView.snp.makeConstraints {
@@ -217,10 +231,10 @@ class OtherProfileViewController: UIViewController {
             $0.leading.equalTo(nameLabel.snp.leading)
         }
         heartLabel.snp.makeConstraints {
-            $0.leading.equalTo(heartImage.snp.trailing).offset(5)
+            $0.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(heartImage.snp.bottom)
         }
-        collectionView.snp.makeConstraints {
+        aboutmeCollectionView.snp.makeConstraints {
             $0.leading.equalTo(aboutLabel.snp.leading)
             $0.top.equalTo(aboutLabel.snp.bottom).offset(10)
             $0.height.equalTo(150)
@@ -233,12 +247,19 @@ class OtherProfileViewController: UIViewController {
         }
         horizontalStackView.snp.makeConstraints {
             $0.height.equalTo(45)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
             $0.leading.trailing.equalToSuperview().inset(15)
         }
-        
-        
-        
+        preferenceLabel.snp.makeConstraints {
+            $0.top.equalTo(barView2.snp.bottom).offset(20)
+            $0.leading.equalTo(nameLabel.snp.leading)
+        }
+        preferenceCollectionView.snp.makeConstraints {
+            $0.leading.equalTo(preferenceLabel.snp.leading)
+            $0.top.equalTo(preferenceLabel.snp.bottom).offset(10)
+            $0.height.equalTo(150)
+            $0.width.equalTo(160)
+        }
     }
     func setupPieChart() {
         let entries = [PieChartDataEntry(value: 90), PieChartDataEntry(value: 10)]
@@ -252,7 +273,7 @@ class OtherProfileViewController: UIViewController {
         dataSet.drawIconsEnabled = false
         let data = PieChartData(dataSet: dataSet)
         
-        pieChartView.holeRadiusPercent = 0.8
+        pieChartView.holeRadiusPercent = 0.9
         pieChartView.holeColor = UIColor.clear // 배경색을 투명하게 설정
         
         pieChartView.data = data
@@ -262,31 +283,51 @@ class OtherProfileViewController: UIViewController {
         guard let url = URL(string:"https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg") else { return }
         cupidImageView.kf.setImage(with: url)
     }
-
+    @objc func declarButtonTapped() {
+        
+    }
+    //뒤로가기
+    @objc func back(_ sender: Any) {
+         self.navigationController?.popViewController(animated: true)
+        print("back click")
+     }
 }
 extension OtherProfileViewController: UICollectionViewDelegate {
     
 }
 extension OtherProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherProfileCollectionViewCell.reuseIdentifier, for: indexPath) as? OtherProfileCollectionViewCell else {
-            return UICollectionViewCell()
+        if collectionView == aboutmeCollectionView {
+            return 5
+        } else if collectionView == preferenceCollectionView {
+            return 4
         }
-        let profileData = OtherProfile(age: "22살", height: "165cm", location: "서울", voiceType: "중음", animalType: "토끼상")
-
-        cell.configure(with: profileData)
-        return cell
-    }
-   
-}
-extension OtherProfileViewController: UICollectionViewDelegateFlowLayout {
-   
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 50, height: 35)
+        return 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == aboutmeCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherProfileCollectionViewCell.reuseIdentifier, for: indexPath) as? OtherProfileCollectionViewCell else {
+                
+                return UICollectionViewCell()
+            }
+            
+            return cell
+        } else if collectionView == preferenceCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PreferenceCollectionViewCell.reuseIdentifier, for: indexPath) as? PreferenceCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        }
+        return UICollectionViewCell()
+    }
 }
+extension OtherProfileViewController: UICollectionViewDelegateFlowLayout {
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            
+            return CGSize(width: 50, height: 35)
+        }
+        
+    }
+    

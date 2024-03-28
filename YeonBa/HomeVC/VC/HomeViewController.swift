@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import Kingfisher
 import Charts
+import SCLAlertView
 
 class HomeViewController: UIViewController {
     // MARK: - UI Components
@@ -188,11 +189,18 @@ class HomeViewController: UIViewController {
     @objc func alarmButtonTapped() {
         print("tabbar button tapped")
     }
-    //새로운 추천 이성 시 팝업
     @objc func didTapButton() {
-        let popupViewController = MyPopupViewController(title: "다시 해보기", desc: "새로 고침시 5개의 화살이 소진 됩니다. 새로운 추천 이성을 확인해 볼까요?")
-        popupViewController.modalPresentationStyle = .overFullScreen
-        self.present(popupViewController, animated: false)
+        let alertView = SCLAlertView()
+        alertView.iconTintColor = .primary
+        alertView.addButton("확인", backgroundColor: .primary, textColor: .white) {
+            
+        }
+        alertView.showTitle(
+            "다시해보기",
+            subTitle: "새로 고침시 5개의 화살이 소진 됩니다. 새로운 추천 이성을 확인해 볼까요?",
+            style: .notice,
+            closeButtonTitle: "취소"
+        )
     }
    
 

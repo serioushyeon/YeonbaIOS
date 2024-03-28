@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
         $0.text = "지역"
         $0.textColor = .black
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 20)
+        $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     private let locationView = UIView().then {
         $0.backgroundColor = .clear
@@ -54,7 +54,7 @@ class SearchViewController: UIViewController {
         $0.text = "음역대"
         $0.textColor = .black
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 20)
+        $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     private let voiceView = UIView().then {
         $0.backgroundColor = .clear
@@ -81,7 +81,7 @@ class SearchViewController: UIViewController {
         $0.text = "체형"
         $0.textColor = .black
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 20)
+        $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     private let weightView = UIView().then {
         $0.backgroundColor = .clear
@@ -107,7 +107,7 @@ class SearchViewController: UIViewController {
     private let ageHorizontalStackview = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
-        $0.alignment = .fill
+        $0.alignment = .top
         $0.spacing = 222
     }
     private let ageLabel = UILabel().then {
@@ -130,6 +130,7 @@ class SearchViewController: UIViewController {
     private let heightHorizontalStackview = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
+        $0.alignment = .top
         $0.spacing = 200
     }
     private let HeightLabel = UILabel().then {
@@ -199,23 +200,24 @@ class SearchViewController: UIViewController {
         view.addSubview(verticalStackview)
         verticalStackview.addArrangedSubview(locationLabel)
         verticalStackview.addArrangedSubview(locationView)
+        locationView.addSubview(locationChoiceLabel)
+        locationView.addSubview(locationChoiceBtn)
         verticalStackview.addArrangedSubview(barView)
         verticalStackview.addArrangedSubview(voiceLabel)
         verticalStackview.addArrangedSubview(voiceView)
+        voiceView.addSubview(voiceChoiceLabel)
+        voiceView.addSubview(vocieChoiceBtn)
         verticalStackview.addArrangedSubview(barView2)
         verticalStackview.addArrangedSubview(weightLabel)
         verticalStackview.addArrangedSubview(weightView)
         verticalStackview.addArrangedSubview(barView3)
-        locationView.addSubview(locationChoiceLabel)
-        locationView.addSubview(locationChoiceBtn)
-        voiceView.addSubview(voiceChoiceLabel)
-        voiceView.addSubview(vocieChoiceBtn)
-        weightView.addSubview(weightChoiceLabel)
-        weightView.addSubview(weightChoiceBtn)
         verticalStackview.addArrangedSubview(ageHorizontalStackview)
         ageHorizontalStackview.addArrangedSubview(ageLabel)
         ageHorizontalStackview.addArrangedSubview(ageRangeLabel)
         verticalStackview.addArrangedSubview(ageSlider)
+        weightView.addSubview(weightChoiceLabel)
+        weightView.addSubview(weightChoiceBtn)
+        
         verticalStackview.addArrangedSubview(barView4)
         verticalStackview.addArrangedSubview(heightHorizontalStackview)
         heightHorizontalStackview.addArrangedSubview(HeightLabel)
@@ -237,36 +239,29 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
-        locationLabel.snp.makeConstraints {
-            $0.height.equalTo(20)
-            $0.top.equalToSuperview()
-        }
         locationView.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.height.equalTo(45)
+            $0.leading.trailing.equalToSuperview()
         }
         locationChoiceLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
         }
-       // locationChoiceBtn의 제약 설정
-       locationChoiceBtn.snp.makeConstraints {
-           $0.centerY.equalToSuperview()
-           $0.trailing.equalToSuperview().offset(-15)
-       }
+        locationChoiceBtn.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-15)
+        }
         barView.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
         voiceLabel.snp.makeConstraints {
             $0.height.equalTo(20)
         }
         voiceView.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.height.equalTo(45)
+
+            $0.leading.trailing.equalToSuperview()
         }
         voiceChoiceLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -278,16 +273,14 @@ class SearchViewController: UIViewController {
         }
         barView2.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
         weightLabel.snp.makeConstraints {
             $0.height.equalTo(20)
         }
         weightView.snp.makeConstraints {
-           // $0.height.equalTo(40)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.height.equalTo(45)
+            $0.leading.trailing.equalToSuperview()
         }
         weightChoiceLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -299,38 +292,33 @@ class SearchViewController: UIViewController {
         }
         barView3.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
         ageHorizontalStackview.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalTo(25)
             $0.leading.trailing.equalToSuperview()
         }
         ageSlider.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            //$0.height.equalTo(40)
+            $0.leading.trailing.equalToSuperview()
         }
         barView4.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
-        
+
         heightHorizontalStackview.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalTo(25)
             $0.leading.trailing.equalToSuperview()
         }
         
         heightSlider.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            //$0.height.equalTo(40)
+            $0.leading.trailing.equalToSuperview()
         }
         barView5.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
         animalHorizontalStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
@@ -343,10 +331,11 @@ class SearchViewController: UIViewController {
         findButton.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(40)
+            $0.height.equalTo(45)
         }
-                    
     }
+
+
     @objc func showLocationModal() {
         let locationModalVC = LocationModalViewController(locations: locations)
         locationModalVC.modalPresentationStyle = .pageSheet
