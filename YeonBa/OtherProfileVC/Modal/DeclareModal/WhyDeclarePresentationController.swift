@@ -1,28 +1,28 @@
 //
-//  ModeSelectPresentationController.swift
+//  WhyDeclarePresentationController.swift
 //  YeonBa
 //
 //  Created by 김민솔 on 3/28/24.
 //
 
 import UIKit
+import SnapKit
 
-final class ModeSelectPresentationController: UIPresentationController {
+final class WhyDeclarePresentationController: UIPresentationController {
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     private var currentPositionTouched: CGPoint?
     private let dimmingView: UIView = {
         let dimmingView = UIVisualEffectView(
             effect: UIBlurEffect(style: .systemMaterialDark)
         )
-        dimmingView.translatesAutoresizingMaskIntoConstraints = false
         return dimmingView
     }()
     
     override var frameOfPresentedViewInContainerView: CGRect {
         let screenBounds = UIScreen.main.bounds
         let size = CGSize(width: screenBounds.width,
-                          height: screenBounds.height * 0.25)
-        let origin = CGPoint(x: .zero, y: screenBounds.height * 0.75)
+                          height: screenBounds.height * 0.65)
+        let origin = CGPoint(x: .zero, y: screenBounds.height * 0.35)
         
         return CGRect(origin: origin, size: size)
     }
@@ -77,12 +77,9 @@ final class ModeSelectPresentationController: UIPresentationController {
     }
     
     private func setupDimmingViewLayout(in view: UIView) {
-        NSLayoutConstraint.activate([
-            dimmingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dimmingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dimmingView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            dimmingView.topAnchor.constraint(equalTo: view.topAnchor)
-        ])
+        dimmingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     @objc private func dismissView(_ sender: UIPanGestureRecognizer) {

@@ -9,20 +9,20 @@ import Foundation
 import UIKit
 
 enum DeclareMode: Int, CaseIterable {
-    case daily
-    case weekly
+    case declare
+    case cut
     
     var title: NSAttributedString {
         let attributes: [NSAttributedString.Key: Any]
         let titleString: String
         
         switch self {
-        case .daily:
+        case .declare:
             titleString = "신고하기"
             attributes = [.foregroundColor: UIColor.red]
-        case .weekly:
+        case .cut:
             titleString = "차단하기"
-            attributes = [:] // 주간 모드에 대한 특별한 속성은 없습니다
+            attributes = [:] 
         }
         
         return NSAttributedString(string: titleString, attributes: attributes)

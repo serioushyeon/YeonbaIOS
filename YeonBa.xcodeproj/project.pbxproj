@@ -37,6 +37,12 @@
 		58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86202BB544E300F90050 /* ModeSelectTransitioningDelegate.swift */; };
 		58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86232BB54DCB00F90050 /* DeclarLabel.swift */; };
 		58BB86272BB5512400F90050 /* DeclareMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86262BB5512400F90050 /* DeclareMode.swift */; };
+		58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB862A2BB568A500F90050 /* WhyDeclareViewController.swift */; };
+		58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB862C2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift */; };
+		58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB862E2BB56BC000F90050 /* WhyDeclareDelegate.swift */; };
+		58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86302BB56C3C00F90050 /* WhyMode.swift */; };
+		58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86322BB56F2B00F90050 /* WhyDeclarePresentationController.swift */; };
+		58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86342BB579CE00F90050 /* BoundGrayLabel.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -100,6 +106,12 @@
 		58BB86202BB544E300F90050 /* ModeSelectTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectTransitioningDelegate.swift; sourceTree = "<group>"; };
 		58BB86232BB54DCB00F90050 /* DeclarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarLabel.swift; sourceTree = "<group>"; };
 		58BB86262BB5512400F90050 /* DeclareMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclareMode.swift; sourceTree = "<group>"; };
+		58BB862A2BB568A500F90050 /* WhyDeclareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyDeclareViewController.swift; sourceTree = "<group>"; };
+		58BB862C2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyDeclareTableViewCell.swift; sourceTree = "<group>"; };
+		58BB862E2BB56BC000F90050 /* WhyDeclareDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyDeclareDelegate.swift; sourceTree = "<group>"; };
+		58BB86302BB56C3C00F90050 /* WhyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyMode.swift; sourceTree = "<group>"; };
+		58BB86322BB56F2B00F90050 /* WhyDeclarePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyDeclarePresentationController.swift; sourceTree = "<group>"; };
+		58BB86342BB579CE00F90050 /* BoundGrayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundGrayLabel.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -264,8 +276,8 @@
 		58BB858B2BB1D3D500F90050 /* OtherProfileVC */ = {
 			isa = PBXGroup;
 			children = (
+				58BB86282BB5686A00F90050 /* Modal */,
 				58BB86252BB550C800F90050 /* Mode */,
-				58BB85DE2BB4911E00F90050 /* DeclareModal */,
 				58BB85D22BB3AFEF00F90050 /* Model */,
 				58BB85CB2BB3169E00F90050 /* VC */,
 				58BB85CA2BB3169600F90050 /* Cell */,
@@ -324,7 +336,7 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		58BB85DE2BB4911E00F90050 /* DeclareModal */ = {
+		58BB85DE2BB4911E00F90050 /* OptionModal */ = {
 			isa = PBXGroup;
 			children = (
 				58BB861A2BB543CA00F90050 /* ModeSelectPresentationController.swift */,
@@ -332,13 +344,14 @@
 				58BB861E2BB544A500F90050 /* ModeSelectViewController.swift */,
 				58BB86202BB544E300F90050 /* ModeSelectTransitioningDelegate.swift */,
 			);
-			path = DeclareModal;
+			path = OptionModal;
 			sourceTree = "<group>";
 		};
 		58BB86222BB54DAF00F90050 /* NameSpace */ = {
 			isa = PBXGroup;
 			children = (
 				58BB86232BB54DCB00F90050 /* DeclarLabel.swift */,
+				58BB86342BB579CE00F90050 /* BoundGrayLabel.swift */,
 			);
 			path = NameSpace;
 			sourceTree = "<group>";
@@ -347,8 +360,29 @@
 			isa = PBXGroup;
 			children = (
 				58BB86262BB5512400F90050 /* DeclareMode.swift */,
+				58BB86302BB56C3C00F90050 /* WhyMode.swift */,
 			);
 			path = Mode;
+			sourceTree = "<group>";
+		};
+		58BB86282BB5686A00F90050 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				58BB86292BB5688600F90050 /* DeclareModal */,
+				58BB85DE2BB4911E00F90050 /* OptionModal */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		58BB86292BB5688600F90050 /* DeclareModal */ = {
+			isa = PBXGroup;
+			children = (
+				58BB862A2BB568A500F90050 /* WhyDeclareViewController.swift */,
+				58BB862C2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift */,
+				58BB862E2BB56BC000F90050 /* WhyDeclareDelegate.swift */,
+				58BB86322BB56F2B00F90050 /* WhyDeclarePresentationController.swift */,
+			);
+			path = DeclareModal;
 			sourceTree = "<group>";
 		};
 		58D15E862B90585700EB74E9 = {
@@ -664,6 +698,8 @@
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
+				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
+				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */,
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
@@ -672,6 +708,9 @@
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
+				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
+				58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */,
+				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
@@ -689,6 +728,7 @@
 				58BB86272BB5512400F90050 /* DeclareMode.swift in Sources */,
 				58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */,
 				58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */,
+				58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */,
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
 			);

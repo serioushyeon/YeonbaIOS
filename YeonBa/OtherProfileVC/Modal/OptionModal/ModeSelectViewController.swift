@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol ModeSelectViewControllerDelegate: AnyObject {
     func didSelectedRowAt(indexPath: Int)
@@ -20,7 +21,6 @@ final class ModeSelectViewController: UIViewController {
         tableView.isScrollEnabled = false
         tableView.register(ModeSelectCell.self,
                            forCellReuseIdentifier: "modalCell")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -46,7 +46,7 @@ final class ModeSelectViewController: UIViewController {
     }
     
     private func setupInitialView() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor.gray2
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
     }
@@ -77,7 +77,14 @@ extension ModeSelectViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell(style: .default, reuseIdentifier: .none)
         }
         let mode = DeclareMode.allCases[indexPath.row]
-        cell.setup(label: mode.title, isChecked: currentMode == mode)
+        // 이미지를 설정하여 셀에 전달
+        let image: UIImage?
+        if mode == .declare {
+            image = UIImage(named: "declare")
+        } else {
+            image = UIImage(named: "chadan")
+        }
+        cell.setup(label: mode.title, image: image, isChecked: currentMode == mode)
         return cell
     }
     
@@ -87,6 +94,10 @@ extension ModeSelectViewController: UITableViewDelegate, UITableViewDataSource {
                 
         dismissView()
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            // 테이블 뷰의 높이의 절반을 반환하여 셀이 화면의 절반을 차지하도록 함
+            return tableView.bounds.height / 2
+        }
 }
 
 // MARK: Setup Layout
@@ -99,12 +110,10 @@ extension ModeSelectViewController {
     
     private func setupLayout() {
         view.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
     }
 }
+

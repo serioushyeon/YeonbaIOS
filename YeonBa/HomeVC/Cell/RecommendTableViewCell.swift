@@ -144,6 +144,7 @@ class RecommendTableViewCell: UITableViewCell {
         loadImage()
         setupPieChart()
        }
+    //셀 사이 간격 설정 
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))

@@ -11,23 +11,11 @@ import Then
 import Kingfisher
 import Charts
 
-//enum BoxOfficeMode: Int, CaseIterable {
-//    case daily
-//    case weekly
-//    
-//    var title: String {
-//        switch self {
-//        case .daily:
-//            return  "신고하기"
-//        case .weekly:
-//            return "차단하기"
-//        }
-//    }
-//}
 class OtherProfileViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private var viewMode: DeclareMode = .daily
+    private var viewMode: DeclareMode = .declare
+    private var whyviewMode: WhyMode = .maner
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -357,12 +345,42 @@ extension OtherProfileViewController: ModeSelectViewControllerDelegate {
         
         
         switch viewMode {
-        case .daily:
+        case .declare:
+            // 새로운 모달 창을 표시하기 위한 뷰 컨트롤러 생성
+            dismiss(animated: true) {
+                let whydeclareVC = WhyDeclareViewController(passMode: self.whyviewMode)
+                whydeclareVC.delegate = self
+                // 새로운 모달 창 표시
+                self.present(whydeclareVC, animated: true)
+            }
             print("daily")
-        case .weekly:
+        case .cut:
             print("weekly")
            
         }
     }
 }
+
+extension OtherProfileViewController: WhyDeclareViewControllerDelegate {
+    func whydidSelectedRowAt(indexPath: Int) {
+        guard let mode = WhyMode(rawValue: indexPath) else { return }
+        
+        whyviewMode = mode
+        
+        switch whyviewMode {
+        case .fuck:
+            print("")
+        case .badchat:
+            print("")
+        case .badprofile:
+            print("")
+        case .other:
+            print("")
+        case .maner:
+            print("")
+        }
+        
+    }
+}
+
     
