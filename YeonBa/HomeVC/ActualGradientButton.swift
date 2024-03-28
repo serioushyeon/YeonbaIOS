@@ -5,6 +5,7 @@
 //  Created by 김민솔 on 3/6/24.
 //
 
+import Foundation
 import UIKit
 
 class ActualGradientButton: UIButton {
