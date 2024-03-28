@@ -177,7 +177,7 @@ class SearchViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 25
         $0.layer.masksToBounds = true
-        $0.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        $0.addTarget(SearchViewController.self, action: #selector(didTapButton), for: .touchUpInside)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

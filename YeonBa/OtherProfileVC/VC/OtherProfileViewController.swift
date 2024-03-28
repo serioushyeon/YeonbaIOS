@@ -11,10 +11,23 @@ import Then
 import Kingfisher
 import Charts
 
+//enum BoxOfficeMode: Int, CaseIterable {
+//    case daily
+//    case weekly
+//    
+//    var title: String {
+//        switch self {
+//        case .daily:
+//            return  "신고하기"
+//        case .weekly:
+//            return "차단하기"
+//        }
+//    }
+//}
 class OtherProfileViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    //var aboutProfile: [OtherProfile] = defaultAbout
+    private var viewMode: DeclareMode = .daily
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -150,9 +163,10 @@ class OtherProfileViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(cupidImageView)
-        [declareBtn,similarityLabel,pieChartView,favoriteBtn].forEach {
+        [similarityLabel,pieChartView,favoriteBtn].forEach {
             cupidImageView.addSubview($0)
         }
+        contentView.addSubview(declareBtn)
         [nameLabel, totalLabel, heartImage, heartLabel, barView, aboutLabel, aboutmeCollectionView].forEach {
             contentView.addSubview($0)
         }
@@ -283,8 +297,12 @@ class OtherProfileViewController: UIViewController {
         guard let url = URL(string:"https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg") else { return }
         cupidImageView.kf.setImage(with: url)
     }
+//MARK: -- Action
     @objc func declarButtonTapped() {
-        
+        print("declare")
+        let declareVC = ModeSelectViewController(passMode: viewMode)
+        declareVC.delegate = self
+        self.present(declareVC, animated: true)
     }
     //뒤로가기
     @objc func back(_ sender: Any) {
@@ -330,4 +348,21 @@ extension OtherProfileViewController: UICollectionViewDelegateFlowLayout {
         }
         
     }
+// MARK: ModalView Delegate
+extension OtherProfileViewController: ModeSelectViewControllerDelegate {
+    func didSelectedRowAt(indexPath: Int) {
+        guard let mode = DeclareMode(rawValue: indexPath) else { return }
+        
+        viewMode = mode
+        
+        
+        switch viewMode {
+        case .daily:
+            print("daily")
+        case .weekly:
+            print("weekly")
+           
+        }
+    }
+}
     
