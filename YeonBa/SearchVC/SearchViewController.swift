@@ -32,7 +32,7 @@ class SearchViewController: UIViewController {
     private let locationView = UIView().then {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.gray.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
     }
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController {
         $0.setImage(UIImage(named: "nextBtn"), for: .normal)
     }
     private let barView = UIView().then {
-        $0.layer.borderColor = UIColor.init(named: "gray")?.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.borderWidth = 1
         $0.backgroundColor = .clear
     }
@@ -59,7 +59,7 @@ class SearchViewController: UIViewController {
     private let voiceView = UIView().then {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.gray.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
     }
@@ -73,7 +73,7 @@ class SearchViewController: UIViewController {
         $0.setImage(UIImage(named: "nextBtn"), for: .normal)
     }
     private let barView2 = UIView().then {
-        $0.layer.borderColor = UIColor.init(named: "gray")?.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.borderWidth = 1
         $0.backgroundColor = .clear
     }
@@ -86,7 +86,7 @@ class SearchViewController: UIViewController {
     private let weightView = UIView().then {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.gray.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
     }
@@ -100,21 +100,21 @@ class SearchViewController: UIViewController {
         $0.setImage(UIImage(named: "nextBtn"), for: .normal)
     }
     private let barView3 = UIView().then {
-        $0.layer.borderColor = UIColor.init(named: "gray")?.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.borderWidth = 1
         $0.backgroundColor = .clear
     }
     private let ageHorizontalStackview = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
-        $0.alignment = .top
+        $0.alignment = .bottom
         $0.spacing = 222
     }
     private let ageLabel = UILabel().then {
         $0.text = "나이"
         $0.textColor = .black
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 20)
+        $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     private let ageRangeLabel = UILabel().then {
         $0.text = "20~25세"
@@ -123,21 +123,21 @@ class SearchViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 16)
     }
     private let barView4 = UIView().then {
-        $0.layer.borderColor = UIColor.init(named: "gray")?.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.borderWidth = 1
         $0.backgroundColor = .clear
     }
     private let heightHorizontalStackview = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
-        $0.alignment = .top
+        $0.alignment = .bottom
         $0.spacing = 200
     }
     private let HeightLabel = UILabel().then {
         $0.text = "키"
         $0.textColor = .black
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 20)
+        $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     private let heightRangeLabel = UILabel().then {
         $0.text = "150cm~170cm"
@@ -152,7 +152,7 @@ class SearchViewController: UIViewController {
         $0.upper = 75
     }
     private let barView5 = UIView().then {
-        $0.layer.borderColor = UIColor.init(named: "gray")?.cgColor
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
         $0.layer.borderWidth = 1
         $0.backgroundColor = .clear
     }
@@ -175,7 +175,7 @@ class SearchViewController: UIViewController {
         $0.setTitle("이성 찾기", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 25
+        $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = true
         $0.addTarget(SearchViewController.self, action: #selector(didTapButton), for: .touchUpInside)
     }
@@ -184,18 +184,19 @@ class SearchViewController: UIViewController {
         navigationControl()
         addSubviews()
         configUI()
-        
+        tapGesture()
         
     }
     
 
-    // MARK: - Navigation
+// MARK: - Navigation
     func navigationControl() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         self.title = "찾아보기"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
+//MARK: -- UI
     func addSubviews() {
         view.addSubview(verticalStackview)
         verticalStackview.addArrangedSubview(locationLabel)
@@ -228,10 +229,19 @@ class SearchViewController: UIViewController {
         animalHorizontalStackView.addArrangedSubview(meetAnimalLabel)
         animalHorizontalStackView.addArrangedSubview(animalCheckBox)
         verticalStackview.addArrangedSubview(findButton)
-        
+    }
+    func tapGesture() {
         locationView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLocationModal))
         locationView.addGestureRecognizer(tapGesture)
+        
+        voiceView.isUserInteractionEnabled = true
+        let voicetapGesture = UITapGestureRecognizer(target: self, action: #selector(voiceModal))
+        voiceView.addGestureRecognizer(voicetapGesture)
+        
+        weightView.isUserInteractionEnabled = true
+        let weighttapGesture = UITapGestureRecognizer(target: self, action: #selector(weightModal))
+        weightView.addGestureRecognizer(weighttapGesture)
     }
     func configUI() {
         verticalStackview.snp.makeConstraints {
@@ -239,8 +249,11 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
+        locationLabel.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
         locationView.snp.makeConstraints {
-            $0.height.equalTo(45)
+            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         locationChoiceLabel.snp.makeConstraints {
@@ -259,8 +272,7 @@ class SearchViewController: UIViewController {
             $0.height.equalTo(20)
         }
         voiceView.snp.makeConstraints {
-            $0.height.equalTo(45)
-
+            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         voiceChoiceLabel.snp.makeConstraints {
@@ -279,7 +291,7 @@ class SearchViewController: UIViewController {
             $0.height.equalTo(20)
         }
         weightView.snp.makeConstraints {
-            $0.height.equalTo(45)
+            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         weightChoiceLabel.snp.makeConstraints {
@@ -299,7 +311,7 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         ageSlider.snp.makeConstraints {
-            //$0.height.equalTo(40)
+            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         barView4.snp.makeConstraints {
@@ -313,7 +325,7 @@ class SearchViewController: UIViewController {
         }
         
         heightSlider.snp.makeConstraints {
-            //$0.height.equalTo(40)
+            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         barView5.snp.makeConstraints {
@@ -321,6 +333,7 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         animalHorizontalStackView.snp.makeConstraints {
+            $0.height.equalTo(27)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -329,22 +342,24 @@ class SearchViewController: UIViewController {
             $0.width.equalTo(25)
         }
         findButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(45)
+            $0.height.equalToSuperview().multipliedBy(0.08) // 수직 스택뷰 높이의 5%로 설정
         }
     }
 
-
+//MARK: -- Action
     @objc func showLocationModal() {
         let locationModalVC = LocationModalViewController(locations: locations)
         locationModalVC.modalPresentationStyle = .pageSheet
         self.present(locationModalVC, animated: true, completion: nil)
     }
+    @objc func voiceModal() {
+        
+    }
+    @objc func weightModal() {
+        
+    }
     @objc func didTapButton() {
-//        let popupViewController = MyPopupViewController(title: "다시 해보기", desc: "새로 고침시 5개의 화살이 소진 됩니다. 새로운 추천 이성을 확인해 볼까요?")
-//        popupViewController.modalPresentationStyle = .overFullScreen
-//        self.present(popupViewController, animated: false)
     }
     
 

@@ -86,27 +86,27 @@ final class JKSlider: UIControl {
         self.addSubview(self.upperThumbButton)
         
         self.lowerThumbButton.snp.makeConstraints {
-          $0.top.bottom.equalToSuperview()
-          $0.right.lessThanOrEqualTo(self.upperThumbButton.snp.left)
-          $0.left.greaterThanOrEqualToSuperview()
-          $0.width.equalTo(self.snp.height)
-          self.leftConstraint = $0.left.equalTo(self.snp.left).priority(999).constraint // .constraint로 값 가져오기 테크닉
+            $0.top.bottom.equalToSuperview().inset(6)
+            $0.right.lessThanOrEqualTo(self.upperThumbButton.snp.left)
+            $0.left.greaterThanOrEqualToSuperview()
+            $0.width.equalTo(self.snp.height)
+            self.leftConstraint = $0.left.equalTo(self.snp.left).priority(999).constraint // .constraint로 값 가져오기 테크닉
         }
         self.upperThumbButton.snp.makeConstraints {
-          $0.top.bottom.equalToSuperview()
-          $0.left.greaterThanOrEqualTo(self.lowerThumbButton.snp.right)
-          $0.right.lessThanOrEqualToSuperview()
-          $0.width.equalTo(self.snp.height)
-          self.rightConstraint = $0.left.equalTo(self.snp.left).priority(999).constraint
+            $0.top.bottom.equalToSuperview().inset(6)
+            $0.left.greaterThanOrEqualTo(self.lowerThumbButton.snp.right)
+            $0.right.lessThanOrEqualToSuperview()
+            $0.width.equalTo(self.snp.height)
+            self.rightConstraint = $0.left.equalTo(self.snp.left).priority(999).constraint
         }
         self.trackView.snp.makeConstraints {
-          $0.left.right.centerY.equalToSuperview()
-          $0.height.equalTo(self).multipliedBy(Constant.barRatio)
+            $0.left.right.centerY.equalToSuperview()
+            $0.height.equalTo(self).multipliedBy(Constant.barRatio)
         }
         self.trackTintView.snp.makeConstraints {
-          $0.left.equalTo(self.lowerThumbButton.snp.right)
-          $0.right.equalTo(self.upperThumbButton.snp.left)
-          $0.top.bottom.equalTo(self.trackView)
+            $0.left.equalTo(self.lowerThumbButton.snp.right)
+            $0.right.equalTo(self.upperThumbButton.snp.left)
+            $0.top.bottom.equalTo(self.trackView)
         }
       }
     // MARK: Touch
@@ -168,6 +168,7 @@ final class JKSlider: UIControl {
           
           if isLowerThumb {
             self.leftConstraint?.update(offset: offset)
+              
           } else {
             self.rightConstraint?.update(offset: offset)
           }
@@ -178,6 +179,9 @@ class RoundableButton: UIButton {
   override func layoutSubviews() {
     super.layoutSubviews()
     self.layer.cornerRadius = self.frame.height / 2
+      // 버튼의 너비와 높이 설정
+      let buttonSize: CGFloat = 21 // 원하는 크기 값으로 설정
+      self.frame.size = CGSize(width: buttonSize, height: buttonSize)
   }
 }
 class ThumbButton: RoundableButton {
@@ -187,9 +191,9 @@ class ThumbButton: RoundableButton {
         self.layer.shadowOffset = CGSize(width: 0, height: 3)
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.3
-        self.layer.borderWidth = 7.0
+        self.layer.borderWidth = 5.0
         self.layer.borderColor = UIColor.primary?.cgColor
-        // 너비 설정
+        
         
     }
     required init?(coder: NSCoder) {
@@ -200,5 +204,5 @@ class ThumbButton: RoundableButton {
       func clamped(to limits: ClosedRange<Self>) -> Self {
         min(max(self, limits.lowerBound), limits.upperBound)
       }
-    }
+}
     

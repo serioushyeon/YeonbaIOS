@@ -16,5 +16,6 @@ extension UIColor {
     class var gray2: UIColor? {return UIColor(named: "gray2")}
     class var thirdary: UIColor? {return UIColor(named: "thirdary")}
     class var customgray: UIColor? {return UIColor(named: "customgray")}
+    class var customgray2: UIColor? {return UIColor(named: "customgray2")}
     class var gray3: UIColor? {return UIColor(named: "gray3")}
 }

@@ -229,9 +229,9 @@
 		589DF3272B907469003F03C5 /* SearchVC */ = {
 			isa = PBXGroup;
 			children = (
+				58BB86362BB67B7C00F90050 /* SearchModal */,
 				589DF3282B90747B003F03C5 /* SearchViewController.swift */,
 				584DCF7B2BA1A5880081149F /* JKSlider.swift */,
-				580AAD2B2BA9375200672050 /* LocationModalViewController.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -383,6 +383,30 @@
 				58BB86322BB56F2B00F90050 /* WhyDeclarePresentationController.swift */,
 			);
 			path = DeclareModal;
+			sourceTree = "<group>";
+		};
+		58BB86362BB67B7C00F90050 /* SearchModal */ = {
+			isa = PBXGroup;
+			children = (
+				58BB86382BB67D1800F90050 /* WeightModal */,
+				58BB86372BB67C3800F90050 /* VoiceModal */,
+				580AAD2B2BA9375200672050 /* LocationModalViewController.swift */,
+			);
+			path = SearchModal;
+			sourceTree = "<group>";
+		};
+		58BB86372BB67C3800F90050 /* VoiceModal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VoiceModal;
+			sourceTree = "<group>";
+		};
+		58BB86382BB67D1800F90050 /* WeightModal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WeightModal;
 			sourceTree = "<group>";
 		};
 		58D15E862B90585700EB74E9 = {
