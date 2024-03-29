@@ -13,6 +13,8 @@ protocol WhyDeclareViewControllerDelegate: AnyObject {
 }
 
 final class WhyDeclareViewController: UIViewController {
+    private var selectedCellIndex: IndexPath?
+
     weak var delegate: WhyDeclareViewControllerDelegate?
     private let customTransitioningDelegate = WhyDeclareDelegate()
     private let currentMode: WhyMode
@@ -81,6 +83,7 @@ final class WhyDeclareViewController: UIViewController {
         self.dismiss(animated: true)
     }
 }
+//MARK: -- 신고하기 UITableViewDelegate,UITableViewDataSource
 
 extension WhyDeclareViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
@@ -97,18 +100,19 @@ extension WhyDeclareViewController: UITableViewDelegate, UITableViewDataSource {
         let mode = WhyMode.allCases[indexPath.row]
         // 이미지를 설정하여 셀에 전달
         cell.setup(label: mode.title)
+        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         delegate?.whydidSelectedRowAt(indexPath: indexPath.row)
-                
-        dismissView()
+        //dismissView()
     }
+    
 }
 
-// MARK: Setup Layout
+// MARK: 신고하기 Setup Layout
 extension WhyDeclareViewController {
     private func setupView() {
         setupInitialView()
@@ -134,7 +138,7 @@ extension WhyDeclareViewController {
         findButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(40)
+            $0.height.equalTo(43)
         }
         
     }
