@@ -1,4 +1,5 @@
 PODS:
+<<<<<<< HEAD
   - Charts (4.1.0):
     - Charts/Core (= 4.1.0)
   - Charts/Core (4.1.0):
@@ -6,6 +7,12 @@ PODS:
   - Kingfisher (7.11.0)
   - Pageboy (4.0.2)
   - SCLAlertView (0.8)
+=======
+<<<<<<< HEAD
+=======
+  - Kingfisher (7.11.0)
+>>>>>>> 13608ecdfdbb2ce66546b069fb9e81dab84c227f
+>>>>>>> Feat/#3
   - SnapKit (5.7.1)
   - SwiftAlgorithms (1.0.0)
   - Tabman (3.0.2):
@@ -13,26 +20,51 @@ PODS:
   - Then (3.0.0)
 
 DEPENDENCIES:
+<<<<<<< HEAD
   - Charts
   - Kingfisher
   - SCLAlertView
+=======
+<<<<<<< HEAD
+=======
+  - Kingfisher
+>>>>>>> 13608ecdfdbb2ce66546b069fb9e81dab84c227f
+>>>>>>> Feat/#3
   - SnapKit
   - Tabman
   - Then
 
 SPEC REPOS:
   trunk:
+<<<<<<< HEAD
     - Charts
     - Kingfisher
     - Pageboy
     - SCLAlertView
+=======
+<<<<<<< HEAD
+=======
+    - Kingfisher
+>>>>>>> 13608ecdfdbb2ce66546b069fb9e81dab84c227f
+>>>>>>> Feat/#3
     - SnapKit
     - SwiftAlgorithms
     - Tabman
     - Then
 
 SPEC CHECKSUMS:
+<<<<<<< HEAD
   Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
+=======
+<<<<<<< HEAD
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+
+PODFILE CHECKSUM: bd0da7286d2f2b1e2dee99472115d48ef0d9ddad
+
+COCOAPODS: 1.15.2
+=======
+>>>>>>> Feat/#3
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   Pageboy: 34ff11e8d1041b81769d5bcde9b19a0cb7218bd9
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
@@ -44,3 +76,4 @@ SPEC CHECKSUMS:
 PODFILE CHECKSUM: 094c6842c660a6e5e8edf97c4eca290e1c4f9a79
 
 COCOAPODS: 1.8.4
+>>>>>>> 13608ecdfdbb2ce66546b069fb9e81dab84c227f
