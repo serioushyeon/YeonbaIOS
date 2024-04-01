@@ -56,6 +56,9 @@
 		58BB868C2BB8433F00F90050 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB868B2BB8433F00F90050 /* LocationTableViewCell.swift */; };
 		58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB868D2BB843C100F90050 /* LocationLabel.swift */; };
 		58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB868F2BB844CA00F90050 /* LocationMode.swift */; };
+		58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86D22BBAF94300F90050 /* SearchResultViewController.swift */; };
+		58BB86D52BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86D42BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift */; };
+		58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86D62BBAFC7000F90050 /* CategoryCollectionViewCell.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -138,6 +141,9 @@
 		58BB868B2BB8433F00F90050 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		58BB868D2BB843C100F90050 /* LocationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationLabel.swift; sourceTree = "<group>"; };
 		58BB868F2BB844CA00F90050 /* LocationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMode.swift; sourceTree = "<group>"; };
+		58BB86D22BBAF94300F90050 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		58BB86D42BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		58BB86D62BBAFC7000F90050 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -255,6 +261,7 @@
 		589DF3272B907469003F03C5 /* SearchVC */ = {
 			isa = PBXGroup;
 			children = (
+				58BB86D12BBAF92400F90050 /* SearchResultVC */,
 				58BB86362BB67B7C00F90050 /* SearchModal */,
 				589DF3282B90747B003F03C5 /* SearchViewController.swift */,
 				584DCF7B2BA1A5880081149F /* JKSlider.swift */,
@@ -462,6 +469,16 @@
 				58BB868B2BB8433F00F90050 /* LocationTableViewCell.swift */,
 			);
 			path = LocationModal;
+			sourceTree = "<group>";
+		};
+		58BB86D12BBAF92400F90050 /* SearchResultVC */ = {
+			isa = PBXGroup;
+			children = (
+				58BB86D22BBAF94300F90050 /* SearchResultViewController.swift */,
+				58BB86D42BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift */,
+				58BB86D62BBAFC7000F90050 /* CategoryCollectionViewCell.swift */,
+			);
+			path = SearchResultVC;
 			sourceTree = "<group>";
 		};
 		58D15E862B90585700EB74E9 = {
@@ -799,13 +816,16 @@
 				58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
+				58BB86D52BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
+				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
+				58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
 				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,

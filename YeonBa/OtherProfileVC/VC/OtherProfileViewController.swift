@@ -319,6 +319,7 @@ class OtherProfileViewController: UIViewController {
         print("back click")
      }
 }
+//MARK: -- OtherProfileViewController UICollectionViewDelegate,UICollectionViewDataSource
 extension OtherProfileViewController: UICollectionViewDelegate {
     
 }

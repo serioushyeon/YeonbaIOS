@@ -181,7 +181,7 @@ class SearchViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 23
         $0.layer.masksToBounds = true
-        $0.addTarget(SearchViewController.self, action: #selector(didTapButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(navigateToSearchResultViewController), for: .touchUpInside)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -352,6 +352,7 @@ class SearchViewController: UIViewController {
             $0.height.equalToSuperview().multipliedBy(0.06) // 수직 스택뷰 높이의 5%로 설정
         }
     }
+    
 
 //MARK: -- Action
     @objc func showLocationModal() {
@@ -369,8 +370,9 @@ class SearchViewController: UIViewController {
         weightVC.delegate = self
         self.present(weightVC, animated: true)
     }
-    @objc func didTapButton() {
-        
+    @objc func navigateToSearchResultViewController(_ sender: Any) {
+        let searchResultVC = SearchResultViewController()
+        self.navigationController?.pushViewController(searchResultVC, animated: true)
     }
     
 
