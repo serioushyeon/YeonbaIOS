@@ -22,11 +22,6 @@ class LocationModalViewController: UIViewController {
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 26)
     }
-    private let searchView = UIView().then {
-        $0.backgroundColor = UIColor.gray3
-        $0.layer.cornerRadius = 10
-        $0.layer.masksToBounds = true
-    }
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.isScrollEnabled = true
@@ -34,6 +29,11 @@ class LocationModalViewController: UIViewController {
                            forCellReuseIdentifier: "modalCell")
         return tableView
     }()
+    private let horizontalStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 10
+        $0.distribution = .fillEqually
+    }
     private let finishButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
@@ -110,10 +110,10 @@ extension LocationModalViewController {
     }
     func addSubviews() {
         view.addSubview(allLabel)
-        view.addSubview(searchView)
         view.addSubview(tableView)
-//        view.addSubview(finishButton)
-//        view.addSubview(nextButton)
+        view.addSubview(horizontalStackView)
+        horizontalStackView.addArrangedSubview(finishButton)
+        horizontalStackView.addArrangedSubview(nextButton)
     }
     func configUI() {
         allLabel.snp.makeConstraints {
@@ -122,15 +122,15 @@ extension LocationModalViewController {
         $0.height.equalTo(35)
             
         }
-        searchView.snp.makeConstraints {
-            $0.top.equalTo(allLabel.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(51)
-        }
         tableView.snp.makeConstraints {
-            $0.top.equalTo(searchView.snp.bottom).offset(20)
+            $0.top.equalTo(allLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(horizontalStackView.snp.top)
+        }
+        horizontalStackView.snp.makeConstraints {
+            $0.height.equalTo(45)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
         }
        
     }
