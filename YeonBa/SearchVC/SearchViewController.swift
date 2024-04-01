@@ -11,6 +11,9 @@ import SnapKit
 
 class SearchViewController: UIViewController {
     let locations = ["서울", "경기도", "인천", "부산", "대전", "광주", "대구", "울산", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "세종", "제주"]
+    private var voiceViewMode: VoiceMode = .high
+    private var weightViewMode: WeightMode = .thinBody
+    private var locationViewMode: LocationMode = .gyeonggi
     private let verticalStackview = UIStackView().then {
         $0.axis = .vertical
         $0.distribution = .fill
@@ -108,7 +111,7 @@ class SearchViewController: UIViewController {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
         $0.alignment = .bottom
-        $0.spacing = 222
+        $0.spacing = 10
     }
     private let ageLabel = UILabel().then {
         $0.text = "나이"
@@ -131,7 +134,7 @@ class SearchViewController: UIViewController {
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
         $0.alignment = .bottom
-        $0.spacing = 200
+        $0.spacing = 10
     }
     private let HeightLabel = UILabel().then {
         $0.text = "키"
@@ -158,15 +161,16 @@ class SearchViewController: UIViewController {
     }
     private let animalHorizontalStackView = UIStackView().then {
         $0.axis = .horizontal
+        $0.alignment = .center
         $0.distribution = .equalSpacing
-        $0.spacing = 175
+        $0.spacing = 5
         
     }
     private let meetAnimalLabel = UILabel().then {
         $0.text = "선호하는 동물 상 만나기"
         $0.textColor = UIColor.thirdary
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardMedium(size: 14)
+        $0.font = UIFont.pretendardMedium(size: 15)
     }
     private let animalCheckBox = UIButton().then {
         $0.setImage(UIImage(named: "checkbox"), for: .normal)
@@ -175,7 +179,7 @@ class SearchViewController: UIViewController {
         $0.setTitle("이성 찾기", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 20
+        $0.layer.cornerRadius = 23
         $0.layer.masksToBounds = true
         $0.addTarget(SearchViewController.self, action: #selector(didTapButton), for: .touchUpInside)
     }
@@ -228,7 +232,7 @@ class SearchViewController: UIViewController {
         verticalStackview.addArrangedSubview(animalHorizontalStackView)
         animalHorizontalStackView.addArrangedSubview(meetAnimalLabel)
         animalHorizontalStackView.addArrangedSubview(animalCheckBox)
-        verticalStackview.addArrangedSubview(findButton)
+        view.addSubview(findButton)
     }
     func tapGesture() {
         locationView.isUserInteractionEnabled = true
@@ -247,13 +251,13 @@ class SearchViewController: UIViewController {
         verticalStackview.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-100)
         }
         locationLabel.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalToSuperview().multipliedBy(0.03) // 수직 스택뷰 높이의 5%로 설정
         }
         locationView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
+            $0.height.equalToSuperview().multipliedBy(0.09) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         locationChoiceLabel.snp.makeConstraints {
@@ -269,10 +273,10 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         voiceLabel.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalToSuperview().multipliedBy(0.03) // 수직 스택뷰 높이의 5%로 설정
         }
         voiceView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
+            $0.height.equalToSuperview().multipliedBy(0.09) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         voiceChoiceLabel.snp.makeConstraints {
@@ -288,10 +292,10 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         weightLabel.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalToSuperview().multipliedBy(0.03) // 수직 스택뷰 높이의 5%로 설정
         }
         weightView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
+            $0.height.equalToSuperview().multipliedBy(0.09) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         weightChoiceLabel.snp.makeConstraints {
@@ -307,11 +311,11 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         ageHorizontalStackview.snp.makeConstraints {
-            $0.height.equalTo(25)
+            $0.height.equalToSuperview().multipliedBy(0.04) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         ageSlider.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
+            $0.height.equalToSuperview().multipliedBy(0.08) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         barView4.snp.makeConstraints {
@@ -320,12 +324,12 @@ class SearchViewController: UIViewController {
         }
 
         heightHorizontalStackview.snp.makeConstraints {
-            $0.height.equalTo(25)
+            $0.height.equalToSuperview().multipliedBy(0.04) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         
         heightSlider.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.07) // 수직 스택뷰 높이의 5%로 설정
+            $0.height.equalToSuperview().multipliedBy(0.08) // 수직 스택뷰 높이의 5%로 설정
             $0.leading.trailing.equalToSuperview()
         }
         barView5.snp.makeConstraints {
@@ -333,34 +337,89 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         animalHorizontalStackView.snp.makeConstraints {
-            $0.height.equalTo(27)
+           // $0.height.equalToSuperview().multipliedBy(0.05)
             $0.leading.trailing.equalToSuperview()
         }
         
         animalCheckBox.snp.makeConstraints {
-            $0.height.equalTo(25)
-            $0.width.equalTo(25)
+            $0.height.equalTo(28)
+            $0.width.equalTo(28)
         }
         findButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.08) // 수직 스택뷰 높이의 5%로 설정
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(verticalStackview.snp.bottom).offset(10)
+           // $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            $0.height.equalToSuperview().multipliedBy(0.06) // 수직 스택뷰 높이의 5%로 설정
         }
     }
 
 //MARK: -- Action
     @objc func showLocationModal() {
-        let locationModalVC = LocationModalViewController(locations: locations)
+        let locationModalVC = LocationModalViewController(passMode: locationViewMode)
         locationModalVC.modalPresentationStyle = .pageSheet
-        self.present(locationModalVC, animated: true, completion: nil)
+        self.present(locationModalVC, animated: true)
     }
     @objc func voiceModal() {
-        
+        let voiceVC = VoiceViewController(passMode: voiceViewMode)
+        voiceVC.delegate = self
+        self.present(voiceVC, animated: true)
     }
     @objc func weightModal() {
-        
+        let weightVC = WeightViewController(passMode: weightViewMode)
+        weightVC.delegate = self
+        self.present(weightVC, animated: true)
     }
     @objc func didTapButton() {
+        
     }
     
 
 }
+//MARK: -- 지역 delegate
+extension SearchViewController: LocationViewControllerDelegate {
+    func locationSelectedRowAt(indexPath: Int) {
+        guard let mode = LocationMode(rawValue: indexPath) else { return }
+        locationViewMode = mode
+        
+        
+    }
+}
+//MARK: -- 음성 delegate
+extension SearchViewController: VoiceViewControllerDelegate {
+    func voiceSelectedRowAt(indexPath: Int) {
+        guard let mode = VoiceMode(rawValue: indexPath) else { return }
+        
+        voiceViewMode = mode
+        
+        switch voiceViewMode {
+        case .high:
+            print("")
+        case .middle:
+            print("")
+        case .low:
+            print("")
+        case .allLike:
+            print("")
+        }
+    }
+}
+//MARK: -- 체중 delegate
+extension SearchViewController: WeightViewControllerDelegate {
+    func weightSelectedRowAt(indexPath: Int) {
+        guard let mode = WeightMode(rawValue: indexPath) else { return }
+        
+        weightViewMode = mode
+        
+        switch weightViewMode {
+        case .thinBody:
+            print("")
+        case .middleBody:
+            print("")
+        case .littleFatBody:
+            print("")
+        case .fatBody:
+            print("")
+        }
+    }
+}
+
