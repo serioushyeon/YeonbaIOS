@@ -31,10 +31,6 @@
 		58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85D82BB3E55B00F90050 /* RecommendTableViewCell.swift */; };
 		58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85DA2BB4230B00F90050 /* HomeCollectionViewCell.swift */; };
 		58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85DC2BB445FE00F90050 /* PreferenceCollectionViewCell.swift */; };
-<<<<<<< HEAD
-		58BB85E02BB4915300F90050 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85DF2BB4915300F90050 /* CustomPresentationController.swift */; };
-		58BB85E22BB491E600F90050 /* CustomTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB85E12BB491E600F90050 /* CustomTransitioningDelegate.swift */; };
-=======
 		58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB861A2BB543CA00F90050 /* ModeSelectPresentationController.swift */; };
 		58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB861C2BB5440A00F90050 /* ModalSelectCell.swift */; };
 		58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB861E2BB544A500F90050 /* ModeSelectViewController.swift */; };
@@ -60,7 +56,6 @@
 		58BB868C2BB8433F00F90050 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB868B2BB8433F00F90050 /* LocationTableViewCell.swift */; };
 		58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB868D2BB843C100F90050 /* LocationLabel.swift */; };
 		58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB868F2BB844CA00F90050 /* LocationMode.swift */; };
->>>>>>> Feat/#4
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -118,10 +113,6 @@
 		58BB85D82BB3E55B00F90050 /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
 		58BB85DA2BB4230B00F90050 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		58BB85DC2BB445FE00F90050 /* PreferenceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCollectionViewCell.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		58BB85DF2BB4915300F90050 /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
-		58BB85E12BB491E600F90050 /* CustomTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitioningDelegate.swift; sourceTree = "<group>"; };
-=======
 		58BB861A2BB543CA00F90050 /* ModeSelectPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectPresentationController.swift; sourceTree = "<group>"; };
 		58BB861C2BB5440A00F90050 /* ModalSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSelectCell.swift; sourceTree = "<group>"; };
 		58BB861E2BB544A500F90050 /* ModeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +138,6 @@
 		58BB868B2BB8433F00F90050 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		58BB868D2BB843C100F90050 /* LocationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationLabel.swift; sourceTree = "<group>"; };
 		58BB868F2BB844CA00F90050 /* LocationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMode.swift; sourceTree = "<group>"; };
->>>>>>> Feat/#4
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -268,10 +258,6 @@
 				58BB86362BB67B7C00F90050 /* SearchModal */,
 				589DF3282B90747B003F03C5 /* SearchViewController.swift */,
 				584DCF7B2BA1A5880081149F /* JKSlider.swift */,
-<<<<<<< HEAD
-				580AAD2B2BA9375200672050 /* LocationModalViewController.swift */,
-=======
->>>>>>> Feat/#4
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -316,12 +302,8 @@
 		58BB858B2BB1D3D500F90050 /* OtherProfileVC */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				58BB85DE2BB4911E00F90050 /* DeclareModal */,
-=======
 				58BB86282BB5686A00F90050 /* Modal */,
 				58BB86252BB550C800F90050 /* ModalMode */,
->>>>>>> Feat/#4
 				58BB85D22BB3AFEF00F90050 /* Model */,
 				58BB85CB2BB3169E00F90050 /* VC */,
 				58BB85CA2BB3169600F90050 /* Cell */,
@@ -380,13 +362,6 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
-		58BB85DE2BB4911E00F90050 /* DeclareModal */ = {
-			isa = PBXGroup;
-			children = (
-				58BB85DF2BB4915300F90050 /* CustomPresentationController.swift */,
-				58BB85E12BB491E600F90050 /* CustomTransitioningDelegate.swift */,
-=======
 		58BB85DE2BB4911E00F90050 /* OptionModal */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,13 +408,10 @@
 				58BB862C2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift */,
 				58BB862E2BB56BC000F90050 /* WhyDeclareDelegate.swift */,
 				58BB86322BB56F2B00F90050 /* WhyDeclarePresentationController.swift */,
->>>>>>> Feat/#4
 			);
 			path = DeclareModal;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
-=======
 		58BB86362BB67B7C00F90050 /* SearchModal */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,7 +464,6 @@
 			path = LocationModal;
 			sourceTree = "<group>";
 		};
->>>>>>> Feat/#4
 		58D15E862B90585700EB74E9 = {
 			isa = PBXGroup;
 			children = (
@@ -518,10 +489,7 @@
 		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-=======
 				58BB86222BB54DAF00F90050 /* NameSpace */,
->>>>>>> Feat/#4
 				58BB858B2BB1D3D500F90050 /* OtherProfileVC */,
 				589DF3742B95ECCB003F03C5 /* Fonts */,
 				589DF3332B907517003F03C5 /* SettingVC */,
@@ -806,10 +774,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
-				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
-=======
 				58BB86812BB7E56300F90050 /* VoiceTableViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
@@ -819,7 +783,6 @@
 				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
->>>>>>> Feat/#4
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */,
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
@@ -832,14 +795,10 @@
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
-<<<<<<< HEAD
-=======
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
 				58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
->>>>>>> Feat/#4
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
-				58BB85E22BB491E600F90050 /* CustomTransitioningDelegate.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
@@ -848,15 +807,6 @@
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
-<<<<<<< HEAD
-				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
-				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
-				58BB85E02BB4915300F90050 /* CustomPresentationController.swift in Sources */,
-				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
-				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
-				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
-				58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */,
-=======
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
 				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
 				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
@@ -870,7 +820,6 @@
 				58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */,
 				58BB86852BB7F9FA00F90050 /* WeightViewController.swift in Sources */,
 				58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */,
->>>>>>> Feat/#4
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
 				58BB868C2BB8433F00F90050 /* LocationTableViewCell.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
