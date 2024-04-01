@@ -14,7 +14,8 @@ import Charts
 class OtherProfileViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    //var aboutProfile: [OtherProfile] = defaultAbout
+    private var viewMode: DeclareMode = .declare
+    private var whyviewMode: WhyMode = .maner
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -32,6 +33,8 @@ class OtherProfileViewController: UIViewController {
     }
     private let favoriteBtn = UIButton().then {
         $0.setImage(UIImage(named: "PinkFavorites"), for: .normal)
+        $0.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+
     }
     
     private let heartImage = UIImageView().then {
@@ -97,6 +100,11 @@ class OtherProfileViewController: UIViewController {
         $0.distribution = .fillEqually
         $0.spacing = 10
     }
+    private let bottomBarView = UIView().then {
+        
+        $0.layer.borderColor = UIColor.gray2?.cgColor
+        $0.layer.borderWidth = 1
+    }
     private let sendBtn = UIButton().then {
         $0.setTitle("화살 보내기", for: .normal)
         $0.setTitleColor(.black, for: .normal)
@@ -104,13 +112,13 @@ class OtherProfileViewController: UIViewController {
         $0.layer.borderColor = UIColor.black.cgColor
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 20
+        $0.layer.cornerRadius = 19
     }
     private let sendChatBtn = ActualGradientButton().then {
         $0.setTitle("채팅 보내기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
-        $0.layer.cornerRadius = 20
+        $0.layer.cornerRadius = 19
         $0.layer.masksToBounds = true
     }
     // MARK: - 탭바제거
@@ -150,15 +158,18 @@ class OtherProfileViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(cupidImageView)
-        [declareBtn,similarityLabel,pieChartView,favoriteBtn].forEach {
+        [similarityLabel,pieChartView].forEach {
             cupidImageView.addSubview($0)
         }
+        contentView.addSubview(declareBtn)
+        contentView.addSubview(favoriteBtn)
         [nameLabel, totalLabel, heartImage, heartLabel, barView, aboutLabel, aboutmeCollectionView].forEach {
             contentView.addSubview($0)
         }
         [barView2,preferenceLabel,preferenceCollectionView].forEach {
             contentView.addSubview($0)
         }
+        view.addSubview(bottomBarView)
         view.addSubview(horizontalStackView)
         horizontalStackView.addArrangedSubview(sendBtn)
         horizontalStackView.addArrangedSubview(sendChatBtn)
@@ -177,7 +188,7 @@ class OtherProfileViewController: UIViewController {
         scrollView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-55)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-65)
         }
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
@@ -205,7 +216,7 @@ class OtherProfileViewController: UIViewController {
             $0.width.equalTo(120)
         }
         favoriteBtn.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(20)
+            $0.top.equalTo(declareBtn.snp.bottom).offset(255)
             $0.trailing.equalToSuperview().inset(20)
         }
         nameLabel.snp.makeConstraints {
@@ -245,11 +256,17 @@ class OtherProfileViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
+        bottomBarView.snp.makeConstraints {
+            $0.height.equalTo(1)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(horizontalStackView.snp.top).offset(-10)
+        }
         horizontalStackView.snp.makeConstraints {
             $0.height.equalTo(45)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
             $0.leading.trailing.equalToSuperview().inset(15)
         }
+        
         preferenceLabel.snp.makeConstraints {
             $0.top.equalTo(barView2.snp.bottom).offset(20)
             $0.leading.equalTo(nameLabel.snp.leading)
@@ -283,8 +300,18 @@ class OtherProfileViewController: UIViewController {
         guard let url = URL(string:"https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg") else { return }
         cupidImageView.kf.setImage(with: url)
     }
+//MARK: -- Action
     @objc func declarButtonTapped() {
-        
+        print("declare")
+        let declareVC = ModeSelectViewController(passMode: viewMode)
+        declareVC.delegate = self
+        self.present(declareVC, animated: true)
+    }
+    @objc func favoriteButtonTapped() {
+        if let currentImage = favoriteBtn.imageView?.image {
+            let newImage = currentImage == UIImage(named: "PinkFavorites") ? UIImage(named: "WhiteFavorites") : UIImage(named: "PinkFavorites")
+            favoriteBtn.setImage(newImage, for: .normal)
+        }
     }
     //뒤로가기
     @objc func back(_ sender: Any) {
@@ -330,4 +357,51 @@ extension OtherProfileViewController: UICollectionViewDelegateFlowLayout {
         }
         
     }
+// MARK: ModalView Delegate
+extension OtherProfileViewController: ModeSelectViewControllerDelegate {
+    func didSelectedRowAt(indexPath: Int) {
+        guard let mode = DeclareMode(rawValue: indexPath) else { return }
+        
+        viewMode = mode
+        
+        
+        switch viewMode {
+        case .declare:
+            // 새로운 모달 창을 표시하기 위한 뷰 컨트롤러 생성
+            dismiss(animated: true) {
+                let whydeclareVC = WhyDeclareViewController(passMode: self.whyviewMode)
+                whydeclareVC.delegate = self
+                // 새로운 모달 창 표시
+                self.present(whydeclareVC, animated: true)
+            }
+            print("daily")
+        case .cut:
+            print("weekly")
+           
+        }
+    }
+}
+
+extension OtherProfileViewController: WhyDeclareViewControllerDelegate {
+    func whydidSelectedRowAt(indexPath: Int) {
+        guard let mode = WhyMode(rawValue: indexPath) else { return }
+        
+        whyviewMode = mode
+        
+        switch whyviewMode {
+        case .fuck:
+            print("")
+        case .badchat:
+            print("")
+        case .badprofile:
+            print("")
+        case .other:
+            print("")
+        case .maner:
+            print("")
+        }
+        
+    }
+}
+
     

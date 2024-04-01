@@ -144,6 +144,7 @@ class RecommendTableViewCell: UITableViewCell {
         loadImage()
         setupPieChart()
        }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
