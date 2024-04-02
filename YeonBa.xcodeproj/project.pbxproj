@@ -59,6 +59,11 @@
 		58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86D22BBAF94300F90050 /* SearchResultViewController.swift */; };
 		58BB86D52BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86D42BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift */; };
 		58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB86D62BBAFC7000F90050 /* CategoryCollectionViewCell.swift */; };
+		58BB87162BBBECEB00F90050 /* BirthDateSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB87152BBBECEB00F90050 /* BirthDateSettingViewController.swift */; };
+		58BB87182BBBECF600F90050 /* EmailSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB87172BBBECF600F90050 /* EmailSettingViewController.swift */; };
+		58BB871A2BBBECFD00F90050 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB87192BBBECFD00F90050 /* PasswordViewController.swift */; };
+		58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */; };
+		58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -144,6 +149,11 @@
 		58BB86D22BBAF94300F90050 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		58BB86D42BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		58BB86D62BBAFC7000F90050 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		58BB87152BBBECEB00F90050 /* BirthDateSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthDateSettingViewController.swift; sourceTree = "<group>"; };
+		58BB87172BBBECF600F90050 /* EmailSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSettingViewController.swift; sourceTree = "<group>"; };
+		58BB87192BBBECFD00F90050 /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
+		58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -481,6 +491,18 @@
 			path = SearchResultVC;
 			sourceTree = "<group>";
 		};
+		58BB87142BBBECDD00F90050 /* SignupVC */ = {
+			isa = PBXGroup;
+			children = (
+				58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */,
+				58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */,
+				58BB87192BBBECFD00F90050 /* PasswordViewController.swift */,
+				58BB87172BBBECF600F90050 /* EmailSettingViewController.swift */,
+				58BB87152BBBECEB00F90050 /* BirthDateSettingViewController.swift */,
+			);
+			path = SignupVC;
+			sourceTree = "<group>";
+		};
 		58D15E862B90585700EB74E9 = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +528,7 @@
 		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
+				58BB87142BBBECDD00F90050 /* SignupVC */,
 				58BB86222BB54DAF00F90050 /* NameSpace */,
 				58BB858B2BB1D3D500F90050 /* OtherProfileVC */,
 				589DF3742B95ECCB003F03C5 /* Fonts */,
@@ -795,6 +818,7 @@
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
+				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
 				58BB86792BB7DA8400F90050 /* WeightMode.swift in Sources */,
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
 				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
@@ -807,6 +831,7 @@
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
+				58BB87162BBBECEB00F90050 /* BirthDateSettingViewController.swift in Sources */,
 				58BB86892BB7FA2E00F90050 /* WeightPresentationController.swift in Sources */,
 				58BB867B2BB7DC9C00F90050 /* VoicePresentationController.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
@@ -826,12 +851,15 @@
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
 				58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */,
+				58BB871A2BBBECFD00F90050 /* PasswordViewController.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
 				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
 				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
+				58BB87182BBBECF600F90050 /* EmailSettingViewController.swift in Sources */,
 				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
 				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
+				58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */,
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
 				58BB86272BB5512400F90050 /* DeclareMode.swift in Sources */,
 				58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */,
