@@ -124,17 +124,17 @@ class OtherProfileViewController: UIViewController {
     // MARK: - 탭바제거
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        //tabBarController?.tabBar.isHidden = true
         // 커스텀 탭바를 숨깁니다.
-        if let tabBarController = self.tabBarController as? tabBarController {
+        if let tabBarController = self.tabBarController {
             tabBarController.tabBar.isHidden = true
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+       // tabBarController?.tabBar.isHidden = false
         // 다른 화면으로 넘어갈 때 커스텀 탭바를 다시 보이게 합니다.
-        if let tabBarController = self.tabBarController as? tabBarController {
+        if let tabBarController = self.tabBarController {
             tabBarController.tabBar.isHidden = false
         }
     }
@@ -146,8 +146,9 @@ class OtherProfileViewController: UIViewController {
         loadImage()
         configureCollectionView()
         navigationController()
-        tabBarController?.tabBar.isHidden = true
+       
         tabBarController?.tabBar.isTranslucent = true
+       
         view.backgroundColor = .white
     }
     func navigationController() {

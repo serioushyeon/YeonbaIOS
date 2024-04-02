@@ -53,7 +53,7 @@ class SettingViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("남은 화살 수", for: .normal)
         $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
-        $0.backgroundColor = UIColor(named: "KeyColor") // 배경색
+        $0.backgroundColor = .primary
         $0.setTitleColor(UIColor.white, for: .normal) // 텍스트 색상
         $0.setImage(UIImage(named: "heart")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .white
@@ -128,7 +128,7 @@ class SettingViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 0
         stackView.distribution = .fillEqually
-        stackView.backgroundColor = UIColor(named: "SettingColor")
+        stackView.backgroundColor = .gray2
         bottomView.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview() // 수직 스택 뷰의 상단과 하단을 부모 뷰에 맞춥니다.
@@ -144,7 +144,7 @@ class SettingViewController: UIViewController {
             let title = labelTitles[index] // 각 버튼에 다른 이름을 할당합니다.
             label.text = title // 레이블에 텍스트를 설정합니다.
             label.textColor = .black // 텍스트 색상을 지정합니다.
-            label.backgroundColor = UIColor(named: "SettingColor")
+            label.backgroundColor = .gray2
             view.addSubview(label)
             
             label.snp.makeConstraints { make in
