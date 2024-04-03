@@ -143,7 +143,7 @@ class SearchViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     private let heightRangeLabel = UILabel().then {
-        $0.text = "150cm~170cm"
+        $0.text = "160cm~170cm"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 16)
@@ -174,6 +174,8 @@ class SearchViewController: UIViewController {
     }
     private let animalCheckBox = UIButton().then {
         $0.setImage(UIImage(named: "checkbox"), for: .normal)
+        $0.addTarget(self, action: #selector(animalButtonTapped), for: .touchUpInside)
+
     }
     private let findButton = ActualGradientButton().then {
         $0.setTitle("이성 찾기", for: .normal)
@@ -374,6 +376,16 @@ class SearchViewController: UIViewController {
         let searchResultVC = SearchResultViewController()
         self.navigationController?.pushViewController(searchResultVC, animated: true)
     }
+    @objc func animalButtonTapped() {
+        // 현재 버튼의 상태를 확인하여 이미지를 변경
+           if animalCheckBox.isSelected {
+               animalCheckBox.setImage(UIImage(named: "pinkcheckbox"), for: .normal)
+           } else {
+               animalCheckBox.setImage(UIImage(named: "checkbox"), for: .normal)
+           }
+           // 버튼의 선택 상태를 반전
+           animalCheckBox.isSelected = !animalCheckBox.isSelected
+    }
     
 
 }
@@ -382,7 +394,42 @@ extension SearchViewController: LocationViewControllerDelegate {
     func locationSelectedRowAt(indexPath: Int) {
         guard let mode = LocationMode(rawValue: indexPath) else { return }
         locationViewMode = mode
-        
+        switch locationViewMode {
+        case .seoul:
+            print("서울")
+        case .gyeonggi:
+            print("경기")
+        case .incheon:
+            print("인천")
+        case .busan:
+            print("부산")
+        case .daejeon:
+            print("대전")
+        case .gwangju:
+            print("광주")
+        case .daegu:
+            print("대구")
+        case .ulsan:
+            print("울산")
+        case .gangwon:
+            print("강원도")
+        case .chungbuk:
+            print("충북")
+        case .chungnam:
+            print("충남")
+        case .jeonbuk:
+            print("전북")
+        case .jeonnam:
+            print("전남")
+        case .gyeongbuk:
+            print("경북")
+        case .gyeongnam:
+            print("경남")
+        case .sejong:
+            print("세종")
+        case .jeju:
+            print("제주")
+        }
         
     }
 }
@@ -395,11 +442,11 @@ extension SearchViewController: VoiceViewControllerDelegate {
         
         switch voiceViewMode {
         case .high:
-            print("")
+            print("고음")
         case .middle:
-            print("")
+            print("중음")
         case .low:
-            print("")
+            print("저음")
         case .allLike:
             print("")
         }
