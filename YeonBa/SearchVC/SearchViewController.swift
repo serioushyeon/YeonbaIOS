@@ -143,7 +143,7 @@ class SearchViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     private let heightRangeLabel = UILabel().then {
-        $0.text = "150cm~170cm"
+        $0.text = "160cm~170cm"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 16)
