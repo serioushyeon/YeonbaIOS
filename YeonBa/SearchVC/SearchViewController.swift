@@ -430,7 +430,6 @@ extension SearchViewController: LocationViewControllerDelegate {
         case .jeju:
             print("제주")
         }
-        
     }
 }
 //MARK: -- 음성 delegate

@@ -9,6 +9,7 @@ import UIKit
 import Then
 import SnapKit
 import Kingfisher
+import Charts
 
 class SearchResultViewController: UIViewController {
 //MARK: -- UI Component
@@ -27,6 +28,7 @@ class SearchResultViewController: UIViewController {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
+    
     private lazy var resultImageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

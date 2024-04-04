@@ -37,13 +37,12 @@ final class VoiceViewController: UIViewController {
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
     }
-    private let nextButton = UIButton().then {
+    private let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
-        $0.setTitleColor(UIColor.customgray3, for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
-        $0.layer.backgroundColor = UIColor.gray2?.cgColor
     }
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -113,6 +112,10 @@ extension VoiceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
+        finishButton.layer.borderWidth = 2
+        finishButton.layer.borderColor = UIColor.black.cgColor
+        finishButton.titleLabel?.textColor = UIColor.black
+        finishButton.layer.backgroundColor = UIColor.white.cgColor
         delegate?.voiceSelectedRowAt(indexPath: indexPath.row)
         //dismissView()
     }
