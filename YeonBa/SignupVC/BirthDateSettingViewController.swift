@@ -7,9 +7,17 @@ class BirthDateSettingViewController: UIViewController {
     let instructionLabel = UILabel().then {
         $0.text = "생년월일을 입력해 주세요."
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 24)
         $0.numberOfLines = 0
+    }
+    
+    let instructionLabel2 = UILabel().then {
+        $0.text = "매칭을 위해 필수단계입니다. 이후 변경이 불가합니다."
+        $0.textColor = .darkGray
+        $0.font = UIFont.pretendardSemiBold(size: 12)
+        $0.numberOfLines = 1
+        $0.textAlignment = .left
     }
 
     let yearTextField = UITextField().then {
@@ -59,6 +67,7 @@ class BirthDateSettingViewController: UIViewController {
 
     private func setupViews() {
         view.addSubview(instructionLabel)
+        view.addSubview(instructionLabel2)
         view.addSubview(yearTextField)
         view.addSubview(monthTextField)
         view.addSubview(dayTextField)
@@ -70,8 +79,13 @@ class BirthDateSettingViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
+        instructionLabel2.snp.makeConstraints { make in
+            make.top.equalTo(instructionLabel.snp.bottom).offset(20)
+            make.leading.equalToSuperview().inset(20)
+        }
+        
         yearTextField.snp.makeConstraints { make in
-            make.top.equalTo(instructionLabel.snp.bottom).offset(40)
+            make.top.equalTo(instructionLabel2.snp.bottom).offset(40)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(70)
             make.height.equalTo(40)
@@ -100,5 +114,8 @@ class BirthDateSettingViewController: UIViewController {
 
     @objc func nextButtonTapped() {
         // Validate the date and transition to the next screen if successful
+        
+        let nextVC = NicknameSettingViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
