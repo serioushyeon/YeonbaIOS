@@ -31,6 +31,8 @@
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
 		582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17C2BBE8A0200600EA7 /* ChatAcceptanceCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
+		582DB1832BBE917000600EA7 /* NicknameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */; };
+		582DB1852BBE917D00600EA7 /* BodyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
 		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
@@ -143,6 +145,8 @@
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
 		582DB1802BBE8A4D00600EA7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		582DB1812BBE8A5300600EA7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameSettingViewController.swift; sourceTree = "<group>"; };
+		582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyInfoViewController.swift; sourceTree = "<group>"; };
 		584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
@@ -598,6 +602,8 @@
 		58BB87142BBBECDD00F90050 /* SignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */,
+				582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */,
 				58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */,
 				58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */,
 				58BB87192BBBECFD00F90050 /* PasswordViewController.swift */,
@@ -953,8 +959,10 @@
 				582DB1682BBE896000600EA7 /* MyMessageCell.swift in Sources */,
 				58BB867B2BB7DC9C00F90050 /* VoicePresentationController.swift in Sources */,
 				582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */,
+				582DB1852BBE917D00600EA7 /* BodyInfoViewController.swift in Sources */,
 				582DB16D2BBE897F00600EA7 /* LoginViewController.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
+				582DB1832BBE917000600EA7 /* NicknameSettingViewController.swift in Sources */,
 				582DB15D2BBE88D900600EA7 /* PhotoSelectionViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
