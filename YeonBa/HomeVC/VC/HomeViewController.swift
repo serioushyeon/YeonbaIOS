@@ -188,7 +188,7 @@ class HomeViewController: UIViewController {
         print("heart button tapped")
     }
     @objc func alarmButtonTapped() {
-        print("tabbar button tapped")
+        self.navigationController?.pushViewController(NotificationsViewController(), animated: true)
     }
     @objc func didTapButton() {
         let alertView = SCLAlertView()
@@ -217,12 +217,6 @@ extension UIFont {
         return font
     }
     static func pretendardRegular(size: CGFloat) -> UIFont {
-        guard let font = UIFont(name: "Pretendard-Regular", size: size) else {
-            return UIFont.systemFont(ofSize: size, weight: .regular)
-        }
-        return font
-    }
-    static func pretendardMedium(size: CGFloat) -> UIFont {
         guard let font = UIFont(name: "Pretendard-Regular", size: size) else {
             return UIFont.systemFont(ofSize: size, weight: .regular)
         }

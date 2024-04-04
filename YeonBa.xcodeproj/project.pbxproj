@@ -9,6 +9,28 @@
 /* Begin PBXBuildFile section */
 		34B37BAFEBEFCEE711013DFA /* Pods_YeonBa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F8400511F4316517C02537 /* Pods_YeonBa.framework */; };
 		580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580AAD2B2BA9375200672050 /* LocationModalViewController.swift */; };
+		582DB1582BBE88D900600EA7 /* VoicePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1502BBE88D900600EA7 /* VoicePopupView.swift */; };
+		582DB1592BBE88D900600EA7 /* AnalysisSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1512BBE88D900600EA7 /* AnalysisSyncViewController.swift */; };
+		582DB15A2BBE88D900600EA7 /* AnalysisSyncResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1522BBE88D900600EA7 /* AnalysisSyncResultViewController.swift */; };
+		582DB15B2BBE88D900600EA7 /* VoiceRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1532BBE88D900600EA7 /* VoiceRecordingViewController.swift */; };
+		582DB15C2BBE88D900600EA7 /* VoicePopupViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1542BBE88D900600EA7 /* VoicePopupViewcontroller.swift */; };
+		582DB15D2BBE88D900600EA7 /* PhotoSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */; };
+		582DB15E2BBE88D900600EA7 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1562BBE88D900600EA7 /* GuideViewController.swift */; };
+		582DB15F2BBE88D900600EA7 /* AiPhotoshopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1572BBE88D900600EA7 /* AiPhotoshopViewController.swift */; };
+		582DB1612BBE891300600EA7 /* ChattingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1602BBE891300600EA7 /* ChattingRoomViewController.swift */; };
+		582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1622BBE891C00600EA7 /* ChattingViewController.swift */; };
+		582DB1662BBE892C00600EA7 /* ChattingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1652BBE892C00600EA7 /* ChattingListCell.swift */; };
+		582DB1682BBE896000600EA7 /* MyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1672BBE896000600EA7 /* MyMessageCell.swift */; };
+		582DB16A2BBE896600600EA7 /* OtherMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1692BBE896600600EA7 /* OtherMessageCell.swift */; };
+		582DB16D2BBE897F00600EA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB16C2BBE897F00600EA7 /* LoginViewController.swift */; };
+		582DB16F2BBE899200600EA7 /* FindIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB16E2BBE899200600EA7 /* FindIdViewController.swift */; };
+		582DB1712BBE899900600EA7 /* FindPwResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1702BBE899900600EA7 /* FindPwResultViewController.swift */; };
+		582DB1732BBE89A000600EA7 /* FindPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1722BBE89A000600EA7 /* FindPwViewController.swift */; };
+		582DB1752BBE89C100600EA7 /* FindIdResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1742BBE89C100600EA7 /* FindIdResultViewController.swift */; };
+		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
+		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
+		582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17C2BBE8A0200600EA7 /* ChatAcceptanceCell.swift */; };
+		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
 		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
@@ -20,7 +42,6 @@
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
 		589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32E2B9074E7003F03C5 /* CollectViewController.swift */; };
-		589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3312B90750D003F03C5 /* ChattingViewController.swift */; };
 		589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3342B907528003F03C5 /* SettingViewController.swift */; };
 		589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */; };
 		589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */; };
@@ -98,6 +119,30 @@
 		1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.release.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.release.xcconfig"; sourceTree = "<group>"; };
 		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		580AAD2B2BA9375200672050 /* LocationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModalViewController.swift; sourceTree = "<group>"; };
+		582DB1502BBE88D900600EA7 /* VoicePopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoicePopupView.swift; sourceTree = "<group>"; };
+		582DB1512BBE88D900600EA7 /* AnalysisSyncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisSyncViewController.swift; sourceTree = "<group>"; };
+		582DB1522BBE88D900600EA7 /* AnalysisSyncResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisSyncResultViewController.swift; sourceTree = "<group>"; };
+		582DB1532BBE88D900600EA7 /* VoiceRecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceRecordingViewController.swift; sourceTree = "<group>"; };
+		582DB1542BBE88D900600EA7 /* VoicePopupViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoicePopupViewcontroller.swift; sourceTree = "<group>"; };
+		582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectionViewController.swift; sourceTree = "<group>"; };
+		582DB1562BBE88D900600EA7 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		582DB1572BBE88D900600EA7 /* AiPhotoshopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AiPhotoshopViewController.swift; sourceTree = "<group>"; };
+		582DB1602BBE891300600EA7 /* ChattingRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingRoomViewController.swift; sourceTree = "<group>"; };
+		582DB1622BBE891C00600EA7 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		582DB1652BBE892C00600EA7 /* ChattingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingListCell.swift; sourceTree = "<group>"; };
+		582DB1672BBE896000600EA7 /* MyMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMessageCell.swift; sourceTree = "<group>"; };
+		582DB1692BBE896600600EA7 /* OtherMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherMessageCell.swift; sourceTree = "<group>"; };
+		582DB16C2BBE897F00600EA7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		582DB16E2BBE899200600EA7 /* FindIdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIdViewController.swift; sourceTree = "<group>"; };
+		582DB1702BBE899900600EA7 /* FindPwResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPwResultViewController.swift; sourceTree = "<group>"; };
+		582DB1722BBE89A000600EA7 /* FindPwViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPwViewController.swift; sourceTree = "<group>"; };
+		582DB1742BBE89C100600EA7 /* FindIdResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIdResultViewController.swift; sourceTree = "<group>"; };
+		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
+		582DB17C2BBE8A0200600EA7 /* ChatAcceptanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAcceptanceCell.swift; sourceTree = "<group>"; };
+		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
+		582DB1802BBE8A4D00600EA7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		582DB1812BBE8A5300600EA7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
@@ -110,7 +155,6 @@
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
 		589DF32E2B9074E7003F03C5 /* CollectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectViewController.swift; sourceTree = "<group>"; };
-		589DF3312B90750D003F03C5 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		589DF3342B907528003F03C5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -215,6 +259,62 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		582DB14F2BBE888900600EA7 /* AiSignupVC */ = {
+			isa = PBXGroup;
+			children = (
+				582DB1572BBE88D900600EA7 /* AiPhotoshopViewController.swift */,
+				582DB1522BBE88D900600EA7 /* AnalysisSyncResultViewController.swift */,
+				582DB1512BBE88D900600EA7 /* AnalysisSyncViewController.swift */,
+				582DB1562BBE88D900600EA7 /* GuideViewController.swift */,
+				582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */,
+				582DB1502BBE88D900600EA7 /* VoicePopupView.swift */,
+				582DB1542BBE88D900600EA7 /* VoicePopupViewcontroller.swift */,
+				582DB1532BBE88D900600EA7 /* VoiceRecordingViewController.swift */,
+			);
+			path = AiSignupVC;
+			sourceTree = "<group>";
+		};
+		582DB1642BBE892100600EA7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				582DB1692BBE896600600EA7 /* OtherMessageCell.swift */,
+				582DB1672BBE896000600EA7 /* MyMessageCell.swift */,
+				582DB1652BBE892C00600EA7 /* ChattingListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		582DB16B2BBE897300600EA7 /* LoginVC */ = {
+			isa = PBXGroup;
+			children = (
+				582DB1742BBE89C100600EA7 /* FindIdResultViewController.swift */,
+				582DB1722BBE89A000600EA7 /* FindPwViewController.swift */,
+				582DB1702BBE899900600EA7 /* FindPwResultViewController.swift */,
+				582DB16E2BBE899200600EA7 /* FindIdViewController.swift */,
+				582DB16C2BBE897F00600EA7 /* LoginViewController.swift */,
+			);
+			path = LoginVC;
+			sourceTree = "<group>";
+		};
+		582DB1762BBE89CB00600EA7 /* AlramVC */ = {
+			isa = PBXGroup;
+			children = (
+				582DB1792BBE89EA00600EA7 /* Cell */,
+				582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */,
+			);
+			path = AlramVC;
+			sourceTree = "<group>";
+		};
+		582DB1792BBE89EA00600EA7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */,
+				582DB17C2BBE8A0200600EA7 /* ChatAcceptanceCell.swift */,
+				582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		584DCF272B9CC0650081149F /* SendVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,7 +393,9 @@
 		589DF3302B9074FE003F03C5 /* ChatVC */ = {
 			isa = PBXGroup;
 			children = (
-				589DF3312B90750D003F03C5 /* ChattingViewController.swift */,
+				582DB1642BBE892100600EA7 /* Cell */,
+				582DB1622BBE891C00600EA7 /* ChattingViewController.swift */,
+				582DB1602BBE891300600EA7 /* ChattingRoomViewController.swift */,
 			);
 			path = ChatVC;
 			sourceTree = "<group>";
@@ -309,6 +411,8 @@
 		589DF3742B95ECCB003F03C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				582DB1812BBE8A5300600EA7 /* Pretendard-ExtraBold.otf */,
+				582DB1802BBE8A4D00600EA7 /* Pretendard-Bold.otf */,
 				584DCF792BA07A780081149F /* Pretendard-Medium.otf */,
 				589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */,
 				589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */,
@@ -528,6 +632,9 @@
 		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
+				582DB1762BBE89CB00600EA7 /* AlramVC */,
+				582DB16B2BBE897300600EA7 /* LoginVC */,
+				582DB14F2BBE888900600EA7 /* AiSignupVC */,
 				58BB87142BBBECDD00F90050 /* SignupVC */,
 				58BB86222BB54DAF00F90050 /* NameSpace */,
 				58BB858B2BB1D3D500F90050 /* OtherProfileVC */,
@@ -816,41 +923,61 @@
 			files = (
 				58BB86812BB7E56300F90050 /* VoiceTableViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
+				582DB1582BBE88D900600EA7 /* VoicePopupView.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
 				58BB86792BB7DA8400F90050 /* WeightMode.swift in Sources */,
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
 				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
+				582DB16A2BBE896600600EA7 /* OtherMessageCell.swift in Sources */,
+				582DB1612BBE891300600EA7 /* ChattingRoomViewController.swift in Sources */,
+				582DB1592BBE88D900600EA7 /* AnalysisSyncViewController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */,
+				582DB15C2BBE88D900600EA7 /* VoicePopupViewcontroller.swift in Sources */,
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
+				582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */,
+				582DB1662BBE892C00600EA7 /* ChattingListCell.swift in Sources */,
+				582DB15F2BBE88D900600EA7 /* AiPhotoshopViewController.swift in Sources */,
 				58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */,
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
+				582DB1732BBE89A000600EA7 /* FindPwViewController.swift in Sources */,
 				58BB87162BBBECEB00F90050 /* BirthDateSettingViewController.swift in Sources */,
 				58BB86892BB7FA2E00F90050 /* WeightPresentationController.swift in Sources */,
+				582DB16F2BBE899200600EA7 /* FindIdViewController.swift in Sources */,
+				582DB1682BBE896000600EA7 /* MyMessageCell.swift in Sources */,
 				58BB867B2BB7DC9C00F90050 /* VoicePresentationController.swift in Sources */,
+				582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */,
+				582DB16D2BBE897F00600EA7 /* LoginViewController.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
-				589DF3322B90750D003F03C5 /* ChattingViewController.swift in Sources */,
+				582DB15D2BBE88D900600EA7 /* PhotoSelectionViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
+				582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */,
+				582DB1712BBE899900600EA7 /* FindPwResultViewController.swift in Sources */,
 				58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
 				58BB86D52BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
+				582DB15E2BBE88D900600EA7 /* GuideViewController.swift in Sources */,
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
+				582DB15A2BBE88D900600EA7 /* AnalysisSyncResultViewController.swift in Sources */,
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
+				582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
 				58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */,
+				582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */,
+				582DB1752BBE89C100600EA7 /* FindIdResultViewController.swift in Sources */,
 				58BB871A2BBBECFD00F90050 /* PasswordViewController.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
@@ -869,6 +996,7 @@
 				58BB86852BB7F9FA00F90050 /* WeightViewController.swift in Sources */,
 				58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */,
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
+				582DB15B2BBE88D900600EA7 /* VoiceRecordingViewController.swift in Sources */,
 				58BB868C2BB8433F00F90050 /* LocationTableViewCell.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
 			);
