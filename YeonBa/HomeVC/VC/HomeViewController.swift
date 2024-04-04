@@ -59,6 +59,7 @@ class HomeViewController: UIViewController {
         $0.setTitle("더보기", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardRegular(size: 13)
         $0.setTitleColor(UIColor.gray, for: .normal)
+        $0.addTarget(self, action: #selector(plusGenderTapped), for: .touchUpInside)
     }
     private lazy var collectionview: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -202,6 +203,9 @@ class HomeViewController: UIViewController {
             closeButtonTitle: "취소"
         )
     }
+    @objc func plusGenderTapped() {
+        //self.navigationController?.pushViewController(CollectViewController(), animated: true)
+    }
    
 
 }
@@ -246,12 +250,16 @@ extension HomeViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendTableViewCell.identifier, for: indexPath) as? RecommendTableViewCell else {
             return UITableViewCell()
         }
+        cell.selectionStyle = .none
         return cell
     }
 }
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(OtherProfileViewController(), animated: true)
     }
 }
 extension HomeViewController : UICollectionViewDataSource {
