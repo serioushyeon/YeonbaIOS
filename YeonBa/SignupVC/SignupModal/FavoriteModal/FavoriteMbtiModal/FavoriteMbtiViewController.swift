@@ -181,6 +181,7 @@ extension FavoriteMbtiViewController {
         verticalStackView.addArrangedSubview(horizontalStackView1)
         verticalStackView.addArrangedSubview(horizontalStackView2)
         verticalStackView.addArrangedSubview(horizontalStackView3)
+        verticalStackView.addArrangedSubview(horizontalStackView4)
         // 버튼을 생성하고 verticalStackView에 추가합니다.
         let modes = MbtiMode.allCases
         for (index, mode) in modes.enumerated() {
