@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '10.0'
 
 target 'YeonBa' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -12,6 +12,7 @@ target 'YeonBa' do
 	pod 'Kingfisher'
 	pod 'Charts'
 	pod 'SCLAlertView'
+	pod 'Alamofire', '~> 5.4.4'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing
