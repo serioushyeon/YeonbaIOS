@@ -96,6 +96,8 @@
 		58D15EB62B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */; };
 		58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
+		C1024B532BC4DFE100A32BA1 /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B522BC4DFE100A32BA1 /* HeightPickerViewController.swift */; };
+		C1024B572BC7A0E700A32BA1 /* BodyShapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B562BC7A0E700A32BA1 /* BodyShapeViewController.swift */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -219,6 +221,8 @@
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa_YeonBaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1024B522BC4DFE100A32BA1 /* HeightPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPickerViewController.swift; sourceTree = "<group>"; };
+		C1024B562BC7A0E700A32BA1 /* BodyShapeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyShapeViewController.swift; sourceTree = "<group>"; };
 		FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -602,13 +606,15 @@
 		58BB87142BBBECDD00F90050 /* SignupVC */ = {
 			isa = PBXGroup;
 			children = (
-				582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */,
-				582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */,
 				58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */,
 				58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */,
 				58BB87192BBBECFD00F90050 /* PasswordViewController.swift */,
 				58BB87172BBBECF600F90050 /* EmailSettingViewController.swift */,
 				58BB87152BBBECEB00F90050 /* BirthDateSettingViewController.swift */,
+				582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */,
+				582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */,
+				C1024B562BC7A0E700A32BA1 /* BodyShapeViewController.swift */,
+				C1024B522BC4DFE100A32BA1 /* HeightPickerViewController.swift */,
 			);
 			path = SignupVC;
 			sourceTree = "<group>";
@@ -983,6 +989,7 @@
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
+				C1024B572BC7A0E700A32BA1 /* BodyShapeViewController.swift in Sources */,
 				58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */,
 				582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */,
 				582DB1752BBE89C100600EA7 /* FindIdResultViewController.swift in Sources */,
@@ -997,6 +1004,7 @@
 				58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */,
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
 				58BB86272BB5512400F90050 /* DeclareMode.swift in Sources */,
+				C1024B532BC4DFE100A32BA1 /* HeightPickerViewController.swift in Sources */,
 				58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */,
 				58BB86832BB7F9E800F90050 /* WeightTableViewCell.swift in Sources */,
 				58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */,
