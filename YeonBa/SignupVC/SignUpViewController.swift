@@ -39,6 +39,7 @@ class SignUpViewController: UIViewController {
         ]
         let attributedTitle = NSAttributedString(string: "가입하기", attributes: attributes)
         $0.setAttributedTitle(attributedTitle, for: .normal)
+        $0.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
 
     
@@ -97,12 +98,9 @@ class SignUpViewController: UIViewController {
             make.top.equalTo(loginButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
-        
-        // 로그인 버튼과 회원가입 버튼에 대한 액션 메서드를 추가하세요.
-        // 예를 들어 로그인 버튼에 액션을 추가하는 방법:
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         // 회원가입 버튼에 액션을 추가하는 방법:
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        
     }
     
     
