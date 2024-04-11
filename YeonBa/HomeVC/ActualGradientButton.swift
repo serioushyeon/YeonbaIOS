@@ -20,7 +20,7 @@ class ActualGradientButton: UIButton {
         l.colors = [UIColor.secondary?.cgColor, UIColor.primary?.cgColor]
         l.startPoint = CGPoint(x: 0.5, y: 0)
         l.endPoint = CGPoint(x: 0.5, y: 1)
-        l.cornerRadius = 16
+        l.cornerRadius = 20
         layer.insertSublayer(l, at: 0)
         return l
     }()
