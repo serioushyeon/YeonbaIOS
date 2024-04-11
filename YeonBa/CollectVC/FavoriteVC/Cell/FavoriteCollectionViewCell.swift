@@ -63,13 +63,13 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     func addSubviews() {
         contentView.addSubview(cupidImageView)
-        contentView.addSubview(pieChartView)
-        contentView.addSubview(similarityLabel)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(ageLabel)
-        contentView.addSubview(heartImage)
-        contentView.addSubview(heartLabel)
-        contentView.addSubview(cupidFavoriteButton)
+        cupidImageView.addSubview(pieChartView)
+        cupidImageView.addSubview(similarityLabel)
+        cupidImageView.addSubview(nameLabel)
+        cupidImageView.addSubview(ageLabel)
+        cupidImageView.addSubview(heartImage)
+        cupidImageView.addSubview(heartLabel)
+        cupidImageView.addSubview(cupidFavoriteButton)
     }
     func setUI() {
         cupidImageView.snp.makeConstraints { make in
@@ -83,14 +83,14 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
             $0.trailing.equalTo(cupidImageView.snp.trailing).offset(-24)
         }
         pieChartView.snp.makeConstraints {
-            $0.width.equalTo(90)
-            $0.height.equalTo(90)
-            $0.top.equalTo(cupidImageView.snp.top).offset(117)
+            $0.width.equalTo(85)
+            $0.height.equalTo(85)
+            $0.bottom.equalToSuperview().inset(-5)
             $0.trailing.equalTo(cupidImageView.snp.trailing).offset(5)
         }
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(cupidImageView.snp.leading).offset(10)
-            $0.top.equalTo(cupidImageView.snp.top).offset(140)
+            $0.bottom.equalTo(heartImage.snp.top).offset(-5)
             
         }
         ageLabel.snp.makeConstraints {
@@ -99,10 +99,12 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         }
         heartImage.snp.makeConstraints {
             $0.leading.equalTo(nameLabel.snp.leading)
+            $0.bottom.equalToSuperview().inset(10)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
         heartLabel.snp.makeConstraints {
             $0.leading.equalTo(heartImage.snp.trailing).offset(5)
+            $0.bottom.equalToSuperview().inset(10)
             $0.top.equalTo(heartImage.snp.top)
         }
         cupidFavoriteButton.snp.makeConstraints {
