@@ -4,18 +4,32 @@ PODS:
     - Charts/Core (= 4.1.0)
   - Charts/Core (4.1.0):
     - SwiftAlgorithms (~> 1.0)
+  - KakaoSDKAuth (2.21.1):
+    - KakaoSDKCommon (= 2.21.1)
+  - KakaoSDKCommon (2.21.1):
+    - KakaoSDKCommon/Common (= 2.21.1)
+    - KakaoSDKCommon/Network (= 2.21.1)
+  - KakaoSDKCommon/Common (2.21.1)
+  - KakaoSDKCommon/Network (2.21.1):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.21.1)
+  - KakaoSDKUser (2.21.1):
+    - KakaoSDKAuth (= 2.21.1)
   - Kingfisher (7.11.0)
-  - Pageboy (4.0.2)
+  - Pageboy (4.1.0)
   - SCLAlertView (0.8)
   - SnapKit (5.7.1)
   - SwiftAlgorithms (1.0.0)
-  - Tabman (3.0.2):
-    - Pageboy (~> 4.0.2)
+  - Tabman (3.1.0):
+    - Pageboy (~> 4.1.0)
   - Then (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.4.4)
   - Charts
+  - KakaoSDKAuth
+  - KakaoSDKCommon
+  - KakaoSDKUser
   - Kingfisher
   - SCLAlertView
   - SnapKit
@@ -26,6 +40,9 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Charts
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - Kingfisher
     - Pageboy
     - SCLAlertView
@@ -37,14 +54,17 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
+  KakaoSDKAuth: 28343159dd60ee9bbb61ff25d45d9769fcef6b8c
+  KakaoSDKCommon: 7938fce8e5ba3e73490f1928e55b20b510a0685b
+  KakaoSDKUser: 35608bb49bbc644f507561d8b8a33dec1c5eb360
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
-  Pageboy: 34ff11e8d1041b81769d5bcde9b19a0cb7218bd9
+  Pageboy: e1c494f866874697493da9528777c5006fee613c
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
-  Tabman: 6326ec3a792da1c2a6e79c7eddb56af7b591c9d6
+  Tabman: b4211db1d33b7e993015e2e7c6746e6003c02725
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: f6c1f3dc30afb0452b7540058f32562deee3469e
+PODFILE CHECKSUM: b235f72a07652fb404ed6a27d550888af6dd624d
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.15.2
