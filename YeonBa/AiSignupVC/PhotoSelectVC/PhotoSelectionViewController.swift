@@ -9,9 +9,12 @@ import UIKit
 import SnapKit
 import Then
 import Charts
+import AVFoundation
+import Photos
+import PhotosUI
 
 class PhotoSelectionViewController: UIViewController {
-
+    
     // MARK: - UI Components
     
     let backButton = UIButton(type: .system).then {
@@ -33,19 +36,13 @@ class PhotoSelectionViewController: UIViewController {
         $0.font = UIFont.pretendardMedium(size: 16)
         $0.numberOfLines = 0
     }
-
-    let photoPlaceholderView = DottedBorderView().then {
-        $0.layer.borderColor = UIColor(hex: "616161").cgColor
-        $0.layer.cornerRadius = 10
-        $0.layer.masksToBounds = true
-        $0.backgroundColor = UIColor(hex: "EFEFEF")
+    
+    let photoPlaceholderView = PhotoPlaceholderView().then {
+        $0.setHintText("대표")
     }
-
-    let photoPlaceholderView2 = DottedBorderView().then {
-        $0.layer.borderColor = UIColor(hex: "616161").cgColor
-        $0.layer.cornerRadius = 10
-        $0.layer.masksToBounds = true
-        $0.backgroundColor = UIColor(hex: "EFEFEF")
+    
+    let essentialPlaceHolderView = PhotoEssentialView().then {
+        $0.setHintText("필수")
     }
     
     let addButton = UIButton().then {
@@ -59,10 +56,11 @@ class PhotoSelectionViewController: UIViewController {
         let image = UIImage(named: "DeleteIcon")
         $0.setImage(image, for: .normal)
     }
-    let progressCircleView = PieChartView() // Custom UIView that draws a circular progress.
+    
+    let progressCircleView = PieChartView()
     
     let similarityLabel = UILabel().then {
-        $0.text = "1/2"
+        $0.text = "0/2"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 18)
@@ -84,28 +82,30 @@ class PhotoSelectionViewController: UIViewController {
         $0.backgroundColor = UIColor(hex: "EFEFEF")
         $0.layer.cornerRadius = 20
     }
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+//        photoPlaceholderView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPhotoPlaceholderView)))
         addSubViews()
         configUI()
         setupActions()
         setupPieChart()
     }
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         self.navigationItem.hidesBackButton = true
+        super.viewWillAppear(animated)
+        self.navigationItem.hidesBackButton = true
     }
     
     // MARK: - UI Layout
     private func addSubViews(){
         // Add subviews
-        [backButton, instructionLabel, subInstructionLabel, photoPlaceholderView,photoPlaceholderView2, progressCircleView, photoGuideButton, goToCameraButton, addButton, deleteIcon, similarityLabel].forEach {
+        [backButton, instructionLabel, subInstructionLabel, photoPlaceholderView,essentialPlaceHolderView, progressCircleView, photoGuideButton, goToCameraButton, addButton, deleteIcon, similarityLabel].forEach {
             view.addSubview($0)
         }
     }
+    
     private func configUI() {
         
         backButton.snp.makeConstraints { make in
@@ -119,9 +119,9 @@ class PhotoSelectionViewController: UIViewController {
         }
         
         subInstructionLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(181)
-            make.width.equalTo(350)
-            make.leading.equalToSuperview().offset(20)
+            make.top.equalTo(instructionLabel.snp.bottom).offset(10)
+            make.leading.equalTo(instructionLabel.snp.leading)
+            make.width.equalTo(300)
         }
         
         // 왼쪽 placeholder view
@@ -131,39 +131,39 @@ class PhotoSelectionViewController: UIViewController {
             make.height.equalTo(210)
             make.width.equalTo(171)
         }
-
+        
         // 오른쪽 placeholder view
-        photoPlaceholderView2.snp.makeConstraints { make in
+        essentialPlaceHolderView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(311)
             make.left.equalTo(view.snp.centerX).offset(10)
             make.height.equalTo(210)
             make.width.equalTo(171)
         }
-
+        
         addButton.snp.makeConstraints { make in
             make.top.equalTo(photoPlaceholderView.snp.top).offset(-12.5)
             make.right.equalTo(photoPlaceholderView.snp.right).offset(12.5)
         }
         
         deleteIcon.snp.makeConstraints { make in
-            make.top.equalTo(photoPlaceholderView2.snp.top).offset(-12.5)
-            make.right.equalTo(photoPlaceholderView2.snp.right).offset(12.5)
+            make.top.equalTo(essentialPlaceHolderView.snp.top).offset(-12.5)
+            make.right.equalTo(essentialPlaceHolderView.snp.right).offset(12.5)
         }
         
         progressCircleView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-235)
+            make.top.equalTo(essentialPlaceHolderView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(90)
             make.height.equalTo(90)
         }
         
         similarityLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-268.5)
+            make.top.equalTo(essentialPlaceHolderView.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
         }
         
         photoGuideButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-171)
+            make.top.equalTo(progressCircleView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.height.equalTo(46)
             make.width.equalTo(146)
@@ -177,15 +177,19 @@ class PhotoSelectionViewController: UIViewController {
         }
     }
     
+
+    
     // MARK: - Setup
     
     func setupPieChart() {
-        let entries = [PieChartDataEntry(value: 50), PieChartDataEntry(value: 50)]
-
+        let entries = [PieChartDataEntry(value: 0), PieChartDataEntry(value: 100)]
+        
         let dataSet = PieChartDataSet(entries: entries)
-        if let customPinkColor = UIColor.primary {
-            let otherColor = UIColor.white
-            dataSet.colors = [customPinkColor, otherColor]
+        if let customPinkColor = UIColor.primary,
+            let otherColor = UIColor(named: "gray2") {
+                let nsCustomPinkColor = NSUIColor(cgColor: customPinkColor.cgColor)
+                let nsOtherColor = NSUIColor(cgColor: otherColor.cgColor)
+                dataSet.colors = [nsCustomPinkColor, nsOtherColor]
         }
         dataSet.drawValuesEnabled = false
         dataSet.drawIconsEnabled = false
@@ -236,7 +240,7 @@ extension CALayer {
     func addDottedBorder() {
         // 새로운 CAShapeLayer를 생성하기 전에 기존의 dotted layer를 제거합니다.
         sublayers?.filter { $0.name == "dotted" }.forEach { $0.removeFromSuperlayer() }
-
+        
         let shapeLayer = CAShapeLayer()
         shapeLayer.name = "dotted"
         shapeLayer.strokeColor = UIColor.gray.cgColor

@@ -33,6 +33,8 @@
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
 		582DB1832BBE917000600EA7 /* NicknameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */; };
 		582DB1852BBE917D00600EA7 /* BodyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */; };
+		582DB2372BC683EA00600EA7 /* PhotoPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB2362BC683EA00600EA7 /* PhotoPlaceHolderView.swift */; };
+		582DB2392BC7739B00600EA7 /* PhotoEssentialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB2382BC7739B00600EA7 /* PhotoEssentialView.swift */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
 		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
@@ -147,6 +149,8 @@
 		582DB1812BBE8A5300600EA7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameSettingViewController.swift; sourceTree = "<group>"; };
 		582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyInfoViewController.swift; sourceTree = "<group>"; };
+		582DB2362BC683EA00600EA7 /* PhotoPlaceHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPlaceHolderView.swift; sourceTree = "<group>"; };
+		582DB2382BC7739B00600EA7 /* PhotoEssentialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEssentialView.swift; sourceTree = "<group>"; };
 		584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
@@ -266,11 +270,11 @@
 		582DB14F2BBE888900600EA7 /* AiSignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				582DB2352BC6835100600EA7 /* PhotoSelectVC */,
 				582DB1572BBE88D900600EA7 /* AiPhotoshopViewController.swift */,
 				582DB1522BBE88D900600EA7 /* AnalysisSyncResultViewController.swift */,
 				582DB1512BBE88D900600EA7 /* AnalysisSyncViewController.swift */,
 				582DB1562BBE88D900600EA7 /* GuideViewController.swift */,
-				582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */,
 				582DB1502BBE88D900600EA7 /* VoicePopupView.swift */,
 				582DB1542BBE88D900600EA7 /* VoicePopupViewcontroller.swift */,
 				582DB1532BBE88D900600EA7 /* VoiceRecordingViewController.swift */,
@@ -317,6 +321,24 @@
 				582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		582DB2342BC6833D00600EA7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				582DB2362BC683EA00600EA7 /* PhotoPlaceHolderView.swift */,
+				582DB2382BC7739B00600EA7 /* PhotoEssentialView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		582DB2352BC6835100600EA7 /* PhotoSelectVC */ = {
+			isa = PBXGroup;
+			children = (
+				582DB2342BC6833D00600EA7 /* View */,
+				582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */,
+			);
+			path = PhotoSelectVC;
 			sourceTree = "<group>";
 		};
 		584DCF272B9CC0650081149F /* SendVC */ = {
@@ -929,6 +951,7 @@
 			files = (
 				58BB86812BB7E56300F90050 /* VoiceTableViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
+				582DB2392BC7739B00600EA7 /* PhotoEssentialView.swift in Sources */,
 				582DB1582BBE88D900600EA7 /* VoicePopupView.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
@@ -998,6 +1021,7 @@
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
 				58BB86272BB5512400F90050 /* DeclareMode.swift in Sources */,
 				58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */,
+				582DB2372BC683EA00600EA7 /* PhotoPlaceHolderView.swift in Sources */,
 				58BB86832BB7F9E800F90050 /* WeightTableViewCell.swift in Sources */,
 				58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */,
 				58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */,
@@ -1104,7 +1128,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1158,7 +1182,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1174,15 +1198,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성 녹음 기능을 사용하기 위해 마이크 접근이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1190,6 +1219,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1202,15 +1232,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성 녹음 기능을 사용하기 위해 마이크 접근이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1218,6 +1253,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

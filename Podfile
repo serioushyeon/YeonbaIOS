@@ -13,6 +13,9 @@ target 'YeonBa' do
 	pod 'Charts'
 	pod 'SCLAlertView'
 	pod 'Alamofire', '~> 5.4.4'
+	pod 'KakaoSDKAuth'
+  	pod 'KakaoSDKUser'
+  	pod 'KakaoSDKCommon'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing
