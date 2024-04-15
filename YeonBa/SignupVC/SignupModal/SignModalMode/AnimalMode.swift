@@ -15,8 +15,9 @@ enum AnimalMode: Int, CaseIterable {
     case cow
     case fox
     case bear
+    case empty
     
-    var title: String {
+    var title: String? {
        
         switch self {
         case .dog:
@@ -31,7 +32,8 @@ enum AnimalMode: Int, CaseIterable {
             return "여우 상"
         case .bear:
             return "곰 상"
-            
+        case .empty:
+            return nil
         }
         
     }

@@ -1,37 +1,37 @@
 //
-//  FavoriteAgeViewController.swift
+//  FavoriteTallViewController.swift
 //  YeonBa
 //
-//  Created by jin on 4/11/24.
+//  Created by jin on 4/15/24.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-protocol FavoriteAgeViewControllerDelegate: AnyObject {
-    func ageSelected(_ mode: String)
+protocol FavoriteTallViewControllerDelegate: AnyObject {
+    func tallSelected(_ mode: String)
 }
 
-final class FavoriteAgeViewController: UIViewController {
+final class FavoriteTallViewController: UIViewController {
     private var selectedMode: String?
-    weak var delegate: FavoriteAgeViewControllerDelegate?
+    weak var delegate: FavoriteTallViewControllerDelegate?
     
-    private let customTransitioningDelegate = FavoriteAgeDelegate()
+    private let customTransitioningDelegate = FavoriteTallDelegate()
     private let titleLabel = UILabel().then {
-        $0.text = "선호하는 나이"
+        $0.text = "선호하는 키"
         $0.textColor = UIColor.black
         $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 26)
     }
-    private let ageSlider = JKSlider().then {
+    private let tallSlider = JKSlider().then {
         $0.minValue = 1
         $0.maxValue = 100
         $0.lower = 1
         $0.upper = 75
     }
-    private let ageRangeLabel = UILabel().then {
-        $0.text = "20~25세"
+    private let tallRangeLabel = UILabel().then {
+        $0.text = "170~175cm"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 16)
@@ -91,14 +91,14 @@ final class FavoriteAgeViewController: UIViewController {
     
     @objc private func finishButtonTapped() {
         // Finish 버튼을 터치했을 때의 동작
-        self.selectedMode = ageRangeLabel.text
-        delegate?.ageSelected(ageRangeLabel.text ?? "20~25세")
+        self.selectedMode = tallRangeLabel.text
+        delegate?.tallSelected(tallRangeLabel.text ?? "20~25세")
         self.dismiss(animated: true)
     }
 }
 
 // MARK: 나이 버튼 Setup Layout
-extension FavoriteAgeViewController {
+extension FavoriteTallViewController {
     private func setupView() {
         setupInitialView()
         setupLayout()
@@ -106,8 +106,8 @@ extension FavoriteAgeViewController {
     
     private func setupLayout() {
         view.addSubview(titleLabel)
-        view.addSubview(ageRangeLabel)
-        view.addSubview(ageSlider)
+        view.addSubview(tallRangeLabel)
+        view.addSubview(tallSlider)
         view.addSubview(horizontalStackView)
         horizontalStackView.addArrangedSubview(finishButton)
         horizontalStackView.addArrangedSubview(nextButton)
@@ -117,12 +117,12 @@ extension FavoriteAgeViewController {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(24)
         }
-        ageRangeLabel.snp.makeConstraints {
+        tallRangeLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(41)
             $0.trailing.equalToSuperview().offset(-20)
         }
-        ageSlider.snp.makeConstraints {
-            $0.top.equalTo(ageRangeLabel.snp.bottom).offset(9)
+        tallSlider.snp.makeConstraints {
+            $0.top.equalTo(tallRangeLabel.snp.bottom).offset(9)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(21)
         }

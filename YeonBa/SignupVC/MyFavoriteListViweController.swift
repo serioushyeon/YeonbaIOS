@@ -11,12 +11,13 @@ import Then
 
 class MyFavoriteListViweController: UIViewController {
     let locations = ["서울", "경기도", "인천", "부산", "대전", "광주", "대구", "울산", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "세종", "제주"]
-    private var voiceViewMode: VoiceMode = .high
-    private var bodyViewMode: WeightMode = .thinBody
-    private var animalViewMode: AnimalMode = .dog
-    private var mbtiViewMode: MbtiMode = .ENFJ
-    private var locationViewMode: LocationMode = .gyeonggi
+    private var voiceViewMode: SignVoiceMode = .empty
+    private var bodyViewMode: SignWeightMode = .empty
+    private var animalViewMode: AnimalMode = .empty
+    private var mbtiViewMode: MbtiMode = .empty
+    private var locationViewMode: SignLocationMode = .empty
     private var ageViewMode: String = "20~25세"
+    private var tallViewMode: String = "170~175cm"
     // MARK: - UI Components
     let titleLabel = UILabel().then{
         $0.text = "나의 선호조건"
@@ -143,6 +144,23 @@ class MyFavoriteListViweController: UIViewController {
     private let mbtiChoiceBtn = UIButton().then {
         $0.setImage(UIImage(named: "nextBtn"), for: .normal)
     }
+    
+    private let tallView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.masksToBounds = true
+    }
+    private let tallLabel = UILabel().then {
+        $0.text = "선호하는 키가 어떻게 되세요?"
+        $0.textColor = UIColor.gray
+        $0.font = UIFont.pretendardMedium(size: 16)
+        $0.textAlignment = .center
+    }
+    private let tallChoiceBtn = UIButton().then {
+        $0.setImage(UIImage(named: "nextBtn"), for: .normal)
+    }
 
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -185,6 +203,9 @@ class MyFavoriteListViweController: UIViewController {
         verticalStackview.addArrangedSubview(mbtiView)
         mbtiView.addSubview(mbtiLabel)
         mbtiView.addSubview(mbtiChoiceBtn)
+        verticalStackview.addArrangedSubview(tallView)
+        tallView.addSubview(tallLabel)
+        tallView.addSubview(tallChoiceBtn)
     }
     func configUI() {
         backButton.snp.makeConstraints { make in
@@ -281,6 +302,18 @@ class MyFavoriteListViweController: UIViewController {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-15)
         }
+        tallView.snp.makeConstraints {
+            $0.height.equalTo(55)
+            $0.leading.trailing.equalToSuperview()
+        }
+        tallLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+        }
+        tallChoiceBtn.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-15)
+        }
         nextButton.snp.makeConstraints{make in
             make.bottom.equalToSuperview().offset(-55)
             make.leading.equalToSuperview().offset(20)
@@ -312,6 +345,10 @@ class MyFavoriteListViweController: UIViewController {
         mbtiView.isUserInteractionEnabled = true
         let mbtiGesture = UITapGestureRecognizer(target: self, action: #selector(showMbtiModal))
         mbtiView.addGestureRecognizer(mbtiGesture)
+        
+        tallView.isUserInteractionEnabled = true
+        let tallGesture = UITapGestureRecognizer(target: self, action: #selector(showTallModal))
+        tallView.addGestureRecognizer(tallGesture)
     }
     //MARK: - Actions
     @objc func backButtonTapped() {
@@ -327,6 +364,7 @@ class MyFavoriteListViweController: UIViewController {
     @objc func showLocationModal() {
         let locationModalVC = FavoriteLocationViewController(passMode: locationViewMode)
         locationModalVC.modalPresentationStyle = .pageSheet
+        locationModalVC.delegate = self
         self.present(locationModalVC, animated: true)
     }
     @objc func showVoiceModal() {
@@ -354,154 +392,63 @@ class MyFavoriteListViweController: UIViewController {
         ageVC.delegate = self
         self.present(ageVC, animated: true)
     }
+    @objc func showTallModal() {
+        let tallVC = FavoriteTallViewController(passMode: tallViewMode)
+        tallVC.delegate = self
+        self.present(tallVC, animated: true)
+    }
 }
 //MARK: -- 지역 delegate
 extension MyFavoriteListViweController: FavoriteLocationViewControllerDelegate {
     func locationSelectedRowAt(indexPath: Int) {
-        guard let mode = LocationMode(rawValue: indexPath) else { return }
+        guard let mode = SignLocationMode(rawValue: indexPath) else { return }
         locationViewMode = mode
-        switch locationViewMode {
-        case .seoul:
-            print("서울")
-        case .gyeonggi:
-            print("경기")
-        case .incheon:
-            print("인천")
-        case .busan:
-            print("부산")
-        case .daejeon:
-            print("대전")
-        case .gwangju:
-            print("광주")
-        case .daegu:
-            print("대구")
-        case .ulsan:
-            print("울산")
-        case .gangwon:
-            print("강원도")
-        case .chungbuk:
-            print("충북")
-        case .chungnam:
-            print("충남")
-        case .jeonbuk:
-            print("전북")
-        case .jeonnam:
-            print("전남")
-        case .gyeongbuk:
-            print("경북")
-        case .gyeongnam:
-            print("경남")
-        case .sejong:
-            print("세종")
-        case .jeju:
-            print("제주")
-        }
+        locationLabel.text = mode.title // 라벨 텍스트 변경
     }
 }
 //MARK: -- 음성 delegate
 extension MyFavoriteListViweController: FavoriteVoiceViewControllerDelegate {
     func voiceSelectedRowAt(indexPath: Int) {
-        guard let mode = VoiceMode(rawValue: indexPath) else { return }
+        guard let mode = SignVoiceMode(rawValue: indexPath) else { return }
         
         voiceViewMode = mode
-        
-        switch voiceViewMode {
-        case .high:
-            print("고음")
-        case .middle:
-            print("중음")
-        case .low:
-            print("저음")
-        case .allLike:
-            print("")
-        }
+        voiceLabel.text = mode.title // 라벨 텍스트 변경
     }
 }
 //MARK: -- 체중 delegate
 extension MyFavoriteListViweController: FavoriteBodyDelegate {
     func weightSelectedRowAt(indexPath: Int) {
-        guard let mode = WeightMode(rawValue: indexPath) else { return }
+        guard let mode = SignWeightMode(rawValue: indexPath) else { return }
         
         bodyViewMode = mode
-        
-        switch bodyViewMode {
-        case .thinBody:
-            print("")
-        case .middleBody:
-            print("")
-        case .littleFatBody:
-            print("")
-        case .fatBody:
-            print("")
-        }
+        bodyLabel.text = mode.title // 라벨 텍스트 변경
     }
 }
 //MARK: -- 동물상 delegate
 extension MyFavoriteListViweController: FavoriteAnimalViewControllerDelegate {
     func animalSelected(_ mode: AnimalMode) {
         animalViewMode = mode
-        
-        switch animalViewMode {
-        case .dog:
-            print("")
-        case .cat:
-            print("")
-        case .deer:
-            print("")
-        case .cow:
-            print("")
-        case .fox:
-            print("")
-        case .bear:
-            print("")
-        }
+        animalLabel.text = mode.title // 라벨 텍스트 변경
     }
 }
 //MARK: -- mbti delegate
 extension MyFavoriteListViweController: FavoriteMbtiViewControllerDelegate {
     func mbtiSelected(_ mode: MbtiMode) {
         mbtiViewMode = mode
-        
-        switch mbtiViewMode {
-        case .ISTJ:
-            print("")
-        case .ISFJ:
-            print("")
-        case .INFJ:
-            print("")
-        case .INTJ:
-            print("")
-        case .ISTP:
-            print("")
-        case .ISFP:
-            print("")
-        case .INFP:
-            print("")
-        case .INTP:
-            print("")
-        case .ESTP:
-            print("")
-        case .ESFP:
-            print("")
-        case .ENFP:
-            print("")
-        case .ENTP:
-            print("")
-        case .ESTJ:
-            print("")
-        case .ESFJ:
-            print("")
-        case .ENFJ:
-            print("")
-        case .ENTJ:
-            print("")
-        }
+        mbtiLabel.text = mode.title // 라벨 텍스트 변경
     }
 }
 //MARK: -- age delegate
 extension MyFavoriteListViweController: FavoriteAgeViewControllerDelegate {
     func ageSelected(_ mode: String) {
-        print(mode)
+        ageLabel.text = mode // 라벨 텍스트 변경
     }
     
+}
+
+//MARK: -- tall delegate
+extension MyFavoriteListViweController: FavoriteTallViewControllerDelegate {
+    func tallSelected(_ mode: String) {
+        tallLabel.text = mode // 라벨 텍스트 변경
+    }
 }
