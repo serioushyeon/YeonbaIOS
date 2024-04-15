@@ -14,11 +14,11 @@ protocol FavoriteBodyDelegate: AnyObject {
     func weightSelectedRowAt(indexPath: Int)
 }
 final class FavoriteBodyViewController: UIViewController {
-    private var selectedCellIndex: IndexPath?
+    private var selectedCellIndex: Int?
 
     weak var delegate: FavoriteBodyDelegate?
     private let customTransitioningDelegate = FavoriteBodyViewControllerDelegate()
-    private let currentMode: WeightMode
+    private var currentMode: SignWeightMode
     private let titleLabel = UILabel().then {
         $0.text = "체형"
         $0.textColor = UIColor.black
@@ -37,6 +37,8 @@ final class FavoriteBodyViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.isEnabled = false
+        $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -53,7 +55,7 @@ final class FavoriteBodyViewController: UIViewController {
         return tableView
     }()
     
-    init(passMode: WeightMode) {
+    init(passMode: SignWeightMode) {
         self.currentMode = passMode
         super.init(nibName: nil, bundle: nil)
         setupModalStyle()
@@ -89,13 +91,32 @@ final class FavoriteBodyViewController: UIViewController {
     @objc private func dismissView() {
         self.dismiss(animated: true)
     }
+    @objc private func finishButtonTapped() {
+        // Finish 버튼을 터치했을 때의 동작
+        delegate?.weightSelectedRowAt(indexPath: self.selectedCellIndex!)
+        self.dismiss(animated: true)
+        
+    }
+    // 선택된 위치가 없을 때 finishButton을 비활성화하는 메서드
+    private func updateFinishButtonState() {
+        if currentMode.title == nil {
+            finishButton.isEnabled = false
+            finishButton.layer.backgroundColor = UIColor.gray2?.cgColor
+        } else {
+            finishButton.isEnabled = true
+            finishButton.layer.borderWidth = 2
+            finishButton.layer.borderColor = UIColor.black.cgColor
+            finishButton.setTitleColor(.black, for: .normal)
+            finishButton.layer.backgroundColor = UIColor.white.cgColor
+        }
+    }
 }
 //MARK: -- 체형 UITableViewDelegate,UITableViewDataSource
 
 extension FavoriteBodyViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return SignWeightMode.allCases.filter { $0 != .empty }.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -104,9 +125,9 @@ extension FavoriteBodyViewController: UITableViewDelegate, UITableViewDataSource
                                                        for: indexPath) as? FavoriteBodyTableViewCell else {
             return UITableViewCell(style: .default, reuseIdentifier: .none)
         }
-        let mode = WeightMode.allCases[indexPath.row]
+        let mode = SignWeightMode.allCases.filter { $0 != .empty }[indexPath.row]
         // 이미지를 설정하여 셀에 전달
-        cell.setup(label: mode.title)
+        cell.setup(label: mode.title ?? "")
         cell.selectionStyle = .none
         return cell
     }
@@ -117,7 +138,10 @@ extension FavoriteBodyViewController: UITableViewDelegate, UITableViewDataSource
         finishButton.layer.borderColor = UIColor.black.cgColor
         finishButton.titleLabel?.textColor = UIColor.black
         finishButton.layer.backgroundColor = UIColor.white.cgColor
-        delegate?.weightSelectedRowAt(indexPath: indexPath.row)
+        selectedCellIndex = indexPath.row
+        currentMode = SignWeightMode(rawValue: indexPath.row) ?? .thinBody
+        updateFinishButtonState()
+        //delegate?.weightSelectedRowAt(indexPath: indexPath.row)
         //dismissView()
     }
     

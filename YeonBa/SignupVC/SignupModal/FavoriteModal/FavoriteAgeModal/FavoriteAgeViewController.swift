@@ -93,6 +93,7 @@ final class FavoriteAgeViewController: UIViewController {
         // Finish 버튼을 터치했을 때의 동작
         self.selectedMode = ageRangeLabel.text
         delegate?.ageSelected(ageRangeLabel.text ?? "20~25세")
+        self.dismiss(animated: true)
     }
 }
 

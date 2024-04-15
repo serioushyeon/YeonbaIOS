@@ -13,11 +13,11 @@ protocol FavoriteVoiceViewControllerDelegate: AnyObject {
     func voiceSelectedRowAt(indexPath: Int)
 }
 final class FavoriteVoiceViewController: UIViewController {
-    private var selectedCellIndex: IndexPath?
+    private var selectedCellIndex: Int?
 
     weak var delegate: FavoriteVoiceViewControllerDelegate?
     private let customTransitioningDelegate = FavoriteVoiceDelegate()
-    private let currentMode: VoiceMode
+    private var currentMode: SignVoiceMode
     private let titleLabel = UILabel().then {
         $0.text = "음역대"
         $0.textColor = UIColor.black
@@ -36,6 +36,8 @@ final class FavoriteVoiceViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.isEnabled = false
+        $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -52,7 +54,7 @@ final class FavoriteVoiceViewController: UIViewController {
         return tableView
     }()
     
-    init(passMode: VoiceMode) {
+    init(passMode: SignVoiceMode) {
         self.currentMode = passMode
         super.init(nibName: nil, bundle: nil)
         setupModalStyle()
@@ -88,13 +90,32 @@ final class FavoriteVoiceViewController: UIViewController {
     @objc private func dismissView() {
         self.dismiss(animated: true)
     }
+    @objc private func finishButtonTapped() {
+        // Finish 버튼을 터치했을 때의 동작
+        delegate?.voiceSelectedRowAt(indexPath: selectedCellIndex!)
+        self.dismiss(animated: true)
+    }
+    // 선택된 위치가 없을 때 finishButton을 비활성화하는 메서드
+    private func updateFinishButtonState() {
+        if currentMode.title == nil {
+            finishButton.isEnabled = false
+            finishButton.layer.backgroundColor = UIColor.gray2?.cgColor
+        } else {
+            finishButton.isEnabled = true
+            finishButton.layer.borderWidth = 2
+            finishButton.layer.borderColor = UIColor.black.cgColor
+            finishButton.titleLabel?.textColor = UIColor.black
+            finishButton.setTitleColor(.black, for: .normal)
+            finishButton.layer.backgroundColor = UIColor.white.cgColor
+        }
+    }
 }
 //MARK: -- 신고하기 UITableViewDelegate,UITableViewDataSource
 
 extension FavoriteVoiceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return SignVoiceMode.allCases.filter { $0 != .empty }.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -103,9 +124,9 @@ extension FavoriteVoiceViewController: UITableViewDelegate, UITableViewDataSourc
                                                        for: indexPath) as? FavoriteVoiceTableViewCell else {
             return UITableViewCell(style: .default, reuseIdentifier: .none)
         }
-        let mode = VoiceMode.allCases[indexPath.row]
+        let mode = SignVoiceMode.allCases.filter { $0 != .empty }[indexPath.row]
         // 이미지를 설정하여 셀에 전달
-        cell.setup(label: mode.title)
+        cell.setup(label: mode.title ?? "")
         cell.selectionStyle = .none
         return cell
     }
@@ -116,7 +137,10 @@ extension FavoriteVoiceViewController: UITableViewDelegate, UITableViewDataSourc
         finishButton.layer.borderColor = UIColor.black.cgColor
         finishButton.titleLabel?.textColor = UIColor.black
         finishButton.layer.backgroundColor = UIColor.white.cgColor
-        delegate?.voiceSelectedRowAt(indexPath: indexPath.row)
+        selectedCellIndex = indexPath.row
+        currentMode = SignVoiceMode(rawValue: indexPath.row) ?? .low
+        updateFinishButtonState()
+        //delegate?.voiceSelectedRowAt(indexPath: indexPath.row)
         //dismissView()
     }
     

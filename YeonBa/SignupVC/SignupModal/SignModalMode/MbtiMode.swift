@@ -25,8 +25,9 @@ enum MbtiMode: Int, CaseIterable {
     case ESFJ
     case ENFJ
     case ENTJ
+    case empty
     
-    var title: String {
+    var title: String? {
        
         switch self {
         case .ISTJ:
@@ -61,6 +62,8 @@ enum MbtiMode: Int, CaseIterable {
             return "ENFJ"
         case .ENTJ:
             return "ENTJ"
+        case .empty:
+            return nil
             
         }
         

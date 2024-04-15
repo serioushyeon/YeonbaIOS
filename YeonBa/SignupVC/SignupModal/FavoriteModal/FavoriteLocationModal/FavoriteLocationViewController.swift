@@ -14,7 +14,8 @@ protocol FavoriteLocationViewControllerDelegate: AnyObject {
 }
 class FavoriteLocationViewController: UIViewController {
     weak var delegate: FavoriteLocationViewControllerDelegate?
-    private let currentMode: LocationMode
+    private var currentMode: SignLocationMode
+    private var locationSelect: Int?
     //MARK: -- UI Component
     private let allLabel = UILabel().then {
         $0.text = "지역"
@@ -41,6 +42,7 @@ class FavoriteLocationViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -49,7 +51,7 @@ class FavoriteLocationViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
     }
-    init(passMode: LocationMode) {
+    init(passMode: SignLocationMode) {
         self.currentMode = passMode
         super.init(nibName: nil, bundle: nil)
     }
@@ -70,7 +72,27 @@ class FavoriteLocationViewController: UIViewController {
         tableView.rowHeight = view.bounds.height / 15
     }
     
+    //MARK: - Actions
+    @objc private func finishButtonTapped() {
+        guard let locationSelect = locationSelect else { return } // locationSelect가 nil인 경우에는 이후 코드를 실행하지 않음
+        delegate?.locationSelectedRowAt(indexPath: self.locationSelect!)
+        self.dismiss(animated: true)
+        
+    }
     
+    // 선택된 위치가 없을 때 finishButton을 비활성화하는 메서드
+    private func updateFinishButtonState() {
+        if currentMode.title == nil {
+            finishButton.isEnabled = false
+            finishButton.layer.backgroundColor = UIColor.gray2?.cgColor
+        } else {
+            finishButton.isEnabled = true
+            finishButton.layer.borderWidth = 2
+            finishButton.layer.borderColor = UIColor.black.cgColor
+            finishButton.setTitleColor(.black, for: .normal)
+            finishButton.layer.backgroundColor = UIColor.white.cgColor
+        }
+    }
 
 }
 //MARK: -- 지역 UITableViewDelegate,UITableViewDataSource
@@ -78,7 +100,7 @@ class FavoriteLocationViewController: UIViewController {
 extension FavoriteLocationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return 17
+        return SignLocationMode.allCases.filter { $0 != .empty }.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -87,9 +109,9 @@ extension FavoriteLocationViewController: UITableViewDelegate, UITableViewDataSo
                                                        for: indexPath) as? FavoriteLocationViewCell else {
             return UITableViewCell(style: .default, reuseIdentifier: .none)
         }
-        let mode = LocationMode.allCases[indexPath.row]
+        let mode = SignLocationMode.allCases.filter { $0 != .empty }[indexPath.row]
         // 이미지를 설정하여 셀에 전달
-        cell.setup(label: mode.title)
+        cell.setup(label: mode.title ?? "")
         cell.selectionStyle = .none
         return cell
     }
@@ -101,8 +123,9 @@ extension FavoriteLocationViewController: UITableViewDelegate, UITableViewDataSo
         finishButton.titleLabel?.textColor = UIColor.black
         finishButton.layer.backgroundColor = UIColor.white.cgColor
         nextButton.gradientLayer.colors = [UIColor.secondary?.cgColor, UIColor.primary?.cgColor] // 그라디언트 색상 변경
-
-        delegate?.locationSelectedRowAt(indexPath: indexPath.row)
+        self.locationSelect = indexPath.row
+        currentMode = SignLocationMode(rawValue: indexPath.row) ?? .seoul
+        updateFinishButtonState() // 선택이 변경될 때마다 버튼 상태 업데이트
         //dismissView()
     }
     

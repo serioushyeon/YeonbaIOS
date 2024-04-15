@@ -55,6 +55,7 @@ final class FavoriteAnimalViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.isEnabled = false
         $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
@@ -92,7 +93,7 @@ final class FavoriteAnimalViewController: UIViewController {
         view.clipsToBounds = true
     }
     
-    @objc private func dismissView() {
+    private func dismissView() {
         self.dismiss(animated: true)
     }
     
@@ -100,13 +101,15 @@ final class FavoriteAnimalViewController: UIViewController {
         guard let mode = AnimalMode(rawValue: sender.tag) else { return }
         self.selectedMode = mode
         // 선택한 동물 모드를 delegate를 통해 호출한 쪽에 전달
-        delegate?.animalSelected(mode)
         // 선택된 버튼 스타일 변경
         updateButtonSelection()
     }
     
     @objc private func finishButtonTapped() {
         // Finish 버튼을 터치했을 때의 동작
+        delegate?.animalSelected(self.selectedMode!)
+        self.dismiss(animated: true)
+        
     }
     private func updateButtonSelection() {
         // 모든 버튼의 선택 상태 초기화
@@ -126,8 +129,9 @@ final class FavoriteAnimalViewController: UIViewController {
             button.setTitleColor(.primary, for: .normal) // 선택된 버튼의 텍스트 색상을 프라이머리 색상으로 변경
             finishButton.layer.borderWidth = 2
             finishButton.layer.borderColor = UIColor.black.cgColor
-            finishButton.titleLabel?.textColor = UIColor.black
+            finishButton.setTitleColor(.black, for: .normal)
             finishButton.layer.backgroundColor = UIColor.white.cgColor
+            finishButton.isEnabled = true
         }
     }
     
@@ -179,6 +183,9 @@ extension FavoriteAnimalViewController {
         // 버튼을 생성하고 verticalStackView에 추가합니다.
         let modes = AnimalMode.allCases
         for (index, mode) in modes.enumerated() {
+            if(mode.title == nil){
+                continue
+            }
             let button = UIButton()
             button.setTitle(mode.title, for: .normal)
             button.setTitleColor(.customgray2, for: .normal)
