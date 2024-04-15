@@ -1,4 +1,5 @@
 import UIKit
+import KakaoSDKUser
 import SnapKit
 import Then
 
@@ -15,7 +16,7 @@ class SignUpViewController: UIViewController {
         $0.image = UIImage(named: "logoimage") // "logoImage"는 해당 이미지의 이름입니다.
         $0.contentMode = .scaleAspectFit
     }
-
+    
     let descriptionLabel = UILabel().then {
         $0.text = "연애는, 바로 지금, 연바"
         $0.font = UIFont.pretendardSemiBold(size: 26)
@@ -24,11 +25,13 @@ class SignUpViewController: UIViewController {
     }
     
     let loginButton = UIButton().then {
-        $0.setTitle("로그인 하기", for: .normal)
+        //$0.setTitle("로그인 하기", for: .normal)
+        $0.setImage(UIImage(named: "kakaoLoginBtn"), for: .normal)
         $0.backgroundColor = .white
         $0.setTitleColor(.red, for: .normal)
         $0.layer.cornerRadius = 25
         $0.layer.masksToBounds = true
+        $0.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
     let signUpButton = UIButton().then {
@@ -41,7 +44,7 @@ class SignUpViewController: UIViewController {
         $0.setAttributedTitle(attributedTitle, for: .normal)
         $0.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
-
+    
     
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -51,7 +54,7 @@ class SignUpViewController: UIViewController {
         layer.cornerRadius = 16
         return layer
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.layer.insertSublayer(gradientLayer, at: 0)
@@ -71,7 +74,7 @@ class SignUpViewController: UIViewController {
             make.left.equalToSuperview().offset(100) // 좌측 여백을 100으로 설정
             make.right.equalToSuperview().inset(40) // 우측 여백은 40으로 유지
         }
-
+        
         
         view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in
@@ -79,7 +82,7 @@ class SignUpViewController: UIViewController {
             make.right.equalTo(logoLabel.snp.left).offset(10) // 로고 라벨의 왼쪽에 위치하도록 합니다.
             make.width.height.equalTo(60) // 로고 이미지의 크기를 설정합니다. 필요에 따라 조정하세요.
         }
-
+        
         view.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(logoLabel.snp.bottom).offset(100)
@@ -106,10 +109,52 @@ class SignUpViewController: UIViewController {
     
 }
 
-    // MARK: - Actions
+// MARK: - Actions
 extension SignUpViewController {
     @objc func loginButtonTapped() {
-        // 로그인 화면으로 전환하는 로직을 여기에 구현합니다.
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            //카톡 설치되어있으면 -> 카톡으로 로그인
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("카카오 톡으로 로그인 성공")
+                    
+                    _ = oauthToken
+                    // 로그인 관련 메소드 추가
+                }
+            }
+            
+        }else {
+            UserApi.shared.loginWithKakaoAccount { (oauthToken, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("카카오 계정으로 로그인 성공")
+                    _ = oauthToken
+                    UserApi.shared.me { [self] user, error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            
+                        }
+                        guard let token = oauthToken?.accessToken, let email = user?.kakaoAccount?.email,
+                              let name = user?.kakaoAccount?.profile?.nickname,let kakaoId = user?.id
+                        
+                        else{
+                            print("token/email/name is nil")
+                            return
+                        }
+                        print(email,token,name,kakaoId)
+                        //                        self.email = email
+                        //                        self.accessToken = token
+                        //                        self.name = name
+                        
+                    }
+                }
+            }
+            
+        }
     }
     
     @objc func signUpButtonTapped() {
