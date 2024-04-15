@@ -17,6 +17,7 @@ class MyFavoriteListViweController: UIViewController {
     private var mbtiViewMode: MbtiMode = .empty
     private var locationViewMode: SignLocationMode = .empty
     private var ageViewMode: String = "20~25세"
+    private var tallViewMode: String = "170~175cm"
     // MARK: - UI Components
     let titleLabel = UILabel().then{
         $0.text = "나의 선호조건"
@@ -143,6 +144,23 @@ class MyFavoriteListViweController: UIViewController {
     private let mbtiChoiceBtn = UIButton().then {
         $0.setImage(UIImage(named: "nextBtn"), for: .normal)
     }
+    
+    private let tallView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.customgray2?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.masksToBounds = true
+    }
+    private let tallLabel = UILabel().then {
+        $0.text = "선호하는 키가 어떻게 되세요?"
+        $0.textColor = UIColor.gray
+        $0.font = UIFont.pretendardMedium(size: 16)
+        $0.textAlignment = .center
+    }
+    private let tallChoiceBtn = UIButton().then {
+        $0.setImage(UIImage(named: "nextBtn"), for: .normal)
+    }
 
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -185,6 +203,9 @@ class MyFavoriteListViweController: UIViewController {
         verticalStackview.addArrangedSubview(mbtiView)
         mbtiView.addSubview(mbtiLabel)
         mbtiView.addSubview(mbtiChoiceBtn)
+        verticalStackview.addArrangedSubview(tallView)
+        tallView.addSubview(tallLabel)
+        tallView.addSubview(tallChoiceBtn)
     }
     func configUI() {
         backButton.snp.makeConstraints { make in
@@ -281,6 +302,18 @@ class MyFavoriteListViweController: UIViewController {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-15)
         }
+        tallView.snp.makeConstraints {
+            $0.height.equalTo(55)
+            $0.leading.trailing.equalToSuperview()
+        }
+        tallLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+        }
+        tallChoiceBtn.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-15)
+        }
         nextButton.snp.makeConstraints{make in
             make.bottom.equalToSuperview().offset(-55)
             make.leading.equalToSuperview().offset(20)
@@ -312,6 +345,10 @@ class MyFavoriteListViweController: UIViewController {
         mbtiView.isUserInteractionEnabled = true
         let mbtiGesture = UITapGestureRecognizer(target: self, action: #selector(showMbtiModal))
         mbtiView.addGestureRecognizer(mbtiGesture)
+        
+        tallView.isUserInteractionEnabled = true
+        let tallGesture = UITapGestureRecognizer(target: self, action: #selector(showTallModal))
+        tallView.addGestureRecognizer(tallGesture)
     }
     //MARK: - Actions
     @objc func backButtonTapped() {
@@ -354,6 +391,11 @@ class MyFavoriteListViweController: UIViewController {
         let ageVC = FavoriteAgeViewController(passMode: ageViewMode)
         ageVC.delegate = self
         self.present(ageVC, animated: true)
+    }
+    @objc func showTallModal() {
+        let tallVC = FavoriteTallViewController(passMode: tallViewMode)
+        tallVC.delegate = self
+        self.present(tallVC, animated: true)
     }
 }
 //MARK: -- 지역 delegate
@@ -402,4 +444,11 @@ extension MyFavoriteListViweController: FavoriteAgeViewControllerDelegate {
         ageLabel.text = mode // 라벨 텍스트 변경
     }
     
+}
+
+//MARK: -- tall delegate
+extension MyFavoriteListViweController: FavoriteTallViewControllerDelegate {
+    func tallSelected(_ mode: String) {
+        tallLabel.text = mode // 라벨 텍스트 변경
+    }
 }
