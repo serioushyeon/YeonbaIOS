@@ -13,7 +13,7 @@ import AVFoundation
 import Photos
 import PhotosUI
 
-class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate {
+class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - UI Components
     
@@ -227,6 +227,17 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         goToCameraButton.addTarget(self, action: #selector(didTapGoToCamera), for: .touchUpInside)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        // 사용자가 찍은 사진을 가져옴
+        if let takenPhoto = info[.originalImage] as? UIImage {
+            // 앱에서 필요한 대로 찍은 사진을 사용
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
     // MARK: - Actions
     
     @objc func didTapBack() {
@@ -243,8 +254,21 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     @objc func didTapGoToCamera() {
-        let AnaysisSyncVC = AnalysisSyncViewController()
-        navigationController?.pushViewController(AnaysisSyncVC, animated: true)
+        // 디바이스에 카메라가 있는지 확인
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraViewController = UIImagePickerController()
+            cameraViewController.sourceType = .camera
+            cameraViewController.delegate = self
+            cameraViewController.allowsEditing = false
+            
+            // 카메라 인터페이스 표시
+            self.present(cameraViewController, animated: true, completion: nil)
+        } else {
+            // 카메라를 사용할 수 없는 경우, 경고를 표시하거나 다른 작업을 수행
+            let alert = UIAlertController(title: "오류", message: "카메라를 사용할 수 없습니다", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
