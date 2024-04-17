@@ -7,8 +7,10 @@
 
 import Foundation
 import UIKit
+import Photos
+import PhotosUI
 
-class PhotoEssentialView: DottedBorderView {
+class PhotoEssentialView: DottedBorderView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - Properties
     
@@ -18,11 +20,14 @@ class PhotoEssentialView: DottedBorderView {
         $0.font = .pretendardSemiBold(size: 20)
     }
     
-    private let imageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+    private var imageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.isHidden = true  // Initially hidden
+        $0.clipsToBounds = true
     }
     
     // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -42,6 +47,7 @@ class PhotoEssentialView: DottedBorderView {
     }
     
     // MARK: - Setup
+    
     private func setupView() {
         addSubview(hintLabel)
         addSubview(imageView)
@@ -66,6 +72,7 @@ class PhotoEssentialView: DottedBorderView {
     }
     
     // MARK: - Actions
+    
     @objc private func didTapView() {
         // Check if photo library is available
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
@@ -82,21 +89,20 @@ class PhotoEssentialView: DottedBorderView {
             viewController.present(imagePickerController, animated: true, completion: nil)
         }
     }
-
-}
+    
     // MARK: - UIImagePickerControllerDelegate
-extension PhotoEssentialView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // Handle the selected image
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
+            imageView.image = pickedImage
+            imageView.isHidden = false
+            hintLabel.isHidden = true
         }
         picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
         picker.dismiss(animated: true, completion: nil)
     }
 }

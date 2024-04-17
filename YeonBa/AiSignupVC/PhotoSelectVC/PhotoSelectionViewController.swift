@@ -13,7 +13,7 @@ import AVFoundation
 import Photos
 import PhotosUI
 
-class PhotoSelectionViewController: UIViewController {
+class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate {
     
     // MARK: - UI Components
     
@@ -36,7 +36,11 @@ class PhotoSelectionViewController: UIViewController {
         $0.font = UIFont.pretendardMedium(size: 16)
         $0.numberOfLines = 0
     }
-    
+    let horizontalStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 20
+        $0.distribution = .fillEqually
+    }
     let photoPlaceholderView = PhotoPlaceholderView().then {
         $0.setHintText("대표")
     }
@@ -66,7 +70,6 @@ class PhotoSelectionViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     
-    
     let photoGuideButton = UIButton().then {
         $0.setTitle("사진 등록 가이드 >", for: .normal)
         $0.backgroundColor = .secondary
@@ -87,11 +90,12 @@ class PhotoSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        photoPlaceholderView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPhotoPlaceholderView)))
         addSubViews()
         configUI()
         setupActions()
-        setupPieChart()
+        setupInitialPieChart()
+        photoPlaceholderView.delegate = self
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -101,9 +105,11 @@ class PhotoSelectionViewController: UIViewController {
     // MARK: - UI Layout
     private func addSubViews(){
         // Add subviews
-        [backButton, instructionLabel, subInstructionLabel, photoPlaceholderView,essentialPlaceHolderView, progressCircleView, photoGuideButton, goToCameraButton, addButton, deleteIcon, similarityLabel].forEach {
+        [backButton, instructionLabel, subInstructionLabel, horizontalStackView, progressCircleView, photoGuideButton, goToCameraButton, addButton, deleteIcon, similarityLabel].forEach {
             view.addSubview($0)
         }
+        horizontalStackView.addArrangedSubview(photoPlaceholderView)
+        horizontalStackView.addArrangedSubview(essentialPlaceHolderView)
     }
     
     private func configUI() {
@@ -124,20 +130,11 @@ class PhotoSelectionViewController: UIViewController {
             make.width.equalTo(300)
         }
         
-        // 왼쪽 placeholder view
-        photoPlaceholderView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(311)
-            make.right.equalTo(view.snp.centerX).offset(-10)
+        horizontalStackView.snp.makeConstraints { make in
+            make.top.equalTo(subInstructionLabel.snp.bottom).offset(50)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(210)
-            make.width.equalTo(171)
-        }
-        
-        // 오른쪽 placeholder view
-        essentialPlaceHolderView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(311)
-            make.left.equalTo(view.snp.centerX).offset(10)
-            make.height.equalTo(210)
-            make.width.equalTo(171)
         }
         
         addButton.snp.makeConstraints { make in
@@ -176,34 +173,54 @@ class PhotoSelectionViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-    
-
-    
     // MARK: - Setup
+    func updateAddButton() {
+        addButton.isHidden = true
+    }
+    func didUpdatePhotoCount(_ count: Int, total: Int) {
+        similarityLabel.text = "\(count)/\(total)"
+    }
     
-    func setupPieChart() {
-        let entries = [PieChartDataEntry(value: 0), PieChartDataEntry(value: 100)]
-        
+    func setupInitialPieChart() {
+        let entries = [PieChartDataEntry(value: 100)]
         let dataSet = PieChartDataSet(entries: entries)
-        if let customPinkColor = UIColor.primary,
-            let otherColor = UIColor(named: "gray2") {
-                let nsCustomPinkColor = NSUIColor(cgColor: customPinkColor.cgColor)
-                let nsOtherColor = NSUIColor(cgColor: otherColor.cgColor)
-                dataSet.colors = [nsCustomPinkColor, nsOtherColor]
+        if let grayColor = UIColor(named: "gray2") {
+            let nsGrayColor = NSUIColor(cgColor: grayColor.cgColor)
+            dataSet.colors = [nsGrayColor]
         }
         dataSet.drawValuesEnabled = false
         dataSet.drawIconsEnabled = false
         let data = PieChartData(dataSet: dataSet)
+        progressCircleView.data = data
+        progressCircleView.holeRadiusPercent = 0.8
+        progressCircleView.holeColor = UIColor.clear
+        progressCircleView.legend.enabled = false
+    }
+    // MARK: - SetupPieChart
+    func updatePieChart(with percentage: Double) {
+        let remainingValue = 100 - percentage
+        let entries = [
+            PieChartDataEntry(value: percentage),
+            PieChartDataEntry(value: remainingValue)
+        ]
         
+        let dataSet = PieChartDataSet(entries: entries)
+        if let customPinkColor = UIColor.primary,
+           let otherColor = UIColor(named: "gray2") {
+            let nsCustomPinkColor = NSUIColor(cgColor: customPinkColor.cgColor)
+            let nsOtherColor = NSUIColor(cgColor: otherColor.cgColor)
+            dataSet.colors = [nsCustomPinkColor, nsOtherColor]
+        }
+        dataSet.drawValuesEnabled = false
+        dataSet.drawIconsEnabled = false
+        let data = PieChartData(dataSet: dataSet)
         progressCircleView.holeRadiusPercent = 0.8
         progressCircleView.holeColor = UIColor.clear // 배경색을 투명하게 설정
-        
         progressCircleView.data = data
         progressCircleView.legend.enabled = false
     }
     
     private func setupActions() {
-        // Add target-action for buttons
         backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(didTapAddPhoto), for: .touchUpInside)
         photoGuideButton.addTarget(self, action: #selector(didTapPhotoGuide), for: .touchUpInside)
@@ -230,12 +247,14 @@ class PhotoSelectionViewController: UIViewController {
         navigationController?.pushViewController(AnaysisSyncVC, animated: true)
     }
 }
+
 class DottedBorderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.addDottedBorder()
     }
 }
+
 extension CALayer {
     func addDottedBorder() {
         // 새로운 CAShapeLayer를 생성하기 전에 기존의 dotted layer를 제거합니다.

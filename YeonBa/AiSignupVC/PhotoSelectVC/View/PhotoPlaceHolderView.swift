@@ -10,7 +10,23 @@ import UIKit
 import Photos
 import PhotosUI
 
-class PhotoPlaceholderView: DottedBorderView {
+protocol PhotoPlaceholderViewDelegate: AnyObject {
+    func updatePieChart(with value: Double)
+    func didUpdatePhotoCount(_ count: Int, total: Int)
+    func updateAddButton()
+}
+class PhotoPlaceholderView: DottedBorderView, PhotoSelectionDelegate {
+    weak var delegate: PhotoPlaceholderViewDelegate?
+
+    func didSelectPhoto(_ image: UIImage) {
+        imageView.image = image
+        imageView.isHidden = false
+        hintLabel.isHidden = true
+        delegate?.updateAddButton()
+        delegate?.updatePieChart(with: 50)
+        delegate?.didUpdatePhotoCount(1, total: 2)
+
+    }
     
     // MARK: - Properties
     
@@ -18,6 +34,12 @@ class PhotoPlaceholderView: DottedBorderView {
         $0.textColor = .customgray3
         $0.textAlignment = .center
         $0.font = .pretendardSemiBold(size: 20)
+    }
+    
+    private var imageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.isHidden = true  // Initially hidden
+        $0.clipsToBounds = true
     }
     
     // MARK: - Init
@@ -44,6 +66,7 @@ class PhotoPlaceholderView: DottedBorderView {
     
     private func setupView() {
         addSubview(hintLabel)
+        addSubview(imageView)
         setupConstraints()
         layer.addDottedBorder()
     }
@@ -52,6 +75,9 @@ class PhotoPlaceholderView: DottedBorderView {
         hintLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
@@ -64,39 +90,18 @@ class PhotoPlaceholderView: DottedBorderView {
     // MARK: - Actions
     
     @objc private func didTapView() {
-        // Check if photo library is available
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
-            print("Photo library is not available.")
-            return
-        }
+        let galleryVC = CustomPhotoGalleryViewController()
+        galleryVC.delegate = self
         
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.allowsEditing = false
-        
-        if let viewController = UIApplication.shared.keyWindow?.rootViewController {
-            viewController.present(imagePickerController, animated: true, completion: nil)
-        }
-    }
-    
-    
-}
-// MARK: - UIImagePickerControllerDelegate
-extension PhotoPlaceholderView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        // Handle the selected image
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        // 현재 활성화된 scene의 delegate에서 window를 가져옵니다.
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController {
+            let navController = rootViewController as? UINavigationController ?? rootViewController.navigationController
+            navController?.pushViewController(galleryVC, animated: true)
             
         }
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        picker.dismiss(animated: true, completion: nil)
     }
 }
+
 
 
