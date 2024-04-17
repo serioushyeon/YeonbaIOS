@@ -96,6 +96,9 @@
 		58D15EAA2B90585B00EB74E9 /* YeonBaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EA92B90585B00EB74E9 /* YeonBaTests.swift */; };
 		58D15EB42B90585B00EB74E9 /* YeonBaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EB32B90585B00EB74E9 /* YeonBaUITests.swift */; };
 		58D15EB62B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */; };
+		58D6445F2BCF80C2008DCC9F /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6445E2BCF80C2008DCC9F /* FullScreenImageViewController.swift */; };
+		58D644612BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644602BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift */; };
+		58D644642BCF8B21008DCC9F /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644632BCF8B21008DCC9F /* PhotoCollectionViewCell.swift */; };
 		58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
@@ -217,6 +220,9 @@
 		58D15EAF2B90585B00EB74E9 /* YeonBaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YeonBaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15EB32B90585B00EB74E9 /* YeonBaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaUITests.swift; sourceTree = "<group>"; };
 		58D15EB52B90585B00EB74E9 /* YeonBaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		58D6445E2BCF80C2008DCC9F /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
+		58D644602BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoGalleryViewController.swift; sourceTree = "<group>"; };
+		58D644632BCF8B21008DCC9F /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualGradientButton.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +276,7 @@
 		582DB14F2BBE888900600EA7 /* AiSignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				58D644652BCF8D4F008DCC9F /* PhotoGalleryVC */,
 				582DB2352BC6835100600EA7 /* PhotoSelectVC */,
 				582DB1572BBE88D900600EA7 /* AiPhotoshopViewController.swift */,
 				582DB1522BBE88D900600EA7 /* AnalysisSyncResultViewController.swift */,
@@ -335,8 +342,8 @@
 		582DB2352BC6835100600EA7 /* PhotoSelectVC */ = {
 			isa = PBXGroup;
 			children = (
-				582DB2342BC6833D00600EA7 /* View */,
 				582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */,
+				582DB2342BC6833D00600EA7 /* View */,
 			);
 			path = PhotoSelectVC;
 			sourceTree = "<group>";
@@ -699,6 +706,24 @@
 			path = YeonBaUITests;
 			sourceTree = "<group>";
 		};
+		58D644622BCF8B08008DCC9F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				58D644632BCF8B21008DCC9F /* PhotoCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		58D644652BCF8D4F008DCC9F /* PhotoGalleryVC */ = {
+			isa = PBXGroup;
+			children = (
+				58D644602BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift */,
+				58D6445E2BCF80C2008DCC9F /* FullScreenImageViewController.swift */,
+				58D644622BCF8B08008DCC9F /* Cell */,
+			);
+			path = PhotoGalleryVC;
+			sourceTree = "<group>";
+		};
 		73DBD3DD5A263E9104BB9837 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -970,6 +995,7 @@
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
 				582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */,
 				582DB1662BBE892C00600EA7 /* ChattingListCell.swift in Sources */,
+				58D644642BCF8B21008DCC9F /* PhotoCollectionViewCell.swift in Sources */,
 				582DB15F2BBE88D900600EA7 /* AiPhotoshopViewController.swift in Sources */,
 				58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */,
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
@@ -1006,6 +1032,7 @@
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
+				58D6445F2BCF80C2008DCC9F /* FullScreenImageViewController.swift in Sources */,
 				58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */,
 				582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */,
 				582DB1752BBE89C100600EA7 /* FindIdResultViewController.swift in Sources */,
@@ -1013,6 +1040,7 @@
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
 				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
+				58D644612BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift in Sources */,
 				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
 				58BB87182BBBECF600F90050 /* EmailSettingViewController.swift in Sources */,
 				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
