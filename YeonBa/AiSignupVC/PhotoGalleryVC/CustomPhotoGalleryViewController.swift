@@ -18,9 +18,11 @@ class CustomPhotoGalleryViewController: UIViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        // 최신순으로 정렬하기 위해 ascending 값을 false로 설정
         let allPhotosOptions = PHFetchOptions()
-        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+        
         setupCollectionView()
     }
     
@@ -63,7 +65,7 @@ class CustomPhotoGalleryViewController: UIViewController, UICollectionViewDelega
             guard let strongSelf = self, let image = image else { return }
             if let isDegradedImage = info?[PHImageResultIsDegradedKey] as? Bool, !isDegradedImage {
                 let photoDetailVC = FullScreenImageViewController(image: image)
-                photoDetailVC.delegate = self?.delegate 
+                photoDetailVC.delegate = self?.delegate
                 self?.navigationController?.pushViewController(photoDetailVC, animated: true)
             }
         }

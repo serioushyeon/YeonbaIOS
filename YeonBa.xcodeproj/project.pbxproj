@@ -284,7 +284,6 @@
 				582DB1572BBE88D900600EA7 /* AiPhotoshopViewController.swift */,
 				582DB1522BBE88D900600EA7 /* AnalysisSyncResultViewController.swift */,
 				582DB1512BBE88D900600EA7 /* AnalysisSyncViewController.swift */,
-				582DB1562BBE88D900600EA7 /* GuideViewController.swift */,
 				582DB1502BBE88D900600EA7 /* VoicePopupView.swift */,
 				582DB1542BBE88D900600EA7 /* VoicePopupViewcontroller.swift */,
 				582DB1532BBE88D900600EA7 /* VoiceRecordingViewController.swift */,
@@ -345,6 +344,7 @@
 		582DB2352BC6835100600EA7 /* PhotoSelectVC */ = {
 			isa = PBXGroup;
 			children = (
+				582DB1562BBE88D900600EA7 /* GuideViewController.swift */,
 				582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */,
 				582DB2342BC6833D00600EA7 /* View */,
 			);

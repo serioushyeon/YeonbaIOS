@@ -10,10 +10,23 @@ import UIKit
 import Photos
 import PhotosUI
 
-class PhotoEssentialView: DottedBorderView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+protocol PhotoEssentialViewDelegate: AnyObject {
+    func updatePieChart(with value: Double)
+    func didUpdatePhotoCount(_ count: Int, total: Int)
+    func updateEssentialAddButton()
+}
+class PhotoEssentialView: DottedBorderView, PhotoSelectionDelegate {
+    weak var delegate : PhotoEssentialViewDelegate?
+    func didSelectPhoto(_ image: UIImage) {
+        imageView.image = image
+        imageView.isHidden = false
+        hintLabel.isHidden = true
+        delegate?.updateEssentialAddButton()
+        delegate?.updatePieChart(with: 100)
+        delegate?.didUpdatePhotoCount(2, total: 2)
+        
+    }
     // MARK: - Properties
-    
     private let hintLabel = UILabel().then {
         $0.textColor = .customgray3
         $0.textAlignment = .center
@@ -74,35 +87,15 @@ class PhotoEssentialView: DottedBorderView, UIImagePickerControllerDelegate, UIN
     // MARK: - Actions
     
     @objc private func didTapView() {
-        // Check if photo library is available
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
-            print("Photo library is not available.")
-            return
-        }
+        let galleryVC = CustomPhotoGalleryViewController()
+        galleryVC.delegate = self
         
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.allowsEditing = false
-        
-        if let viewController = UIApplication.shared.keyWindow?.rootViewController {
-            viewController.present(imagePickerController, animated: true, completion: nil)
+        // 현재 활성화된 scene의 delegate에서 window를 가져옵니다.
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController {
+            let navController = rootViewController as? UINavigationController ?? rootViewController.navigationController
+            navController?.pushViewController(galleryVC, animated: true)
+            
         }
-    }
-    
-    // MARK: - UIImagePickerControllerDelegate
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        // Handle the selected image
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imageView.image = pickedImage
-            imageView.isHidden = false
-            hintLabel.isHidden = true
-        }
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
     }
 }
