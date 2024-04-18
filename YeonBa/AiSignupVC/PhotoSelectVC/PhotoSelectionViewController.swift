@@ -13,7 +13,7 @@ import AVFoundation
 import Photos
 import PhotosUI
 
-class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate {
+class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate, PhotoEssentialViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - UI Components
     
@@ -50,6 +50,11 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     let addButton = UIButton().then {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
+        let image = UIImage(named: "AddProfileImage")
+        $0.setImage(image, for: .normal)
+    }
+    let addButton2 = UIButton().then {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
         let image = UIImage(named: "AddProfileImage")
         $0.setImage(image, for: .normal)
@@ -95,6 +100,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         setupActions()
         setupInitialPieChart()
         photoPlaceholderView.delegate = self
+        essentialPlaceHolderView.delegate = self
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +111,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     // MARK: - UI Layout
     private func addSubViews(){
         // Add subviews
-        [backButton, instructionLabel, subInstructionLabel, horizontalStackView, progressCircleView, photoGuideButton, goToCameraButton, addButton, deleteIcon, similarityLabel].forEach {
+        [backButton, instructionLabel, subInstructionLabel, horizontalStackView, progressCircleView, photoGuideButton, goToCameraButton, addButton, addButton2, similarityLabel].forEach {
             view.addSubview($0)
         }
         horizontalStackView.addArrangedSubview(photoPlaceholderView)
@@ -142,7 +148,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
             make.right.equalTo(photoPlaceholderView.snp.right).offset(12.5)
         }
         
-        deleteIcon.snp.makeConstraints { make in
+        addButton2.snp.makeConstraints { make in
             make.top.equalTo(essentialPlaceHolderView.snp.top).offset(-12.5)
             make.right.equalTo(essentialPlaceHolderView.snp.right).offset(12.5)
         }
@@ -177,9 +183,13 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     func updateAddButton() {
         addButton.isHidden = true
     }
+    func updateEssentialAddButton() {
+        addButton2.isHidden = true
+    }
     func didUpdatePhotoCount(_ count: Int, total: Int) {
         similarityLabel.text = "\(count)/\(total)"
     }
+    
     
     func setupInitialPieChart() {
         let entries = [PieChartDataEntry(value: 100)]
@@ -227,6 +237,17 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         goToCameraButton.addTarget(self, action: #selector(didTapGoToCamera), for: .touchUpInside)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        // 사용자가 찍은 사진을 가져옴
+        if let takenPhoto = info[.originalImage] as? UIImage {
+            // 앱에서 필요한 대로 찍은 사진을 사용
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
     // MARK: - Actions
     
     @objc func didTapBack() {
@@ -243,8 +264,13 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     @objc func didTapGoToCamera() {
-        let AnaysisSyncVC = AnalysisSyncViewController()
-        navigationController?.pushViewController(AnaysisSyncVC, animated: true)
+        let faceDetectionVC = FaceDetectionViewController()
+        
+        // 프레젠트 방식을 전체 화면으로 설정
+        faceDetectionVC.modalPresentationStyle = .fullScreen
+        
+        // 현재 뷰 컨트롤러에서 FaceDetectionViewController를 프레젠트
+        self.present(faceDetectionVC, animated: true, completion: nil)
     }
 }
 

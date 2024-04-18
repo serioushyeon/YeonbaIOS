@@ -99,6 +99,7 @@
 		58D6445F2BCF80C2008DCC9F /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D6445E2BCF80C2008DCC9F /* FullScreenImageViewController.swift */; };
 		58D644612BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644602BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift */; };
 		58D644642BCF8B21008DCC9F /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644632BCF8B21008DCC9F /* PhotoCollectionViewCell.swift */; };
+		58D644682BCFB3C3008DCC9F /* FaceDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644672BCFB3C3008DCC9F /* FaceDetectionViewController.swift */; };
 		58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
@@ -223,6 +224,7 @@
 		58D6445E2BCF80C2008DCC9F /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		58D644602BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoGalleryViewController.swift; sourceTree = "<group>"; };
 		58D644632BCF8B21008DCC9F /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		58D644672BCFB3C3008DCC9F /* FaceDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionViewController.swift; sourceTree = "<group>"; };
 		58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualGradientButton.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -276,12 +278,12 @@
 		582DB14F2BBE888900600EA7 /* AiSignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				58D644662BCFB3A3008DCC9F /* CameraVC */,
 				58D644652BCF8D4F008DCC9F /* PhotoGalleryVC */,
 				582DB2352BC6835100600EA7 /* PhotoSelectVC */,
 				582DB1572BBE88D900600EA7 /* AiPhotoshopViewController.swift */,
 				582DB1522BBE88D900600EA7 /* AnalysisSyncResultViewController.swift */,
 				582DB1512BBE88D900600EA7 /* AnalysisSyncViewController.swift */,
-				582DB1562BBE88D900600EA7 /* GuideViewController.swift */,
 				582DB1502BBE88D900600EA7 /* VoicePopupView.swift */,
 				582DB1542BBE88D900600EA7 /* VoicePopupViewcontroller.swift */,
 				582DB1532BBE88D900600EA7 /* VoiceRecordingViewController.swift */,
@@ -342,6 +344,7 @@
 		582DB2352BC6835100600EA7 /* PhotoSelectVC */ = {
 			isa = PBXGroup;
 			children = (
+				582DB1562BBE88D900600EA7 /* GuideViewController.swift */,
 				582DB1552BBE88D900600EA7 /* PhotoSelectionViewController.swift */,
 				582DB2342BC6833D00600EA7 /* View */,
 			);
@@ -724,6 +727,14 @@
 			path = PhotoGalleryVC;
 			sourceTree = "<group>";
 		};
+		58D644662BCFB3A3008DCC9F /* CameraVC */ = {
+			isa = PBXGroup;
+			children = (
+				58D644672BCFB3C3008DCC9F /* FaceDetectionViewController.swift */,
+			);
+			path = CameraVC;
+			sourceTree = "<group>";
+		};
 		73DBD3DD5A263E9104BB9837 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,6 +996,7 @@
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
 				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
 				582DB16A2BBE896600600EA7 /* OtherMessageCell.swift in Sources */,
+				58D644682BCFB3C3008DCC9F /* FaceDetectionViewController.swift in Sources */,
 				582DB1612BBE891300600EA7 /* ChattingRoomViewController.swift in Sources */,
 				582DB1592BBE88D900600EA7 /* AnalysisSyncViewController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
