@@ -11,6 +11,9 @@ import AVFoundation
 class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     //MARK: - UI Components
+    var waveformView = WaveformView().then{
+        $0.backgroundColor = .clear
+    }
     let titleLabel = UILabel().then{
         $0.text = "AI 음역대 측정"
         $0.font = UIFont.pretendardMedium(size: 18)
@@ -26,10 +29,12 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     let recordingIndicatorView = UIView().then {
         $0.backgroundColor = .red
         $0.layer.cornerRadius = 5
+        $0.isHidden = true
     }
     
     let recordingLabel = UILabel().then {
         $0.text = "녹음 중.."
+        $0.isHidden = true
         $0.font = UIFont.pretendardMedium(size: 18)
     }
     
@@ -69,7 +74,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     let recordingTimeLabel = UILabel().then {
-        $0.text = "00:11"
+        $0.text = "00:00"
         $0.font = UIFont.pretendardMedium(size: 16)
         $0.textAlignment = .center
     }
@@ -87,17 +92,21 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     var audioRecorder: AVAudioRecorder?
+    var recordingTimer: Timer?
+    var recordingDuration: TimeInterval = 0
+    let maxRecordingDuration: TimeInterval = 10
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupWaveformView()
         setupUI()
         addSubViews()
         configUI()
     }
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         self.navigationItem.hidesBackButton = true
+        super.viewWillAppear(animated)
+        self.navigationItem.hidesBackButton = true
     }
     
     // MARK: - Setup
@@ -118,6 +127,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         view.addSubview(detailLabel)
         view.addSubview(recordingTimeLabel)
         view.addSubview(recordButton)
+        view.addSubview(waveformView)
     }
     
     func configUI() {
@@ -169,6 +179,12 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
             make.centerX.equalToSuperview()
         }
         
+        waveformView.snp.makeConstraints { make in
+            make.top.equalTo(recordingTimeLabel.snp.bottom).offset(20) // recordingTimeLabel 아래에 위치하도록 설정
+            make.leading.trailing.equalToSuperview() // 화면의 가로폭에 맞게 설정
+            make.height.equalTo(54) // 원하는 높이로 설정
+        }
+        
         recordButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-55)
             make.centerX.equalToSuperview()
@@ -197,25 +213,83 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     // MARK: - Actions
     func setupRecording() {
-        // 녹음 세션 구성
         let recordingSession = AVAudioSession.sharedInstance()
-        try? recordingSession.setCategory(.playAndRecord, mode: .default)
-        try? recordingSession.setActive(true)
-        
-        // 녹음 설정
-        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let audioFilename = documentPath.appendingPathComponent("recording.m4a")
-        
-        let settings = [
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 44100,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-        ]
-        
-        // 오디오 레코더 초기화
-        audioRecorder = try? AVAudioRecorder(url: audioFilename, settings: settings)
-        audioRecorder?.delegate = self
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            
+            let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let audioFilename = documentPath.appendingPathComponent("recording.m4a")
+            
+            let settings: [String: Any] = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 44100,
+                AVNumberOfChannelsKey: 1,
+                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+            
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder?.delegate = self
+            audioRecorder?.isMeteringEnabled = true
+            audioRecorder?.prepareToRecord()
+        } catch {
+            print("Error setting up audio recording: \(error.localizedDescription)")
+        }
+    }
+    private func startRecording() {
+        // 권한
+        AVAudioSession.sharedInstance().requestRecordPermission { (accepted) in
+            if accepted {
+                print("permission granted")
+            }
+        }
+        // 녹음 시작
+        // 녹음 시작
+        recordingLabel.isHidden = false
+        recordingIndicatorView.isHidden = false
+        audioRecorder?.record()
+        recordButton.backgroundColor = UIColor.clear
+        recordButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        recordButton.tintColor = UIColor.primary
+        // Start updating waveform view with audio level
+        startRecordingTimer()
+        startUpdatingWaveform()
+    }
+    private func stopRecording() {
+        // 녹음 중지
+        stopRecordingTimer()
+        audioRecorder?.stop()
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .light)
+        let image = UIImage(systemName: "mic.circle.fill", withConfiguration: imageConfig)
+        recordButton.setImage(image, for: .normal)
+        recordButton.backgroundColor = .white
+        recordButton.tintColor = UIColor.primary
+        presentPopup()
+    }
+    private func startRecordingTimer() {
+        recordingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            self?.recordingDuration += 1
+            self?.updateRecordingTimeLabel()
+            if self!.recordingDuration >= self!.maxRecordingDuration  {
+                self?.stopRecording()
+            }
+        }
+    }
+    private func stopRecordingTimer() {
+        recordingTimer?.invalidate()
+        recordingTimer = nil
+        if let audioURL = audioRecorder?.url {
+            print("녹음이 완료되었습니다. 녹음 파일의 URL: \(audioURL)")
+        }
+    }
+    
+    private func updateRecordingTimeLabel() {
+        let minutes = Int(recordingDuration) / 60
+        let seconds = Int(recordingDuration) % 60
+        let formattedTime = String(format: "%02d:%02d", minutes, seconds)
+        DispatchQueue.main.async { [weak self] in
+            self?.recordingTimeLabel.text = formattedTime
+        }
     }
     @objc func recordButtonTapped() {
         // 권한
@@ -226,23 +300,30 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         }
         if let recorder = audioRecorder {
             if recorder.isRecording {
-                // 녹음 중지
-                recorder.stop()
-                let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .light)
-                let image = UIImage(systemName: "mic.circle.fill", withConfiguration: imageConfig)
-                recordButton.setImage(image, for: .normal)
-                recordButton.backgroundColor = .white
-                recordButton.tintColor = UIColor.primary
-                
-                // 여기서 팝업을 띄웁니다.
-                presentPopup()
+                stopRecording()
             } else {
-                // 녹음 시작
-                recorder.record()
-                recordButton.backgroundColor = UIColor.clear
-                recordButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-                recordButton.tintColor = UIColor.primary
+                startRecording()
             }
+        }
+    }
+    private func startUpdatingWaveform() {
+        let timer = Timer(timeInterval: 0.1, repeats: true) { [weak self] _ in
+            self?.updateAudioLevel()
+        }
+        RunLoop.current.add(timer, forMode: .common)
+    }
+    
+    private func setupWaveformView() {
+        waveformView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: 54)
+    }
+    
+    private func updateAudioLevel() {
+        audioRecorder!.updateMeters() // Update metering levels
+        let decibels = audioRecorder!.averagePower(forChannel: 0) // Get average power in decibels
+        let normalizedLevel = pow(10, decibels / 20) // Normalize decibels to a value between 0 and 1
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.waveformView.update(withLevel: CGFloat(normalizedLevel))
         }
     }
     
@@ -258,6 +339,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
+
 extension UIColor {
     convenience init(hex: String) {
         let scanner = Scanner(string: hex)
