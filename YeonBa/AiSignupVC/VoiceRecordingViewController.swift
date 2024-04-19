@@ -6,7 +6,11 @@
 //
 
 import UIKit
+import Foundation
 import AVFoundation
+import Accelerate
+import CoreML
+
 
 class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
@@ -95,7 +99,9 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     var recordingTimer: Timer?
     var recordingDuration: TimeInterval = 0
     let maxRecordingDuration: TimeInterval = 10
-    
+    let model =  try? converted_model(configuration: MLModelConfiguration())
+    var result : Int?  = 1
+    var voiceMode : String = "중음"
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -257,8 +263,36 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     }
     private func stopRecording() {
         // 녹음 중지
-        stopRecordingTimer()
         audioRecorder?.stop()
+        stopRecordingTimer()
+        if let audioFile = try? AVAudioFile(forReading: audioRecorder!.url){
+            if let audioFormat = try? AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: audioFile.fileFormat.sampleRate, channels: 1, interleaved: false){
+                let pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
+                let mpcmBuffer =  computeMFCC(audioBuffer: pcmBuffer!)
+                if let multiArray = preprocessData(data: mpcmBuffer!) {
+                    print("MultiArray:", multiArray)
+                    do {
+                        let output = try model!.prediction(conv2d_input: multiArray)
+                        result = argmax(output.IdentityShapedArray.strides)
+                        switch result {
+                        case 0 :
+                            voiceMode = "저음"
+                        case 1 :
+                            voiceMode = "중음"
+                        case 2 :
+                            voiceMode = "고음"
+                        case .none:
+                            voiceMode = "중음"
+                        case .some(_):
+                            voiceMode = "중음"
+                        }
+                        
+                    } catch {
+                        print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .light)
         let image = UIImage(systemName: "mic.circle.fill", withConfiguration: imageConfig)
         recordButton.setImage(image, for: .normal)
@@ -266,6 +300,22 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.tintColor = UIColor.primary
         presentPopup()
     }
+    func argmax<T: Comparable>(_ array: [T]) -> Int? {
+        guard !array.isEmpty else { return nil }
+        
+        var maxIndex = 0
+        var maxValue = array[0]
+        
+        for (index, value) in array.enumerated() {
+            if value > maxValue {
+                maxIndex = index
+                maxValue = value
+            }
+        }
+        
+        return maxIndex
+    }
+
     private func startRecordingTimer() {
         recordingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             self?.recordingDuration += 1
@@ -291,21 +341,6 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
             self?.recordingTimeLabel.text = formattedTime
         }
     }
-    @objc func recordButtonTapped() {
-        // 권한
-        AVAudioSession.sharedInstance().requestRecordPermission { (accepted) in
-            if accepted {
-                print("permission granted")
-            }
-        }
-        if let recorder = audioRecorder {
-            if recorder.isRecording {
-                stopRecording()
-            } else {
-                startRecording()
-            }
-        }
-    }
     private func startUpdatingWaveform() {
         let timer = Timer(timeInterval: 0.1, repeats: true) { [weak self] _ in
             self?.updateAudioLevel()
@@ -329,15 +364,134 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     func presentPopup() {
         // 팝업 뷰 컨트롤러를 생성하고 모달로 띄웁니다.
-        let popupViewController = VoicePopupViewcontroller(title: "연방님은 저음입니다!", desc: "연방님은 저음의 음역대를 가지고 게시군요!\n저음의 목소리를 이성에게 어필해 보세요!", navigation: navigationController)
+        let popupViewController = VoicePopupViewcontroller(title: "연방님은 \(voiceMode)입니다!", desc: "연방님은 \(voiceMode)의 음역대를 가지고 계시군요!\n\(voiceMode)의 목소리를 이성에게 어필해 보세요!", navigation: navigationController)
         popupViewController.modalPresentationStyle = .overFullScreen
         self.present(popupViewController, animated: false)
+    }
+    
+    @objc func recordButtonTapped() {
+        // 권한
+        AVAudioSession.sharedInstance().requestRecordPermission { (accepted) in
+            if accepted {
+                print("permission granted")
+            }
+        }
+        if let recorder = audioRecorder {
+            if recorder.isRecording {
+                stopRecording()
+            } else {
+                startRecording()
+            }
+        }
     }
     
     @objc func backButtonTapped() {
         // 뒤로 가기 로직을 구현
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    //AI 모델 관련 코드
+
+    func preprocessData(data: [Float]) -> MLMultiArray? {
+        let paddedData = padData(data: data, targetLength: 800000)
+        let reshapedData = reshapeData(data: paddedData, rows: 8, columns: 100000)
+        return convertToMultiArray(data: reshapedData)
+    }
+
+    func padData(data: [Float], targetLength: Int) -> [Float] {
+        var paddedData = data
+        if data.count < targetLength {
+            let paddingCount = targetLength - data.count
+            paddedData += [Float](repeating: 0, count: paddingCount)
+        }
+        return paddedData
+    }
+    //차원 변경
+    func reshapeData(data: [Float], rows: Int, columns: Int) -> [[Float]] {
+        var reshapedData = [[Float]]()
+        for i in 0..<rows {
+            let startIndex = i * columns
+            let endIndex = (i + 1) * columns
+            let row = Array(data[startIndex..<endIndex])
+            reshapedData.append(row)
+        }
+        return reshapedData
+    }
+    //모델에 넣기 위한 변환
+    func convertToMultiArray(data: [[Float]]) -> MLMultiArray? {
+        let multiArray = try? MLMultiArray(shape: [1, 8, 100000, 1] as [NSNumber], dataType: .float32)
+        let range = NSRange(location: 0, length: data.count * data[0].count)
+        multiArray?.dataPointer.withMemoryRebound(to: Float.self, capacity: data.count * data[0].count) { pointer in
+            pointer.assign(from: data.flatMap { $0 }, count: data.count * data[0].count)
+        }
+        return multiArray
+    }
+    //오디오를 버퍼로 변환후  MFCC 변환을 위한 함수
+    func computeMFCC(audioBuffer: AVAudioPCMBuffer) -> [Float]? {
+        let sampleRate = audioBuffer.format.sampleRate
+        let frameLength = vDSP_Length(0.025 * Double(sampleRate)) // Frame length (25ms)
+        let frameStep = vDSP_Length(0.01 * Double(sampleRate)) // Frame step (10ms)
+        
+        guard let audioData = audioBuffer.floatChannelData?.pointee else {
+            return nil
+        }
+        
+        let audioDataCount = Int(audioBuffer.frameLength)
+        
+        // Split audio data into frames
+        var frames = [Array<Float>]()
+        var i = 0
+        while i + Int(frameLength) <= audioDataCount {
+            let frame = Array(arrayLiteral: audioData[i])
+            frames.append(frame)
+            i += Int(frameStep)
+        }
+        
+        // Pre-emphasis (optional)
+        let preEmphasisCoeff: Float = 0.97
+        var preEmphasizedFrames = frames.map { frame -> [Float] in
+            var outputFrame = [Float](repeating: 0.0, count: frame.count)
+            outputFrame[0] = frame[0]
+            for i in 1..<frame.count {
+                outputFrame[i] = frame[i] - preEmphasisCoeff * frame[i - 1]
+            }
+            return outputFrame
+        }
+        
+        // Hamming window
+        var window = [Float](repeating: 0.0, count: Int(frameLength))
+        vDSP_hann_window(&window, vDSP_Length(frameLength), Int32(vDSP_HANN_NORM))
+        
+        // Apply Hamming window to frames
+        for i in 0..<preEmphasizedFrames.count {
+            var frame = preEmphasizedFrames[i]
+            vDSP_vmul(frame, 1, window, 1, &frame, 1, vDSP_Length(frameLength))
+            preEmphasizedFrames[i] = frame
+        }
+        // DCT를 위한 설정 생성
+        var setup: vDSP_DFT_Setup? = vDSP_DFT_CreateSetup(nil, vDSP_Length(frameLength))
+        defer {
+            vDSP_DFT_DestroySetup(setup)
+        }
+        
+        
+        // Compute MFCCs
+        var mfccs = [Float]()
+        for frame in preEmphasizedFrames {
+            // frame을 DCT로 변환하여 mfcc 계산
+            var dctInput = frame
+            var dctOutput = [Float](repeating: 0, count: Int(frameLength))
+            vDSP_DCT_Execute(setup!, &dctInput, &dctOutput)
+            
+            // 계산된 MFCC를 mfccs 배열에 추가
+            mfccs.append(contentsOf: dctOutput)
+        }
+        
+        return mfccs
+    }
+    
+    
 }
 
 extension UIColor {
