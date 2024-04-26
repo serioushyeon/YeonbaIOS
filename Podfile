@@ -16,6 +16,8 @@ target 'YeonBa' do
 	pod 'KakaoSDKAuth'
   	pod 'KakaoSDKUser'
   	pod 'KakaoSDKCommon'
+	pod 'Firebase/Core'
+	pod 'Firebase/Messaging'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing
