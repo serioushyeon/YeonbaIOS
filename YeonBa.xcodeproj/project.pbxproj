@@ -42,6 +42,8 @@
 		584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF712B9FF1040081149F /* SendCupidCollectionViewCell.swift */; };
 		584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */; };
 		584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF7B2BA1A5880081149F /* JKSlider.swift */; };
+		58580E9F2BDF76560055F3E8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580E9E2BDF76560055F3E8 /* NotificationService.swift */; };
+		58580EA32BDF76560055F3E8 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 58580E9C2BDF76560055F3E8 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
@@ -107,6 +109,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		58580EA12BDF76560055F3E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58D15E872B90585700EB74E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58580E9B2BDF76560055F3E8;
+			remoteInfo = NotificationService;
+		};
 		58D15EA62B90585B00EB74E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 58D15E872B90585700EB74E9 /* Project object */;
@@ -122,6 +131,20 @@
 			remoteInfo = YeonBa;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		58580EA72BDF76560055F3E8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				58580EA32BDF76560055F3E8 /* NotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		135D41D6288D154A8F7BD06C /* Pods-YeonBa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.debug.xcconfig"; sourceTree = "<group>"; };
@@ -164,6 +187,9 @@
 		584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		584DCF792BA07A780081149F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		584DCF7B2BA1A5880081149F /* JKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JKSlider.swift; sourceTree = "<group>"; };
+		58580E9C2BDF76560055F3E8 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		58580E9E2BDF76560055F3E8 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		58580EA02BDF76560055F3E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -238,6 +264,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		58580E992BDF76560055F3E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58D15E8C2B90585700EB74E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -394,6 +427,24 @@
 				584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		58580E972BDF50280055F3E8 /* SocialSign */ = {
+			isa = PBXGroup;
+			children = (
+				58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */,
+				58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */,
+			);
+			path = SocialSign;
+			sourceTree = "<group>";
+		};
+		58580E9D2BDF76560055F3E8 /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				58580E9E2BDF76560055F3E8 /* NotificationService.swift */,
+				58580EA02BDF76560055F3E8 /* Info.plist */,
+			);
+			path = NotificationService;
 			sourceTree = "<group>";
 		};
 		589DF3242B907311003F03C5 /* HomeVC */ = {
@@ -637,10 +688,9 @@
 		58BB87142BBBECDD00F90050 /* SignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				58580E972BDF50280055F3E8 /* SocialSign */,
 				582DB1842BBE917D00600EA7 /* BodyInfoViewController.swift */,
 				582DB1822BBE917000600EA7 /* NicknameSettingViewController.swift */,
-				58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */,
-				58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */,
 				58BB87192BBBECFD00F90050 /* PasswordViewController.swift */,
 				58BB87172BBBECF600F90050 /* EmailSettingViewController.swift */,
 				58BB87152BBBECEB00F90050 /* BirthDateSettingViewController.swift */,
@@ -654,6 +704,7 @@
 				58D15E912B90585700EB74E9 /* YeonBa */,
 				58D15EA82B90585B00EB74E9 /* YeonBaTests */,
 				58D15EB22B90585B00EB74E9 /* YeonBaUITests */,
+				58580E9D2BDF76560055F3E8 /* NotificationService */,
 				58D15E902B90585700EB74E9 /* Products */,
 				44FA544D8692B790EA8732E3 /* Pods */,
 				73DBD3DD5A263E9104BB9837 /* Frameworks */,
@@ -666,6 +717,7 @@
 				58D15E8F2B90585700EB74E9 /* YeonBa.app */,
 				58D15EA52B90585B00EB74E9 /* YeonBaTests.xctest */,
 				58D15EAF2B90585B00EB74E9 /* YeonBaUITests.xctest */,
+				58580E9C2BDF76560055F3E8 /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -753,6 +805,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		58580E9B2BDF76560055F3E8 /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58580EA42BDF76560055F3E8 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				58580E982BDF76560055F3E8 /* Sources */,
+				58580E992BDF76560055F3E8 /* Frameworks */,
+				58580E9A2BDF76560055F3E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = 58580E9C2BDF76560055F3E8 /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		58D15E8E2B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58D15EB92B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBa" */;
@@ -762,10 +831,12 @@
 				58D15E8C2B90585700EB74E9 /* Frameworks */,
 				58D15E8D2B90585700EB74E9 /* Resources */,
 				76E1B181A9E22DF7E94EF563 /* [CP] Embed Pods Frameworks */,
+				58580EA72BDF76560055F3E8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				58580EA22BDF76560055F3E8 /* PBXTargetDependency */,
 			);
 			name = YeonBa;
 			productName = YeonBa;
@@ -818,9 +889,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					58580E9B2BDF76560055F3E8 = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					58D15E8E2B90585700EB74E9 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -850,11 +924,19 @@
 				58D15E8E2B90585700EB74E9 /* YeonBa */,
 				58D15EA42B90585B00EB74E9 /* YeonBaTests */,
 				58D15EAE2B90585B00EB74E9 /* YeonBaUITests */,
+				58580E9B2BDF76560055F3E8 /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		58580E9A2BDF76560055F3E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58D15E8D2B90585700EB74E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -987,6 +1069,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		58580E982BDF76560055F3E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58580E9F2BDF76560055F3E8 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58D15E8B2B90585700EB74E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1100,6 +1190,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		58580EA22BDF76560055F3E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58580E9B2BDF76560055F3E8 /* NotificationService */;
+			targetProxy = 58580EA12BDF76560055F3E8 /* PBXContainerItemProxy */;
+		};
 		58D15EA72B90585B00EB74E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 58D15E8E2B90585700EB74E9 /* YeonBa */;
@@ -1124,6 +1219,67 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		58580EA52BDF76560055F3E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G62DUX396A;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		58580EA62BDF76560055F3E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G62DUX396A;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		58D15EB72B90585B00EB74E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1242,6 +1398,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 135D41D6288D154A8F7BD06C /* Pods-YeonBa.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
@@ -1277,6 +1434,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
@@ -1391,6 +1549,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		58580EA42BDF76560055F3E8 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58580EA52BDF76560055F3E8 /* Debug */,
+				58580EA62BDF76560055F3E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		58D15E8A2B90585700EB74E9 /* Build configuration list for PBXProject "YeonBa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

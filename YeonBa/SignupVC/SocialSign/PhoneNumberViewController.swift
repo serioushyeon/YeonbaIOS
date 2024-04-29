@@ -4,9 +4,8 @@ import Then
 import Alamofire
 
 class PhoneNumberViewController: UIViewController {
-    
-    var timer: Timer?
-    var timeRemaining = 300
+    var socialID: Int?
+    var loginType: String?
     let instructionLabel = UILabel().then {
         $0.text = "전화번호를 입력해주세요."
         $0.textColor = .black
@@ -36,7 +35,7 @@ class PhoneNumberViewController: UIViewController {
         $0.placeholder = "전화번호 입력"
         $0.keyboardType = .phonePad
         $0.borderStyle = .roundedRect
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.keyboardType = .numberPad
         
     }
@@ -51,28 +50,6 @@ class PhoneNumberViewController: UIViewController {
         $0.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
     }
     
-    let verificationCodeTextField = UITextField().then {
-        $0.placeholder = "인증번호 입력"
-        $0.keyboardType = .numberPad
-        $0.borderStyle = .roundedRect
-        $0.textAlignment = .center
-    }
-    
-    let confirmButton = UIButton().then {
-        $0.setTitle("인증", for: .normal)
-        $0.setTitleColor(.gray, for: .normal)
-        $0.backgroundColor = .clear
-        $0.layer.cornerRadius = 10
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.systemGray.cgColor
-        $0.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
-    }
-    
-    let timerLabel = UILabel().then {
-        $0.text = "2:57"
-        $0.textAlignment = .center
-        $0.textColor = .gray
-    }
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
         $0.backgroundColor = .systemGray
@@ -95,10 +72,7 @@ class PhoneNumberViewController: UIViewController {
         view.addSubview(verificationCodeUnderlineView)
         view.addSubview(phoneNumberTextField)
         view.addSubview(sendCodeButton)
-        view.addSubview(verificationCodeTextField)
-        view.addSubview(confirmButton)
         view.addSubview(nextButton)
-        view.addSubview(timerLabel)
         
         instructionLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
@@ -130,32 +104,6 @@ class PhoneNumberViewController: UIViewController {
             make.trailing.equalToSuperview().inset(20)
             make.width.equalTo(60)
             make.height.equalTo(phoneNumberTextField.snp.height)
-        }
-        
-        verificationCodeTextField.borderStyle = .none
-        verificationCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberUnderlineView.snp.bottom).offset(20)
-            make.leading.equalToSuperview().inset(20)
-            make.height.equalTo(40)
-        }
-        
-        verificationCodeUnderlineView.snp.makeConstraints { make in
-            make.top.equalTo(verificationCodeTextField.snp.bottom)
-            make.leading.trailing.equalTo(verificationCodeTextField)
-            make.height.equalTo(1)
-        }
-        
-        confirmButton.snp.remakeConstraints { make in
-            make.centerY.equalTo(verificationCodeTextField)
-            make.leading.equalTo(verificationCodeTextField.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().inset(20)
-            make.width.equalTo(60)
-            make.height.equalTo(verificationCodeTextField.snp.height)
-        }
-        
-        timerLabel.snp.makeConstraints { make in
-            make.leading.equalTo(verificationCodeUnderlineView.snp.leading)
-            make.top.equalTo(verificationCodeUnderlineView.snp.bottom)
         }
         
         nextButton.snp.makeConstraints { make in
@@ -198,31 +146,7 @@ class PhoneNumberViewController: UIViewController {
             }
     }
     
-    func startTimer() {
-        // 타이머가 이미 실행 중인 경우 먼저 중지시킵니다.
-        stopTimer()
-        
-        // 1초마다 반복되는 타이머 생성
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-            guard let self = self else { return }
-            
-            // 남은 시간 감소
-            self.timeRemaining -= 1
-            
-            // 타이머가 종료되면 처리
-            if self.timeRemaining <= 0 {
-                self.stopTimer()
-                // 여기에 타이머 종료 시 처리할 내용을 추가합니다.
-                // 예: 시간이 종료되었음을 사용자에게 알림
-            }
-        }
-    }
     
-    // 타이머를 중지하는 함수
-    func stopTimer() {
-        timer?.invalidate() // 타이머 중지
-        timer = nil
-    }
     
     //MARK: -- Action
     //전송 버튼을 눌를 경우
@@ -232,9 +156,9 @@ class PhoneNumberViewController: UIViewController {
         }
         if isValidPhoneNumber(phoneNumber) {
             // 전화번호가 유효한 경우
-            requestVerificationCode()
-            // 타이머 시작
-            startTimer()
+//            requestVerificationCode()
+//            // 타이머 시작
+//            startTimer()
         } else {
             // 전화번호가 유효하지 않은 경우, 사용자에게 알림 등을 표시할 수 있습니다.
             // 예: UIAlertController를 사용하여 경고창을 표시하거나, 적절한 방법으로 사용자에게 메시지를 전달합니다.
@@ -249,11 +173,11 @@ class PhoneNumberViewController: UIViewController {
     }
     
     
-    private func requestVerificationCode() {
-        // 예시로, 성공했다고 가정하고 verificationCodeTextField를 활성화합니다.
-        verificationCodeTextField.isHidden = false
-        confirmButton.isHidden = false
-    }
+//    private func requestVerificationCode() {
+//        // 예시로, 성공했다고 가정하고 verificationCodeTextField를 활성화합니다.
+//        verificationCodeTextField.isHidden = false
+//        confirmButton.isHidden = false
+//    }
     
     private func verificationSuccessful() {
         // 인증 성공 시 '다음' 버튼을 활성화합니다.
