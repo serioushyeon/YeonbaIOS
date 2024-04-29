@@ -14,8 +14,8 @@ enum WhyMode: Int, CaseIterable {
     case badprofile
     case badchat
     case other
-    
-    var title: String {
+    case empty
+    var title: String? {
        
         switch self {
         case .maner:
@@ -28,6 +28,8 @@ enum WhyMode: Int, CaseIterable {
             return "부적절한 채팅을 보냅니다."
         case .other:
             return "기타 사유"
+        case .empty:
+            return nil
         }
     
         

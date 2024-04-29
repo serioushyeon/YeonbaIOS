@@ -26,9 +26,11 @@ final class WhyDeclareViewController: UIViewController {
     private let findButton = ActualGradientButton().then {
         $0.setTitle("신고 완료", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(.customgray, for: .normal)
         $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = true
+        $0.isEnabled = false
+        $0.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
     }
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -41,6 +43,7 @@ final class WhyDeclareViewController: UIViewController {
     init(passMode: WhyMode) {
         self.currentMode = passMode
         super.init(nibName: nil, bundle: nil)
+        
         setupModalStyle()
     }
     
@@ -58,7 +61,16 @@ final class WhyDeclareViewController: UIViewController {
         modalTransitionStyle = .coverVertical
         transitioningDelegate = customTransitioningDelegate
     }
-    
+    // 선택된 위치가 없을 때 finishButton을 비활성화하는 메서드
+    private func updateFinishButtonState() {
+        if currentMode.title == nil {
+            findButton.isEnabled = false
+            findButton.setTitleColor(.customgray4, for: .normal)
+        } else {
+            findButton.isEnabled = true
+            findButton.setTitleColor(.white, for: .normal)
+        }
+    }
     private func setupInitialView() {
         view.backgroundColor = UIColor.white
         view.layer.cornerRadius = 20
@@ -82,6 +94,10 @@ final class WhyDeclareViewController: UIViewController {
     @objc private func dismissView() {
         self.dismiss(animated: true)
     }
+    @objc private func doneTapped() {
+        delegate?.whydidSelectedRowAt(indexPath: selectedCellIndex!.row)
+        dismissView()
+    }
 }
 //MARK: -- 신고하기 UITableViewDelegate,UITableViewDataSource
 
@@ -97,16 +113,17 @@ extension WhyDeclareViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? WhyDeclareTableViewCell else {
             return UITableViewCell(style: .default, reuseIdentifier: .none)
         }
-        let mode = WhyMode.allCases[indexPath.row]
+        let mode = WhyMode.allCases.filter { $0 != .empty }[indexPath.row]
         // 이미지를 설정하여 셀에 전달
-        cell.setup(label: mode.title)
+        cell.setup(label: mode.title ?? "")
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        delegate?.whydidSelectedRowAt(indexPath: indexPath.row)
+        selectedCellIndex = indexPath
+        updateFinishButtonState()
         //dismissView()
     }
     
