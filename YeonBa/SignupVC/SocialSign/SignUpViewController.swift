@@ -4,7 +4,8 @@ import SnapKit
 import Then
 
 class SignUpViewController: UIViewController {
-    
+    var socialID: Int?
+    var loginType: String?
     let logoLabel = UILabel().then {
         $0.text = "YeonBa"
         $0.font = UIFont.pretendardSemiBold(size: 60)
@@ -113,54 +114,46 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController {
     @objc func loginButtonTapped() {
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            //카톡 설치되어있으면 -> 카톡으로 로그인
-            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+            // 카톡 설치되어있으면 -> 카톡으로 로그인
+            UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
+                guard let self = self else { return }
                 if let error = error {
                     print(error)
                 } else {
                     print("카카오 톡으로 로그인 성공")
+                    // 안전한 옵셔널 바인딩을 사용하여 처리
                     
-                    _ = oauthToken
-                    // 로그인 관련 메소드 추가
+//                        let userId = accessTokenInfo.id
+                        // 소셜 ID와 로그인 타입 설정
+//                        self.socialID = userId
+                        self.loginType = "KAKAO"
+                        // PhoneNumberViewController로 이동
+//                        self.navigateToPhoneNumberVC()
+                    
                 }
             }
-            
-        }else {
-            UserApi.shared.loginWithKakaoAccount { (oauthToken, error) in
+        } else {
+            // 카톡 설치되어있지 않으면 -> 카카오 계정으로 로그인
+            UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+                guard let self = self else { return }
                 if let error = error {
                     print(error)
                 } else {
                     print("카카오 계정으로 로그인 성공")
-                    _ = oauthToken
-                    UserApi.shared.me { [self] user, error in
-                        if let error = error {
-                            print(error)
-                        } else {
-                            
-                        }
-                        guard let token = oauthToken?.accessToken, let email = user?.kakaoAccount?.email,
-                              let name = user?.kakaoAccount?.profile?.nickname,let kakaoId = user?.id
-                        
-                        else{
-                            print("token/email/name is nil")
-                            return
-                        }
-                        print(email,token,name,kakaoId)
-                        //                        self.email = email
-                        //                        self.accessToken = token
-                        //                        self.name = name
-                        
-                    }
+                    // 여기에도 마찬가지로 안전한 옵셔널 바인딩을 사용하여 처리해야 함
                 }
             }
-            
         }
     }
     
     @objc func signUpButtonTapped() {
         
         let phonenumberVC = PhoneNumberViewController()
+        phonenumberVC.socialID = self.socialID
+        phonenumberVC.loginType = self.loginType
         navigationController?.pushViewController(phonenumberVC, animated: true)
     }
 }
+
+
 

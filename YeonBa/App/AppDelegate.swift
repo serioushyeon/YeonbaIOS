@@ -67,6 +67,8 @@ extension AppDelegate: MessagingDelegate {
     // FCM Token 업데이트 시
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("🥳", #function, fcmToken ?? "nil")
+        let userInfo: [String: Any] = ["fcmToken": fcmToken ?? ""]
+        print(userInfo)
     }
     
     // error 발생 시
@@ -84,11 +86,39 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = notification.request.content.userInfo
         print(userInfo)
         
+        // 푸시 알림 내용을 인코딩하여 출력
+        if let aps = userInfo["aps"] as? [String: Any],
+           let alert = aps["alert"] as? [String: Any],
+           let title = alert["title"] as? String,
+           let body = alert["body"] as? String {
+               if let encodedTitle = title.data(using: .utf8),
+                  let encodedBody = body.data(using: .utf8),
+                  let decodedTitle = String(data: encodedTitle, encoding: .utf8),
+                  let decodedBody = String(data: encodedBody, encoding: .utf8) {
+                      print("Encoded Title: \(title)")
+                      print("Encoded Body: \(body)")
+                      print("Decoded Title: \(decodedTitle)")
+                      print("Decoded Body: \(decodedBody)")
+               }
+        }
+        
         if #available(iOS 14.0, *) {
             return [.sound, .banner, .list]
         } else {
             return []
         }
+    }
+
+}
+extension AppDelegate {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("Push notification received:")
+        print(userInfo)
+        if let message = userInfo["message"] as? String {
+            let notificationInfo: [String: Any] = ["message": message]
+            print(notificationInfo)
+        }
+        completionHandler(.newData)
     }
 }
 
