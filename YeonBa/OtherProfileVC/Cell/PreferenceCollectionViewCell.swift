@@ -32,8 +32,8 @@ class PreferenceCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func configure(with profile: OtherProfile) {
-        aboutButton.setTitle(profile.animalType, for: .normal)
+    func configure(with title: String) {
+        aboutButton.setTitle(title, for: .normal)
     }
     
     

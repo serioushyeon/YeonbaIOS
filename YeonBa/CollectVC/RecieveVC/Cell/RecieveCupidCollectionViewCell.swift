@@ -1,10 +1,9 @@
 //
-//  FavoriteCollectionViewCell.swift
+//  RecieveCupidCollectionViewCell.swift
 //  YeonBa
 //
-//  Created by 김민솔 on 3/12/24.
+//  Created by jin on 4/29/24.
 //
-
 import UIKit
 import Then
 import SnapKit
@@ -12,10 +11,10 @@ import Kingfisher
 import Charts
 import Alamofire
 
-class FavoriteCollectionViewCell: UICollectionViewCell {
+class RecieveCupidCollectionViewCell: UICollectionViewCell {
     var id : String?
     
-    static let sendCupidIdentifier = "FavoriteCell"
+    static let sendCupidIdentifier = "RecieveCell"
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
@@ -135,19 +134,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         pieChartView.data = data
         pieChartView.legend.enabled = false
     }
-    func configure(with model: CollectDataUserModel) {
-        nameLabel.text = model.nickname
-        heartLabel.text = "\(model.receivedArrows!)"
-        similarityLabel.text = "\(model.photoSyncRate!)%"
-        setupPieChart(pieValue: model.photoSyncRate!)
-        id = model.id!
-        //나이
-        //ageLabel.text = "\(model.age)"
-        // 이미지 로딩
-        //if let url = URL(string: model.imageURL) {
-        //    cupidImageView.kf.setImage(with: url)
-        //}
-    }
     /**
      * API 응답 구현체 값
      */
@@ -198,6 +184,19 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
                 apiBookmark(id: id!)
             }
         }
+    }
+    func configure(with model: CollectDataUserModel) {
+        nameLabel.text = model.nickname
+        heartLabel.text = "\(model.receivedArrows!)"
+        similarityLabel.text = "\(model.photoSyncRate!)%"
+        setupPieChart(pieValue: model.photoSyncRate!)
+        id = model.id!
+        //나이
+        //ageLabel.text = "\(model.age)"
+        // 이미지 로딩
+        //if let url = URL(string: model.imageURL) {
+        //    cupidImageView.kf.setImage(with: url)
+        //}
     }
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         // 터치된 지점이 버튼의 영역 안에 있는지 확인
