@@ -106,7 +106,7 @@ class BirthDateSettingViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(yearTextField.snp.bottom).offset(20)
+            make.bottom.equalToSuperview().offset(-55)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }

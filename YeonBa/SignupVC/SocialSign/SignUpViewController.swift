@@ -1,3 +1,9 @@
+//
+//  SignUpViewController.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 2/29/24.
+//
 import UIKit
 import KakaoSDKUser
 import SnapKit
@@ -14,7 +20,7 @@ class SignUpViewController: UIViewController {
     }
     
     let logoImageView = UIImageView().then {
-        $0.image = UIImage(named: "logoimage") // "logoImage"는 해당 이미지의 이름입니다.
+        $0.image = UIImage(named: "logoimage")
         $0.contentMode = .scaleAspectFit
     }
     
@@ -72,16 +78,16 @@ class SignUpViewController: UIViewController {
         view.addSubview(logoLabel)
         logoLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(200)
-            make.left.equalToSuperview().offset(100) // 좌측 여백을 100으로 설정
-            make.right.equalToSuperview().inset(40) // 우측 여백은 40으로 유지
+            make.left.equalToSuperview().offset(100)
+            make.right.equalToSuperview().inset(40)
         }
         
         
         view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(logoLabel.snp.centerY) // 로고 이미지를 라벨과 수직 중앙으로 정렬합니다.
-            make.right.equalTo(logoLabel.snp.left).offset(10) // 로고 라벨의 왼쪽에 위치하도록 합니다.
-            make.width.height.equalTo(60) // 로고 이미지의 크기를 설정합니다. 필요에 따라 조정하세요.
+            make.centerY.equalTo(logoLabel.snp.centerY)
+            make.right.equalTo(logoLabel.snp.left).offset(10)
+            make.width.height.equalTo(60)
         }
         
         view.addSubview(descriptionLabel)
@@ -103,7 +109,7 @@ class SignUpViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        // 회원가입 버튼에 액션을 추가하는 방법:
+       
         
     }
     
@@ -121,14 +127,11 @@ extension SignUpViewController {
                     print(error)
                 } else {
                     print("카카오 톡으로 로그인 성공")
-                    // 안전한 옵셔널 바인딩을 사용하여 처리
-                    
-//                        let userId = accessTokenInfo.id
-                        // 소셜 ID와 로그인 타입 설정
-//                        self.socialID = userId
-                        self.loginType = "KAKAO"
-                        // PhoneNumberViewController로 이동
-//                        self.navigateToPhoneNumberVC()
+                    self.loginType = "KAKAO"
+                    // 사용자의 카카오 아이디 받아오기
+                    self.fetchKakaoUserID()
+                    // PhoneNumberViewController로 이동
+                    self.navigateToPhoneNumberVC()
                     
                 }
             }
@@ -140,10 +143,36 @@ extension SignUpViewController {
                     print(error)
                 } else {
                     print("카카오 계정으로 로그인 성공")
-                    // 여기에도 마찬가지로 안전한 옵셔널 바인딩을 사용하여 처리해야 함
+                    self.loginType = "KAKAO"
+                    // 사용자의 카카오 아이디 받아오기
+                    self.fetchKakaoUserID()
+                   
                 }
             }
         }
+    }
+    func fetchKakaoUserID() {
+        UserApi.shared.me { [weak self] (user, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("카카오 사용자 정보 가져오기 실패: \(error)")
+            } else {
+                if let id = user?.id {
+                    self.socialID = Int(id)
+                    print("카카오 사용자 아이디: \(id)")
+                    // PhoneNumberViewController로 이동
+                    self.navigateToPhoneNumberVC()
+                }
+            }
+        }
+    }
+    
+    func navigateToPhoneNumberVC() {
+        let phonenumberVC = PhoneNumberViewController()
+        phonenumberVC.socialID = self.socialID
+        phonenumberVC.loginType = self.loginType
+        navigationController?.pushViewController(phonenumberVC, animated: true)
+        
     }
     
     @objc func signUpButtonTapped() {

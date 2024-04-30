@@ -18,6 +18,7 @@ target 'YeonBa' do
   	pod 'KakaoSDKCommon'
 	pod 'Firebase/Core'
 	pod 'Firebase/Messaging'
+	pod 'SwiftKeychainWrapper'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing

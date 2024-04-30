@@ -235,26 +235,33 @@
 			<key>orderHint</key>
 			<integer>34</integer>
 		</dict>
-		<key>Tabman-Tabman.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>36</integer>
-		</dict>
-		<key>Tabman.xcscheme</key>
+		<key>SwiftKeychainWrapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>35</integer>
 		</dict>
-		<key>Then.xcscheme</key>
+		<key>Tabman-Tabman.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>37</integer>
+		</dict>
+		<key>Tabman.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>36</integer>
+		</dict>
+		<key>Then.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>38</integer>
 		</dict>
 		<key>nanopb-nanopb_Privacy.xcscheme</key>
 		<dict>
