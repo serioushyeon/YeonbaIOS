@@ -2,128 +2,273 @@ import UIKit
 import SnapKit
 import Then
 
-class BodyInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+
+class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelegate, BodyShapeViewControllerDelegate {
+    
+    var selectedHeight: Int? {
+          didSet {
+              // 사용자가 키를 선택하면 heightTitleLabel의 텍스트를 업데이트합니다.
+              heightTitleLabel.text = "\(selectedHeight!)cm"
+          }
+      }
+
+    var heightTitleLabel: UILabel!
+    var bodyShapeTitleLabel: UILabel!
+    
+    
+    let numberLabel = UILabel().then {
+        $0.text = "2/5"
+        $0.textColor = .red
+        $0.textAlignment = .left
+        $0.font = UIFont.pretendardSemiBold(size: 24)
+        $0.numberOfLines = 0
+    }
     
     let instructionLabel = UILabel().then {
         $0.text = "신체정보를 입력해 주세요."
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 24)
         $0.numberOfLines = 0
     }
     
     let addinstructionLabel = UILabel().then {
         $0.text = "매칭을 위해 필수 단계입니다. 이후 변경이 불가합니다."
-        $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textColor = .gray
+        $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 16)
-        $0.numberOfLines = 1
+        $0.numberOfLines = 0
     }
     
-    let tableView = UITableView(frame: .zero, style: .grouped).then {
-        $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        $0.isScrollEnabled = false // Disable scrolling if the table is short
+    let verticalStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 20
+        $0.alignment = .fill
+        $0.distribution = .equalSpacing
     }
     
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
-        $0.layer.cornerRadius = 30
+        $0.backgroundColor = UIColor.red
+        $0.layer.cornerRadius = 25
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
+        
+        
+    }
+    
+    private func setupLayout() {
         view.backgroundColor = .white
-        setupNavigationBar()
-        setupViews()
-        setupTableView()
-    }
-    
-    private func setupNavigationBar() {
         navigationItem.title = "나의 정보"
-    }
-    
-    private func setupViews() {
+        
+        view.addSubview(numberLabel)
         view.addSubview(instructionLabel)
         view.addSubview(addinstructionLabel)
-        view.addSubview(tableView)
+        view.addSubview(verticalStackView)
         view.addSubview(nextButton)
         
+        numberLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(70)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
         instructionLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
+            make.top.equalTo(numberLabel.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
         addinstructionLabel.snp.makeConstraints { make in
-            make.top.equalTo(instructionLabel.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(instructionLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
-        tableView.snp.remakeConstraints { make in
-            make.top.equalTo(addinstructionLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview()
-            let tableViewHeight = tableView.numberOfRows(inSection: 0) * 60 // 셀의 개수와 각 셀의 높이를 곱한 값
-            make.height.equalTo(tableViewHeight)
+        verticalStackView.snp.makeConstraints { make in
+            make.top.equalTo(addinstructionLabel.snp.top).offset(100)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
+        // Create the 'Height' and 'BodyShape' custom views
+        let heightView = createCustomView(title: "키가 어떻게 되세요?", for: .height)
+        let bodyShapeView = createCustomView(title: "체형이 어떻게 되세요?", for: .bodyShape)
+        
+        // Add custom views to the stack view
+        verticalStackView.addArrangedSubview(heightView)
+        verticalStackView.addArrangedSubview(bodyShapeView)
+        
+        // Set up constraints for the next button
         nextButton.snp.makeConstraints { make in
-            make.bottom.equalTo(tableView.snp.bottom).offset(90)
+            make.bottom.equalToSuperview().offset(-55)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
+            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
     }
-    
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    // TableView DataSource and Delegate methods
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2 // Two cells for height and weight
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.textColor = .black
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 18)
-        if indexPath.row == 0 {
-            cell.textLabel?.text = "키가 어떻게 되세요?"
-        } else {
-            cell.textLabel?.text = "체형이 어떻게 되세요?"
-        }
-        return cell
-    }
-    
-    
-    
-    // You can customize tableView delegate methods as needed
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Handle cell selection for entering height and weight
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    // 셀의 높이를 설정하는 메서드입니다.
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60 // 예상한 셀의 높이로 설정하세요.
-    }
-
-    // 섹션 헤더의 높이를 설정하는 메서드입니다.
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude // 섹션 헤더를 사용하지 않는다면 최소한으로 설정
-    }
-
-    // 섹션 푸터의 높이를 설정하는 메서드입니다.
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude // 섹션 푸터를 사용하지 않는다면 최소한으로 설정
-    }
-
     
     @objc func nextButtonTapped() {
-        // Validate the information and move to the next screen
+        // 키와 체형이 모두 선택되었는지 확인
+        if let _ = selectedHeight, let bodyShape = bodyShapeTitleLabel.text, bodyShape != "체형이 어떻게 되세요?" {
+            // 모두 선택되었다면 다음 화면으로 이동
+            let jobSelectionVC = JobSelectionViewController()
+            navigationController?.pushViewController(jobSelectionVC, animated: true)
+        } else {
+            // 하나라도 선택되지 않았다면 사용자에게 알림
+            showAlertForIncompleteSelection()
+        }
     }
+
+    private func showAlertForIncompleteSelection() {
+        // 알림을 표시하는 코드
+        let alert = UIAlertController(title: "선택 누락", message: "키와 체형을 모두 선택해주세요.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
+    
+    private func createCustomView(title: String, for infoType: InfoType) -> UIView {
+            
+        
+        let customView = UIView().then {
+           $0.backgroundColor = .white
+           $0.layer.borderWidth = 1.0 // Set border width
+           $0.layer.borderColor = UIColor.lightGray.cgColor // Set border color
+           $0.layer.cornerRadius = 10
+       }
+       
+        let titleLabel = UILabel().then {
+          $0.text = title
+          $0.textColor = .black
+          $0.font = UIFont.pretendardSemiBold(size: 18)
+       }
+       customView.addSubview(titleLabel)
+       titleLabel.snp.makeConstraints { make in
+          make.centerY.equalToSuperview()
+          make.leading.equalToSuperview().offset(20)
+       }
+        
+        bodyShapeTitleLabel = UILabel().then {
+            $0.text = title
+            $0.textColor = .black
+            $0.font = UIFont.pretendardSemiBold(size: 18)
+        }
+        
+       let arrowImageView = UIImageView().then {
+           $0.image = UIImage(systemName: "chevron.right")
+           $0.tintColor = .gray
+       }
+       
+       customView.addSubview(arrowImageView)
+       
+       arrowImageView.snp.makeConstraints { make in
+           make.centerY.equalToSuperview()
+           make.trailing.equalToSuperview().offset(-20)
+       }
+       
+        if infoType == .height {
+            heightTitleLabel = titleLabel
+            customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showHeightPicker)))
+        } else if infoType == .bodyShape {
+            bodyShapeTitleLabel = titleLabel
+            customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showBodyShape)))
+        }
+       // 높이가 지정된 경우 customView에 제약 조건을 설정합니다.
+       customView.snp.makeConstraints { make in
+           make.height.equalTo(60)
+       }
+       
+       return customView
+    }
+    
+    
+    @objc private func customViewTapped(_ sender: UITapGestureRecognizer) {
+        // Handle the tap event on the custom view
+        let heightPickerVC = HeightPickerViewController()
+        heightPickerVC.modalPresentationStyle = .pageSheet
+        heightPickerVC.delegate = self
+
+        self.present(heightPickerVC, animated: true, completion: nil)
+        
+        // iOS 15 이상에서만 사용 가능
+        if #available(iOS 15.0, *) {
+            if let sheet = heightPickerVC.sheetPresentationController {
+                // 사용자가 변경할 수 있는 두 가지 크기(detent)를 설정합니다.
+                sheet.detents = [.medium(), .large()]
+                // 기본값을 .medium으로 설정합니다.
+                sheet.selectedDetentIdentifier = .medium
+                sheet.prefersGrabberVisible = true
+            }
+        }
+        
+        let bodyShapeVC = BodyShapeViewController()
+        bodyShapeVC.modalPresentationStyle = .pageSheet
+        bodyShapeVC.delegate = self
+        
+        self.present(bodyShapeVC, animated: true, completion: nil)
+        
+        // iOS 15 이상에서만 사용 가능
+        if #available(iOS 15.0, *) {
+            if let sheet = bodyShapeVC.sheetPresentationController {
+                // 사용자가 변경할 수 있는 두 가지 크기(detent)를 설정합니다.
+                sheet.detents = [.medium(), .large()]
+                // 기본값을 .medium으로 설정합니다.
+                sheet.selectedDetentIdentifier = .medium
+                sheet.prefersGrabberVisible = true
+            }
+        }
+        
+        
+        
+    }
+    @objc func showHeightPicker() {
+        let heightPickerVC = HeightPickerViewController()
+        heightPickerVC.delegate = self
+        present(heightPickerVC, animated: true, completion: nil)
+    }
+    
+    func updateHeightView() {
+            // 여기서 heightTitleLabel의 텍스트를 업데이트합니다.
+            heightTitleLabel.text = selectedHeight != nil ? "\(selectedHeight!)cm" : "키가 어떻게 되세요?"
+        }
+    
+    func didSelectHeight(_ height: Int) {
+        DispatchQueue.main.async {
+            self.selectedHeight = height
+            self.updateHeightView() // 여기서 키 라벨을 업데이트합니다.
+        }
+    }
+
+   
+    @objc func showBodyShape() {
+        let bodyShapeVC = BodyShapeViewController()
+        bodyShapeVC.delegate = self
+        present(bodyShapeVC, animated: true, completion: nil)
+    }
+//    
+//    func updateBodyShapeView() {
+//            
+//        
+//        }
+    
+    // BodyShapeViewControllerDelegate 구현 (예시)
+    func didSelectBodyShape(_ bodyShape: String) {
+        DispatchQueue.main.async {
+            // 이곳에서 선택된 체형을 처리하고 UI를 업데이트합니다.
+            self.bodyShapeTitleLabel.text = bodyShape
+        }
+    }
+    
 }
+
+enum InfoType {
+    case height
+    case bodyShape
+}
+
+private func customViewTapped(_ sender: UITapGestureRecognizer) {
+    // 'customViewTapped' 메소드에서 'HeightPickerViewController'를 제대로 표시하도록 로직을 수정하세요.
+    // 예를 들어, 사용자가 'heightView'를 탭했을 때만 'HeightPickerViewController'가 나타나게 할 수 있습니다.
+}
+

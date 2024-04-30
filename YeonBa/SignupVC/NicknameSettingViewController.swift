@@ -70,7 +70,7 @@ class NicknameSettingViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(nicknameTextField.snp.bottom).offset(20)
+            make.bottom.equalToSuperview().offset(-55)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
@@ -78,7 +78,7 @@ class NicknameSettingViewController: UIViewController {
 
     @objc func nextButtonTapped() {
         // Validate the nickname and if valid, proceed to the next screen
-        let nextVC = BodyInfoViewController()
+        let nextVC = GenderSelectionViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

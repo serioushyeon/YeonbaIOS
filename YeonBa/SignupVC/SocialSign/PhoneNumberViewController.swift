@@ -1,7 +1,14 @@
+//
+//  PhoneNumberViewController.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 2/29/24.
+//
 import UIKit
 import SnapKit
 import Then
 import Alamofire
+import SwiftKeychainWrapper
 
 class PhoneNumberViewController: UIViewController {
     var socialID: Int?
@@ -40,15 +47,15 @@ class PhoneNumberViewController: UIViewController {
         
     }
     
-    let sendCodeButton = UIButton().then {
-        $0.setTitle("전송", for: .normal)
-        $0.setTitleColor(.gray, for: .normal)
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = .clear
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.systemGray.cgColor
-        $0.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
-    }
+    //    let sendCodeButton = UIButton().then {
+    //        $0.setTitle("전송", for: .normal)
+    //        $0.setTitleColor(.gray, for: .normal)
+    //        $0.layer.cornerRadius = 10
+    //        $0.backgroundColor = .clear
+    //        $0.layer.borderWidth = 1
+    //        $0.layer.borderColor = UIColor.systemGray.cgColor
+    //        $0.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
+    //    }
     
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -56,11 +63,13 @@ class PhoneNumberViewController: UIViewController {
         $0.layer.cornerRadius = 30
         $0.isEnabled = false // 인증 완료 전까지 비활성화
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        $0.isEnabled = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupKeyboardDismissal()
         setupViews()
         
     }
@@ -71,7 +80,6 @@ class PhoneNumberViewController: UIViewController {
         view.addSubview(phoneNumberUnderlineView)
         view.addSubview(verificationCodeUnderlineView)
         view.addSubview(phoneNumberTextField)
-        view.addSubview(sendCodeButton)
         view.addSubview(nextButton)
         
         instructionLabel.snp.makeConstraints { make in
@@ -88,7 +96,7 @@ class PhoneNumberViewController: UIViewController {
         phoneNumberTextField.borderStyle = .none
         phoneNumberTextField.snp.makeConstraints { make in
             make.top.equalTo(instructionLabel2.snp.top).offset(100)
-            make.leading.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
         
@@ -96,14 +104,6 @@ class PhoneNumberViewController: UIViewController {
             make.top.equalTo(phoneNumberTextField.snp.bottom)
             make.leading.trailing.equalTo(phoneNumberTextField)
             make.height.equalTo(1)
-        }
-        
-        sendCodeButton.snp.remakeConstraints { make in
-            make.centerY.equalTo(phoneNumberTextField)
-            make.leading.equalTo(phoneNumberTextField.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().inset(20)
-            make.width.equalTo(60)
-            make.height.equalTo(phoneNumberTextField.snp.height)
         }
         
         nextButton.snp.makeConstraints { make in
@@ -127,27 +127,16 @@ class PhoneNumberViewController: UIViewController {
         // 모든 규칙을 통과한 경우 유효한 전화번호로 간주합니다.
         return true
     }
-    func requestVerificationCode(phoneNumber: String) {
-        let parameters: [String: Any] = [
-            "phoneNumber": phoneNumber,
-            "verificationCode": "YourVerificationCodeHere"
-        ]
-        
-        AF.request("https://api.yeonba.co.kr/users/join/phone-number", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    print("Verification request successful with response: \(value)")
-                    // 서버로부터의 응답에 따라 추가적인 처리를 수행할 수 있습니다.
-                case .failure(let error):
-                    print("Error requesting verification: \(error)")
-                    // 에러 처리
-                }
-            }
+    private func setupKeyboardDismissal() {
+        // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
-    
-    
+    @objc private func dismissKeyboard() {
+        // 키보드를 숨깁니다.
+        view.endEditing(true)
+    }
     //MARK: -- Action
     //전송 버튼을 눌를 경우
     @objc func sendCodeButtonTapped() {
@@ -155,39 +144,112 @@ class PhoneNumberViewController: UIViewController {
             return
         }
         if isValidPhoneNumber(phoneNumber) {
-            // 전화번호가 유효한 경우
-//            requestVerificationCode()
-//            // 타이머 시작
-//            startTimer()
+            
         } else {
             // 전화번호가 유효하지 않은 경우, 사용자에게 알림 등을 표시할 수 있습니다.
-            // 예: UIAlertController를 사용하여 경고창을 표시하거나, 적절한 방법으로 사용자에게 메시지를 전달합니다.
             print("전화번호는 11자리의 숫자여야 합니다.")
         }
     }
     
-    @objc func confirmButtonTapped() {
-        // TODO: 인증번호 유효성 검사 로직을 여기에 구현합니다.
-        // 인증번호 유효성 검사 통과 후
-        verificationSuccessful()
-    }
+    //    @objc func confirmButtonTapped() {
+    //        // TODO: 인증번호 유효성 검사 로직을 여기에 구현합니다.
+    //        // 인증번호 유효성 검사 통과 후
+    //        verificationSuccessful()
+    //    }
     
     
-//    private func requestVerificationCode() {
-//        // 예시로, 성공했다고 가정하고 verificationCodeTextField를 활성화합니다.
-//        verificationCodeTextField.isHidden = false
-//        confirmButton.isHidden = false
-//    }
+    //    private func requestVerificationCode() {
+    //        // 예시로, 성공했다고 가정하고 verificationCodeTextField를 활성화합니다.
+    //        verificationCodeTextField.isHidden = false
+    //        confirmButton.isHidden = false
+    //    }
     
     private func verificationSuccessful() {
         // 인증 성공 시 '다음' 버튼을 활성화합니다.
         nextButton.isEnabled = true
         nextButton.backgroundColor = .systemBlue
     }
+    func fetchData() {
+        guard let phoneNumber = phoneNumberTextField.text else {
+            return
+        }
+        // 각각의 필드값을 출력
+        print("socialId: \(socialID ?? 0)")
+        print("loginType: \(loginType ?? "")")
+        print("phoneNumber: \(phoneNumber)")
+        let endpoint = "https://api.yeonba.co.kr/users/login"
+        
+        let parameters: [String: Any] = [
+            "socialId": socialID ?? 0,
+            "loginType": loginType ?? "",
+            "phoneNumber": phoneNumber
+        ]
+        
+        AF.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { [weak self] response in
+                guard let self = self else { return }
+                
+                switch response.result {
+                case .success(let value):
+                    if let httpResponse = response.response {
+                        let statusCode = httpResponse.statusCode
+                        print("Response status code: \(statusCode)")
+                    }
+                    if let json = value as? [String: Any] {
+                        if let status = json["status"] as? String {
+                            if status == "success" {
+                                // Handle success case
+                                if let data = json["data"] as? [String: Any],
+                                   let accessToken = data["accessToken"] as? String,
+                                   let refreshToken = data["refreshToken"] as? String {
+                                    // Save tokens to Keychain
+                                    let saveAccessToken = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
+                                    if saveAccessToken {
+                                        print("AccessToken: \(accessToken)")
+                                        print("Access token saved successfully.")
+                                    } else {
+                                        print("Failed to save access token.")
+                                    }
+                                    
+                                    let saveRefreshToken = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
+                                    if saveRefreshToken {
+                                        print("RefreshToken: \(refreshToken)")
+                                        print("Refresh token saved successfully.")
+                                    } else {
+                                        print("Failed to save refresh token.")
+                                    }
+                                } else {
+                                    print("Failed to retrieve tokens from the response.")
+                                }
+                            } else {
+                                
+                                if let message = json["message"] as? String {
+                                    print("Message: \(message)")
+                                    // Show message to the user or take appropriate action
+                                }
+                            }
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("Error sending POST request: \(error)")
+                    // Handle failure case
+                }
+            }
+    }
     
+    
+    
+    // 토큰 가져오기
+    func retrieveAccessToken() -> String? {
+        return KeychainWrapper.standard.string(forKey: "accessToken")
+    }
     
     @objc func nextButtonTapped() {
-        let passwordVC = PasswordViewController()
-        navigationController?.pushViewController(passwordVC, animated: true)
+        print("next button")
+        verificationSuccessful()
+        let birthVC = BirthDateSettingViewController()
+        navigationController?.pushViewController(birthVC, animated: true)
+       // fetchData()
     }
 }
