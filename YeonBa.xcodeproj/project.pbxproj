@@ -51,6 +51,43 @@
 		58580EB52BE0BA080055F3E8 /* JobSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EB42BE0BA080055F3E8 /* JobSelectionViewController.swift */; };
 		58580EB72BE0BA0E0055F3E8 /* LocalSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EB62BE0BA0D0055F3E8 /* LocalSelectViewController.swift */; };
 		58580EB92BE0BA120055F3E8 /* NicknameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EB82BE0BA120055F3E8 /* NicknameSettingViewController.swift */; };
+		58580EEA2BE13E490055F3E8 /* FavoriteAgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EC42BE13E490055F3E8 /* FavoriteAgeDelegate.swift */; };
+		58580EEB2BE13E490055F3E8 /* FavoriteAgePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EC52BE13E490055F3E8 /* FavoriteAgePresentationController.swift */; };
+		58580EEC2BE13E490055F3E8 /* FavoriteAgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EC62BE13E490055F3E8 /* FavoriteAgeViewController.swift */; };
+		58580EED2BE13E490055F3E8 /* FavoriteAnimalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EC82BE13E490055F3E8 /* FavoriteAnimalDelegate.swift */; };
+		58580EEE2BE13E490055F3E8 /* FavoriteAnimalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EC92BE13E490055F3E8 /* FavoriteAnimalPresentationController.swift */; };
+		58580EEF2BE13E490055F3E8 /* FavoriteAnimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ECA2BE13E490055F3E8 /* FavoriteAnimalViewController.swift */; };
+		58580EF02BE13E490055F3E8 /* FavoriteBodyPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ECC2BE13E490055F3E8 /* FavoriteBodyPresentationController.swift */; };
+		58580EF12BE13E490055F3E8 /* FavoriteBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ECD2BE13E490055F3E8 /* FavoriteBodyTableViewCell.swift */; };
+		58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ECE2BE13E490055F3E8 /* FavoriteBodyViewController.swift */; };
+		58580EF32BE13E490055F3E8 /* FavoriteBodyViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ECF2BE13E490055F3E8 /* FavoriteBodyViewControllerDelegate.swift */; };
+		58580EF42BE13E490055F3E8 /* FavoriteLocationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ED12BE13E490055F3E8 /* FavoriteLocationViewCell.swift */; };
+		58580EF52BE13E490055F3E8 /* FavoriteLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ED22BE13E490055F3E8 /* FavoriteLocationViewController.swift */; };
+		58580EF62BE13E490055F3E8 /* FavoriteMbtiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ED42BE13E490055F3E8 /* FavoriteMbtiDelegate.swift */; };
+		58580EF72BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ED52BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift */; };
+		58580EF82BE13E490055F3E8 /* FavoriteMbtiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ED62BE13E490055F3E8 /* FavoriteMbtiViewController.swift */; };
+		58580EF92BE13E490055F3E8 /* FavoriteTallDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ED82BE13E490055F3E8 /* FavoriteTallDelegate.swift */; };
+		58580EFA2BE13E490055F3E8 /* FavoriteTallPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580ED92BE13E490055F3E8 /* FavoriteTallPresentationController.swift */; };
+		58580EFB2BE13E490055F3E8 /* FavoriteTallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EDA2BE13E490055F3E8 /* FavoriteTallViewController.swift */; };
+		58580EFC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EDC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift */; };
+		58580EFD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EDD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift */; };
+		58580EFE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EDE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift */; };
+		58580EFF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EDF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift */; };
+		58580F002BE13E490055F3E8 /* AgeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EE22BE13E490055F3E8 /* AgeMode.swift */; };
+		58580F012BE13E490055F3E8 /* AnimalMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EE32BE13E490055F3E8 /* AnimalMode.swift */; };
+		58580F022BE13E490055F3E8 /* MbtiMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EE42BE13E490055F3E8 /* MbtiMode.swift */; };
+		58580F032BE13E490055F3E8 /* SignLocationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EE52BE13E490055F3E8 /* SignLocationMode.swift */; };
+		58580F042BE13E490055F3E8 /* SignVoiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EE62BE13E490055F3E8 /* SignVoiceMode.swift */; };
+		58580F052BE13E490055F3E8 /* SignWeightMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EE72BE13E490055F3E8 /* SignWeightMode.swift */; };
+		58580F0A2BE141E30055F3E8 /* CollectDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F062BE141E30055F3E8 /* CollectDataModel.swift */; };
+		58580F0B2BE141E30055F3E8 /* CollectDataUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F072BE141E30055F3E8 /* CollectDataUserModel.swift */; };
+		58580F0C2BE141E30055F3E8 /* CollectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F082BE141E30055F3E8 /* CollectResponse.swift */; };
+		58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F0D2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift */; };
+		58580F122BE142400055F3E8 /* WaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F102BE142400055F3E8 /* WaveFormView.swift */; };
+		58580F142BE142500055F3E8 /* converted_model.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 58580F132BE142500055F3E8 /* converted_model.mlpackage */; };
+		58580F182BE142870055F3E8 /* OtherProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F152BE142870055F3E8 /* OtherProfileDataModel.swift */; };
+		58580F192BE142870055F3E8 /* OtherProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F162BE142870055F3E8 /* OtherProfileResponse.swift */; };
+		58580F1B2BE1F5F30055F3E8 /* MyFavoriteListViweController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580F1A2BE1F5F30055F3E8 /* MyFavoriteListViweController.swift */; };
 		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
@@ -201,6 +238,43 @@
 		58580EB42BE0BA080055F3E8 /* JobSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobSelectionViewController.swift; sourceTree = "<group>"; };
 		58580EB62BE0BA0D0055F3E8 /* LocalSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalSelectViewController.swift; sourceTree = "<group>"; };
 		58580EB82BE0BA120055F3E8 /* NicknameSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameSettingViewController.swift; sourceTree = "<group>"; };
+		58580EC42BE13E490055F3E8 /* FavoriteAgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteAgeDelegate.swift; sourceTree = "<group>"; };
+		58580EC52BE13E490055F3E8 /* FavoriteAgePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteAgePresentationController.swift; sourceTree = "<group>"; };
+		58580EC62BE13E490055F3E8 /* FavoriteAgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteAgeViewController.swift; sourceTree = "<group>"; };
+		58580EC82BE13E490055F3E8 /* FavoriteAnimalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteAnimalDelegate.swift; sourceTree = "<group>"; };
+		58580EC92BE13E490055F3E8 /* FavoriteAnimalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteAnimalPresentationController.swift; sourceTree = "<group>"; };
+		58580ECA2BE13E490055F3E8 /* FavoriteAnimalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteAnimalViewController.swift; sourceTree = "<group>"; };
+		58580ECC2BE13E490055F3E8 /* FavoriteBodyPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBodyPresentationController.swift; sourceTree = "<group>"; };
+		58580ECD2BE13E490055F3E8 /* FavoriteBodyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBodyTableViewCell.swift; sourceTree = "<group>"; };
+		58580ECE2BE13E490055F3E8 /* FavoriteBodyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBodyViewController.swift; sourceTree = "<group>"; };
+		58580ECF2BE13E490055F3E8 /* FavoriteBodyViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBodyViewControllerDelegate.swift; sourceTree = "<group>"; };
+		58580ED12BE13E490055F3E8 /* FavoriteLocationViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteLocationViewCell.swift; sourceTree = "<group>"; };
+		58580ED22BE13E490055F3E8 /* FavoriteLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteLocationViewController.swift; sourceTree = "<group>"; };
+		58580ED42BE13E490055F3E8 /* FavoriteMbtiDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMbtiDelegate.swift; sourceTree = "<group>"; };
+		58580ED52BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMbtiPresentationController.swift; sourceTree = "<group>"; };
+		58580ED62BE13E490055F3E8 /* FavoriteMbtiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMbtiViewController.swift; sourceTree = "<group>"; };
+		58580ED82BE13E490055F3E8 /* FavoriteTallDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTallDelegate.swift; sourceTree = "<group>"; };
+		58580ED92BE13E490055F3E8 /* FavoriteTallPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTallPresentationController.swift; sourceTree = "<group>"; };
+		58580EDA2BE13E490055F3E8 /* FavoriteTallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTallViewController.swift; sourceTree = "<group>"; };
+		58580EDC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteVoiceDelegate.swift; sourceTree = "<group>"; };
+		58580EDD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteVoicePresentationController.swift; sourceTree = "<group>"; };
+		58580EDE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteVoiceTableViewCell.swift; sourceTree = "<group>"; };
+		58580EDF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteVoiceViewController.swift; sourceTree = "<group>"; };
+		58580EE22BE13E490055F3E8 /* AgeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeMode.swift; sourceTree = "<group>"; };
+		58580EE32BE13E490055F3E8 /* AnimalMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalMode.swift; sourceTree = "<group>"; };
+		58580EE42BE13E490055F3E8 /* MbtiMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MbtiMode.swift; sourceTree = "<group>"; };
+		58580EE52BE13E490055F3E8 /* SignLocationMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignLocationMode.swift; sourceTree = "<group>"; };
+		58580EE62BE13E490055F3E8 /* SignVoiceMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignVoiceMode.swift; sourceTree = "<group>"; };
+		58580EE72BE13E490055F3E8 /* SignWeightMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignWeightMode.swift; sourceTree = "<group>"; };
+		58580F062BE141E30055F3E8 /* CollectDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectDataModel.swift; sourceTree = "<group>"; };
+		58580F072BE141E30055F3E8 /* CollectDataUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectDataUserModel.swift; sourceTree = "<group>"; };
+		58580F082BE141E30055F3E8 /* CollectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectResponse.swift; sourceTree = "<group>"; };
+		58580F0D2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecieveCupidCollectionViewCell.swift; sourceTree = "<group>"; };
+		58580F102BE142400055F3E8 /* WaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormView.swift; sourceTree = "<group>"; };
+		58580F132BE142500055F3E8 /* converted_model.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = converted_model.mlpackage; sourceTree = "<group>"; };
+		58580F152BE142870055F3E8 /* OtherProfileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileDataModel.swift; sourceTree = "<group>"; };
+		58580F162BE142870055F3E8 /* OtherProfileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileResponse.swift; sourceTree = "<group>"; };
+		58580F1A2BE1F5F30055F3E8 /* MyFavoriteListViweController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoriteListViweController.swift; sourceTree = "<group>"; };
 		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -322,6 +396,8 @@
 		582DB14F2BBE888900600EA7 /* AiSignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				58580F132BE142500055F3E8 /* converted_model.mlpackage */,
+				58580F112BE142400055F3E8 /* WaveForm */,
 				58D644662BCFB3A3008DCC9F /* CameraVC */,
 				58D644652BCF8D4F008DCC9F /* PhotoGalleryVC */,
 				582DB2352BC6835100600EA7 /* PhotoSelectVC */,
@@ -416,6 +492,7 @@
 		584DCF292B9CC0800081149F /* RecieveVC */ = {
 			isa = PBXGroup;
 			children = (
+				58580F0E2BE1420E0055F3E8 /* Cell */,
 				584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */,
 			);
 			path = RecieveVC;
@@ -455,6 +532,164 @@
 			path = NotificationService;
 			sourceTree = "<group>";
 		};
+		58580EC72BE13E490055F3E8 /* FavoriteAgeModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580EC42BE13E490055F3E8 /* FavoriteAgeDelegate.swift */,
+				58580EC52BE13E490055F3E8 /* FavoriteAgePresentationController.swift */,
+				58580EC62BE13E490055F3E8 /* FavoriteAgeViewController.swift */,
+			);
+			path = FavoriteAgeModal;
+			sourceTree = "<group>";
+		};
+		58580ECB2BE13E490055F3E8 /* FavoriteAnimalModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580EC82BE13E490055F3E8 /* FavoriteAnimalDelegate.swift */,
+				58580EC92BE13E490055F3E8 /* FavoriteAnimalPresentationController.swift */,
+				58580ECA2BE13E490055F3E8 /* FavoriteAnimalViewController.swift */,
+			);
+			path = FavoriteAnimalModal;
+			sourceTree = "<group>";
+		};
+		58580ED02BE13E490055F3E8 /* FavoriteBodyModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580ECC2BE13E490055F3E8 /* FavoriteBodyPresentationController.swift */,
+				58580ECD2BE13E490055F3E8 /* FavoriteBodyTableViewCell.swift */,
+				58580ECE2BE13E490055F3E8 /* FavoriteBodyViewController.swift */,
+				58580ECF2BE13E490055F3E8 /* FavoriteBodyViewControllerDelegate.swift */,
+			);
+			path = FavoriteBodyModal;
+			sourceTree = "<group>";
+		};
+		58580ED32BE13E490055F3E8 /* FavoriteLocationModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580ED12BE13E490055F3E8 /* FavoriteLocationViewCell.swift */,
+				58580ED22BE13E490055F3E8 /* FavoriteLocationViewController.swift */,
+			);
+			path = FavoriteLocationModal;
+			sourceTree = "<group>";
+		};
+		58580ED72BE13E490055F3E8 /* FavoriteMbtiModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580ED42BE13E490055F3E8 /* FavoriteMbtiDelegate.swift */,
+				58580ED52BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift */,
+				58580ED62BE13E490055F3E8 /* FavoriteMbtiViewController.swift */,
+			);
+			path = FavoriteMbtiModal;
+			sourceTree = "<group>";
+		};
+		58580EDB2BE13E490055F3E8 /* FavoriteTallModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580ED82BE13E490055F3E8 /* FavoriteTallDelegate.swift */,
+				58580ED92BE13E490055F3E8 /* FavoriteTallPresentationController.swift */,
+				58580EDA2BE13E490055F3E8 /* FavoriteTallViewController.swift */,
+			);
+			path = FavoriteTallModal;
+			sourceTree = "<group>";
+		};
+		58580EE02BE13E490055F3E8 /* FavoriteVoiceModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580EDC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift */,
+				58580EDD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift */,
+				58580EDE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift */,
+				58580EDF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift */,
+			);
+			path = FavoriteVoiceModal;
+			sourceTree = "<group>";
+		};
+		58580EE12BE13E490055F3E8 /* FavoriteModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580EC72BE13E490055F3E8 /* FavoriteAgeModal */,
+				58580ECB2BE13E490055F3E8 /* FavoriteAnimalModal */,
+				58580ED02BE13E490055F3E8 /* FavoriteBodyModal */,
+				58580ED32BE13E490055F3E8 /* FavoriteLocationModal */,
+				58580ED72BE13E490055F3E8 /* FavoriteMbtiModal */,
+				58580EDB2BE13E490055F3E8 /* FavoriteTallModal */,
+				58580EE02BE13E490055F3E8 /* FavoriteVoiceModal */,
+			);
+			path = FavoriteModal;
+			sourceTree = "<group>";
+		};
+		58580EE82BE13E490055F3E8 /* SignModalMode */ = {
+			isa = PBXGroup;
+			children = (
+				58580EE22BE13E490055F3E8 /* AgeMode.swift */,
+				58580EE32BE13E490055F3E8 /* AnimalMode.swift */,
+				58580EE42BE13E490055F3E8 /* MbtiMode.swift */,
+				58580EE52BE13E490055F3E8 /* SignLocationMode.swift */,
+				58580EE62BE13E490055F3E8 /* SignVoiceMode.swift */,
+				58580EE72BE13E490055F3E8 /* SignWeightMode.swift */,
+			);
+			path = SignModalMode;
+			sourceTree = "<group>";
+		};
+		58580EE92BE13E490055F3E8 /* SignupModal */ = {
+			isa = PBXGroup;
+			children = (
+				58580EE12BE13E490055F3E8 /* FavoriteModal */,
+				58580EE82BE13E490055F3E8 /* SignModalMode */,
+			);
+			path = SignupModal;
+			sourceTree = "<group>";
+		};
+		58580F092BE141E30055F3E8 /* CollectModel */ = {
+			isa = PBXGroup;
+			children = (
+				58580F062BE141E30055F3E8 /* CollectDataModel.swift */,
+				58580F072BE141E30055F3E8 /* CollectDataUserModel.swift */,
+				58580F082BE141E30055F3E8 /* CollectResponse.swift */,
+			);
+			path = CollectModel;
+			sourceTree = "<group>";
+		};
+		58580F0E2BE1420E0055F3E8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				58580F0D2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		58580F112BE142400055F3E8 /* WaveForm */ = {
+			isa = PBXGroup;
+			children = (
+				58580F102BE142400055F3E8 /* WaveFormView.swift */,
+			);
+			path = WaveForm;
+			sourceTree = "<group>";
+		};
+		58580F172BE142870055F3E8 /* OtherProfileAPI */ = {
+			isa = PBXGroup;
+			children = (
+				58580F152BE142870055F3E8 /* OtherProfileDataModel.swift */,
+				58580F162BE142870055F3E8 /* OtherProfileResponse.swift */,
+			);
+			path = OtherProfileAPI;
+			sourceTree = "<group>";
+		};
+		58580F1C2BE1FA3F0055F3E8 /* UserInfoVC */ = {
+			isa = PBXGroup;
+			children = (
+				58580EB42BE0BA080055F3E8 /* JobSelectionViewController.swift */,
+				58580EB02BE0B9FC0055F3E8 /* HeightPickerViewController.swift */,
+				58580EB82BE0BA120055F3E8 /* NicknameSettingViewController.swift */,
+				58580EB62BE0BA0D0055F3E8 /* LocalSelectViewController.swift */,
+				58580EB22BE0BA030055F3E8 /* InterestsViewController.swift */,
+				58580EAE2BE0B9F60055F3E8 /* GenderSelectionViewController.swift */,
+				58580EAC2BE0B9F10055F3E8 /* BodyShapeViewController.swift */,
+				58580EAA2BE0B9EA0055F3E8 /* BodyInfoViewController.swift */,
+				58580EA82BE0B9E30055F3E8 /* BirthDateSettingViewController.swift */,
+			);
+			path = UserInfoVC;
+			sourceTree = "<group>";
+		};
 		589DF3242B907311003F03C5 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,6 +715,7 @@
 		589DF32C2B9074C5003F03C5 /* CollectVC */ = {
 			isa = PBXGroup;
 			children = (
+				58580F092BE141E30055F3E8 /* CollectModel */,
 				584DCF292B9CC0800081149F /* RecieveVC */,
 				584DCF282B9CC0720081149F /* FavoriteVC */,
 				584DCF272B9CC0650081149F /* SendVC */,
@@ -521,6 +757,7 @@
 		58BB858B2BB1D3D500F90050 /* OtherProfileVC */ = {
 			isa = PBXGroup;
 			children = (
+				58580F172BE142870055F3E8 /* OtherProfileAPI */,
 				58BB86282BB5686A00F90050 /* Modal */,
 				58BB86252BB550C800F90050 /* ModalMode */,
 				58BB85D22BB3AFEF00F90050 /* Model */,
@@ -697,15 +934,9 @@
 		58BB87142BBBECDD00F90050 /* SignupVC */ = {
 			isa = PBXGroup;
 			children = (
-				58580EB82BE0BA120055F3E8 /* NicknameSettingViewController.swift */,
-				58580EB62BE0BA0D0055F3E8 /* LocalSelectViewController.swift */,
-				58580EB42BE0BA080055F3E8 /* JobSelectionViewController.swift */,
-				58580EB22BE0BA030055F3E8 /* InterestsViewController.swift */,
-				58580EB02BE0B9FC0055F3E8 /* HeightPickerViewController.swift */,
-				58580EAE2BE0B9F60055F3E8 /* GenderSelectionViewController.swift */,
-				58580EAC2BE0B9F10055F3E8 /* BodyShapeViewController.swift */,
-				58580EAA2BE0B9EA0055F3E8 /* BodyInfoViewController.swift */,
-				58580EA82BE0B9E30055F3E8 /* BirthDateSettingViewController.swift */,
+				58580F1C2BE1FA3F0055F3E8 /* UserInfoVC */,
+				58580EE92BE13E490055F3E8 /* SignupModal */,
+				58580F1A2BE1F5F30055F3E8 /* MyFavoriteListViweController.swift */,
 				58580E972BDF50280055F3E8 /* SocialSign */,
 			);
 			path = SignupVC;
@@ -1094,59 +1325,88 @@
 			buildActionMask = 2147483647;
 			files = (
 				58BB86812BB7E56300F90050 /* VoiceTableViewCell.swift in Sources */,
+				58580F022BE13E490055F3E8 /* MbtiMode.swift in Sources */,
+				58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				582DB2392BC7739B00600EA7 /* PhotoEssentialView.swift in Sources */,
 				582DB1582BBE88D900600EA7 /* VoicePopupView.swift in Sources */,
+				58580F002BE13E490055F3E8 /* AgeMode.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
+				58580F042BE13E490055F3E8 /* SignVoiceMode.swift in Sources */,
 				58BB86792BB7DA8400F90050 /* WeightMode.swift in Sources */,
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
 				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
+				58580F142BE142500055F3E8 /* converted_model.mlpackage in Sources */,
+				58580EEE2BE13E490055F3E8 /* FavoriteAnimalPresentationController.swift in Sources */,
 				582DB16A2BBE896600600EA7 /* OtherMessageCell.swift in Sources */,
 				58D644682BCFB3C3008DCC9F /* FaceDetectionViewController.swift in Sources */,
 				582DB1612BBE891300600EA7 /* ChattingRoomViewController.swift in Sources */,
 				582DB1592BBE88D900600EA7 /* AnalysisSyncViewController.swift in Sources */,
+				58580EF72BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
+				58580F012BE13E490055F3E8 /* AnimalMode.swift in Sources */,
+				58580F182BE142870055F3E8 /* OtherProfileDataModel.swift in Sources */,
 				58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */,
 				582DB15C2BBE88D900600EA7 /* VoicePopupViewcontroller.swift in Sources */,
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
 				582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */,
+				58580F0A2BE141E30055F3E8 /* CollectDataModel.swift in Sources */,
 				582DB1662BBE892C00600EA7 /* ChattingListCell.swift in Sources */,
+				58580F0B2BE141E30055F3E8 /* CollectDataUserModel.swift in Sources */,
+				58580EF02BE13E490055F3E8 /* FavoriteBodyPresentationController.swift in Sources */,
 				58D644642BCF8B21008DCC9F /* PhotoCollectionViewCell.swift in Sources */,
 				582DB15F2BBE88D900600EA7 /* AiPhotoshopViewController.swift in Sources */,
 				58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */,
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
+				58580EFB2BE13E490055F3E8 /* FavoriteTallViewController.swift in Sources */,
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
 				582DB1732BBE89A000600EA7 /* FindPwViewController.swift in Sources */,
 				58BB86892BB7FA2E00F90050 /* WeightPresentationController.swift in Sources */,
+				58580EFA2BE13E490055F3E8 /* FavoriteTallPresentationController.swift in Sources */,
+				58580EFF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift in Sources */,
 				582DB16F2BBE899200600EA7 /* FindIdViewController.swift in Sources */,
 				582DB1682BBE896000600EA7 /* MyMessageCell.swift in Sources */,
+				58580EEC2BE13E490055F3E8 /* FavoriteAgeViewController.swift in Sources */,
 				58BB867B2BB7DC9C00F90050 /* VoicePresentationController.swift in Sources */,
 				58580EA92BE0B9E30055F3E8 /* BirthDateSettingViewController.swift in Sources */,
+				58580F032BE13E490055F3E8 /* SignLocationMode.swift in Sources */,
+				58580F1B2BE1F5F30055F3E8 /* MyFavoriteListViweController.swift in Sources */,
+				58580EF62BE13E490055F3E8 /* FavoriteMbtiDelegate.swift in Sources */,
 				582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */,
 				582DB16D2BBE897F00600EA7 /* LoginViewController.swift in Sources */,
+				58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */,
+				58580F192BE142870055F3E8 /* OtherProfileResponse.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
+				58580F122BE142400055F3E8 /* WaveFormView.swift in Sources */,
 				582DB15D2BBE88D900600EA7 /* PhotoSelectionViewController.swift in Sources */,
 				58580EAD2BE0B9F10055F3E8 /* BodyShapeViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
 				58580EB72BE0BA0E0055F3E8 /* LocalSelectViewController.swift in Sources */,
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
 				582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */,
+				58580EED2BE13E490055F3E8 /* FavoriteAnimalDelegate.swift in Sources */,
 				582DB1712BBE899900600EA7 /* FindPwResultViewController.swift in Sources */,
 				58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */,
 				58580EAB2BE0B9EA0055F3E8 /* BodyInfoViewController.swift in Sources */,
+				58580EF32BE13E490055F3E8 /* FavoriteBodyViewControllerDelegate.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
+				58580EF52BE13E490055F3E8 /* FavoriteLocationViewController.swift in Sources */,
+				58580F0C2BE141E30055F3E8 /* CollectResponse.swift in Sources */,
+				58580EEB2BE13E490055F3E8 /* FavoriteAgePresentationController.swift in Sources */,
 				58580EB12BE0B9FC0055F3E8 /* HeightPickerViewController.swift in Sources */,
 				589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */,
+				58580EF92BE13E490055F3E8 /* FavoriteTallDelegate.swift in Sources */,
 				58BB86D52BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift in Sources */,
 				58580EB32BE0BA030055F3E8 /* InterestsViewController.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				582DB15E2BBE88D900600EA7 /* GuideViewController.swift in Sources */,
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
+				58580F052BE13E490055F3E8 /* SignWeightMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
@@ -1155,10 +1415,14 @@
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
+				58580EEA2BE13E490055F3E8 /* FavoriteAgeDelegate.swift in Sources */,
 				58D6445F2BCF80C2008DCC9F /* FullScreenImageViewController.swift in Sources */,
 				58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */,
 				582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */,
+				58580EEF2BE13E490055F3E8 /* FavoriteAnimalViewController.swift in Sources */,
 				582DB1752BBE89C100600EA7 /* FindIdResultViewController.swift in Sources */,
+				58580EFC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift in Sources */,
+				58580EFE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
 				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
@@ -1167,9 +1431,11 @@
 				58580EB52BE0BA080055F3E8 /* JobSelectionViewController.swift in Sources */,
 				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
 				58580EB92BE0BA120055F3E8 /* NicknameSettingViewController.swift in Sources */,
+				58580EFD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift in Sources */,
 				58580EAF2BE0B9F60055F3E8 /* GenderSelectionViewController.swift in Sources */,
 				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
 				58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */,
+				58580EF82BE13E490055F3E8 /* FavoriteMbtiViewController.swift in Sources */,
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,
 				58BB86272BB5512400F90050 /* DeclareMode.swift in Sources */,
 				58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */,
@@ -1181,7 +1447,9 @@
 				58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */,
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
 				582DB15B2BBE88D900600EA7 /* VoiceRecordingViewController.swift in Sources */,
+				58580EF12BE13E490055F3E8 /* FavoriteBodyTableViewCell.swift in Sources */,
 				58BB868C2BB8433F00F90050 /* LocationTableViewCell.swift in Sources */,
+				58580EF42BE13E490055F3E8 /* FavoriteLocationViewCell.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1419,9 +1687,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
@@ -1440,6 +1710,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = YeonBa;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1455,9 +1726,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
@@ -1476,6 +1749,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = YeonBa;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

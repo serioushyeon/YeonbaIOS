@@ -6,12 +6,6 @@ class InterestsViewController: UIViewController {
 
     var selectedInterestsButton: UIButton?
     
-    let scrollView = UIScrollView().then {
-        $0.backgroundColor = .white
-    }
-    
-    let contentView = UIView()
-    
     let numberLabel = UILabel().then {
         $0.text = "5/5"
         $0.textColor = .red
@@ -36,6 +30,7 @@ class InterestsViewController: UIViewController {
 
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
+        $0.isEnabled = true
         $0.backgroundColor = .red
         $0.layer.cornerRadius = 25
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -53,26 +48,14 @@ class InterestsViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = .white
         navigationItem.title = "나의 정보"
-        setupScrollView()
-        
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(numberLabel)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
-        contentView.addSubview(nextButton)
-        
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        contentView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView)
-            make.width.equalTo(scrollView)
-        }
+    
+        view.addSubview(numberLabel)
+        view.addSubview(titleLabel)
+        view.addSubview(descriptionLabel)
+        view.addSubview(nextButton)
         
         numberLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(20)
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -93,11 +76,6 @@ class InterestsViewController: UIViewController {
         }
     }
     
-    private func setupScrollView() {
-        // 스크롤 뷰와 컨텐츠 뷰 설정을 추가합니다.
-    }
-    
-    
     private func setupButtons() {
         interests.enumerated().forEach { (index, interest) in
             let button = UIButton().then {
@@ -111,7 +89,7 @@ class InterestsViewController: UIViewController {
                 $0.addTarget(self, action: #selector(interestButtonTapped(_:)), for: .touchUpInside)
             }
             buttons.append(button)
-            contentView.addSubview(button)
+            view.addSubview(button)
             
             button.snp.makeConstraints { make in
                 if index == 0 {
@@ -122,11 +100,6 @@ class InterestsViewController: UIViewController {
                 make.leading.trailing.equalToSuperview().inset(20)
                 make.height.equalTo(50)
             }
-        }
-        
-        // contentView의 bottom을 마지막 버튼의 bottom에 연결하여 스크롤뷰의 컨텐츠 사이즈를 결정합니다.
-        contentView.snp.makeConstraints { make in
-            make.bottom.equalTo(buttons.last!.snp.bottom).offset(20)
         }
     }
     
@@ -151,15 +124,18 @@ class InterestsViewController: UIViewController {
         }
     }
     
-    @objc private func nextButtonTapped() {
-        if selectedInterestsButton != nil {
-            // 선택된 관심사를 처리하는 로직을 여기에 추가합니다.
-            // 예를 들어 다음 화면으로 넘어가거나 선택된 관심사 정보를 저장합니다.
-        } else {
-            // 관심사가 선택되지 않았을 경우 사용자에게 알립니다.
-            showAlertForInterestsSelection()
+    @objc func nextButtonTapped() {
+            // 선택된 버튼이 있는지 확인
+            guard selectedInterestsButton != nil else {
+                // 경고 메시지 표시 또는 사용자에게 선택하라고 알림
+                showAlertForInterestsSelection()
+                return
+            }
+            print("next favorite")
+
+            let favoriteVC = MyFavoriteListViweController()
+            navigationController?.pushViewController(favoriteVC, animated: true)
         }
-    }
     
     private func showAlertForInterestsSelection() {
         let alert = UIAlertController(title: "관심사 선택", message: "계속하려면 관심사를 선택해주세요.", preferredStyle: .alert)
