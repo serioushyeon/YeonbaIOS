@@ -1,6 +1,14 @@
+//
+//  BirthDateSettingViewController.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 2/29/24.
+//
 import UIKit
 import SnapKit
 import Then
+import Alamofire
+import SwiftKeychainWrapper
 
 class BirthDateSettingViewController: UIViewController {
 
@@ -58,6 +66,7 @@ class BirthDateSettingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigationBar()
+        setupKeyboardDismissal()
         setupViews()
     }
     
@@ -111,9 +120,25 @@ class BirthDateSettingViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-
+    
+    private func setupKeyboardDismissal() {
+        // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        // 키보드를 숨깁니다.
+        view.endEditing(true)
+    }
     @objc func nextButtonTapped() {
-        // Validate the date and transition to the next screen if successful
+        guard let year = yearTextField.text,let month = monthTextField.text,let day = dayTextField.text else {
+            return
+        }
+        
+        let birthDate = "\(year)\(month)\(day)"
+        
+        SignDataManager.shared.birthDate = birthDate
         
         let nextVC = NicknameSettingViewController()
         navigationController?.pushViewController(nextVC, animated: true)
