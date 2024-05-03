@@ -8,6 +8,7 @@ import UIKit
 import KakaoSDKUser
 import SnapKit
 import Then
+import AuthenticationServices
 
 class SignUpViewController: UIViewController {
     var socialID: Int?
@@ -66,11 +67,25 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         view.layer.insertSublayer(gradientLayer, at: 0)
         setupViews()
+        setupProviderLoginView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = view.bounds
+    }
+    
+    func setupProviderLoginView() {
+        let appleButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+        appleButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        self.view.addSubview(appleButton)
+        
+        appleButton.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(50)
+            make.height.equalTo(50)
+            
+        }
     }
     
     private func setupViews() {
@@ -103,13 +118,13 @@ class SignUpViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        view.addSubview(signUpButton)
-        signUpButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-        }
+        //        view.addSubview(signUpButton)
+        //        signUpButton.snp.makeConstraints { make in
+        //            make.top.equalTo(loginButton.snp.bottom).offset(20)
+        //            make.centerX.equalToSuperview()
+        //        }
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-       
+        
         
     }
     
@@ -118,6 +133,17 @@ class SignUpViewController: UIViewController {
 
 // MARK: - Actions
 extension SignUpViewController {
+    @objc func handleAuthorizationAppleIDButtonPress() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName,.email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
     @objc func loginButtonTapped() {
         if (UserApi.isKakaoTalkLoginAvailable()) {
             // 카톡 설치되어있으면 -> 카톡으로 로그인
@@ -146,7 +172,7 @@ extension SignUpViewController {
                     self.loginType = "KAKAO"
                     // 사용자의 카카오 아이디 받아오기
                     self.fetchKakaoUserID()
-                   
+                    
                 }
             }
         }
@@ -183,6 +209,49 @@ extension SignUpViewController {
         navigationController?.pushViewController(phonenumberVC, animated: true)
     }
 }
+
+extension SignUpViewController:
+    ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            if  let authorizationCode = appleIDCredential.authorizationCode,
+                let identityToken = appleIDCredential.identityToken,
+                let authString = String(data: authorizationCode, encoding: .utf8),
+                let tokenString = String(data: identityToken, encoding: .utf8) {
+                print("authorizationCode: \(authorizationCode)")
+                print("identityToken: \(identityToken)")
+                print("authString: \(authString)")
+                print("tokenString: \(tokenString)")
+            }
+            
+            
+        case let passwordCredential as ASPasswordCredential:
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            
+            print("username: \(username)")
+            print("password: \(password)")
+            
+        default:
+            break
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        //handle error.
+    }
+}
+
+
 
 
 
