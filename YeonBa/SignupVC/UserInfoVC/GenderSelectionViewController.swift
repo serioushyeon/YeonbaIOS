@@ -95,6 +95,17 @@ class GenderSelectionViewController: UIViewController {
         }
     }
     
+    private func setupKeyboardDismissal() {
+        // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        // 키보드를 숨깁니다.
+        view.endEditing(true)
+    }
+    
     @objc private func genderButtonTapped(_ sender: UIButton) {
         selectedGenderButton?.backgroundColor = .white
         selectedGenderButton?.setTitleColor(.black, for: .normal)

@@ -21,6 +21,7 @@ class HeightPickerViewController: UIViewController, UIPickerViewDelegate, UIPick
         $0.addTarget(self, action: #selector(dismissPicker), for: .touchUpInside)
 
     }
+    
     let heightLabel = UILabel().then {
         $0.text = "키"
         $0.textColor = .black

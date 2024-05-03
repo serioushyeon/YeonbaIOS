@@ -46,7 +46,18 @@ class NicknameSettingViewController: UIViewController {
     private func setupNavigationBar() {
         navigationItem.title = "회원가입"
     }
-
+    
+    private func setupKeyboardDismissal() {
+        // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        // 키보드를 숨깁니다.
+        view.endEditing(true)
+    }
+    
     private func setupViews() {
         view.addSubview(instructionLabel)
         view.addSubview(instructionLabel2)
@@ -77,7 +88,7 @@ class NicknameSettingViewController: UIViewController {
     }
 
     @objc func nextButtonTapped() {
-        // Validate the nickname and if valid, proceed to the next screen
+        
         let nextVC = GenderSelectionViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
