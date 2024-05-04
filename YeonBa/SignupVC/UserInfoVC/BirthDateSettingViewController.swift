@@ -11,7 +11,7 @@ import Alamofire
 import SwiftKeychainWrapper
 
 class BirthDateSettingViewController: UIViewController {
-
+    
     let instructionLabel = UILabel().then {
         $0.text = "생년월일을 입력해 주세요."
         $0.textColor = .black
@@ -27,7 +27,7 @@ class BirthDateSettingViewController: UIViewController {
         $0.numberOfLines = 1
         $0.textAlignment = .left
     }
-
+    
     let yearTextField = UITextField().then {
         $0.placeholder = "YYYY"
         $0.layer.borderWidth = 1
@@ -36,7 +36,7 @@ class BirthDateSettingViewController: UIViewController {
         $0.textAlignment = .center
         $0.keyboardType = .numberPad
     }
-
+    
     let monthTextField = UITextField().then {
         $0.placeholder = "MM"
         $0.layer.borderWidth = 1
@@ -45,7 +45,7 @@ class BirthDateSettingViewController: UIViewController {
         $0.textAlignment = .center
         $0.keyboardType = .numberPad
     }
-
+    
     let dayTextField = UITextField().then {
         $0.placeholder = "DD"
         $0.layer.borderWidth = 1
@@ -54,33 +54,53 @@ class BirthDateSettingViewController: UIViewController {
         $0.textAlignment = .center
         $0.keyboardType = .numberPad
     }
-
+    
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
         $0.backgroundColor = .red
         $0.layer.cornerRadius = 25
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
-
+    
+    // 생년월일을 선택하기 위한 피커뷰
+    lazy var yearPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
+    lazy var monthPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
+    lazy var dayPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigationBar()
         setupKeyboardDismissal()
         setupViews()
+        yearTextField.inputView = yearPickerView
+        monthTextField.inputView = monthPickerView
+        dayTextField.inputView = dayPickerView
     }
     
     private func setupNavigationBar() {
         navigationItem.title = "회원가입"
     }
-
+    
     private func setupViews() {
-        view.addSubview(instructionLabel)
-        view.addSubview(instructionLabel2)
-        view.addSubview(yearTextField)
-        view.addSubview(monthTextField)
-        view.addSubview(dayTextField)
-        view.addSubview(nextButton)
+        view.addSubviews(instructionLabel,instructionLabel2,yearTextField,monthTextField,dayTextField,nextButton)
         
         instructionLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
@@ -99,14 +119,14 @@ class BirthDateSettingViewController: UIViewController {
             make.width.equalTo(70)
             make.height.equalTo(40)
         }
-
+        
         monthTextField.snp.makeConstraints { make in
             make.top.equalTo(yearTextField.snp.top)
             make.left.equalTo(yearTextField.snp.right).offset(10)
             make.width.equalTo(50)
             make.height.equalTo(40)
         }
-
+        
         dayTextField.snp.makeConstraints { make in
             make.top.equalTo(yearTextField.snp.top)
             make.left.equalTo(monthTextField.snp.right).offset(10)
@@ -142,5 +162,46 @@ class BirthDateSettingViewController: UIViewController {
         
         let nextVC = NicknameSettingViewController()
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+extension BirthDateSettingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == yearPickerView {
+            let currentYear = Calendar.current.component(.year, from: Date())
+            return currentYear - 1900 + 1
+        } else if pickerView == monthPickerView {
+            return 12 // 월은 1부터 12까지
+        } else {
+            // 일은 1부터 31까지
+            return 31
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == yearPickerView {
+            let currentYear = Calendar.current.component(.year, from: Date())
+            return "\(currentYear - row)"
+        } else if pickerView == monthPickerView {
+            return "\(row + 1)"
+        } else {
+            return "\(row + 1)"
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == yearPickerView {
+            let selectedYear = Calendar.current.component(.year, from: Date()) - row
+            yearTextField.text = "\(selectedYear)"
+        } else if pickerView == monthPickerView {
+            monthTextField.text = "\(row + 1)"
+        } else {
+            dayTextField.text = "\(row + 1)"
+        }
     }
 }

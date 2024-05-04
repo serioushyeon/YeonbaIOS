@@ -133,10 +133,6 @@ class BodyShapeViewController: UIViewController {
         // 델리게이트를 통해 선택된 체형을 알립니다.
         delegate?.didSelectBodyShape(selectedShape)
     }
-
-
-    
-    
     
     @objc private func dismissModal() {
         // 완료 버튼을 누르면, 선택된 체형이 있을 경우에만 모달을 닫습니다.
