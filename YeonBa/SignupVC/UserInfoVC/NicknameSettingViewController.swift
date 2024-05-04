@@ -1,9 +1,15 @@
+//
+//  SignUpViewController.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 2/29/24.
+//
 import UIKit
 import SnapKit
 import Then
 
 class NicknameSettingViewController: UIViewController {
-
+    
     let instructionLabel = UILabel().then {
         $0.text = "닉네임을 입력해 주세요."
         $0.textColor = .black
@@ -19,7 +25,7 @@ class NicknameSettingViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 16)
         $0.numberOfLines = 0
     }
-
+    
     let nicknameTextField = UITextField().then {
         $0.placeholder = "닉네임 입력"
         $0.layer.borderWidth = 1
@@ -28,19 +34,20 @@ class NicknameSettingViewController: UIViewController {
         $0.textAlignment = .center
         $0.borderStyle = .roundedRect
     }
-
+    
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
         $0.backgroundColor = .red
         $0.layer.cornerRadius = 25
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigationBar()
         setupViews()
+        setupKeyboardDismissal()
     }
     
     private func setupNavigationBar() {
@@ -59,10 +66,7 @@ class NicknameSettingViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.addSubview(instructionLabel)
-        view.addSubview(instructionLabel2)
-        view.addSubview(nicknameTextField)
-        view.addSubview(nextButton)
+        view.addSubviews(instructionLabel,instructionLabel2,nicknameTextField,nextButton)
         
         instructionLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
@@ -86,9 +90,21 @@ class NicknameSettingViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-
+    //MARK: - Actions
+    @objc func backButtonTapped() {
+        // 뒤로 가기 로직을 구현
+        navigationController?.popViewController(animated: true)
+    }
     @objc func nextButtonTapped() {
-        
+        //닉네임 입력 nil 처리 
+//        guard let nickname = nicknameTextField.text, !nickname.isEmpty else {
+//            let alert = UIAlertController(title: "닉네임 입력", message: "닉네임을 입력해 주세요.", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//            return
+//        }
+        let nickname = nicknameTextField.text
+        SignDataManager.shared.nickName = nickname
         let nextVC = GenderSelectionViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }

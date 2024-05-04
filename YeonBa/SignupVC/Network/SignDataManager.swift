@@ -15,13 +15,13 @@ class SignDataManager {
     
     var birthDate: String? {
         get {
-            return KeychainWrapper.standard.string(forKey: "birthDate")
+            return KeychainWrapper.standard.string(forKey: "birthDate") // keychain 반환
         }
         set {
             if let newValue = newValue {
-                KeychainWrapper.standard.set(newValue, forKey: "birthDate")
+                KeychainWrapper.standard.set(newValue, forKey: "birthDate") //keychain 저장
             } else {
-                KeychainWrapper.standard.removeObject(forKey: "birthDate")
+                KeychainWrapper.standard.removeObject(forKey: "birthDate") //keychain 삭제
             }
         }
     }

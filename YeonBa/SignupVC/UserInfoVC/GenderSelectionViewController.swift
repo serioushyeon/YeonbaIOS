@@ -46,10 +46,7 @@ class GenderSelectionViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "나의 정보"
         
-        view.addSubview(numberLabel)
-        view.addSubview(instructionLabel)
-        view.addSubview(verticalStackView)
-        view.addSubview(nextButton)
+        view.addSubviews(numberLabel,instructionLabel,verticalStackView,nextButton)
         
         numberLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(70)
@@ -125,9 +122,9 @@ class GenderSelectionViewController: UIViewController {
             present(alert, animated: true, completion: nil)
             return
         }
-        
-        // 다음 뷰 컨트롤러로 전환하는 로직을 여기에 추가합니다.
-        // 예시:
+        if let gender = selectedGenderButton?.titleLabel?.text {
+            SignDataManager.shared.gender = gender
+        }
         let nextVC = BodyInfoViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }

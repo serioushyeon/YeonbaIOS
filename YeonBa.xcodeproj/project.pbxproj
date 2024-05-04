@@ -95,6 +95,8 @@
 		589CDCFD2BE50A2A00BA332F /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDCFC2BE50A2A00BA332F /* HTTPHeaderField.swift */; };
 		589CDCFF2BE514A500BA332F /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDCFE2BE514A500BA332F /* KeychainHandler.swift */; };
 		589CDD012BE51D8300BA332F /* SignDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD002BE51D8200BA332F /* SignDataManager.swift */; };
+		589CDD052BE5F0C800BA332F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD042BE5F0C800BA332F /* UIView+.swift */; };
+		589CDD082BE5FE0700BA332F /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */; };
 		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
@@ -289,6 +291,8 @@
 		589CDCFC2BE50A2A00BA332F /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
 		589CDCFE2BE514A500BA332F /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
 		589CDD002BE51D8200BA332F /* SignDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignDataManager.swift; sourceTree = "<group>"; };
+		589CDD042BE5F0C800BA332F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -733,6 +737,22 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
+		589CDD032BE5F09C00BA332F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				589CDD042BE5F0C800BA332F /* UIView+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		589CDD062BE5FDE900BA332F /* Gloabal */ = {
+			isa = PBXGroup;
+			children = (
+				589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */,
+			);
+			path = Gloabal;
+			sourceTree = "<group>";
+		};
 		589DF3242B907311003F03C5 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1013,6 +1033,8 @@
 		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
+				589CDD062BE5FDE900BA332F /* Gloabal */,
+				589CDD032BE5F09C00BA332F /* Extensions */,
 				589CDCF52BE504F400BA332F /* GlobalAPI */,
 				58A467A42BDBA7F700BBA7FB /* GoogleService-Info.plist */,
 				58A467A32BDBA27D00BBA7FB /* YeonBa.entitlements */,
@@ -1417,6 +1439,7 @@
 				58BB86892BB7FA2E00F90050 /* WeightPresentationController.swift in Sources */,
 				58580EFA2BE13E490055F3E8 /* FavoriteTallPresentationController.swift in Sources */,
 				58580EFF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift in Sources */,
+				589CDD082BE5FE0700BA332F /* BaseNavigationController.swift in Sources */,
 				582DB16F2BBE899200600EA7 /* FindIdViewController.swift in Sources */,
 				582DB1682BBE896000600EA7 /* MyMessageCell.swift in Sources */,
 				58580EEC2BE13E490055F3E8 /* FavoriteAgeViewController.swift in Sources */,
@@ -1438,6 +1461,7 @@
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
 				582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */,
 				58580EED2BE13E490055F3E8 /* FavoriteAnimalDelegate.swift in Sources */,
+				589CDD052BE5F0C800BA332F /* UIView+.swift in Sources */,
 				582DB1712BBE899900600EA7 /* FindPwResultViewController.swift in Sources */,
 				58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */,
 				58580EAB2BE0B9EA0055F3E8 /* BodyInfoViewController.swift in Sources */,

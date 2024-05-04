@@ -16,7 +16,6 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
     var heightTitleLabel: UILabel!
     var bodyShapeTitleLabel: UILabel!
     
-    
     let numberLabel = UILabel().then {
         $0.text = "2/5"
         $0.textColor = .red
@@ -55,22 +54,28 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
+    private func setupKeyboardDismissal() {
+        // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        // 키보드를 숨깁니다.
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        
-        
+        setupKeyboardDismissal()
     }
     
     private func setupLayout() {
         view.backgroundColor = .white
         navigationItem.title = "나의 정보"
         
-        view.addSubview(numberLabel)
-        view.addSubview(instructionLabel)
-        view.addSubview(addinstructionLabel)
-        view.addSubview(verticalStackView)
-        view.addSubview(nextButton)
+        view.addSubviews(numberLabel,instructionLabel,addinstructionLabel,verticalStackView,nextButton)
         
         numberLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(70)
@@ -127,10 +132,8 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
         present(alert, animated: true, completion: nil)
     }
 
-    
     private func createCustomView(title: String, for infoType: InfoType) -> UIView {
             
-        
         let customView = UIView().then {
            $0.backgroundColor = .white
            $0.layer.borderWidth = 1.0 // Set border width
@@ -182,7 +185,6 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
        return customView
     }
     
-    
     @objc private func customViewTapped(_ sender: UITapGestureRecognizer) {
         // Handle the tap event on the custom view
         let heightPickerVC = HeightPickerViewController()
@@ -222,11 +224,6 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
         
         
     }
-    @objc func showHeightPicker() {
-        let heightPickerVC = HeightPickerViewController()
-        heightPickerVC.delegate = self
-        present(heightPickerVC, animated: true, completion: nil)
-    }
     
     func updateHeightView() {
             // 여기서 heightTitleLabel의 텍스트를 업데이트합니다.
@@ -239,25 +236,22 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
             self.updateHeightView() // 여기서 키 라벨을 업데이트합니다.
         }
     }
-
-   
+    
+    func didSelectBodyShape(_ bodyShape: String) {
+        DispatchQueue.main.async {
+            self.bodyShapeTitleLabel.text = bodyShape
+        }
+    }
+    
     @objc func showBodyShape() {
         let bodyShapeVC = BodyShapeViewController()
         bodyShapeVC.delegate = self
         present(bodyShapeVC, animated: true, completion: nil)
     }
-//    
-//    func updateBodyShapeView() {
-//            
-//        
-//        }
-    
-    // BodyShapeViewControllerDelegate 구현 (예시)
-    func didSelectBodyShape(_ bodyShape: String) {
-        DispatchQueue.main.async {
-            // 이곳에서 선택된 체형을 처리하고 UI를 업데이트합니다.
-            self.bodyShapeTitleLabel.text = bodyShape
-        }
+    @objc func showHeightPicker() {
+        let heightPickerVC = HeightPickerViewController()
+        heightPickerVC.delegate = self
+        present(heightPickerVC, animated: true, completion: nil)
     }
     
 }
