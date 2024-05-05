@@ -3,7 +3,7 @@ import SnapKit
 import Then
 
 class JobSelectionViewController: UIViewController {
-
+    
     var selectedJobButton: UIButton?
     
     
@@ -51,8 +51,8 @@ class JobSelectionViewController: UIViewController {
         setupLayout()
         setupButtons()
     }
-
-
+    
+    
     
     private func setupLayout() {
         view.backgroundColor = .white
@@ -100,14 +100,14 @@ class JobSelectionViewController: UIViewController {
         
         for jobTitle in jobTitles {
             let button = UIButton().then {
-                    $0.setTitle(jobTitle, for: .normal)
-                    $0.setTitleColor(.black, for: .normal)
-                    $0.backgroundColor = .white
-                    $0.layer.cornerRadius = 10
-                    $0.layer.borderWidth = 1.0
-                    $0.layer.borderColor = UIColor.lightGray.cgColor
-                    $0.addTarget(self, action: #selector(jobButtonTapped(_:)), for: .touchUpInside)
-                }
+                $0.setTitle(jobTitle, for: .normal)
+                $0.setTitleColor(.black, for: .normal)
+                $0.backgroundColor = .white
+                $0.layer.cornerRadius = 10
+                $0.layer.borderWidth = 1.0
+                $0.layer.borderColor = UIColor.lightGray.cgColor
+                $0.addTarget(self, action: #selector(jobButtonTapped(_:)), for: .touchUpInside)
+            }
             verticalStackView.addArrangedSubview(button)
             
             button.snp.makeConstraints { make in
@@ -116,18 +116,18 @@ class JobSelectionViewController: UIViewController {
         }
         
     }
-
+    
     @objc private func jobButtonTapped(_ sender: UIButton) {// 이전에 선택된 버튼의 스타일을 초기화합니다.
         // 이전에 선택된 버튼의 스타일을 초기화합니다.
         selectedJobButton?.backgroundColor = .white
         selectedJobButton?.setTitleColor(.black, for: .normal)
         selectedJobButton?.layer.borderColor = UIColor.lightGray.cgColor
-
+        
         // 새로 선택된 버튼의 스타일을 업데이트합니다.
         sender.backgroundColor = UIColor.white
         sender.setTitleColor(.primary, for: .normal) // 선택된 상태의 텍스트 색상을 빨간색으로 설정
         sender.layer.borderColor = UIColor.red.cgColor // 선택된 상태의 테두리 색상을 빨간색으로 설정
-
+        
         // 새로 선택된 버튼을 저장합니다.
         selectedJobButton = sender
         
@@ -139,29 +139,29 @@ class JobSelectionViewController: UIViewController {
                 button.layer.borderColor = UIColor.lightGray.cgColor
             }
         }
-
+        
         // 선택된 직업을 처리합니다.
         guard let jobTitle = sender.titleLabel?.text else { return }
         print("Selected job: \(jobTitle)")
     }
     
     @objc private func nextButtonTapped() {
-            // 선택된 버튼이 있는지 확인
-            guard selectedJobButton != nil else {
-                // 경고 메시지 표시 또는 사용자에게 선택하라고 알림
-                showAlertForJobSelection()
-                return
-            }
-            
-            // 선택된 경우, LocalSelectViewController로 화면 전환
-            let localSelectVC = LocalSelectViewController()
-            navigationController?.pushViewController(localSelectVC, animated: true)
+        guard selectedJobButton != nil else {
+            // 경고 메시지 표시 또는 사용자에게 선택하라고 알림
+            showAlertForJobSelection()
+            return
         }
-        
-        // 사용자가 직업을 선택하지 않았을 때 경고를 표시하는 메서드
-        private func showAlertForJobSelection() {
-            let alert = UIAlertController(title: "직업 선택", message: "계속하려면 직업을 선택해 주세요.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
+        SignDataManager.shared.job = selectedJobButton?.currentTitle
+        print(selectedJobButton?.currentTitle ?? "nil")
+        // 선택된 경우, LocalSelectViewController로 화면 전환
+        let localSelectVC = LocalSelectViewController()
+        navigationController?.pushViewController(localSelectVC, animated: true)
+    }
+    
+    // 사용자가 직업을 선택하지 않았을 때 경고를 표시하는 메서드
+    private func showAlertForJobSelection() {
+        let alert = UIAlertController(title: "직업 선택", message: "계속하려면 직업을 선택해 주세요.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 }

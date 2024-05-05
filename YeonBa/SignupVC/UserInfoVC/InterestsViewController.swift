@@ -3,7 +3,7 @@ import SnapKit
 import Then
 
 class InterestsViewController: UIViewController {
-
+    
     var selectedInterestsButton: UIButton?
     
     let numberLabel = UILabel().then {
@@ -27,7 +27,7 @@ class InterestsViewController: UIViewController {
         $0.font = UIFont.pretendardRegular(size: 16)
         $0.textAlignment = .left
     }
-
+    
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
         $0.isEnabled = true
@@ -48,11 +48,8 @@ class InterestsViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = .white
         navigationItem.title = "나의 정보"
-    
-        view.addSubview(numberLabel)
-        view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
-        view.addSubview(nextButton)
+        
+        view.addSubviews(numberLabel,titleLabel,descriptionLabel,nextButton)
         
         numberLabel.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
@@ -125,17 +122,14 @@ class InterestsViewController: UIViewController {
     }
     
     @objc func nextButtonTapped() {
-            // 선택된 버튼이 있는지 확인
-            guard selectedInterestsButton != nil else {
-                // 경고 메시지 표시 또는 사용자에게 선택하라고 알림
-                showAlertForInterestsSelection()
-                return
-            }
-            print("next favorite")
-
-            let favoriteVC = MyFavoriteListViweController()
-            navigationController?.pushViewController(favoriteVC, animated: true)
+        guard selectedInterestsButton != nil else {
+            showAlertForInterestsSelection()
+            return
         }
+        SignDataManager.shared.lookAlikeAnimal = selectedInterestsButton?.currentTitle
+        let favoriteVC = MyFavoriteListViweController()
+        navigationController?.pushViewController(favoriteVC, animated: true)
+    }
     
     private func showAlertForInterestsSelection() {
         let alert = UIAlertController(title: "관심사 선택", message: "계속하려면 관심사를 선택해주세요.", preferredStyle: .alert)

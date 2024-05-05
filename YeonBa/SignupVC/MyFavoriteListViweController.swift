@@ -19,17 +19,6 @@ class MyFavoriteListViweController: UIViewController {
     private var ageViewMode: String = "20~25세"
     private var tallViewMode: String = "170~175cm"
     // MARK: - UI Components
-    let titleLabel = UILabel().then{
-        $0.text = "나의 선호조건"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "back2")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
     
     let headerLabel = UILabel().then {
         $0.text = "선호하는 조건을 골라 주세요."
@@ -161,7 +150,7 @@ class MyFavoriteListViweController: UIViewController {
     private let tallChoiceBtn = UIButton().then {
         $0.setImage(UIImage(named: "nextBtn"), for: .normal)
     }
-
+    
     let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
@@ -169,22 +158,21 @@ class MyFavoriteListViweController: UIViewController {
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupNavigationBar()
         setupViews()
         configUI()
         tapGesture()
     }
-
+    
+    private func setupNavigationBar() {
+        navigationItem.title = "나의 선호조건"
+    }
     private func setupViews() {
-        view.addSubview(titleLabel)
-        view.addSubview(backButton)
-        view.addSubview(headerLabel)
-        view.addSubview(contentLabel)
-        view.addSubview(nextButton)
-        view.addSubview(verticalStackview)
+        view.addSubviews(headerLabel,contentLabel,nextButton,verticalStackview)
         verticalStackview.addArrangedSubview(animalView)
         animalView.addSubview(animalLabel)
         animalView.addSubview(animalChoiceBtn)
@@ -208,18 +196,9 @@ class MyFavoriteListViweController: UIViewController {
         tallView.addSubview(tallChoiceBtn)
     }
     func configUI() {
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.centerX.equalToSuperview()
-        }
         
         headerLabel.snp.makeConstraints{make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(60)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(45)
             make.leading.equalToSuperview().offset(20)
         }
         contentLabel.snp.makeConstraints{make in

@@ -105,10 +105,7 @@ extension FavoriteAgeViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(titleLabel)
-        view.addSubview(ageRangeLabel)
-        view.addSubview(ageSlider)
-        view.addSubview(horizontalStackView)
+        view.addSubviews(titleLabel,ageRangeLabel,ageSlider,horizontalStackView)
         horizontalStackView.addArrangedSubview(finishButton)
         horizontalStackView.addArrangedSubview(nextButton)
         
