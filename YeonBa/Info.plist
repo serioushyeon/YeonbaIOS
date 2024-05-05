@@ -43,6 +43,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSUserActivityTypes</key>
+	<string>INSendMessagingIntent</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
