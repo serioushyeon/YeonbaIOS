@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else {return}
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let viewController = MyFavoriteListViweController()
+        let viewController = SignUpViewController()
 
         let navigationController = BaseNavigationController(rootViewController: viewController)
         window?.rootViewController = navigationController

@@ -14,11 +14,18 @@ class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
     
+    // APNs를 수신하면 didReceive 메소드 호출
+    // contentHnadler 클로저를 수행하면 푸시가 노출
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
+        // attachment에 이미지 넣기: https://ios-development.tistory.com/1282
+        // (아래 setAppIconToCustom 예제를 위해 잠시 주석 처리)
+//        setAttachment(request: request, contentHandler: contentHandler)
+        
+        // 푸시 app icon 부분 커스텀 하기: https://ios-development.tistory.com/1283
         setAppIconToCustom(request: request, contentHandler: contentHandler)
     }
     
@@ -45,11 +52,12 @@ class NotificationService: UNNotificationServiceExtension {
             print(error)
         }
     }
+    
     private func setAppIconToCustom(request: UNNotificationRequest, contentHandler: @escaping (UNNotificationContent) -> Void) {
         // Intent를 사용 전에는 info.plist에 키-값 추가 필요
         // NSUserActivityTypes을 array로 놓고 배열 중 하나의 값으로 INSendMessageIntent 입력
-        
-        let avatar = INImage(imageData: UIImage(named: "Icon.png")!.pngData()!)
+
+        let avatar = INImage(imageData: UIImage(named: "my_image.png")!.pngData()!)
         
         let senderPerson = INPerson(
             personHandle: INPersonHandle(value: "unique-sender-id-2", type: .unknown),
@@ -85,7 +93,7 @@ class NotificationService: UNNotificationServiceExtension {
         
         //
         intent.setImage(avatar, forParameterNamed: \.sender)
-        //        intent.setImage(avatar, forParameterNamed: \.speakableGroupName) // 그룹
+//        intent.setImage(avatar, forParameterNamed: \.speakableGroupName) // 그룹
         
         // interaction
         let interaction = INInteraction(intent: intent, response: nil)

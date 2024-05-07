@@ -17,13 +17,6 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     
     // MARK: - UI Components
     
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "BackButton")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-    }
-    
     let instructionLabel = UILabel().then {
         $0.text = "회원님의 사진 2장을 선택해 주세요."
         $0.font = UIFont.pretendardBold(size: 26)
@@ -111,7 +104,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     // MARK: - UI Layout
     private func addSubViews(){
         // Add subviews
-        [backButton, instructionLabel, subInstructionLabel, horizontalStackView, progressCircleView, photoGuideButton, goToCameraButton, addButton, addButton2, similarityLabel].forEach {
+        [instructionLabel, subInstructionLabel, horizontalStackView, progressCircleView, photoGuideButton, goToCameraButton, addButton, addButton2, similarityLabel].forEach {
             view.addSubview($0)
         }
         horizontalStackView.addArrangedSubview(photoPlaceholderView)
@@ -119,14 +112,8 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     private func configUI() {
-        
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(57)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
         instructionLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(139)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
             make.leading.equalToSuperview().offset(20)
         }
         
@@ -231,7 +218,6 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     private func setupActions() {
-        backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(didTapAddPhoto), for: .touchUpInside)
         photoGuideButton.addTarget(self, action: #selector(didTapPhotoGuide), for: .touchUpInside)
         goToCameraButton.addTarget(self, action: #selector(didTapGoToCamera), for: .touchUpInside)

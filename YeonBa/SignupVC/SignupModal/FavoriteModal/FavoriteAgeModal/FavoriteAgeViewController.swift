@@ -13,7 +13,11 @@ protocol FavoriteAgeViewControllerDelegate: AnyObject {
     func ageSelected(_ mode: String)
 }
 
-final class FavoriteAgeViewController: UIViewController {
+final class FavoriteAgeViewController: UIViewController,JKSliderDelegate {
+    func sliderValueChanged(lowerValue: Double, upperValue: Double) {
+        ageRangeLabel.text = "\(Int(lowerValue)) ~ \(Int(upperValue))"
+    }
+    
     private var selectedMode: String?
     weak var delegate: FavoriteAgeViewControllerDelegate?
     
@@ -24,14 +28,18 @@ final class FavoriteAgeViewController: UIViewController {
         $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 26)
     }
+    private let ageView = UIView().then {
+        $0.backgroundColor = .green
+        
+    }
     private let ageSlider = JKSlider().then {
-        $0.minValue = 1
-        $0.maxValue = 100
-        $0.lower = 1
-        $0.upper = 75
+        $0.minValue = 20
+        $0.maxValue = 40
+        $0.lower = 20
+        $0.upper = 40
     }
     private let ageRangeLabel = UILabel().then {
-        $0.text = "20~25세"
+        $0.text = "20~40세"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 16)
@@ -71,6 +79,7 @@ final class FavoriteAgeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        ageSlider.delegate = self
     }
     
     private func setupModalStyle() {
@@ -84,7 +93,6 @@ final class FavoriteAgeViewController: UIViewController {
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
     }
-    
     @objc private func dismissView() {
         self.dismiss(animated: true)
     }
@@ -92,9 +100,11 @@ final class FavoriteAgeViewController: UIViewController {
     @objc private func finishButtonTapped() {
         // Finish 버튼을 터치했을 때의 동작
         self.selectedMode = ageRangeLabel.text
+        ageRangeLabel.text = "\(Int(self.ageSlider.lower)) ~ \(Int(self.ageSlider.upper))"
         delegate?.ageSelected(ageRangeLabel.text ?? "20~25세")
         self.dismiss(animated: true)
     }
+
 }
 
 // MARK: 나이 버튼 Setup Layout
@@ -105,24 +115,29 @@ extension FavoriteAgeViewController {
     }
     
     private func setupLayout() {
-        view.addSubviews(titleLabel,ageRangeLabel,ageSlider,horizontalStackView)
+        view.addSubviews(ageView,titleLabel,horizontalStackView)
         horizontalStackView.addArrangedSubview(finishButton)
         horizontalStackView.addArrangedSubview(nextButton)
-        
+        ageView.addSubviews(ageRangeLabel,ageSlider)
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(51)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(24)
         }
-        ageRangeLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(41)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
-        ageSlider.snp.makeConstraints {
-            $0.top.equalTo(ageRangeLabel.snp.bottom).offset(9)
+        ageView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(21)
+            $0.height.equalTo(100)
         }
+//        ageRangeLabel.snp.makeConstraints {
+//            $0.top.equalTo(titleLabel.snp.bottom).offset(41)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
+//        ageSlider.snp.makeConstraints {
+//            $0.top.equalTo(ageRangeLabel.snp.bottom).offset(9)
+//            $0.leading.trailing.equalToSuperview().inset(20)
+//            $0.height.equalTo(21)
+//        }
         horizontalStackView.snp.makeConstraints {
             $0.height.equalTo(56)
             $0.leading.trailing.equalToSuperview().inset(20)

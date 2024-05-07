@@ -248,6 +248,7 @@ class PhoneNumberViewController: UIViewController {
     @objc func nextButtonTapped() {
         print("next button")
         verificationSuccessful()
+        SignDataManager.shared.phoneNumber = phoneNumberTextField.text
         let birthVC = BirthDateSettingViewController()
         navigationController?.pushViewController(birthVC, animated: true)
        // fetchData()

@@ -250,7 +250,6 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
             }
         }
         // 녹음 시작
-        // 녹음 시작
         recordingLabel.isHidden = false
         recordingIndicatorView.isHidden = false
         audioRecorder?.record()
@@ -277,16 +276,21 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
                         switch result {
                         case 0 :
                             voiceMode = "저음"
+                            SignDataManager.shared.vocalRange = voiceMode
                         case 1 :
                             voiceMode = "중음"
+                            SignDataManager.shared.vocalRange = voiceMode
                         case 2 :
                             voiceMode = "고음"
+                            SignDataManager.shared.vocalRange = voiceMode
                         case .none:
                             voiceMode = "중음"
+                            SignDataManager.shared.vocalRange = voiceMode
                         case .some(_):
                             voiceMode = "중음"
+                            SignDataManager.shared.vocalRange = voiceMode
                         }
-                        
+                        print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
                     } catch {
                         print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
                     }

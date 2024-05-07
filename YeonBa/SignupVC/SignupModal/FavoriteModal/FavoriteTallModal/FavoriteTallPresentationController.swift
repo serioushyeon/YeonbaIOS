@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+//protocol FavoriteTallViewControllerDelegate: AnyObject {
+//    func tallSelected(_ mode: String)
+//}
+
 final class FavoriteTallPresentationController: UIPresentationController {
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     private var currentPositionTouched: CGPoint?
