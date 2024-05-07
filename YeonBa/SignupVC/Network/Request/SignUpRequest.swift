@@ -7,13 +7,12 @@
 
 import Foundation
 
-struct SignUpRequest : Codable {
+struct SignUpRequest : Encodable {
     let socialId : Int
     let loginType : String
     let gender : String
     let phoneNumber : String
     let birth : String
-    let name : String
     let nickname : String
     let height : Int?
     let bodyType : String

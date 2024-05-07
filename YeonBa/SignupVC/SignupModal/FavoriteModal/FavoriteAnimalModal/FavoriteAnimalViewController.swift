@@ -180,7 +180,7 @@ extension FavoriteAnimalViewController {
         verticalStackView.addArrangedSubview(horizontalStackView1)
         verticalStackView.addArrangedSubview(horizontalStackView2)
         verticalStackView.addArrangedSubview(horizontalStackView3)
-        // 버튼을 생성하고 verticalStackView에 추가합니다.
+
         let modes = AnimalMode.allCases
         for (index, mode) in modes.enumerated() {
             if(mode.title == nil){

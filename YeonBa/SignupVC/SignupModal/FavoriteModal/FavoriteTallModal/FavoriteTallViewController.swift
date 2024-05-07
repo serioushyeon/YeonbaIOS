@@ -13,7 +13,10 @@ protocol FavoriteTallViewControllerDelegate: AnyObject {
     func tallSelected(_ mode: String)
 }
 
-final class FavoriteTallViewController: UIViewController {
+final class FavoriteTallViewController: UIViewController{
+    func sliderValueChanged(lowerValue: Double, upperValue: Double) {
+        tallRangeLabel.text = "\(Int(lowerValue)) ~ \(Int(upperValue))"
+    }
     private var selectedMode: String?
     weak var delegate: FavoriteTallViewControllerDelegate?
     
@@ -25,13 +28,13 @@ final class FavoriteTallViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 26)
     }
     private let tallSlider = JKSlider().then {
-        $0.minValue = 1
-        $0.maxValue = 100
-        $0.lower = 1
-        $0.upper = 75
+        $0.minValue = 140
+        $0.maxValue = 220
+        $0.lower = 140
+        $0.upper = 220
     }
     private let tallRangeLabel = UILabel().then {
-        $0.text = "170~175cm"
+        $0.text = "140~175cm"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 16)
@@ -92,6 +95,7 @@ final class FavoriteTallViewController: UIViewController {
     @objc private func finishButtonTapped() {
         // Finish 버튼을 터치했을 때의 동작
         self.selectedMode = tallRangeLabel.text
+        tallRangeLabel.text = "\(Int(self.tallSlider.lower)) ~ \(Int(self.tallSlider.upper))"
         delegate?.tallSelected(tallRangeLabel.text ?? "20~25세")
         self.dismiss(animated: true)
     }
@@ -105,10 +109,7 @@ extension FavoriteTallViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(titleLabel)
-        view.addSubview(tallRangeLabel)
-        view.addSubview(tallSlider)
-        view.addSubview(horizontalStackView)
+        view.addSubviews(titleLabel,tallRangeLabel,tallSlider,horizontalStackView)
         horizontalStackView.addArrangedSubview(finishButton)
         horizontalStackView.addArrangedSubview(nextButton)
         

@@ -2,17 +2,15 @@ import UIKit
 import SnapKit
 import Then
 
-
-
 class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelegate, BodyShapeViewControllerDelegate {
     
     var selectedHeight: Int? {
-          didSet {
-              // 사용자가 키를 선택하면 heightTitleLabel의 텍스트를 업데이트합니다.
-              heightTitleLabel.text = "\(selectedHeight!)cm"
-          }
-      }
-
+        didSet {
+            // 사용자가 키를 선택하면 heightTitleLabel의 텍스트를 업데이트합니다.
+            heightTitleLabel.text = "\(selectedHeight!)cm"
+        }
+    }
+    
     var heightTitleLabel: UILabel!
     var bodyShapeTitleLabel: UILabel!
     
@@ -124,33 +122,33 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
             showAlertForIncompleteSelection()
         }
     }
-
+    
     private func showAlertForIncompleteSelection() {
         // 알림을 표시하는 코드
         let alert = UIAlertController(title: "선택 누락", message: "키와 체형을 모두 선택해주세요.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
+    
     private func createCustomView(title: String, for infoType: InfoType) -> UIView {
-            
+        
         let customView = UIView().then {
-           $0.backgroundColor = .white
-           $0.layer.borderWidth = 1.0 // Set border width
-           $0.layer.borderColor = UIColor.lightGray.cgColor // Set border color
-           $0.layer.cornerRadius = 10
-       }
-       
+            $0.backgroundColor = .white
+            $0.layer.borderWidth = 1.0 // Set border width
+            $0.layer.borderColor = UIColor.lightGray.cgColor // Set border color
+            $0.layer.cornerRadius = 10
+        }
+        
         let titleLabel = UILabel().then {
-          $0.text = title
-          $0.textColor = .black
-          $0.font = UIFont.pretendardSemiBold(size: 18)
-       }
-       customView.addSubview(titleLabel)
-       titleLabel.snp.makeConstraints { make in
-          make.centerY.equalToSuperview()
-          make.leading.equalToSuperview().offset(20)
-       }
+            $0.text = title
+            $0.textColor = .black
+            $0.font = UIFont.pretendardSemiBold(size: 18)
+        }
+        customView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+        }
         
         bodyShapeTitleLabel = UILabel().then {
             $0.text = title
@@ -158,18 +156,18 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
             $0.font = UIFont.pretendardSemiBold(size: 18)
         }
         
-       let arrowImageView = UIImageView().then {
-           $0.image = UIImage(systemName: "chevron.right")
-           $0.tintColor = .gray
-       }
-       
-       customView.addSubview(arrowImageView)
-       
-       arrowImageView.snp.makeConstraints { make in
-           make.centerY.equalToSuperview()
-           make.trailing.equalToSuperview().offset(-20)
-       }
-       
+        let arrowImageView = UIImageView().then {
+            $0.image = UIImage(systemName: "chevron.right")
+            $0.tintColor = .gray
+        }
+        
+        customView.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-20)
+        }
+        
         if infoType == .height {
             heightTitleLabel = titleLabel
             customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showHeightPicker)))
@@ -177,12 +175,12 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
             bodyShapeTitleLabel = titleLabel
             customView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showBodyShape)))
         }
-       // 높이가 지정된 경우 customView에 제약 조건을 설정합니다.
-       customView.snp.makeConstraints { make in
-           make.height.equalTo(60)
-       }
-       
-       return customView
+        // 높이가 지정된 경우 customView에 제약 조건을 설정합니다.
+        customView.snp.makeConstraints { make in
+            make.height.equalTo(60)
+        }
+        
+        return customView
     }
     
     @objc private func customViewTapped(_ sender: UITapGestureRecognizer) {
@@ -190,7 +188,7 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
         let heightPickerVC = HeightPickerViewController()
         heightPickerVC.modalPresentationStyle = .pageSheet
         heightPickerVC.delegate = self
-
+        
         self.present(heightPickerVC, animated: true, completion: nil)
         
         // iOS 15 이상에서만 사용 가능
@@ -220,15 +218,13 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
                 sheet.prefersGrabberVisible = true
             }
         }
-        
-        
-        
     }
     
     func updateHeightView() {
-            // 여기서 heightTitleLabel의 텍스트를 업데이트합니다.
-            heightTitleLabel.text = selectedHeight != nil ? "\(selectedHeight!)cm" : "키가 어떻게 되세요?"
-        }
+        // 여기서 heightTitleLabel의 텍스트를 업데이트합니다.
+        heightTitleLabel.text = selectedHeight != nil ? "\(selectedHeight!)cm" : "키가 어떻게 되세요?"
+        SignDataManager.shared.height = Int(selectedHeight ?? 140)
+    }
     
     func didSelectHeight(_ height: Int) {
         DispatchQueue.main.async {
@@ -240,6 +236,7 @@ class BodyInfoViewController: UIViewController, HeightPickerViewControllerDelega
     func didSelectBodyShape(_ bodyShape: String) {
         DispatchQueue.main.async {
             self.bodyShapeTitleLabel.text = bodyShape
+            SignDataManager.shared.bodyType = self.bodyShapeTitleLabel.text
         }
     }
     

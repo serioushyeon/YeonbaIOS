@@ -42,16 +42,16 @@ class SignUpViewController: UIViewController {
         $0.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
-    let signUpButton = UIButton().then {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 16),
-            .foregroundColor: UIColor.white,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        let attributedTitle = NSAttributedString(string: "가입하기", attributes: attributes)
-        $0.setAttributedTitle(attributedTitle, for: .normal)
-        $0.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-    }
+//    let signUpButton = UIButton().then {
+//        let attributes: [NSAttributedString.Key: Any] = [
+//            .font: UIFont.systemFont(ofSize: 16),
+//            .foregroundColor: UIColor.white,
+//            .underlineStyle: NSUnderlineStyle.single.rawValue
+//        ]
+//        let attributedTitle = NSAttributedString(string: "가입하기", attributes: attributes)
+//        $0.setAttributedTitle(attributedTitle, for: .normal)
+//        $0.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+//    }
     
     
     private lazy var gradientLayer: CAGradientLayer = {
@@ -195,19 +195,23 @@ extension SignUpViewController {
     
     func navigateToPhoneNumberVC() {
         let phonenumberVC = PhoneNumberViewController()
+        SignDataManager.shared.socialId = self.socialID
+        SignDataManager.shared.loginType = self.loginType
+        print("소셜ID: \(String(describing: SignDataManager.shared.socialId))")
+        print("소셜ID: \(String(describing: SignDataManager.shared.loginType))")
         phonenumberVC.socialID = self.socialID
         phonenumberVC.loginType = self.loginType
         navigationController?.pushViewController(phonenumberVC, animated: true)
         
     }
     
-    @objc func signUpButtonTapped() {
-        
-        let phonenumberVC = PhoneNumberViewController()
-        phonenumberVC.socialID = self.socialID
-        phonenumberVC.loginType = self.loginType
-        navigationController?.pushViewController(phonenumberVC, animated: true)
-    }
+//    @objc func signUpButtonTapped() {
+//        
+//        let phonenumberVC = PhoneNumberViewController()
+//        phonenumberVC.socialID = self.socialID
+//        phonenumberVC.loginType = self.loginType
+//        navigationController?.pushViewController(phonenumberVC, animated: true)
+//    }
 }
 
 extension SignUpViewController:

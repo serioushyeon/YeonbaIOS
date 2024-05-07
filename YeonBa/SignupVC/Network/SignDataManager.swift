@@ -13,6 +13,44 @@ class SignDataManager {
     
     private init() {}
     
+    var socialId: Int? {
+        get {
+            return KeychainWrapper.standard.integer(forKey: "socialId") // keychain 반환
+        }
+        set {
+            if let newValue = newValue {
+                KeychainWrapper.standard.set(newValue, forKey: "socialId") //keychain 저장
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: "socialId") //keychain 삭제
+            }
+        }
+    }
+    
+    var loginType: String? {
+        get {
+            return KeychainWrapper.standard.string(forKey: "loginType") // keychain 반환
+        }
+        set {
+            if let newValue = newValue {
+                KeychainWrapper.standard.set(newValue, forKey: "loginType") //keychain 저장
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: "loginType") //keychain 삭제
+            }
+        }
+    }
+    
+    var phoneNumber: String? {
+        get {
+            return KeychainWrapper.standard.string(forKey: "phoneNumber") // keychain 반환
+        }
+        set {
+            if let newValue = newValue {
+                KeychainWrapper.standard.set(newValue, forKey: "phoneNumber") //keychain 저장
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: "phoneNumber") //keychain 삭제
+            }
+        }
+    }
     var birthDate: String? {
         get {
             return KeychainWrapper.standard.string(forKey: "birthDate") // keychain 반환
@@ -100,6 +138,19 @@ class SignDataManager {
                 KeychainWrapper.standard.set(newValue, forKey: "activityArea")
             } else {
                 KeychainWrapper.standard.removeObject(forKey: "activityArea")
+            }
+        }
+    }
+    
+    var vocalRange: String? {
+        get {
+            return KeychainWrapper.standard.string(forKey: "voaclRange")
+        }
+        set {
+            if let newValue = newValue {
+                KeychainWrapper.standard.set(newValue, forKey: "voaclRange")
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: "voaclRange")
             }
         }
     }

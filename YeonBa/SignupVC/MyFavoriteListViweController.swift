@@ -174,26 +174,19 @@ class MyFavoriteListViweController: UIViewController {
     private func setupViews() {
         view.addSubviews(headerLabel,contentLabel,nextButton,verticalStackview)
         verticalStackview.addArrangedSubview(animalView)
-        animalView.addSubview(animalLabel)
-        animalView.addSubview(animalChoiceBtn)
+        animalView.addSubviews(animalLabel,animalChoiceBtn)
         verticalStackview.addArrangedSubview(locationView)
-        locationView.addSubview(locationLabel)
-        locationView.addSubview(locationChoiceBtn)
+        locationView.addSubviews(locationLabel,locationChoiceBtn)
         verticalStackview.addArrangedSubview(voiceView)
-        voiceView.addSubview(voiceLabel)
-        voiceView.addSubview(voiceChoiceBtn)
+        voiceView.addSubviews(voiceLabel,voiceChoiceBtn)
         verticalStackview.addArrangedSubview(ageView)
-        ageView.addSubview(ageLabel)
-        ageView.addSubview(ageChoiceBtn)
+        ageView.addSubviews(ageLabel,ageChoiceBtn)
         verticalStackview.addArrangedSubview(bodyView)
-        bodyView.addSubview(bodyLabel)
-        bodyView.addSubview(bodyChoiceBtn)
+        bodyView.addSubviews(bodyLabel,bodyChoiceBtn)
         verticalStackview.addArrangedSubview(mbtiView)
-        mbtiView.addSubview(mbtiLabel)
-        mbtiView.addSubview(mbtiChoiceBtn)
+        mbtiView.addSubviews(mbtiLabel,mbtiChoiceBtn)
         verticalStackview.addArrangedSubview(tallView)
-        tallView.addSubview(tallLabel)
-        tallView.addSubview(tallChoiceBtn)
+        tallView.addSubviews(tallLabel,tallChoiceBtn)
     }
     func configUI() {
         
@@ -367,6 +360,7 @@ class MyFavoriteListViweController: UIViewController {
         self.present(mbtiVC, animated: true)
     }
     @objc func showAgeModal() {
+        //navigationController?.pushViewController(AgeViewController(), animated: true)
         let ageVC = FavoriteAgeViewController(passMode: ageViewMode)
         ageVC.delegate = self
         self.present(ageVC, animated: true)
@@ -383,6 +377,7 @@ extension MyFavoriteListViweController: FavoriteLocationViewControllerDelegate {
         guard let mode = SignLocationMode(rawValue: indexPath) else { return }
         locationViewMode = mode
         locationLabel.text = mode.title // 라벨 텍스트 변경
+        SignDataManager.shared.preferredArea = locationLabel.text
     }
 }
 //MARK: -- 음성 delegate
@@ -392,15 +387,16 @@ extension MyFavoriteListViweController: FavoriteVoiceViewControllerDelegate {
         
         voiceViewMode = mode
         voiceLabel.text = mode.title // 라벨 텍스트 변경
+        SignDataManager.shared.preferredVocalRange = voiceLabel.text
     }
 }
 //MARK: -- 체중 delegate
 extension MyFavoriteListViweController: FavoriteBodyDelegate {
     func weightSelectedRowAt(indexPath: Int) {
         guard let mode = SignWeightMode(rawValue: indexPath) else { return }
-        
         bodyViewMode = mode
         bodyLabel.text = mode.title // 라벨 텍스트 변경
+        SignDataManager.shared.preferredBodyType = bodyLabel.text
     }
 }
 //MARK: -- 동물상 delegate
@@ -408,6 +404,7 @@ extension MyFavoriteListViweController: FavoriteAnimalViewControllerDelegate {
     func animalSelected(_ mode: AnimalMode) {
         animalViewMode = mode
         animalLabel.text = mode.title // 라벨 텍스트 변경
+        SignDataManager.shared.preferredAnimal = animalLabel.text
     }
 }
 //MARK: -- mbti delegate
@@ -415,19 +412,55 @@ extension MyFavoriteListViweController: FavoriteMbtiViewControllerDelegate {
     func mbtiSelected(_ mode: MbtiMode) {
         mbtiViewMode = mode
         mbtiLabel.text = mode.title // 라벨 텍스트 변경
+        SignDataManager.shared.preferredMbti = mbtiLabel.text
     }
 }
 //MARK: -- age delegate
 extension MyFavoriteListViweController: FavoriteAgeViewControllerDelegate {
     func ageSelected(_ mode: String) {
-        ageLabel.text = mode // 라벨 텍스트 변경
+        let ageComponents = mode.components(separatedBy: "~")
+        
+        // lowerBound와 upperBound가 적절하게 분리되었는지 확인
+        guard ageComponents.count == 2,
+              let lowerBound = Int(ageComponents[0].trimmingCharacters(in: .whitespaces)),
+              let upperBound = Int(ageComponents[1].trimmingCharacters(in: .whitespaces)) else {
+            // 올바른 형식이 아니면 에러 처리 또는 디폴트 값 할당
+            print("잘못된 나이 형식입니다.")
+            return
+        }
+        print("하향나이 : \(lowerBound)")
+        print("상향나이 : \(upperBound)")
+        // lowerBound와 upperBound를 적절한 속성에 할당
+        SignDataManager.shared.preferredAgeLowerBound = lowerBound
+        SignDataManager.shared.preferredAgeUpperBound = upperBound
+        
+        // 라벨 텍스트 변경
+        ageLabel.text = mode
     }
-    
 }
+
 
 //MARK: -- tall delegate
 extension MyFavoriteListViweController: FavoriteTallViewControllerDelegate {
     func tallSelected(_ mode: String) {
-        tallLabel.text = mode // 라벨 텍스트 변경
+        //tallLabel.text = mode // 라벨 텍스트 변경
+        let tallComponents = mode.components(separatedBy: "~")
+        
+        // lowerBound와 upperBound가 적절하게 분리되었는지 확인
+        guard tallComponents.count == 2,
+              let lowerBound = Int(tallComponents[0].trimmingCharacters(in: .whitespaces)),
+              let upperBound = Int(tallComponents[1].trimmingCharacters(in: .whitespaces)) else {
+            // 올바른 형식이 아니면 에러 처리 또는 디폴트 값 할당
+            print("잘못된 키 형식입니다.")
+            return
+        }
+        print("하향키 : \(lowerBound)")
+        print("상향키 : \(upperBound)")
+        // lowerBound와 upperBound를 적절한 속성에 할당
+        SignDataManager.shared.preferredHeightLowerBound = lowerBound
+        SignDataManager.shared.preferredHeightUpperBound = upperBound
+        
+        // 라벨 텍스트 변경
+        tallLabel.text = mode
     }
 }
