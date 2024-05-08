@@ -10,13 +10,8 @@ import SnapKit
 import Then
 
 class GuideViewController: UIViewController {
-    
     // MARK: - UI Components
-    
-    let titleLabel = UILabel().then {
-        $0.text = "사진 등록 가이드"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
+
     let instructionsTitle = UILabel().then {
         $0.text = "가이드를 꼭 준수해주세요."
         $0.font = UIFont.pretendardBold(size: 26)
@@ -129,8 +124,13 @@ class GuideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupNavigationBar()
         addSubViews()
         configUI()
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.title = "사진 등록 가이드"
     }
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
@@ -139,21 +139,15 @@ class GuideViewController: UIViewController {
 
     // MARK: - UI Layout
     private func addSubViews() {
-        [titleLabel, instructionsTitle, instructionsLabel1, instructionsLabel2, instructionsLabel3, goodLabel, GuideGoodImage1, GuideGoodImage2,GoodIcon, GoodIcon2, badLabel, GuideBadImage1, GuideBadImage2, BadIcon, BadIcon2, understandButton ].forEach {
+        [instructionsTitle, instructionsLabel1, instructionsLabel2, instructionsLabel3, goodLabel, GuideGoodImage1, GuideGoodImage2,GoodIcon, GoodIcon2, badLabel, GuideBadImage1, GuideBadImage2, BadIcon, BadIcon2, understandButton ].forEach {
             view.addSubview($0)
         }
     }
     private func configUI() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.centerX.equalToSuperview()
-        }
-        
         instructionsTitle.snp.makeConstraints{ make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(47)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.equalToSuperview().offset(20)
         }
-        
         
         instructionsLabel1.snp.makeConstraints { make in
             make.top.equalTo(instructionsTitle.snp.bottom).offset(15)

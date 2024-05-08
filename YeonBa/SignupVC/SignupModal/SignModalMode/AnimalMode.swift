@@ -21,17 +21,17 @@ enum AnimalMode: Int, CaseIterable {
        
         switch self {
         case .dog:
-            return "강아지 상"
+            return "강아지상"
         case .cat:
-            return "고양이 상"
+            return "고양이상"
         case .deer:
-            return "사슴 상"
+            return "사슴상"
         case .cow:
-            return "황소 상"
+            return "황소상"
         case .fox:
-            return "여우 상"
+            return "여우상"
         case .bear:
-            return "곰 상"
+            return "곰상"
         case .empty:
             return nil
         }

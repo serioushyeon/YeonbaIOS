@@ -19,12 +19,17 @@ class PhotoEssentialView: DottedBorderView, PhotoSelectionDelegate {
     weak var delegate : PhotoEssentialViewDelegate?
     func didSelectPhoto(_ image: UIImage) {
         imageView.image = image
+        let resizedImage = image.resizeImage(image: image, newWidth: 200) // 폭이 200인 이미지로 리사이징
+            
+            // 리사이징된 이미지를 배열에 추가
+        SignDataManager.shared.selectedImages.append(resizedImage)
+        print("selectedImages contents: \(SignDataManager.shared.selectedImages)")
         imageView.isHidden = false
         hintLabel.isHidden = true
         delegate?.updateEssentialAddButton()
         delegate?.updatePieChart(with: 100)
         delegate?.didUpdatePhotoCount(2, total: 2)
-        
+       
     }
     // MARK: - Properties
     private let hintLabel = UILabel().then {

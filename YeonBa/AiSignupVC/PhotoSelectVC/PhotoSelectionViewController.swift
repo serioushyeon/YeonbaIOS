@@ -12,9 +12,9 @@ import Charts
 import AVFoundation
 import Photos
 import PhotosUI
+import Alamofire
 
-class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate, PhotoEssentialViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate, PhotoEssentialViewDelegate {
     // MARK: - UI Components
     
     let instructionLabel = UILabel().then {
@@ -113,7 +113,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     
     private func configUI() {
         instructionLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.equalToSuperview().offset(20)
         }
         
@@ -193,6 +193,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         progressCircleView.holeColor = UIColor.clear
         progressCircleView.legend.enabled = false
     }
+    
     // MARK: - SetupPieChart
     func updatePieChart(with percentage: Double) {
         let remainingValue = 100 - percentage
@@ -223,17 +224,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         goToCameraButton.addTarget(self, action: #selector(didTapGoToCamera), for: .touchUpInside)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        
-        // 사용자가 찍은 사진을 가져옴
-        if let takenPhoto = info[.originalImage] as? UIImage {
-            // 앱에서 필요한 대로 찍은 사진을 사용
-        }
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
+
     // MARK: - Actions
     
     @objc func didTapBack() {
@@ -241,7 +232,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     @objc func didTapAddPhoto() {
-        // Handle add photo action
+        
     }
     
     @objc func didTapPhotoGuide() {
@@ -250,16 +241,88 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     @objc func didTapGoToCamera() {
-        let faceDetectionVC = FaceDetectionViewController()
         
-        // 프레젠트 방식을 전체 화면으로 설정
-        faceDetectionVC.modalPresentationStyle = .fullScreen
-        
-        // 현재 뷰 컨트롤러에서 FaceDetectionViewController를 프레젠트
-        self.present(faceDetectionVC, animated: true, completion: nil)
+        let dataManager = SignDataManager.shared
+        // 이미지를 Data로 변환하여 저장
+        var imageDatas: [Data] = []
+        for image in dataManager.selectedImages {
+            // UIImage 객체 생성 확인
+            print("UIImage 객체 확인: \(image)")
+            
+            // UIImage를 JPEG 데이터로 변환
+            if let imageData = image.jpegData(compressionQuality: 0.7) {
+                // JPEG 데이터의 유효성 확인
+                print("JPEG 데이터 확인: \(imageData)")
+                imageDatas.append(imageData)
+            } else {
+                print("이미지를 JPEG 데이터로 변환하는 데 실패했습니다.")
+            }
+        }
+        print(imageDatas.count)
+        if imageDatas.count < 2 {
+                print("프로필 사진은 반드시 2장이어야 합니다.")
+                return
+            }
+        let signUpRequest = SignUpRequest (
+            socialId: dataManager.socialId!,
+            loginType: dataManager.loginType!,
+            gender: dataManager.gender!,
+            phoneNumber: dataManager.phoneNumber!,
+            birth: "2001-12-28",
+            nickname: dataManager.nickName!,
+            height: dataManager.height,
+            bodyType: dataManager.bodyType!,
+            job: dataManager.job!,
+            activityArea: dataManager.activityArea!,
+            mbti: "ESTP",
+            vocalRange: dataManager.vocalRange!,
+            profilePhotos: imageDatas, // 이미지 데이터 할당
+            photoSyncRate: 90,
+            lookAlikeAnimal: dataManager.lookAlikeAnimal!,
+            preferredAnimal: dataManager.preferredAnimal!,
+            preferredArea: dataManager.preferredArea!,
+            preferredVocalRange: dataManager.preferredVocalRange!,
+            preferredAgeLowerBound: dataManager.preferredAgeLowerBound,
+            preferredAgeUpperBound: dataManager.preferredAgeUpperBound,
+            preferredHeightLowerBound: dataManager.preferredHeightLowerBound!,
+            preferredHeightUpperBound: dataManager.preferredHeightUpperBound!,
+            preferredBodyType: dataManager.preferredBodyType!,
+            preferredMbti: dataManager.preferredMbti!
+        )
+        print(signUpRequest)
+        NetworkService.shared.signUpService.signUp(bodyDTO: signUpRequest) { response in
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("회원가입 성공")
+            default:
+                print("회원가입 에러")
+            }
+        }
+//        let faceDetectionVC = FaceDetectionViewController()
+//        
+//        // 프레젠트 방식을 전체 화면으로 설정
+//        faceDetectionVC.modalPresentationStyle = .fullScreen
+//        
+//        // 현재 뷰 컨트롤러에서 FaceDetectionViewController를 프레젠트
+//        self.present(faceDetectionVC, animated: true, completion: nil)
     }
 }
 
+extension PhotoSelectionViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            picker.dismiss(animated: true)
+            return
+        }
+//        let resizedImage = image.resizeImage(image: image, newWidth: 200) // 리사이징된 이미지 폭은 200입니다.
+//        picker.dismiss(animated: true)
+
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
 class DottedBorderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -280,5 +343,16 @@ extension CALayer {
         shapeLayer.fillColor = nil
         shapeLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
         addSublayer(shapeLayer)
+    }
+}
+extension UIImage{
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / image.size.width // 새 이미지 확대/축소 비율
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }

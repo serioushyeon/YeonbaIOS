@@ -89,8 +89,14 @@ extension TargetType {
             let bodyParams = bodyRequest?.toDictionary() ?? [:]
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: bodyParams)
             
-        case .requestWithMultipart(let multipartFormData):
-            return try createMultipartRequest(urlRequest: &urlRequest, multipartFormDataClosure: multipartFormData)
+        case .requestWithMultipart(let multipartFormDataClosure):
+            // 멀티파트 폼 데이터 처리
+            var multipartFormData = MultipartFormData()
+            multipartFormDataClosure(multipartFormData)
+            
+            urlRequest.httpBody = try multipartFormData.encode()
+            urlRequest.setValue(multipartFormData.contentType, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+            
             
         case .requestPlain:
             break
@@ -99,24 +105,7 @@ extension TargetType {
         return urlRequest
     }
     
-    private func createMultipartRequest(urlRequest: inout URLRequest, multipartFormDataClosure: (MultipartFormData) -> Void) throws -> URLRequest {
-        var multipartFormData = MultipartFormData()
-        multipartFormDataClosure(multipartFormData) // 클로저 전달
-        
-        // 멀티파트 폼 데이터에 적합한 헤더 설정
-        urlRequest.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
-        
-        return try AF.upload(
-            multipartFormData: multipartFormData,
-            to: urlRequest.url!,
-            method: method,
-            headers: urlRequest.headers
-        ).uploadProgress { progress in
-            // 필요한 경우 진행 상황 처리
-        }.responseJSON { response in
-            // 필요한 경우 응답 처리
-        }.request! // Alamofire의 응답에서 요청 언래핑
-    }
+    
 }
 
 @frozen

@@ -21,11 +21,9 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        // attachment에 이미지 넣기: https://ios-development.tistory.com/1282
         // (아래 setAppIconToCustom 예제를 위해 잠시 주석 처리)
 //        setAttachment(request: request, contentHandler: contentHandler)
         
-        // 푸시 app icon 부분 커스텀 하기: https://ios-development.tistory.com/1283
         setAppIconToCustom(request: request, contentHandler: contentHandler)
     }
     

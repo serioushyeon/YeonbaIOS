@@ -3,7 +3,7 @@ import SnapKit
 import Then
 
 class LocalSelectViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    let locals = ["서울", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주도"]
+    let locals = ["서울", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"]
     
     var selectedLocal: String? {
         didSet {

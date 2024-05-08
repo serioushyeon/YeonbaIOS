@@ -72,7 +72,7 @@ class GenderSelectionViewController: UIViewController {
     }
     
     private func setupButtons() {
-        let genderOptions = ["남자", "여자"]
+        let genderOptions = ["남", "여"]
         
         for gender in genderOptions {
             let button = UIButton().then {

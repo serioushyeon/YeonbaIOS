@@ -37,7 +37,7 @@ class InterestsViewController: UIViewController {
     }
     
     var buttons: [UIButton] = []
-    let interests = ["강아지 상", "고양이 상", "사슴 상", "황소 상", "여우 상", "곰 상"]
+    let interests = ["강아지상", "고양이상", "사슴상", "황소상", "여우상", "곰상"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

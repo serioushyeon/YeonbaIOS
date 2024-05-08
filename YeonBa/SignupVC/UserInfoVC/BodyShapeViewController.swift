@@ -29,7 +29,7 @@ class BodyShapeViewController: UIViewController {
         $0.backgroundColor = .white
     }
     
-    let bodyShapeOptions: [String] = ["마른 체형", "보통 체형", "조금 통통", "통통 체형"]
+    let bodyShapeOptions: [String] = ["마른체형", "보통체형", "조금통통", "통통체형"]
     
     let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)

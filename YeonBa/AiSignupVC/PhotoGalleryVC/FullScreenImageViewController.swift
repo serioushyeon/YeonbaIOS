@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class FullScreenImageViewController: UIViewController {
     var image: UIImage
@@ -43,7 +44,7 @@ class FullScreenImageViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.barStyle = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(dismissViewController))
     }

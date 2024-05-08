@@ -18,13 +18,13 @@ enum SignWeightMode: Int, CaseIterable {
     var title: String? {
         switch self {
         case .thinBody:
-            return "마른 체형"
+            return "마른체형"
         case .middleBody:
-            return "보통 체형"
+            return "보통체형"
         case .littleFatBody:
-            return "조금 통통"
+            return "조금통통"
         case .fatBody:
-            return "통통 체형"
+            return "통통체형"
         case .empty:
             return nil
             
