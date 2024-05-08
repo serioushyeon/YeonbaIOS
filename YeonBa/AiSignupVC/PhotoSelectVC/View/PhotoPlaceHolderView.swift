@@ -20,6 +20,11 @@ class PhotoPlaceholderView: DottedBorderView, PhotoSelectionDelegate {
 
     func didSelectPhoto(_ image: UIImage) {
         imageView.image = image
+        let resizedImage = image.resizeImage(image: image, newWidth: 200) // 폭이 200인 이미지로 리사이징
+            
+            // 리사이징된 이미지를 배열에 추가
+        SignDataManager.shared.selectedImages.append(resizedImage)
+        print("selectedImages contents: \(SignDataManager.shared.selectedImages)")
         imageView.isHidden = false
         hintLabel.isHidden = true
         delegate?.updateAddButton()
@@ -38,7 +43,7 @@ class PhotoPlaceholderView: DottedBorderView, PhotoSelectionDelegate {
     
     private var imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.isHidden = true  // Initially hidden
+        $0.isHidden = true
         $0.clipsToBounds = true
     }
     
@@ -93,7 +98,6 @@ class PhotoPlaceholderView: DottedBorderView, PhotoSelectionDelegate {
         let galleryVC = CustomPhotoGalleryViewController()
         galleryVC.delegate = self
         
-        // 현재 활성화된 scene의 delegate에서 window를 가져옵니다.
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController {
             let navController = rootViewController as? UINavigationController ?? rootViewController.navigationController

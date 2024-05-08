@@ -47,7 +47,7 @@ enum SignLocationMode: Int, CaseIterable {
         case .ulsan:
             return "울산"
         case .gangwon:
-            return "강원도"
+            return "강원"
         case .chungbuk:
             return "충북"
         case .chungnam:

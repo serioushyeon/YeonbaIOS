@@ -12,7 +12,7 @@ class SignDataManager {
     static let shared = SignDataManager()
     
     private init() {}
-    
+    var selectedImages: [UIImage] = []
     var socialId: Int? {
         get {
             return KeychainWrapper.standard.integer(forKey: "socialId") // keychain 반환

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SignUpRequest : Encodable {
+struct SignUpRequest : Codable {
     let socialId : Int
     let loginType : String
     let gender : String
@@ -20,13 +20,14 @@ struct SignUpRequest : Encodable {
     let activityArea : String
     let mbti : String
     let vocalRange : String
-    let profilePhotos : [String]?
+    let profilePhotos : [Data]?
     let photoSyncRate : Int?
     let lookAlikeAnimal : String
     let preferredAnimal : String
     let preferredArea : String
     let preferredVocalRange : String
     let preferredAgeLowerBound : Int?
+    let preferredAgeUpperBound : Int?
     let preferredHeightLowerBound : Int?
     let preferredHeightUpperBound : Int?
     let preferredBodyType : String

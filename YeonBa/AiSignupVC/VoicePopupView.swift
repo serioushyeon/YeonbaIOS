@@ -1,3 +1,4 @@
+
 import UIKit
 import SnapKit
 import Then
@@ -31,68 +32,12 @@ class VoicePopupView: UIView {
         $0.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
     }
     var navigation : UINavigationController?
-    // 이미지 다운로드 및 Data로 변환하는 함수
-    func downloadImage(from url: URL, completion: @escaping (Data?) -> Void) {
-        AF.download(url).responseData { response in
-            guard let data = response.value else {
-                completion(nil)
-                return
-            }
-            completion(data)
-        }
-    }
+
     
     // MARK: - Actions
     @objc func doneTapped() {
         let selectVC = PhotoSelectionViewController()
         navigation?.pushViewController(selectVC, animated: true)
-        let dataManager = SignDataManager.shared
-        let imageURLString = "https://newsimg.sedaily.com/2023/09/12/29UNLQFQT6_1.jpg"
-        guard let imageURL = URL(string: imageURLString) else {
-            print("Invalid image URL")
-            return
-        }
-        
-        guard let imageData = try? Data(contentsOf: imageURL) else {
-            print("Failed to download image data")
-            return
-        }
-        
-        let signUpRequest = SignUpRequest (
-            socialId: dataManager.socialId!,
-            loginType: dataManager.loginType!,
-            gender: dataManager.gender!,
-            phoneNumber: dataManager.phoneNumber!,
-            birth: dataManager.birthDate!,
-            nickname: dataManager.nickName!,
-            height: dataManager.height,
-            bodyType: dataManager.bodyType!,
-            job: dataManager.job!,
-            activityArea: dataManager.activityArea!,
-            mbti: "estp",
-            vocalRange: dataManager.vocalRange!,
-            profilePhotos: [imageURLString], // 이미지 데이터 할당
-            photoSyncRate: 60,
-            lookAlikeAnimal: dataManager.lookAlikeAnimal!,
-            preferredAnimal: dataManager.preferredAnimal!,
-            preferredArea: dataManager.preferredArea!,
-            preferredVocalRange: dataManager.preferredVocalRange!,
-            preferredAgeLowerBound: dataManager.preferredAgeLowerBound,
-            preferredHeightLowerBound: dataManager.preferredHeightLowerBound!,
-            preferredHeightUpperBound: dataManager.preferredHeightUpperBound!,
-            preferredBodyType: dataManager.preferredBodyType!,
-            preferredMbti: dataManager.preferredMbti!
-        )
-        
-        NetworkService.shared.signUpService.signUp(bodyDTO: signUpRequest) { response in
-            switch response {
-            case .success(let data):
-                guard let data = data.data else { return }
-                print("회원가입 성공")
-            default:
-                print("회원가입 에러")
-            }
-        }
         
         onDoneButtonTapped?()
     }
