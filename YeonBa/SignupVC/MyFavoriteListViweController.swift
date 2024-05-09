@@ -23,7 +23,7 @@ class MyFavoriteListViweController: UIViewController {
     let headerLabel = UILabel().then {
         $0.text = "선호하는 조건을 골라 주세요."
         $0.textColor = .black
-        $0.font = UIFont.pretendardBold(size: 26)
+        $0.font = UIFont.pretendardSemiBold(size: 26)
     }
     let contentLabel = UILabel().then {
         $0.text = "매칭을 위해 필수 단계입니다."
@@ -322,6 +322,13 @@ class MyFavoriteListViweController: UIViewController {
         let tallGesture = UITapGestureRecognizer(target: self, action: #selector(showTallModal))
         tallView.addGestureRecognizer(tallGesture)
     }
+    
+    private func showAlertForMissingData() {
+        let alertController = UIAlertController(title: "경고", message: "필수 정보를 모두 입력해주세요.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
     //MARK: - Actions
     @objc func backButtonTapped() {
         // 뒤로 가기 로직을 구현
@@ -329,10 +336,22 @@ class MyFavoriteListViweController: UIViewController {
     }
     
     @objc func nextButtonTapped() {
-        // Validate the nickname and if valid, proceed to the next screen
+        guard voiceViewMode != .empty,
+              bodyViewMode != .empty,
+              animalViewMode != .empty,
+              mbtiViewMode != .empty,
+              locationViewMode != .empty,
+              ageViewMode != nil,
+              tallViewMode != nil else {
+            showAlertForMissingData()
+            return
+        }
+        
+        // 모든 조건이 충족되면 다음 화면으로 이동합니다.
         let nextVC = VoiceRecordingViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
     @objc func showLocationModal() {
         let locationModalVC = FavoriteLocationViewController(passMode: locationViewMode)
         locationModalVC.modalPresentationStyle = .pageSheet
@@ -360,13 +379,12 @@ class MyFavoriteListViweController: UIViewController {
         self.present(mbtiVC, animated: true)
     }
     @objc func showAgeModal() {
-        //navigationController?.pushViewController(AgeViewController(), animated: true)
-        let ageVC = FavoriteAgeViewController(passMode: ageViewMode)
+        let ageVC = AgeViewController()
         ageVC.delegate = self
         self.present(ageVC, animated: true)
     }
     @objc func showTallModal() {
-        let tallVC = FavoriteTallViewController(passMode: tallViewMode)
+        let tallVC = TallViewController()
         tallVC.delegate = self
         self.present(tallVC, animated: true)
     }
@@ -416,8 +434,8 @@ extension MyFavoriteListViweController: FavoriteMbtiViewControllerDelegate {
     }
 }
 //MARK: -- age delegate
-extension MyFavoriteListViweController: FavoriteAgeViewControllerDelegate {
-    func ageSelected(_ mode: String) {
+extension MyFavoriteListViweController: AgeViewControllerDelegate {
+    func favoriteAgeSelected(_ mode: String) {
         let ageComponents = mode.components(separatedBy: "~")
         
         // lowerBound와 upperBound가 적절하게 분리되었는지 확인
@@ -439,10 +457,9 @@ extension MyFavoriteListViweController: FavoriteAgeViewControllerDelegate {
     }
 }
 
-
 //MARK: -- tall delegate
-extension MyFavoriteListViweController: FavoriteTallViewControllerDelegate {
-    func tallSelected(_ mode: String) {
+extension MyFavoriteListViweController: TallViewControllerDelegate {
+    func favoriteTallSelected(_ mode: String) {
         //tallLabel.text = mode // 라벨 텍스트 변경
         let tallComponents = mode.components(separatedBy: "~")
         
