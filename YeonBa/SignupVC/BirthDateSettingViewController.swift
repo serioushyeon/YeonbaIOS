@@ -59,7 +59,19 @@ class BirthDateSettingViewController: UIViewController {
         view.backgroundColor = .white
         setupNavigationBar()
         setupViews()
+        setupHideKeyboardOnTap()
     }
+
+    private func setupHideKeyboardOnTap() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false  // 이 옵션은 제스처 인식 시 다른 UI 요소의 인터랙션을 방해하지 않도록 합니다.
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
     
     private func setupNavigationBar() {
         navigationItem.title = "회원가입"

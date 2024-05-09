@@ -108,7 +108,25 @@
 		58D644642BCF8B21008DCC9F /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644632BCF8B21008DCC9F /* PhotoCollectionViewCell.swift */; };
 		58D644682BCFB3C3008DCC9F /* FaceDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644672BCFB3C3008DCC9F /* FaceDetectionViewController.swift */; };
 		58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */; };
-		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
+		C1024B8E2BE0CB1B00A32BA1 /* WaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B8D2BE0CB1B00A32BA1 /* WaveFormView.swift */; };
+		C1024B902BE0CB2300A32BA1 /* converted_model.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C1024B8F2BE0CB2300A32BA1 /* converted_model.mlpackage */; };
+		C1024B952BE0CB3200A32BA1 /* CollectDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B922BE0CB3200A32BA1 /* CollectDataModel.swift */; };
+		C1024B962BE0CB3200A32BA1 /* CollectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B932BE0CB3200A32BA1 /* CollectResponse.swift */; };
+		C1024B972BE0CB3200A32BA1 /* CollectDataUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B942BE0CB3200A32BA1 /* CollectDataUserModel.swift */; };
+		C1024B9A2BE0CB3B00A32BA1 /* RecieveCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B992BE0CB3B00A32BA1 /* RecieveCupidCollectionViewCell.swift */; };
+		C1024B9E2BE0CB6700A32BA1 /* OtherProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B9C2BE0CB6700A32BA1 /* OtherProfileDataModel.swift */; };
+		C1024B9F2BE0CB6700A32BA1 /* OtherProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024B9D2BE0CB6700A32BA1 /* OtherProfileResponse.swift */; };
+		C1024BA02BE1136500A32BA1 /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
+		C1024BA12BE1136500A32BA1 /* Pods_YeonBaTests.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C1024BA52BE4656A00A32BA1 /* NomeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BA42BE4656A00A32BA1 /* NomeetingViewController.swift */; };
+		C1024BA72BE465DF00A32BA1 /* NotificationsettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BA62BE465DF00A32BA1 /* NotificationsettingsViewController.swift */; };
+		C1024BA92BE4660C00A32BA1 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BA82BE4660C00A32BA1 /* AccountManagementViewController.swift */; };
+		C1024BAB2BE4669700A32BA1 /* BlockingmanagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BAA2BE4669700A32BA1 /* BlockingmanagementViewController.swift */; };
+		C1024BAD2BE4675900A32BA1 /* ArrowchargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BAC2BE4675900A32BA1 /* ArrowchargingViewController.swift */; };
+		C1024BAF2BE46B3800A32BA1 /* CustomercenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BAE2BE46B3800A32BA1 /* CustomercenterViewController.swift */; };
+		C1024BB12BE46B6400A32BA1 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BB02BE46B6400A32BA1 /* PolicyViewController.swift */; };
+		C1024BB32BE46B8000A32BA1 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BB22BE46B8000A32BA1 /* NoticeViewController.swift */; };
+		C1024BB52BEC8E1400A32BA1 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BB42BEC8E1400A32BA1 /* ProfileEditViewController.swift */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +164,17 @@
 				58580EA32BDF76560055F3E8 /* NotificationService.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1024BA22BE1136500A32BA1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C1024BA12BE1136500A32BA1 /* Pods_YeonBaTests.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -268,6 +297,23 @@
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa_YeonBaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1024B8D2BE0CB1B00A32BA1 /* WaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormView.swift; sourceTree = "<group>"; };
+		C1024B8F2BE0CB2300A32BA1 /* converted_model.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = converted_model.mlpackage; sourceTree = "<group>"; };
+		C1024B922BE0CB3200A32BA1 /* CollectDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectDataModel.swift; sourceTree = "<group>"; };
+		C1024B932BE0CB3200A32BA1 /* CollectResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectResponse.swift; sourceTree = "<group>"; };
+		C1024B942BE0CB3200A32BA1 /* CollectDataUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectDataUserModel.swift; sourceTree = "<group>"; };
+		C1024B992BE0CB3B00A32BA1 /* RecieveCupidCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecieveCupidCollectionViewCell.swift; sourceTree = "<group>"; };
+		C1024B9C2BE0CB6700A32BA1 /* OtherProfileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileDataModel.swift; sourceTree = "<group>"; };
+		C1024B9D2BE0CB6700A32BA1 /* OtherProfileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileResponse.swift; sourceTree = "<group>"; };
+		C1024BA42BE4656A00A32BA1 /* NomeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomeetingViewController.swift; sourceTree = "<group>"; };
+		C1024BA62BE465DF00A32BA1 /* NotificationsettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsettingsViewController.swift; sourceTree = "<group>"; };
+		C1024BA82BE4660C00A32BA1 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
+		C1024BAA2BE4669700A32BA1 /* BlockingmanagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingmanagementViewController.swift; sourceTree = "<group>"; };
+		C1024BAC2BE4675900A32BA1 /* ArrowchargingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowchargingViewController.swift; sourceTree = "<group>"; };
+		C1024BAE2BE46B3800A32BA1 /* CustomercenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomercenterViewController.swift; sourceTree = "<group>"; };
+		C1024BB02BE46B6400A32BA1 /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
+		C1024BB22BE46B8000A32BA1 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
+		C1024BB42BEC8E1400A32BA1 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -291,7 +337,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */,
+				C1024BA02BE1136500A32BA1 /* Pods_YeonBaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +368,8 @@
 		582DB14F2BBE888900600EA7 /* AiSignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				C1024B8F2BE0CB2300A32BA1 /* converted_model.mlpackage */,
+				C1024B8C2BE0CB1B00A32BA1 /* WaveForm */,
 				58D644662BCFB3A3008DCC9F /* CameraVC */,
 				58D644652BCF8D4F008DCC9F /* PhotoGalleryVC */,
 				582DB2352BC6835100600EA7 /* PhotoSelectVC */,
@@ -416,6 +464,7 @@
 		584DCF292B9CC0800081149F /* RecieveVC */ = {
 			isa = PBXGroup;
 			children = (
+				C1024B982BE0CB3B00A32BA1 /* Cell */,
 				584DCF2E2B9D55A60081149F /* RecieveCupidViewController.swift */,
 			);
 			path = RecieveVC;
@@ -480,6 +529,7 @@
 		589DF32C2B9074C5003F03C5 /* CollectVC */ = {
 			isa = PBXGroup;
 			children = (
+				C1024B912BE0CB3200A32BA1 /* CollectModel */,
 				584DCF292B9CC0800081149F /* RecieveVC */,
 				584DCF282B9CC0720081149F /* FavoriteVC */,
 				584DCF272B9CC0650081149F /* SendVC */,
@@ -502,6 +552,15 @@
 			isa = PBXGroup;
 			children = (
 				589DF3342B907528003F03C5 /* SettingViewController.swift */,
+				C1024BB42BEC8E1400A32BA1 /* ProfileEditViewController.swift */,
+				C1024BA42BE4656A00A32BA1 /* NomeetingViewController.swift */,
+				C1024BA62BE465DF00A32BA1 /* NotificationsettingsViewController.swift */,
+				C1024BA82BE4660C00A32BA1 /* AccountManagementViewController.swift */,
+				C1024BAA2BE4669700A32BA1 /* BlockingmanagementViewController.swift */,
+				C1024BAC2BE4675900A32BA1 /* ArrowchargingViewController.swift */,
+				C1024BAE2BE46B3800A32BA1 /* CustomercenterViewController.swift */,
+				C1024BB02BE46B6400A32BA1 /* PolicyViewController.swift */,
+				C1024BB22BE46B8000A32BA1 /* NoticeViewController.swift */,
 			);
 			path = SettingVC;
 			sourceTree = "<group>";
@@ -521,6 +580,7 @@
 		58BB858B2BB1D3D500F90050 /* OtherProfileVC */ = {
 			isa = PBXGroup;
 			children = (
+				C1024B9B2BE0CB6700A32BA1 /* OtherProfileAPI */,
 				58BB86282BB5686A00F90050 /* Modal */,
 				58BB86252BB550C800F90050 /* ModalMode */,
 				58BB85D22BB3AFEF00F90050 /* Model */,
@@ -697,16 +757,16 @@
 		58BB87142BBBECDD00F90050 /* SignupVC */ = {
 			isa = PBXGroup;
 			children = (
-				58580EB82BE0BA120055F3E8 /* NicknameSettingViewController.swift */,
-				58580EB62BE0BA0D0055F3E8 /* LocalSelectViewController.swift */,
-				58580EB42BE0BA080055F3E8 /* JobSelectionViewController.swift */,
-				58580EB22BE0BA030055F3E8 /* InterestsViewController.swift */,
-				58580EB02BE0B9FC0055F3E8 /* HeightPickerViewController.swift */,
-				58580EAE2BE0B9F60055F3E8 /* GenderSelectionViewController.swift */,
-				58580EAC2BE0B9F10055F3E8 /* BodyShapeViewController.swift */,
-				58580EAA2BE0B9EA0055F3E8 /* BodyInfoViewController.swift */,
-				58580EA82BE0B9E30055F3E8 /* BirthDateSettingViewController.swift */,
 				58580E972BDF50280055F3E8 /* SocialSign */,
+				58580EA82BE0B9E30055F3E8 /* BirthDateSettingViewController.swift */,
+				58580EB82BE0BA120055F3E8 /* NicknameSettingViewController.swift */,
+				58580EAE2BE0B9F60055F3E8 /* GenderSelectionViewController.swift */,
+				58580EAA2BE0B9EA0055F3E8 /* BodyInfoViewController.swift */,
+				58580EB02BE0B9FC0055F3E8 /* HeightPickerViewController.swift */,
+				58580EAC2BE0B9F10055F3E8 /* BodyShapeViewController.swift */,
+				58580EB42BE0BA080055F3E8 /* JobSelectionViewController.swift */,
+				58580EB62BE0BA0D0055F3E8 /* LocalSelectViewController.swift */,
+				58580EB22BE0BA030055F3E8 /* InterestsViewController.swift */,
 			);
 			path = SignupVC;
 			sourceTree = "<group>";
@@ -814,6 +874,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C1024B8C2BE0CB1B00A32BA1 /* WaveForm */ = {
+			isa = PBXGroup;
+			children = (
+				C1024B8D2BE0CB1B00A32BA1 /* WaveFormView.swift */,
+			);
+			path = WaveForm;
+			sourceTree = "<group>";
+		};
+		C1024B912BE0CB3200A32BA1 /* CollectModel */ = {
+			isa = PBXGroup;
+			children = (
+				C1024B922BE0CB3200A32BA1 /* CollectDataModel.swift */,
+				C1024B932BE0CB3200A32BA1 /* CollectResponse.swift */,
+				C1024B942BE0CB3200A32BA1 /* CollectDataUserModel.swift */,
+			);
+			path = CollectModel;
+			sourceTree = "<group>";
+		};
+		C1024B982BE0CB3B00A32BA1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C1024B992BE0CB3B00A32BA1 /* RecieveCupidCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		C1024B9B2BE0CB6700A32BA1 /* OtherProfileAPI */ = {
+			isa = PBXGroup;
+			children = (
+				C1024B9C2BE0CB6700A32BA1 /* OtherProfileDataModel.swift */,
+				C1024B9D2BE0CB6700A32BA1 /* OtherProfileResponse.swift */,
+			);
+			path = OtherProfileAPI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -863,6 +958,7 @@
 				58D15EA12B90585B00EB74E9 /* Sources */,
 				58D15EA22B90585B00EB74E9 /* Frameworks */,
 				58D15EA32B90585B00EB74E9 /* Resources */,
+				C1024BA22BE1136500A32BA1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1100,12 +1196,14 @@
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
+				C1024BA92BE4660C00A32BA1 /* AccountManagementViewController.swift in Sources */,
 				58BB86792BB7DA8400F90050 /* WeightMode.swift in Sources */,
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
 				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
 				582DB16A2BBE896600600EA7 /* OtherMessageCell.swift in Sources */,
 				58D644682BCFB3C3008DCC9F /* FaceDetectionViewController.swift in Sources */,
 				582DB1612BBE891300600EA7 /* ChattingRoomViewController.swift in Sources */,
+				C1024B962BE0CB3200A32BA1 /* CollectResponse.swift in Sources */,
 				582DB1592BBE88D900600EA7 /* AnalysisSyncViewController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
@@ -1122,6 +1220,7 @@
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
 				582DB1732BBE89A000600EA7 /* FindPwViewController.swift in Sources */,
+				C1024B9A2BE0CB3B00A32BA1 /* RecieveCupidCollectionViewCell.swift in Sources */,
 				58BB86892BB7FA2E00F90050 /* WeightPresentationController.swift in Sources */,
 				582DB16F2BBE899200600EA7 /* FindIdViewController.swift in Sources */,
 				582DB1682BBE896000600EA7 /* MyMessageCell.swift in Sources */,
@@ -1131,10 +1230,13 @@
 				582DB16D2BBE897F00600EA7 /* LoginViewController.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				582DB15D2BBE88D900600EA7 /* PhotoSelectionViewController.swift in Sources */,
+				C1024B9E2BE0CB6700A32BA1 /* OtherProfileDataModel.swift in Sources */,
 				58580EAD2BE0B9F10055F3E8 /* BodyShapeViewController.swift in Sources */,
+				C1024BA72BE465DF00A32BA1 /* NotificationsettingsViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
 				58580EB72BE0BA0E0055F3E8 /* LocalSelectViewController.swift in Sources */,
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
+				C1024B902BE0CB2300A32BA1 /* converted_model.mlpackage in Sources */,
 				582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */,
 				582DB1712BBE899900600EA7 /* FindPwResultViewController.swift in Sources */,
 				58BB86352BB579CE00F90050 /* BoundGrayLabel.swift in Sources */,
@@ -1149,15 +1251,19 @@
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
+				C1024BB32BE46B8000A32BA1 /* NoticeViewController.swift in Sources */,
+				C1024BB12BE46B6400A32BA1 /* PolicyViewController.swift in Sources */,
 				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				582DB15A2BBE88D900600EA7 /* AnalysisSyncResultViewController.swift in Sources */,
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
+				C1024BAB2BE4669700A32BA1 /* BlockingmanagementViewController.swift in Sources */,
 				58D6445F2BCF80C2008DCC9F /* FullScreenImageViewController.swift in Sources */,
 				58BB86D32BBAF94300F90050 /* SearchResultViewController.swift in Sources */,
 				582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */,
+				C1024B9F2BE0CB6700A32BA1 /* OtherProfileResponse.swift in Sources */,
 				582DB1752BBE89C100600EA7 /* FindIdResultViewController.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
@@ -1165,6 +1271,8 @@
 				58D644612BCF8735008DCC9F /* CustomPhotoGalleryViewController.swift in Sources */,
 				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
 				58580EB52BE0BA080055F3E8 /* JobSelectionViewController.swift in Sources */,
+				C1024B8E2BE0CB1B00A32BA1 /* WaveFormView.swift in Sources */,
+				C1024BA52BE4656A00A32BA1 /* NomeetingViewController.swift in Sources */,
 				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
 				58580EB92BE0BA120055F3E8 /* NicknameSettingViewController.swift in Sources */,
 				58580EAF2BE0B9F60055F3E8 /* GenderSelectionViewController.swift in Sources */,
@@ -1174,15 +1282,20 @@
 				58BB86272BB5512400F90050 /* DeclareMode.swift in Sources */,
 				58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */,
 				582DB2372BC683EA00600EA7 /* PhotoPlaceHolderView.swift in Sources */,
+				C1024BAF2BE46B3800A32BA1 /* CustomercenterViewController.swift in Sources */,
+				C1024B972BE0CB3200A32BA1 /* CollectDataUserModel.swift in Sources */,
 				58BB86832BB7F9E800F90050 /* WeightTableViewCell.swift in Sources */,
 				58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */,
 				58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */,
 				58BB86852BB7F9FA00F90050 /* WeightViewController.swift in Sources */,
 				58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */,
+				C1024BAD2BE4675900A32BA1 /* ArrowchargingViewController.swift in Sources */,
 				589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */,
 				582DB15B2BBE88D900600EA7 /* VoiceRecordingViewController.swift in Sources */,
 				58BB868C2BB8433F00F90050 /* LocationTableViewCell.swift in Sources */,
+				C1024BB52BEC8E1400A32BA1 /* ProfileEditViewController.swift in Sources */,
 				589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */,
+				C1024B952BE0CB3200A32BA1 /* CollectDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,9 +1353,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1258,6 +1373,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AllYeonBa;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1271,9 +1388,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1289,6 +1408,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AllYeonBa;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1419,9 +1540,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = QABS9B7G22;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
@@ -1440,6 +1563,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = YeonBa;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1455,9 +1579,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = QABS9B7G22;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
@@ -1476,6 +1602,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = YeonBa;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1486,16 +1613,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AllYeonBa;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = YeonBa;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1507,16 +1640,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AllYeonBa;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = YeonBa;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1529,13 +1668,17 @@
 			baseConfigurationReference = 763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AllYeonBa;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1548,13 +1691,17 @@
 			baseConfigurationReference = 467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AllYeonBa;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
