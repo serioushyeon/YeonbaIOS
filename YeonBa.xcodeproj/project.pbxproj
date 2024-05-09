@@ -110,7 +110,6 @@
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* tabBarController.swift */; };
 		589DF32F2B9074E7003F03C5 /* CollectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32E2B9074E7003F03C5 /* CollectViewController.swift */; };
-		589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3342B907528003F03C5 /* SettingViewController.swift */; };
 		589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */; };
 		589DF3772B95ED86003F03C5 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */; };
 		589DF37B2B96052A003F03C5 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */; };
@@ -152,6 +151,16 @@
 		58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */; };
 		58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */; };
 		58D137EF2BEA3E060048C228 /* AgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137EE2BEA3E060048C228 /* AgeViewController.swift */; };
+		58D137FB2BECAFD90048C228 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F02BECAFD80048C228 /* AccountManagementViewController.swift */; };
+		58D137FC2BECAFD90048C228 /* ArrowchargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F12BECAFD80048C228 /* ArrowchargingViewController.swift */; };
+		58D137FD2BECAFD90048C228 /* BlockingmanagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F22BECAFD80048C228 /* BlockingmanagementViewController.swift */; };
+		58D137FE2BECAFD90048C228 /* CustomercenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F32BECAFD80048C228 /* CustomercenterViewController.swift */; };
+		58D137FF2BECAFD90048C228 /* NomeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F42BECAFD80048C228 /* NomeetingViewController.swift */; };
+		58D138002BECAFD90048C228 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F52BECAFD80048C228 /* NoticeViewController.swift */; };
+		58D138012BECAFD90048C228 /* NotificationsettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F62BECAFD80048C228 /* NotificationsettingsViewController.swift */; };
+		58D138022BECAFD90048C228 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F72BECAFD80048C228 /* PolicyViewController.swift */; };
+		58D138032BECAFD90048C228 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F82BECAFD80048C228 /* ProfileEditViewController.swift */; };
+		58D138042BECAFD90048C228 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F92BECAFD80048C228 /* SettingViewController.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -316,7 +325,6 @@
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
 		589DF32E2B9074E7003F03C5 /* CollectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectViewController.swift; sourceTree = "<group>"; };
-		589DF3342B907528003F03C5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		589DF3362B9225D5003F03C5 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		589DF3762B95ED86003F03C5 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		589DF37A2B96052A003F03C5 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -359,6 +367,16 @@
 		58BB871B2BBBED0300F90050 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		58D137EE2BEA3E060048C228 /* AgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewController.swift; sourceTree = "<group>"; };
+		58D137F02BECAFD80048C228 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
+		58D137F12BECAFD80048C228 /* ArrowchargingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowchargingViewController.swift; sourceTree = "<group>"; };
+		58D137F22BECAFD80048C228 /* BlockingmanagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockingmanagementViewController.swift; sourceTree = "<group>"; };
+		58D137F32BECAFD80048C228 /* CustomercenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomercenterViewController.swift; sourceTree = "<group>"; };
+		58D137F42BECAFD80048C228 /* NomeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeetingViewController.swift; sourceTree = "<group>"; };
+		58D137F52BECAFD80048C228 /* NoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
+		58D137F62BECAFD80048C228 /* NotificationsettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsettingsViewController.swift; sourceTree = "<group>"; };
+		58D137F72BECAFD80048C228 /* PolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
+		58D137F82BECAFD80048C228 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		58D137F92BECAFD80048C228 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -850,14 +868,6 @@
 			path = ChatVC;
 			sourceTree = "<group>";
 		};
-		589DF3332B907517003F03C5 /* SettingVC */ = {
-			isa = PBXGroup;
-			children = (
-				589DF3342B907528003F03C5 /* SettingViewController.swift */,
-			);
-			path = SettingVC;
-			sourceTree = "<group>";
-		};
 		589DF3742B95ECCB003F03C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,6 +1070,23 @@
 			path = SignupVC;
 			sourceTree = "<group>";
 		};
+		58D137FA2BECAFD80048C228 /* SettingVC */ = {
+			isa = PBXGroup;
+			children = (
+				58D137F02BECAFD80048C228 /* AccountManagementViewController.swift */,
+				58D137F12BECAFD80048C228 /* ArrowchargingViewController.swift */,
+				58D137F22BECAFD80048C228 /* BlockingmanagementViewController.swift */,
+				58D137F32BECAFD80048C228 /* CustomercenterViewController.swift */,
+				58D137F42BECAFD80048C228 /* NomeetingViewController.swift */,
+				58D137F52BECAFD80048C228 /* NoticeViewController.swift */,
+				58D137F62BECAFD80048C228 /* NotificationsettingsViewController.swift */,
+				58D137F72BECAFD80048C228 /* PolicyViewController.swift */,
+				58D137F82BECAFD80048C228 /* ProfileEditViewController.swift */,
+				58D137F92BECAFD80048C228 /* SettingViewController.swift */,
+			);
+			path = SettingVC;
+			sourceTree = "<group>";
+		};
 		58D15E862B90585700EB74E9 = {
 			isa = PBXGroup;
 			children = (
@@ -1087,6 +1114,7 @@
 		58D15E912B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXGroup;
 			children = (
+				58D137FA2BECAFD80048C228 /* SettingVC */,
 				589CDD062BE5FDE900BA332F /* Gloabal */,
 				589CDD032BE5F09C00BA332F /* Extensions */,
 				589CDCF52BE504F400BA332F /* GlobalAPI */,
@@ -1098,7 +1126,6 @@
 				58BB87142BBBECDD00F90050 /* SignupVC */,
 				58BB86222BB54DAF00F90050 /* NameSpace */,
 				58BB858B2BB1D3D500F90050 /* OtherProfileVC */,
-				589DF3332B907517003F03C5 /* SettingVC */,
 				589DF3302B9074FE003F03C5 /* ChatVC */,
 				589DF32C2B9074C5003F03C5 /* CollectVC */,
 				589DF3272B907469003F03C5 /* SearchVC */,
@@ -1446,16 +1473,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58D137FB2BECAFD90048C228 /* AccountManagementViewController.swift in Sources */,
 				58BB86812BB7E56300F90050 /* VoiceTableViewCell.swift in Sources */,
 				58580F022BE13E490055F3E8 /* MbtiMode.swift in Sources */,
 				58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				582DB2392BC7739B00600EA7 /* PhotoEssentialView.swift in Sources */,
+				58D137FF2BECAFD90048C228 /* NomeetingViewController.swift in Sources */,
 				582DB1582BBE88D900600EA7 /* VoicePopupView.swift in Sources */,
 				58580F002BE13E490055F3E8 /* AgeMode.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
+				58D138022BECAFD90048C228 /* PolicyViewController.swift in Sources */,
 				58580F042BE13E490055F3E8 /* SignVoiceMode.swift in Sources */,
 				589CDCFF2BE514A500BA332F /* KeychainHandler.swift in Sources */,
 				58BB86792BB7DA8400F90050 /* WeightMode.swift in Sources */,
@@ -1469,7 +1499,9 @@
 				582DB1592BBE88D900600EA7 /* AnalysisSyncViewController.swift in Sources */,
 				58580EF72BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
+				58D138012BECAFD90048C228 /* NotificationsettingsViewController.swift in Sources */,
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
+				58D138032BECAFD90048C228 /* ProfileEditViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
 				58580F012BE13E490055F3E8 /* AnimalMode.swift in Sources */,
 				589CDD5E2BE7E6DB00BA332F /* APIRequestLoader.swift in Sources */,
@@ -1478,6 +1510,7 @@
 				582DB15C2BBE88D900600EA7 /* VoicePopupViewcontroller.swift in Sources */,
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
 				582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */,
+				58D138002BECAFD90048C228 /* NoticeViewController.swift in Sources */,
 				58580F0A2BE141E30055F3E8 /* CollectDataModel.swift in Sources */,
 				582DB1662BBE892C00600EA7 /* ChattingListCell.swift in Sources */,
 				58580F0B2BE141E30055F3E8 /* CollectDataUserModel.swift in Sources */,
@@ -1512,6 +1545,7 @@
 				58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */,
 				58580F192BE142870055F3E8 /* OtherProfileResponse.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
+				58D137FE2BECAFD90048C228 /* CustomercenterViewController.swift in Sources */,
 				58580F122BE142400055F3E8 /* WaveFormView.swift in Sources */,
 				582DB15D2BBE88D900600EA7 /* PhotoSelectionViewController.swift in Sources */,
 				58580EAD2BE0B9F10055F3E8 /* BodyShapeViewController.swift in Sources */,
@@ -1528,6 +1562,7 @@
 				589CDCF72BE5050900BA332F /* NetworkResult.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
 				58580EF52BE13E490055F3E8 /* FavoriteLocationViewController.swift in Sources */,
+				58D138042BECAFD90048C228 /* SettingViewController.swift in Sources */,
 				58580F0C2BE141E30055F3E8 /* CollectResponse.swift in Sources */,
 				589CDD6B2BE8B1F600BA332F /* TallJKSlider.swift in Sources */,
 				58580EEB2BE13E490055F3E8 /* FavoriteAgePresentationController.swift in Sources */,
@@ -1543,7 +1578,6 @@
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				589CDD012BE51D8300BA332F /* SignDataManager.swift in Sources */,
 				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
-				589DF3352B907528003F03C5 /* SettingViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				582DB15A2BBE88D900600EA7 /* AnalysisSyncResultViewController.swift in Sources */,
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
@@ -1568,6 +1602,7 @@
 				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
 				58580EB92BE0BA120055F3E8 /* NicknameSettingViewController.swift in Sources */,
 				589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */,
+				58D137FD2BECAFD90048C228 /* BlockingmanagementViewController.swift in Sources */,
 				58580EFD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift in Sources */,
 				58580EAF2BE0B9F60055F3E8 /* GenderSelectionViewController.swift in Sources */,
 				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
@@ -1579,6 +1614,7 @@
 				58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */,
 				582DB2372BC683EA00600EA7 /* PhotoPlaceHolderView.swift in Sources */,
 				58BB86832BB7F9E800F90050 /* WeightTableViewCell.swift in Sources */,
+				58D137FC2BECAFD90048C228 /* ArrowchargingViewController.swift in Sources */,
 				58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */,
 				58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */,
 				58BB86852BB7F9FA00F90050 /* WeightViewController.swift in Sources */,
