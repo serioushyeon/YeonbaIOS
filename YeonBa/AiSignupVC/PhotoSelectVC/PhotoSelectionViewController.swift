@@ -274,7 +274,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
             bodyType: dataManager.bodyType!,
             job: dataManager.job!,
             activityArea: dataManager.activityArea!,
-            mbti: "ESTP",
+            mbti: dataManager.mbti!,
             vocalRange: dataManager.vocalRange!,
             profilePhotos: imageDatas,
             photoSyncRate: 90,

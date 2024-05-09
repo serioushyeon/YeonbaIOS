@@ -9,20 +9,32 @@ import UIKit
 import SnapKit
 import Then
 //MARK: -- 6/6
-protocol MBTIViewControllerDelegate: AnyObject {
-    func mbtiSelected(_ mode: MbtiMode)
-}
 
 class MBTIViewController: UIViewController {
     private var selectedMode: MbtiMode?
-    weak var delegate: MBTIViewControllerDelegate?
+    
+    let numberLabel = UILabel().then {
+        $0.text = "6/6"
+        $0.textColor = .red
+        $0.textAlignment = .left
+        $0.font = UIFont.pretendardSemiBold(size: 24)
+        $0.numberOfLines = 0
+    }
     
     private let titleLabel = UILabel().then {
-        $0.text = "MBTI"
+        $0.text = "MBTI를 알려주세요!"
         $0.textColor = UIColor.black
         $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 26)
     }
+    
+    let descriptionLabel = UILabel().then {
+        $0.text = "매칭을 위해 필수 단계입니다."
+        $0.textColor = .gray
+        $0.font = UIFont.pretendardRegular(size: 16)
+        $0.textAlignment = .left
+    }
+    
     private let horizontalStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 10
@@ -63,26 +75,16 @@ class MBTIViewController: UIViewController {
         $0.layer.cornerRadius = 20
     }
     
-//    init(passMode: MbtiMode) {
-//        super.init(nibName: nil, bundle: nil)
-//        
-//        selectedMode = passMode
-//    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
-    private func setupInitialView() {
-        view.backgroundColor = UIColor.white
-        view.layer.cornerRadius = 20
-        view.clipsToBounds = true
-    }
+//    private func setupInitialView() {
+//        view.backgroundColor = UIColor.white
+//        view.layer.cornerRadius = 20
+//        view.clipsToBounds = true
+//    }
     
     @objc private func dismissView() {
         self.dismiss(animated: true)
@@ -92,13 +94,18 @@ class MBTIViewController: UIViewController {
         guard let mode = MbtiMode(rawValue: sender.tag) else { return }
         self.selectedMode = mode
         updateButtonSelection()
-        updateFinishButtonState()
+        //updateFinishButtonState()
     }
     
     @objc private func nextButtonTapped() {
-        // Finish 버튼을 터치했을 때의 동작
-        delegate?.mbtiSelected(selectedMode!)
-        self.dismiss(animated: true)
+        guard selectedMode != nil else {
+            showAlertForInterestsSelection()
+            return
+        }
+        SignDataManager.shared.mbti = selectedMode?.title
+        print(selectedMode?.title)
+        let favoriteVC = MyFavoriteListViweController()
+        navigationController?.pushViewController(favoriteVC, animated: true)
     }
     private func updateButtonSelection() {
         // 모든 버튼의 선택 상태 초기화
@@ -119,18 +126,22 @@ class MBTIViewController: UIViewController {
             nextButton.isEnabled = true
         }
     }
+    
     private func updateFinishButtonState() {
         if selectedMode?.title == nil {
             nextButton.isEnabled = false
             nextButton.layer.backgroundColor = UIColor.gray2?.cgColor
         } else {
             nextButton.layer.borderWidth = 2
-            nextButton.layer.borderColor = UIColor.black.cgColor
-            nextButton.titleLabel?.textColor = UIColor.black
-            nextButton.setTitleColor(.black, for: .normal)
-            nextButton.layer.backgroundColor = UIColor.white.cgColor
         }
     }
+    
+    private func showAlertForInterestsSelection() {
+        let alert = UIAlertController(title: "mbti 선택", message: "계속하려면 mbti를 선택해주세요.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     private func findButton(for mode: MbtiMode) -> UIButton? {
         for case let horizontalStackView as UIStackView in verticalStackView.arrangedSubviews {
             for case let button as UIButton in horizontalStackView.arrangedSubviews {
@@ -146,24 +157,32 @@ class MBTIViewController: UIViewController {
 // MARK: mbti 버튼 Setup Layout
 extension MBTIViewController {
     private func setupView() {
-        setupInitialView()
+        //setupInitialView()
         setupLayout()
     }
     
     private func setupLayout() {
-        view.addSubview(titleLabel)
-        view.addSubview(verticalStackView)
-        view.addSubview(horizontalStackView)
+        view.backgroundColor = .white
+        navigationItem.title = "나의 정보"
+        view.addSubviews(numberLabel,titleLabel,descriptionLabel,verticalStackView,horizontalStackView)
         horizontalStackView.addArrangedSubview(nextButton)
         
+        numberLabel.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(51)
+            $0.top.equalTo(numberLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(24)
+        }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(titleLabel)
         }
         
         verticalStackView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(35)
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(35)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(169)
         }

@@ -127,7 +127,7 @@ class InterestsViewController: UIViewController {
             return
         }
         SignDataManager.shared.lookAlikeAnimal = selectedInterestsButton?.currentTitle
-        let mbtiVC = MBTIViewController( )
+        let mbtiVC = MBTIViewController()
         navigationController?.pushViewController(mbtiVC, animated: true)
 //        let favoriteVC = MyFavoriteListViweController()
 //        navigationController?.pushViewController(favoriteVC, animated: true)
