@@ -268,7 +268,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
             loginType: dataManager.loginType!,
             gender: dataManager.gender!,
             phoneNumber: dataManager.phoneNumber!,
-            birth: "2001-12-28",
+            birth: dataManager.birthDate!,
             nickname: dataManager.nickName!,
             height: dataManager.height,
             bodyType: dataManager.bodyType!,
@@ -276,7 +276,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
             activityArea: dataManager.activityArea!,
             mbti: "ESTP",
             vocalRange: dataManager.vocalRange!,
-            profilePhotos: imageDatas, // 이미지 데이터 할당
+            profilePhotos: imageDatas,
             photoSyncRate: 90,
             lookAlikeAnimal: dataManager.lookAlikeAnimal!,
             preferredAnimal: dataManager.preferredAnimal!,

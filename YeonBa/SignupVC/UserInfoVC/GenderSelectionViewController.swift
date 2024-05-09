@@ -7,7 +7,7 @@ class GenderSelectionViewController: UIViewController {
     var selectedGenderButton: UIButton?
     
     let numberLabel = UILabel().then {
-        $0.text = "1/5"
+        $0.text = "1/6"
         $0.textColor = .red
         $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 24)

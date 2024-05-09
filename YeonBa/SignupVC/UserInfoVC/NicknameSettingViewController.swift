@@ -96,14 +96,20 @@ class NicknameSettingViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func nextButtonTapped() {
-        //닉네임 입력 nil 처리 
-//        guard let nickname = nicknameTextField.text, !nickname.isEmpty else {
-//            let alert = UIAlertController(title: "닉네임 입력", message: "닉네임을 입력해 주세요.", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-//            present(alert, animated: true, completion: nil)
-//            return
-//        }
-        let nickname = nicknameTextField.text
+        guard let nickname = nicknameTextField.text, !nickname.isEmpty else {
+            let alert = UIAlertController(title: "닉네임 입력", message: "닉네임을 입력해 주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+
+        if nickname.count >= 8 {
+            let alert = UIAlertController(title: "닉네임 길이 초과", message: "닉네임은 8자 이하여야 합니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+
         SignDataManager.shared.nickName = nickname
         let nextVC = GenderSelectionViewController()
         navigationController?.pushViewController(nextVC, animated: true)
