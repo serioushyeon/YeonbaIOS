@@ -161,6 +161,7 @@
 		58D138022BECAFD90048C228 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F72BECAFD80048C228 /* PolicyViewController.swift */; };
 		58D138032BECAFD90048C228 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F82BECAFD80048C228 /* ProfileEditViewController.swift */; };
 		58D138042BECAFD90048C228 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F92BECAFD80048C228 /* SettingViewController.swift */; };
+		58D138062BECBCD30048C228 /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D138052BECBCD30048C228 /* MBTIViewController.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -377,6 +378,7 @@
 		58D137F72BECAFD80048C228 /* PolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		58D137F82BECAFD80048C228 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		58D137F92BECAFD80048C228 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		58D138052BECBCD30048C228 /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -743,6 +745,7 @@
 				58580EAC2BE0B9F10055F3E8 /* BodyShapeViewController.swift */,
 				58580EAA2BE0B9EA0055F3E8 /* BodyInfoViewController.swift */,
 				58580EA82BE0B9E30055F3E8 /* BirthDateSettingViewController.swift */,
+				58D138052BECBCD30048C228 /* MBTIViewController.swift */,
 			);
 			path = UserInfoVC;
 			sourceTree = "<group>";
@@ -1486,6 +1489,7 @@
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
 				58D138022BECAFD90048C228 /* PolicyViewController.swift in Sources */,
+				58D138062BECBCD30048C228 /* MBTIViewController.swift in Sources */,
 				58580F042BE13E490055F3E8 /* SignVoiceMode.swift in Sources */,
 				589CDCFF2BE514A500BA332F /* KeychainHandler.swift in Sources */,
 				58BB86792BB7DA8400F90050 /* WeightMode.swift in Sources */,
