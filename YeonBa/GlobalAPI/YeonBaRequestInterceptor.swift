@@ -14,7 +14,7 @@ final class YeonBaRequestInterceptor: RequestInterceptor {
     
     private var isRefreshingToken = false
     private var requestsToRetry: [(RetryResult) -> Void] = []
-    
+    // request가
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         print("✋interceptor adapt 작동")
         /// request 될 때마다 실행됨
@@ -51,7 +51,7 @@ final class YeonBaRequestInterceptor: RequestInterceptor {
     
     func refreshToken(completion: @escaping (Bool) -> Void) {
         print("토큰 재발급 시작")
-//        NetworkService.shared.onboardingService.postRefreshToken() { [weak self] result in
+//        NetworkService.shared.signUpService.postRefreshToken() { [weak self] result in
 //            guard let self else {return}
 //            switch result {
 //            case .success(let data):
@@ -65,14 +65,13 @@ final class YeonBaRequestInterceptor: RequestInterceptor {
 //                    return
 //                } else if data.code == 404 {
 //                    print("이미 탈퇴한 사용자로 찾을 수 없습니다.❌")
-////                    self.logout()
+//                    self.logout()
 //                }
 //            case .failure:
-////                self.logout()
-//                break
+//                self.logout()
 //            default:
 //                completion(false)
-////                self.logout()
+//                self.logout()
 //            }
 //        }
     }
