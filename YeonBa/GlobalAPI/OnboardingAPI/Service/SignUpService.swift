@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol SignUpServiceProtocol {
     func signUp(bodyDTO: SignUpRequest, completion: @escaping (NetworkResult<BaseResponse<SignUpResponse>>) -> Void)
