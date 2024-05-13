@@ -2,8 +2,12 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class AnalysisSyncResultViewController: UIViewController {
+    
+    var confidence1 = 0.0
+    var confidence2 = 0.0
     
     // MARK: - UI Components
     let titleLabel = UILabel().then{
@@ -19,7 +23,7 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     let selfieImage = UIImageView().then{
-        $0.image = UIImage(named: "GuideGoodImage1")
+        $0.image = SignDataManager.shared.selfieImage
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -27,7 +31,7 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     let profileImage1 = UIImageView().then{
-        $0.image = UIImage(named: "GuideGoodImage1")
+        $0.image = SignDataManager.shared.selectedImages[0]
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -35,7 +39,7 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     let profileImage2 = UIImageView().then{
-        $0.image = UIImage(named: "GuideGoodImage1")
+        $0.image = SignDataManager.shared.selectedImages[1]
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -45,10 +49,12 @@ class AnalysisSyncResultViewController: UIViewController {
     let text1 = UILabel().then{
         $0.text = "연방님의 유사도는"
         $0.font = UIFont.pretendardExtraBold(size: 32)
+        $0.textColor = .black // 검정색으로 설정
     }
     let text2 = UILabel().then{
         $0.text = "40%에요!"
         $0.font = UIFont.pretendardExtraBold(size: 32)
+        $0.textColor = .black // 검정색으로 설정
     }
     let explainText = UILabel().then{
         $0.text = "업로드한 사진과 실제 얼굴이 달라요\nAI 포토샵으로 유사도를 높일 수 있어요!"
@@ -95,26 +101,106 @@ class AnalysisSyncResultViewController: UIViewController {
         navigationController?.pushViewController(guideVC, animated: true)
     }
     @objc func startBtnTapped() {
-        print("startBtnTapped")
+        let homeVC = HomeViewController()
+        navigationController?.pushViewController(homeVC, animated: true)
     }
     @objc func backButtonTapped() {
         // 뒤로 가기 로직을 구현
         dismiss(animated: true, completion: nil)
     }
+
     // MARK: - View Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        addSubViews()
-        configUI()
         
-        //특정 문자만 색상 변경, 퍼센트 부분 색상 변경
-        let fullText = text2.text ?? ""
-        let attribtuedString = NSMutableAttributedString(string: fullText)
-        let range = (fullText as NSString).range(of: "40%")
-        attribtuedString.addAttribute(.foregroundColor, value: UIColor.primary, range: range)
-        text2.attributedText = attribtuedString
+        // Create a dispatch group
+        let dispatchGroup = DispatchGroup()
+        
+        // Enter the group before starting the first API request
+        dispatchGroup.enter()
+        
+        // Start the first API request
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.apiSimilarity(upload: SignDataManager.shared.selectedImages[0], real: SignDataManager.shared.selfieImage) { confidence in
+                // Leave the group when the first API request is completed
+                dispatchGroup.leave()
+                self.confidence1 = confidence
+            }
+        }
+        
+        // Start the second API request after the first one is completed
+        dispatchGroup.notify(queue: .main) {
+            self.apiSimilarity(upload: SignDataManager.shared.selectedImages[1], real: SignDataManager.shared.selfieImage) {confidence in
+                self.confidence2 = confidence
+                self.addSubViews()
+                self.configUI()
+                var confidence = Int((self.confidence1 + self.confidence2) / 2)
+                self.text2.text = "\(confidence)%에요!"
+                if(confidence <= 75)
+                {
+                    self.explainText.text = "업로드한 사진과 실제 얼굴이 달라요\nAI 포토샵으로 유사도를 높일 수 있어요!"
+                    self.startBtn.isHidden = true
+                }
+                else{
+                    self.explainText.text = "지금 바로 원하는 이성을 찾아 보세요!"
+                    self.selfieBtn.isHidden = true
+                    self.aiBtn.isHidden = true
+                }
+                let fullText = self.text2.text ?? ""
+                let attribtuedString = NSMutableAttributedString(string: fullText)
+                let range = (fullText as NSString).range(of: "\(confidence)%")
+                attribtuedString.addAttribute(.foregroundColor, value: UIColor.primary, range: range)
+                self.text2.attributedText = attribtuedString
+            }
+        }
+    }
+
+    func apiSimilarity(upload: UIImage, real: UIImage, completion: @escaping (Double) -> Void) {
+        // Load images to compare
+        let image1 = upload
+        let image2 = real
+        
+        // Convert images to Data
+        guard let imageData1 = image1.jpegData(compressionQuality: 1.0),
+              let imageData2 = image2.jpegData(compressionQuality: 1.0) else {
+            fatalError("Failed to convert images to data")
+        }
+        
+        let url = "https://api-us.faceplusplus.com/facepp/v3/compare"
+        let parameters: Parameters = [
+            "api_key": "WC0CaE1oGhbR06_-SePXVM-iKQq0BCkT",
+            "api_secret": "48cmzpAX4bUENmwbvKbBB_dNU4d-MdqV"
+        ]
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            // Add images to multipart form data
+            multipartFormData.append(imageData1, withName: "image_file1", fileName: "uploadSelfie.jpeg", mimeType: "image/jpeg")
+            multipartFormData.append(imageData2, withName: "image_file2", fileName: "realSelfie.jpeg", mimeType: "image/jpeg")
+            
+            // Add other parameters to multipart form data
+            for (key, value) in parameters {
+                if let data = String(describing: value).data(using: .utf8) {
+                    multipartFormData.append(data, withName: key)
+                }
+            }
+        }, to: url)
+        .validate(statusCode: 200..<500)
+        .responseJSON() { response in
+            print(response)
+        }
+        .responseDecodable(of: FaceComparisonResult.self) { response in
+            switch response.result {
+                // [CASE] API 통신에 성공한 경우
+            case .success(let value):
+                print("성공하였습니다 :: \(value)")
+                completion(value.confidence!)
+                
+                // [CASE] API 통신에 실패한 경우
+            case .failure(let error):
+                print("실패하였습니다 :: \(error)" )
+            }
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
@@ -123,18 +209,13 @@ class AnalysisSyncResultViewController: UIViewController {
     
     // MARK: - UI Layout
     func configUI() {
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
+            make.top.equalTo(view.safeAreaHeight).offset(20)
             make.centerX.equalToSuperview()
         }
         
         selfieImage.snp.makeConstraints{ make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(80)
+            make.top.equalTo(view.safeAreaHeight).offset(20)
             make.right.equalTo(titleLabel.snp.right)
             make.width.equalTo(219)
             make.height.equalTo(314)
@@ -142,7 +223,7 @@ class AnalysisSyncResultViewController: UIViewController {
         }
         
         profileImage1.snp.makeConstraints{ make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(80)
+            make.top.equalTo(view.safeAreaHeight).offset(20)
             make.left.equalTo(selfieImage.snp.right).offset(10)
             make.width.equalTo(124)
             make.height.equalTo(152)
@@ -182,12 +263,12 @@ class AnalysisSyncResultViewController: UIViewController {
             make.height.equalTo(56)
         }
         //유사도 높으면 바로 시작
-        /*startBtn.snp.makeConstraints{make in
+        startBtn.snp.makeConstraints{make in
             make.bottom.equalTo(view.snp.bottom).offset(-55)
             make.centerX.equalToSuperview()
             make.width.equalTo(353)
             make.height.equalTo(56)
-        }*/
+        }
 
         
     }

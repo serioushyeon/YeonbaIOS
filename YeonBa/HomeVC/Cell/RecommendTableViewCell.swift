@@ -10,8 +10,10 @@ import Then
 import SnapKit
 import Charts
 import Kingfisher
+import Alamofire
 
 class RecommendTableViewCell: UITableViewCell {
+    var id : String?
     static let identifier = "RecommendTableViewCell"
     private let pieChartView = PieChartView() //유사도
     private let myImageView = UIImageView().then {
@@ -72,7 +74,6 @@ class RecommendTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         loadImage()
-        setupPieChart()
         contentView.layer.borderColor = UIColor.gray.cgColor
         contentView.layer.borderWidth = 1
         contentView.layer.masksToBounds = true
@@ -142,15 +143,14 @@ class RecommendTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         loadImage()
-        setupPieChart()
        }
     //셀 사이 간격 설정 
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
     }
-    func setupPieChart() {
-        let entries = [PieChartDataEntry(value: 90), PieChartDataEntry(value: 10)]
+    func setupPieChart(pieValue: Int) {
+        let entries = [PieChartDataEntry(value: Double(pieValue)), PieChartDataEntry(value: Double(100-pieValue))]
 
         let dataSet = PieChartDataSet(entries: entries)
         if let customPinkColor = UIColor.primary {
@@ -170,6 +170,70 @@ class RecommendTableViewCell: UITableViewCell {
     private func loadImage() {
         guard let url = URL(string:"https://newsimg.sedaily.com/2023/09/12/29UNLQFQT6_1.jpg") else { return }
         myImageView.kf.setImage(with: url)
+    }
+    /**
+     * API 응답 구현체 값
+     */
+    struct AFDataResponse<T: Codable>: Codable {
+        
+        // 응답 결과값
+        let data: T?
+        
+        // 응답 코드
+        let status: String?
+        
+        // 응답 메시지
+        let message: String?
+        
+        enum CodingKeys: CodingKey {
+            case data, status, message
+        }
+        
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            
+            status = (try? values.decode(String.self, forKey: .status)) ?? nil
+            message = (try? values.decode(String.self, forKey: .message)) ?? nil
+            data = (try? values.decode(T.self, forKey: .data)) ?? nil
+        }
+    }
+    func apiBookmark(id : String) -> Void{
+        let url = "https://api.yeonba.co.kr/favorites/" + id;
+
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+    }
+    @objc func favoriteButtonTapped() {
+        if let currentImage = favoriteButton.imageView?.image {
+            if(currentImage == UIImage(named: "PinkFavorites")){
+                let newImage = UIImage(named: "WhiteFavorites")
+                favoriteButton.setImage(newImage, for: .normal)
+                apiBookmark(id: id!)
+            }
+            else {
+                let newImage = UIImage(named: "PinkFavorites")
+                favoriteButton.setImage(newImage, for: .normal)
+                apiBookmark(id: id!)
+            }
+        }
+    }
+    func configure(with model: CollectDataUserModel) {
+        myNameLabel.text = model.nickname
+        heartLabel.text = "\(model.receivedArrows!)"
+        similarityLabel.text = "\(model.photoSyncRate!)%"
+        setupPieChart(pieValue: model.photoSyncRate!)
+        id = model.id!
+        //나이
+        //ageLabel.text = "\(model.age)"
+        // 이미지 로딩
+        //if let url = URL(string: model.imageURL) {
+        //    cupidImageView.kf.setImage(with: url)
+        //}
     }
 
 }

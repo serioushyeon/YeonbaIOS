@@ -10,8 +10,10 @@ import Then
 import SnapKit
 import Kingfisher
 import Charts
+import Alamofire
 
 class HomeCollectionViewCell: UICollectionViewCell {
+    var id : String?
     static let sendCupidIdentifier = "HomeCupidCell"
     
     private let cupidImageView = UIImageView().then {
@@ -57,7 +59,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         addSubviews()
         setUI()
         loadImage()
-        setupPieChart()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -113,8 +114,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
             $0.top.equalTo(cupidImageView.snp.top).offset(10)
         }
     }
-    func setupPieChart() {
-        let entries = [PieChartDataEntry(value: 90), PieChartDataEntry(value: 10)]
+    func setupPieChart(pieValue: Int) {
+        let entries = [PieChartDataEntry(value: Double(pieValue)), PieChartDataEntry(value: Double(100-pieValue))]
 
         let dataSet = PieChartDataSet(entries: entries)
         if let customPinkColor = UIColor.primary {
@@ -130,6 +131,70 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         pieChartView.data = data
         pieChartView.legend.enabled = false
+    }
+    /**
+     * API 응답 구현체 값
+     */
+    struct AFDataResponse<T: Codable>: Codable {
+        
+        // 응답 결과값
+        let data: T?
+        
+        // 응답 코드
+        let status: String?
+        
+        // 응답 메시지
+        let message: String?
+        
+        enum CodingKeys: CodingKey {
+            case data, status, message
+        }
+        
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            
+            status = (try? values.decode(String.self, forKey: .status)) ?? nil
+            message = (try? values.decode(String.self, forKey: .message)) ?? nil
+            data = (try? values.decode(T.self, forKey: .data)) ?? nil
+        }
+    }
+    func apiBookmark(id : String) -> Void{
+        let url = "https://api.yeonba.co.kr/favorites/" + id;
+
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+    }
+    @objc func favoriteButtonTapped() {
+        if let currentImage = cupidFavoriteButton.imageView?.image {
+            if(currentImage == UIImage(named: "PinkFavorites")){
+                let newImage = UIImage(named: "WhiteFavorites")
+                cupidFavoriteButton.setImage(newImage, for: .normal)
+                apiBookmark(id: id!)
+            }
+            else {
+                let newImage = UIImage(named: "PinkFavorites")
+                cupidFavoriteButton.setImage(newImage, for: .normal)
+                apiBookmark(id: id!)
+            }
+        }
+    }
+    func configure(with model: CollectDataUserModel) {
+        nameLabel.text = model.nickname
+        heartLabel.text = "\(model.receivedArrows!)"
+        similarityLabel.text = "\(model.photoSyncRate!)%"
+        setupPieChart(pieValue: model.photoSyncRate!)
+        id = model.id!
+        //나이
+        //ageLabel.text = "\(model.age)"
+        // 이미지 로딩
+        //if let url = URL(string: model.imageURL) {
+        //    cupidImageView.kf.setImage(with: url)
+        //}
     }
     private func loadImage() {
         guard let url = URL(string:"https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2021/11/27/OGgTiLOGukOG637735761948231549.jpg") else { return }

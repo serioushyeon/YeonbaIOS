@@ -13,6 +13,7 @@ class SignDataManager {
     
     private init() {}
     var selectedImages: [UIImage] = []
+    var selfieImage : UIImage = UIImage()
     var socialId: Int? {
         get {
             return KeychainWrapper.standard.integer(forKey: "socialId") // keychain 반환

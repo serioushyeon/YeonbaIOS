@@ -18,7 +18,7 @@ class AnalysisSyncViewController: UIViewController {
     }
     
     let profileImage1 = UIImageView().then{
-        $0.image = UIImage(named: "GuideGoodImage1")
+        $0.image = SignDataManager.shared.selectedImages[0]
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -26,7 +26,7 @@ class AnalysisSyncViewController: UIViewController {
     }
     
     let profileImage2 = UIImageView().then{
-        $0.image = UIImage(named: "GuideGoodImage1")
+        $0.image = SignDataManager.shared.selectedImages[1]
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -44,7 +44,7 @@ class AnalysisSyncViewController: UIViewController {
         $0.clipsToBounds = true
     }
     let selfieImage = UIImageView().then{
-        $0.image = UIImage(named: "GuideGoodImage1")
+        $0.image = SignDataManager.shared.selfieImage
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -104,25 +104,15 @@ class AnalysisSyncViewController: UIViewController {
     
     // MARK: - UI Layout
     func configUI() {
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.centerX.equalToSuperview()
-        }
-        
         profileImage1.snp.makeConstraints{ make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(55)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.right.equalTo(view.snp.centerX).offset(-4)
             make.width.equalTo(124)
             make.height.equalTo(152)
             
         }
         profileImage2.snp.makeConstraints{ make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(55)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.left.equalTo(view.snp.centerX).offset(4)
             make.width.equalTo(124)
             make.height.equalTo(152)

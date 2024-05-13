@@ -258,6 +258,9 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
                 print("이미지를 JPEG 데이터로 변환하는 데 실패했습니다.")
             }
         }
+        let cameraVC = FaceDetectionViewController()
+        navigationController?.pushViewController(cameraVC, animated: true)
+        /*
         print(imageDatas.count)
         if imageDatas.count < 2 {
                 print("프로필 사진은 반드시 2장이어야 합니다.")
@@ -298,7 +301,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
             default:
                 print("회원가입 에러")
             }
-        }
+        }*/
 //        let faceDetectionVC = FaceDetectionViewController()
 //        
 //        // 프레젠트 방식을 전체 화면으로 설정
