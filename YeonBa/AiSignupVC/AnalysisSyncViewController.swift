@@ -4,19 +4,6 @@ import Then
 
 class AnalysisSyncViewController: UIViewController {
     
-    // MARK: - UI Components
-    let titleLabel = UILabel().then{
-        $0.text = "유사도 분석"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "BackButton")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
-    
     let profileImage1 = UIImageView().then{
         $0.image = SignDataManager.shared.selectedImages[0]
         $0.contentMode = .scaleAspectFill
@@ -76,7 +63,10 @@ class AnalysisSyncViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(resultBtnTapped), for: .touchUpInside)
     }
-    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "사진 앨범"
+    }
     //MARK: - Actions
     @objc func resultBtnTapped() {
         let AnaysisSyncResultVC = AnalysisSyncResultViewController()
@@ -86,14 +76,11 @@ class AnalysisSyncViewController: UIViewController {
         let guideVC = GuideViewController()
         navigationController?.pushViewController(guideVC, animated: true)
     }
-    @objc func backButtonTapped() {
-        // 뒤로 가기 로직을 구현
-        dismiss(animated: true, completion: nil)
-    }
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupNavigationBar()
         addSubViews()
         configUI()
     }
@@ -141,13 +128,13 @@ class AnalysisSyncViewController: UIViewController {
             
         }
         selfieBtn.snp.makeConstraints{make in
-            make.bottom.equalTo(startBtn.snp.top).offset(-8)
+            make.top.equalTo(selfieText.snp.bottom).offset(37)
             make.centerX.equalToSuperview()
             make.width.equalTo(353)
             make.height.equalTo(56)
         }
         startBtn.snp.makeConstraints{make in
-            make.bottom.equalTo(view.snp.bottom).offset(-55)
+            make.top.equalTo(selfieBtn.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
             make.width.equalTo(353)
             make.height.equalTo(56)
@@ -157,8 +144,6 @@ class AnalysisSyncViewController: UIViewController {
     }
     
     func addSubViews() {
-        view.addSubview(backButton)
-        view.addSubview(titleLabel)
         view.addSubview(profileImage1)
         view.addSubview(profileImage2)
         view.addSubview(uploadText)
