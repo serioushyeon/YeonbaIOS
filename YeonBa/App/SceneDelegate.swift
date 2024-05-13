@@ -19,6 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = SignUpViewController()
 
         let navigationController = BaseNavigationController(rootViewController: viewController)
+        
+        let expirationDateString = KeychainHandler.shared.accessToken
+        
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene

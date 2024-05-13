@@ -33,7 +33,6 @@ class BaseNavigationController: UINavigationController {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
-        /// transitionMaskImage파라미터: push되거나 pop될때의 backButton 마스크 이미지
         appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
         appearance.backButtonAppearance = backButtonAppearance
         
@@ -41,7 +40,6 @@ class BaseNavigationController: UINavigationController {
         navigationBar.compactAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
         navigationBar.isTranslucent = false
-        /// navigationItem의 버튼 색상을 .white로 지정
         navigationBar.tintColor = .white
     }
     

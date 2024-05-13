@@ -12,7 +12,6 @@ enum SignVoiceMode: Int, CaseIterable {
     case high
     case middle
     case low
-    case allLike
     case empty
     
     var title: String? {
@@ -24,8 +23,6 @@ enum SignVoiceMode: Int, CaseIterable {
             return "중음"
         case .low:
             return "저음"
-        case .allLike:
-            return "다 좋아요"
         case .empty:
             return nil
         }

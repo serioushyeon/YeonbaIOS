@@ -8,7 +8,7 @@ class JobSelectionViewController: UIViewController {
     
     
     let numberLabel = UILabel().then {
-        $0.text = "3/5"
+        $0.text = "3/6"
         $0.textColor = .red
         $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 24)

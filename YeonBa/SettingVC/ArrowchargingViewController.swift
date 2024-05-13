@@ -1,13 +1,13 @@
 //
-//  tabBarController.swift
+//  ArrowchargingViewController.swift
 //  YeonBa
 //
-//  Created by 김민솔 on 2/29/24.
+//  Created by 심규민 on 5/3/24.
 //
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class ArrowchargingViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -42,37 +42,29 @@ class SignUpViewController: UIViewController {
         $0.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
-//    let signUpButton = UIButton().then {
-//        let attributes: [NSAttributedString.Key: Any] = [
-//            .font: UIFont.systemFont(ofSize: 16),
-//            .foregroundColor: UIColor.white,
-//            .underlineStyle: NSUnderlineStyle.single.rawValue
-//        ]
-//        let attributedTitle = NSAttributedString(string: "가입하기", attributes: attributes)
-//        $0.setAttributedTitle(attributedTitle, for: .normal)
-//        $0.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-//    }
-    
-    
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
-        layer.colors = [UIColor.secondary?.cgColor, UIColor.primary?.cgColor]
+        layer.colors = [UIColor.secondary?.cgColor ?? UIColor.white, UIColor.primary?.cgColor ?? UIColor.white]
         layer.startPoint = CGPoint(x: 0.5, y: 0)
         layer.endPoint = CGPoint(x: 0.5, y: 1)
-        layer.cornerRadius = 16
         return layer
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.frame = CGRect(x: 0, y: -UIApplication.shared.statusBarFrame.height, width: view.bounds.width, height: view.bounds.height + UIApplication.shared.statusBarFrame.height)
+
         setupViews()
         setupProviderLoginView()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        gradientLayer.frame = view.bounds
+    override func viewWillAppear(_ animated: Bool) {
+      navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+      navigationController?.setNavigationBarHidden(false, animated: true) 
     }
     
     func setupProviderLoginView() {
@@ -89,45 +81,32 @@ class SignUpViewController: UIViewController {
     }
     
     private func setupViews() {
-        
-        view.addSubview(logoLabel)
+        view.addSubviews(logoLabel,logoImageView,descriptionLabel,loginButton)
         logoLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(200)
             make.left.equalToSuperview().offset(100)
             make.right.equalToSuperview().inset(40)
         }
-        
-        
-        view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in
             make.centerY.equalTo(logoLabel.snp.centerY)
             make.right.equalTo(logoLabel.snp.left).offset(10)
             make.width.height.equalTo(60)
         }
-        
-        view.addSubview(descriptionLabel)
+
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(logoLabel.snp.bottom).offset(100)
             make.centerX.equalToSuperview()
         }
         
-        view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(70)
             make.left.right.equalToSuperview().inset(50)
             make.height.equalTo(50)
         }
         
-        //        view.addSubview(signUpButton)
-        //        signUpButton.snp.makeConstraints { make in
-        //            make.top.equalTo(loginButton.snp.bottom).offset(20)
-        //            make.centerX.equalToSuperview()
-        //        }
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         
-        
     }
-    
     
 }
 
@@ -204,14 +183,6 @@ extension SignUpViewController {
         navigationController?.pushViewController(phonenumberVC, animated: true)
         
     }
-    
-//    @objc func signUpButtonTapped() {
-//        
-//        let phonenumberVC = PhoneNumberViewController()
-//        phonenumberVC.socialID = self.socialID
-//        phonenumberVC.loginType = self.loginType
-//        navigationController?.pushViewController(phonenumberVC, animated: true)
-//    }
 }
 
 extension SignUpViewController:
@@ -251,7 +222,6 @@ extension SignUpViewController:
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        //handle error.
     }
 }
 

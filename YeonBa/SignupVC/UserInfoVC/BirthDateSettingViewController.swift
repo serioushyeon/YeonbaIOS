@@ -156,15 +156,13 @@ class BirthDateSettingViewController: UIViewController {
             return
         }
         
-        let birthDate = "\(year)\(month)\(day)"
-        
+        let birthDate = "\(year)-\(month)-\(day)"
         SignDataManager.shared.birthDate = birthDate
         
         let nextVC = NicknameSettingViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
-
 extension BirthDateSettingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -173,30 +171,36 @@ extension BirthDateSettingViewController: UIPickerViewDelegate, UIPickerViewData
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == yearPickerView {
-            let currentYear = Calendar.current.component(.year, from: Date())
-            return currentYear - 1900 + 1
+            let maxYear = 2005
+            let minYear = 1984
+            return maxYear - minYear + 1
         } else if pickerView == monthPickerView {
             return 12 // 월은 1부터 12까지
         } else {
-            // 일은 1부터 31까지
-            return 31
+            return 31 // 일은 1부터 31까지
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == yearPickerView {
-            let currentYear = Calendar.current.component(.year, from: Date())
-            return "\(currentYear - row)"
+            let maxYear = 2005
+            let minYear = 1984
+            let selectedYear = maxYear - row
+            return "\(selectedYear)"
         } else if pickerView == monthPickerView {
-            return "\(row + 1)"
+            // 한 자리 수일 때 앞에 0을 붙여줌
+            return String(format: "%02d", row + 1)
         } else {
-            return "\(row + 1)"
+            // 한 자리 수일 때 앞에 0을 붙여줌
+            return String(format: "%02d", row + 1)
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == yearPickerView {
-            let selectedYear = Calendar.current.component(.year, from: Date()) - row
+            let maxYear = 2005
+            let minYear = 1984
+            let selectedYear = maxYear - row
             yearTextField.text = "\(selectedYear)"
         } else if pickerView == monthPickerView {
             monthTextField.text = "\(row + 1)"

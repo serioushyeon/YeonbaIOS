@@ -1,13 +1,13 @@
+
 import UIKit
 import SnapKit
 import Then
-
+// MARK: -- 5/6
 class InterestsViewController: UIViewController {
-    
     var selectedInterestsButton: UIButton?
     
     let numberLabel = UILabel().then {
-        $0.text = "5/5"
+        $0.text = "5/6"
         $0.textColor = .red
         $0.textAlignment = .left
         $0.font = UIFont.pretendardSemiBold(size: 24)
@@ -127,8 +127,10 @@ class InterestsViewController: UIViewController {
             return
         }
         SignDataManager.shared.lookAlikeAnimal = selectedInterestsButton?.currentTitle
-        let favoriteVC = MyFavoriteListViweController()
-        navigationController?.pushViewController(favoriteVC, animated: true)
+        let mbtiVC = MBTIViewController()
+        navigationController?.pushViewController(mbtiVC, animated: true)
+//        let favoriteVC = MyFavoriteListViweController()
+//        navigationController?.pushViewController(favoriteVC, animated: true)
     }
     
     private func showAlertForInterestsSelection() {
