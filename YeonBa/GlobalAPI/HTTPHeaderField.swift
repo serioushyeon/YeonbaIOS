@@ -18,7 +18,8 @@ enum HTTPHeaderField: String {
 }
 
 enum HTTPHeaderFieldValue: String {
-    case json = "multipart/form-data"
+    case multipartformData = "multipart/form-data"
+    case json = "Application/json"
     case accessToken
 }
 

@@ -203,9 +203,11 @@ extension BirthDateSettingViewController: UIPickerViewDelegate, UIPickerViewData
             let selectedYear = maxYear - row
             yearTextField.text = "\(selectedYear)"
         } else if pickerView == monthPickerView {
-            monthTextField.text = "\(row + 1)"
+            let formattedMonth = String(format: "%02d", row + 1)
+            monthTextField.text = formattedMonth
         } else {
-            dayTextField.text = "\(row + 1)"
+            let formattedDay = String(format: "%02d", row + 1)
+            dayTextField.text = formattedDay
         }
     }
 }
