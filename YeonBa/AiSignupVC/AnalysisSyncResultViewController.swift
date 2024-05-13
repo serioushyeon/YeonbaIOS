@@ -10,18 +10,6 @@ class AnalysisSyncResultViewController: UIViewController {
     var confidence2 = 0.0
     
     // MARK: - UI Components
-    let titleLabel = UILabel().then{
-        $0.text = "유사도 분석"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "BackButton")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
-    
     let selfieImage = UIImageView().then{
         $0.image = SignDataManager.shared.selfieImage
         $0.contentMode = .scaleAspectFill
@@ -90,7 +78,10 @@ class AnalysisSyncResultViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
     }
-    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "사진 앨범"
+    }
     // MARK: - Actions
     @objc func aiBtnTapped() {
         let aiVC = AiPhotoshopViewController()
@@ -101,6 +92,51 @@ class AnalysisSyncResultViewController: UIViewController {
         navigationController?.pushViewController(guideVC, animated: true)
     }
     @objc func startBtnTapped() {
+        let dataManager = SignDataManager.shared
+        let signUpRequest = SignUpRequest (
+            socialId: dataManager.socialId!,
+            loginType: dataManager.loginType!,
+            gender: dataManager.gender!,
+            phoneNumber: dataManager.phoneNumber!,
+            birth: dataManager.birthDate!,
+            nickname: dataManager.nickName!,
+            height: dataManager.height,
+            bodyType: dataManager.bodyType!,
+            job: dataManager.job!,
+            activityArea: dataManager.activityArea!,
+            mbti: dataManager.mbti!,
+            vocalRange: dataManager.vocalRange!,
+            profilePhotos: dataManager.profilePhotos,
+            photoSyncRate: 90,
+            lookAlikeAnimal: dataManager.lookAlikeAnimal!,
+            preferredAnimal: dataManager.preferredAnimal!,
+            preferredArea: dataManager.preferredArea!,
+            preferredVocalRange: dataManager.preferredVocalRange!,
+            preferredAgeLowerBound: dataManager.preferredAgeLowerBound,
+            preferredAgeUpperBound: dataManager.preferredAgeUpperBound,
+            preferredHeightLowerBound: dataManager.preferredHeightLowerBound!,
+            preferredHeightUpperBound: dataManager.preferredHeightUpperBound!,
+            preferredBodyType: dataManager.preferredBodyType!,
+            preferredMbti: dataManager.preferredMbti!
+        )
+        print(signUpRequest)
+        NetworkService.shared.signUpService.signUp(bodyDTO: signUpRequest) { response in
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("회원가입 성공")
+            default:
+                print("회원가입 에러")
+            }
+        }
+//        let faceDetectionVC = FaceDetectionViewController()
+//
+//        // 프레젠트 방식을 전체 화면으로 설정
+//        faceDetectionVC.modalPresentationStyle = .fullScreen
+//
+//        // 현재 뷰 컨트롤러에서 FaceDetectionViewController를 프레젠트
+//        self.present(faceDetectionVC, animated: true, completion: nil)
+
         let homeVC = HomeViewController()
         navigationController?.pushViewController(homeVC, animated: true)
     }
@@ -113,7 +149,7 @@ class AnalysisSyncResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        setupNavigationBar()
         // Create a dispatch group
         let dispatchGroup = DispatchGroup()
         
@@ -209,14 +245,9 @@ class AnalysisSyncResultViewController: UIViewController {
     
     // MARK: - UI Layout
     func configUI() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaHeight).offset(20)
-            make.centerX.equalToSuperview()
-        }
-        
         selfieImage.snp.makeConstraints{ make in
             make.top.equalTo(view.safeAreaHeight).offset(20)
-            make.right.equalTo(titleLabel.snp.right)
+            make.right.equalTo(view.snp.centerX).offset(20)
             make.width.equalTo(219)
             make.height.equalTo(314)
             
@@ -274,8 +305,6 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     func addSubViews() {
-        view.addSubview(backButton)
-        view.addSubview(titleLabel)
         view.addSubview(selfieImage)
         view.addSubview(profileImage1)
         view.addSubview(profileImage2)
@@ -285,6 +314,6 @@ class AnalysisSyncResultViewController: UIViewController {
         view.addSubview(selfieBtn)
         view.addSubview(aiBtn)
         //유사도 높으면 시작 버튼
-        //view.addSubview(startBtn)
+        view.addSubview(startBtn)
     }
 }
