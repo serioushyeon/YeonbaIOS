@@ -12,7 +12,7 @@ import Alamofire
 enum SignUpTarget {
     case signUp(_ bodyDTO: SignUpRequest)
     case login(_ bodyDTO: LoginRequest)
-    case postRefreshToken(_ bodyDTO: LoginRequest)
+    case postRefreshToken(_ bodyDTO: RefreshRequest)
 }
 
 extension SignUpTarget: TargetType {
@@ -22,6 +22,8 @@ extension SignUpTarget: TargetType {
         case .signUp:
             return .post
         case .login:
+            return .post
+        case .postRefreshToken:
             return .post
             
         }
@@ -46,6 +48,8 @@ extension SignUpTarget: TargetType {
             return .requestWithMultipart(bodyDTO.toMultipartFormData())
         case let .login(bodyDTO):
             return .requestWithBody(bodyDTO)
+        case let .postRefreshToken(bodyDTO):
+            return .requestWithBody(bodyDTO)
         }
     }
     
@@ -55,6 +59,8 @@ extension SignUpTarget: TargetType {
             return .plain
         case .login:
             return .providerToken
+        case .postRefreshToken:
+            return .refreshToken
         }
     }
     
@@ -64,6 +70,8 @@ extension SignUpTarget: TargetType {
             return .authorization
         case .login:
             return .socialAuthorization
+        case .postRefreshToken:
+            return .reAuthorization
         }
     }
 }

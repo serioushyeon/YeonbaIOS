@@ -96,6 +96,14 @@ class PhoneNumberViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
+    
+    // MARK: Select RootViewController Function
+    func changeRootViewController(rootViewController: UIViewController) {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+        sceneDelegate.window?.rootViewController = BaseNavigationController(rootViewController: rootViewController)
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
         // 전화번호의 길이가 11자인지 검사합니다.
         guard phoneNumber.count == 11 else {
@@ -111,7 +119,7 @@ class PhoneNumberViewController: UIViewController {
         // 모든 규칙을 통과한 경우 유효한 전화번호로 간주합니다.
         return true
     }
-
+    
     private func setupKeyboardDismissal() {
         // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -136,10 +144,10 @@ class PhoneNumberViewController: UIViewController {
         }
     }
     
-        @objc func confirmButtonTapped() {
-            // 인증번호 유효성 검사 통과 후
-            verificationSuccessful()
-        }
+    @objc func confirmButtonTapped() {
+        // 인증번호 유효성 검사 통과 후
+        verificationSuccessful()
+    }
     
     private func verificationSuccessful() {
         // 인증 성공 시 '다음' 버튼을 활성화합니다.
@@ -150,23 +158,104 @@ class PhoneNumberViewController: UIViewController {
     func retrieveAccessToken() -> String? {
         return KeychainWrapper.standard.string(forKey: "accessToken")
     }
-    
+    func fetchData() {
+        guard let phoneNumber = phoneNumberTextField.text else {
+            return
+        }
+        // 각각의 필드값을 출력
+        print("socialId: \(socialID ?? 0)")
+        print("loginType: \(loginType ?? "")")
+        print("phoneNumber: \(phoneNumber)")
+        let endpoint = "https://api.yeonba.co.kr/users/login"
+        socialID = SignDataManager.shared.socialId
+        loginType = SignDataManager.shared.loginType
+        let parameters: [String: Any] = [
+            "socialId": socialID ?? 0,
+            "loginType": loginType ?? "",
+            "phoneNumber": phoneNumber
+        ]
+        
+        AF.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { [weak self] response in
+                guard let self = self else { return }
+                
+                switch response.result {
+                case .success(let value):
+                    if let httpResponse = response.response {
+                        let statusCode = httpResponse.statusCode
+                        print("Response status code: \(statusCode)")
+                    }
+                    if let json = value as? [String: Any] {
+                        if let status = json["status"] as? String {
+                            if status == "success" {
+                                // Handle success case
+                                if let data = json["data"] as? [String: Any],
+                                   let accessToken = data["accessToken"] as? String,
+                                   let refreshToken = data["refreshToken"] as? String {
+                                    // Save tokens to Keychain
+                                    let saveAccessToken = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
+                                    if saveAccessToken {
+                                        print("AccessToken: \(accessToken)")
+                                        print("Access token saved successfully.")
+                                    } else {
+                                        print("Failed to save access token.")
+                                    }
+                                    
+                                    let saveRefreshToken = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
+                                    if saveRefreshToken {
+                                        print("RefreshToken: \(refreshToken)")
+                                        print("Refresh token saved successfully.")
+                                    } else {
+                                        print("Failed to save refresh token.")
+                                    }
+                                } else {
+                                    print("Failed to retrieve tokens from the response.")
+                                }
+                            } else {
+                                
+                                if let message = json["message"] as? String {
+                                    print("Message: \(message)")
+                                    // Show message to the user or take appropriate action
+                                }
+                            }
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("Error sending POST request: \(error)")
+                    // Handle failure case
+                }
+            }
+    }
     @objc func nextButtonTapped() {
         guard let phoneNumber = phoneNumberTextField.text else {
             return
         }
+        //유저가 존재할 경우
+        fetchData()
         
         if isValidPhoneNumber(phoneNumber) {
             // 전화번호가 유효한 경우
             verificationSuccessful()
-            SignDataManager.shared.phoneNumber = phoneNumber
-            let birthVC = BirthDateSettingViewController()
-            navigationController?.pushViewController(birthVC, animated: true)
+            
+            if KeychainHandler.shared.accessToken.isEmpty {
+                //유저가 존재하지 않을 경우
+                SignDataManager.shared.phoneNumber = phoneNumber
+                let birthVC = BirthDateSettingViewController()
+                navigationController?.pushViewController(birthVC, animated: true)
+                
+            } else {
+                //유저가 존재할 경우
+                fetchData()
+                let tabVC = TabBarController()
+                self.changeRootViewController(rootViewController: tabVC)
+            }
         } else {
             // 전화번호가 유효하지 않은 경우
             showAlert(message: "전화번호는 11자리의 숫자여야 합니다.")
         }
     }
+    
     func showAlert(message: String) {
         let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)

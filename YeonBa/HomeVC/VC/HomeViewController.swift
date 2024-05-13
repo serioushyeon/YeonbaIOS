@@ -79,13 +79,13 @@ class HomeViewController: UIViewController {
         addSubviews()
         configUI()
         checkfont()
-        navigationControl()
+        setupNavigationBar()
         configureTableView()
         configureCollectionView()
         tableView.reloadData()
     }
     // MARK: - Navigation
-    func navigationControl() {
+    func setupNavigationBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -95,7 +95,7 @@ class HomeViewController: UIViewController {
         titleLabel.textColor = .black
         titleLabel.sizeToFit()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
-        
+        navigationItem.hidesBackButton = true
         let heartButton = UIBarButtonItem(image: UIImage(named: "Heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
         
         let heartCountLabel = UILabel()
@@ -107,6 +107,7 @@ class HomeViewController: UIViewController {
         let alarmButton = UIBarButtonItem(image: UIImage(named: "Alarm"), style: .plain, target: self, action: #selector(alarmButtonTapped))
         
         navigationItem.rightBarButtonItems = [alarmButton, heartCountBarButton, heartButton]
+        
     }
     func configureTableView() {
         tableView.dataSource = self
@@ -207,8 +208,8 @@ class HomeViewController: UIViewController {
     @objc func plusGenderTapped() {
         //self.navigationController?.pushViewController(CollectViewController(), animated: true)
     }
-   
-
+    
+    
 }
 extension UIFont {
     static func pretendardSemiBold(size: CGFloat) -> UIFont {
@@ -259,7 +260,7 @@ extension HomeViewController: UITableViewDelegate {
 }
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 2
+        return 2
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // 셀을 dequeue 하고, SendCupidCollectionViewCell 타입으로 타입 캐스팅합니다.
@@ -269,7 +270,7 @@ extension HomeViewController : UICollectionViewDataSource {
         }
         return cell
     }
-
+    
     
 }
 
@@ -278,9 +279,9 @@ extension HomeViewController : UICollectionViewDelegate {
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 165, height: 180)
+        return CGSize(width: 165, height: 180)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 5
+        return 5
     }
 }
