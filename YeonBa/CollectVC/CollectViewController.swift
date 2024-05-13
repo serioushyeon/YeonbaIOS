@@ -9,8 +9,9 @@ import UIKit
 import SnapKit
 import Tabman
 import Pageboy
+import Alamofire
 
-class CollectViewController: TabmanViewController {
+class CollectViewController: TabmanViewController {    
     private var viewcontrollers : Array<UIViewController> = []
     private var tabbar =  TMBar.ButtonBar().then {
         $0.backgroundView.style = .clear

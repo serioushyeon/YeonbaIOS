@@ -1,10 +1,12 @@
+
 import UIKit
 import SnapKit
 import Then
-
+import SwiftKeychainWrapper
+import Alamofire
 class VoicePopupView: UIView {
     var onDoneButtonTapped: (() -> Void)?
-
+    
     private let popupView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 12
@@ -30,13 +32,18 @@ class VoicePopupView: UIView {
         $0.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
     }
     var navigation : UINavigationController?
+
     
     // MARK: - Actions
     @objc func doneTapped() {
         let selectVC = PhotoSelectionViewController()
         navigation?.pushViewController(selectVC, animated: true)
+        
         onDoneButtonTapped?()
     }
+
+
+
     init(title: String, desc: String, navigation: UINavigationController?, leftButtonTitle: String = "취소", rightButtonTitle: String = "완료") {
         self.titleLabel.text = title
         self.descLabel.text = desc

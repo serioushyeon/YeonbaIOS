@@ -11,10 +11,13 @@ import Then
 import Kingfisher
 import Charts
 import SCLAlertView
+import Alamofire
 
 class HomeViewController: UIViewController {
+    var colletModel : [CollectDataUserModel]?
     // MARK: - UI Components
     //스크롤 뷰
+    let heartCountLabel = UILabel()
     private let mainScrollview = UIScrollView().then {
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
@@ -75,16 +78,20 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         addSubviews()
         configUI()
         checkfont()
-        navigationControl()
+        setupNavigationBar()
         configureTableView()
         configureCollectionView()
+        apiDailyCheck()
+        apiRecieveList()
+        apiGetArrowCount()
         tableView.reloadData()
     }
     // MARK: - Navigation
-    func navigationControl() {
+    func setupNavigationBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -94,10 +101,9 @@ class HomeViewController: UIViewController {
         titleLabel.textColor = .black
         titleLabel.sizeToFit()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
-        
+        navigationItem.hidesBackButton = true
         let heartButton = UIBarButtonItem(image: UIImage(named: "Heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
         
-        let heartCountLabel = UILabel()
         heartCountLabel.text = "5" // 초기 하트 개수
         heartCountLabel.textColor = UIColor.primary
         heartCountLabel.sizeToFit()
@@ -106,6 +112,7 @@ class HomeViewController: UIViewController {
         let alarmButton = UIBarButtonItem(image: UIImage(named: "Alarm"), style: .plain, target: self, action: #selector(alarmButtonTapped))
         
         navigationItem.rightBarButtonItems = [alarmButton, heartCountBarButton, heartButton]
+        
     }
     func configureTableView() {
         tableView.dataSource = self
@@ -183,6 +190,97 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    /**
+     * API 응답 구현체 값
+     */
+    struct AFDataResponse<T: Codable>: Codable {
+        
+        // 응답 결과값
+        let data: T?
+        
+        // 응답 코드
+        let status: String?
+        
+        // 응답 메시지
+        let message: String?
+        
+        enum CodingKeys: CodingKey {
+            case data, status, message
+        }
+        
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            
+            status = (try? values.decode(String.self, forKey: .status)) ?? nil
+            message = (try? values.decode(String.self, forKey: .message)) ?? nil
+            data = (try? values.decode(T.self, forKey: .data)) ?? nil
+        }
+    }
+    func apiRecieveList() -> Void{
+        let url = "https://api.yeonba.co.kr/users?type=RECOMMEND&page=0&size=2";
+
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<500)
+        //.responseJSON{response in print(response)}
+        .responseDecodable(of: AFDataResponse<CollectResponse>.self) { response in
+            switch response.result {
+                // [CASE] API 통신에 성공한 경우
+            case .success(let value):
+                print("성공하였습니다 :: \(value)")
+                if let users = value.data?.data?.users, !users.isEmpty {
+                    // 유저 데이터가 존재하는 경우
+                    self.colletModel = users
+                    self.addSubviews()
+                    self.configUI()
+                    self.collectionview.dataSource = self
+                    self.collectionview.delegate = self
+                    self.collectionview.register(RecieveCupidCollectionViewCell.self, forCellWithReuseIdentifier: "RecieveCell")
+                }
+                // [CASE] API 통신에 실패한 경우
+            case .failure(let error):
+                print("실패하였습니다 :: \(error)" )
+            }
+        }
+    }
+    func apiGetArrowCount() -> Void{
+        let url = "https://api.yeonba.co.kr/users/arrows";
+
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<500)
+        //.responseJSON{response in print(response)}
+        .responseDecodable(of: AFDataResponse<HomeAPIResponse>.self) { response in
+            switch response.result {
+                // [CASE] API 통신에 성공한 경우
+            case .success(let value):
+                print("성공하였습니다 :: \(value)")
+                if let arrow = value.data?.data?.arrows{
+                    self.heartCountLabel.text = "\(arrow)"
+                }
+                // [CASE] API 통신에 실패한 경우
+            case .failure(let error):
+                print("실패하였습니다 :: \(error)" )
+            }
+        }
+    }
+    func apiDailyCheck() -> Void{
+        let url = "https://api.yeonba.co.kr/daily-check";
+
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+    }
     // MARK: - Actions
     @objc func heartButtonTapped() {
         print("heart button tapped")
@@ -206,8 +304,8 @@ class HomeViewController: UIViewController {
     @objc func plusGenderTapped() {
         //self.navigationController?.pushViewController(CollectViewController(), animated: true)
     }
-   
-
+    
+    
 }
 extension UIFont {
     static func pretendardSemiBold(size: CGFloat) -> UIFont {
@@ -237,14 +335,16 @@ extension UIButton {
 }
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return  colletModel?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendTableViewCell.identifier, for: indexPath) as? RecommendTableViewCell else {
             return UITableViewCell()
         }
-        cell.selectionStyle = .none
+        // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
+        let model = colletModel?[indexPath.row]
+        cell.configure(with: model ??  CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음"))
         return cell
     }
 }
@@ -253,12 +353,14 @@ extension HomeViewController: UITableViewDelegate {
         return 160
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(OtherProfileViewController(), animated: true)
+        let otherProfileVC = OtherProfileViewController()
+        otherProfileVC.id = colletModel![indexPath.row].id
+        self.navigationController?.pushViewController(otherProfileVC, animated: true)
     }
 }
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 2
+       return colletModel?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // 셀을 dequeue 하고, SendCupidCollectionViewCell 타입으로 타입 캐스팅합니다.
@@ -266,9 +368,12 @@ extension HomeViewController : UICollectionViewDataSource {
             // 캐스팅에 실패하면 기본 UICollectionViewCell을 반환합니다.
             return UICollectionViewCell()
         }
+        // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
+        let model = colletModel?[indexPath.row]
+        cell.configure(with: model ??  CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음"))
         return cell
     }
-
+    
     
 }
 
@@ -277,9 +382,9 @@ extension HomeViewController : UICollectionViewDelegate {
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 165, height: 180)
+        return CGSize(width: 165, height: 180)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 5
+        return 5
     }
 }

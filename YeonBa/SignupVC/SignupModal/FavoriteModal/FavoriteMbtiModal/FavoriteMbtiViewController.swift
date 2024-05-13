@@ -61,6 +61,7 @@ final class FavoriteMbtiViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.isEnabled = false
         $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
@@ -105,13 +106,14 @@ final class FavoriteMbtiViewController: UIViewController {
     @objc private func mbtiButtonTapped(_ sender: UIButton) {
         guard let mode = MbtiMode(rawValue: sender.tag) else { return }
         self.selectedMode = mode
-        delegate?.mbtiSelected(mode)
-        // 선택된 버튼 스타일 변경
         updateButtonSelection()
+        updateFinishButtonState()
     }
     
     @objc private func finishButtonTapped() {
         // Finish 버튼을 터치했을 때의 동작
+        delegate?.mbtiSelected(selectedMode!)
+        self.dismiss(animated: true)
     }
     private func updateButtonSelection() {
         // 모든 버튼의 선택 상태 초기화
@@ -129,13 +131,21 @@ final class FavoriteMbtiViewController: UIViewController {
             button.isSelected = true
             button.layer.borderColor = UIColor.primary?.cgColor
             button.setTitleColor(.primary, for: .normal) // 선택된 버튼의 텍스트 색상을 프라이머리 색상으로 변경
+            finishButton.isEnabled = true
+        }
+    }
+    private func updateFinishButtonState() {
+        if selectedMode?.title == nil {
+            finishButton.isEnabled = false
+            finishButton.layer.backgroundColor = UIColor.gray2?.cgColor
+        } else {
             finishButton.layer.borderWidth = 2
             finishButton.layer.borderColor = UIColor.black.cgColor
             finishButton.titleLabel?.textColor = UIColor.black
+            finishButton.setTitleColor(.black, for: .normal)
             finishButton.layer.backgroundColor = UIColor.white.cgColor
         }
     }
-    
     private func findButton(for mode: MbtiMode) -> UIButton? {
         for case let horizontalStackView as UIStackView in verticalStackView.arrangedSubviews {
             for case let button as UIButton in horizontalStackView.arrangedSubviews {
@@ -185,6 +195,9 @@ extension FavoriteMbtiViewController {
         // 버튼을 생성하고 verticalStackView에 추가합니다.
         let modes = MbtiMode.allCases
         for (index, mode) in modes.enumerated() {
+            if(mode.title == nil){
+                continue
+            }
             let button = UIButton()
             button.setTitle(mode.title, for: .normal)
             button.setTitleColor(.customgray2, for: .normal)

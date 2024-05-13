@@ -10,12 +10,17 @@ import SnapKit
 import Then
 import Kingfisher
 import Charts
+import Alamofire
 
 class OtherProfileViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private var viewMode: DeclareMode = .declare
     private var whyviewMode: WhyMode = .maner
+    var id : String?
+    private var userData : CollectDataUserModel?
+    private var aboutData = ["25살", "165cm", "서울", "고음", "토끼 상"]
+    private var preferenceData = ["강아지 상", "서울", "저음", "20~25세", "마른체형", "INTP"]
     private let cupidImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -34,9 +39,7 @@ class OtherProfileViewController: UIViewController {
     private let favoriteBtn = UIButton().then {
         $0.setImage(UIImage(named: "PinkFavorites"), for: .normal)
         $0.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
-
     }
-    
     private let heartImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "profileheart")
@@ -113,6 +116,7 @@ class OtherProfileViewController: UIViewController {
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 19
+        $0.addTarget(self, action: #selector(arrowBtnTapped), for: .touchUpInside)
     }
     private let sendChatBtn = ActualGradientButton().then {
         $0.setTitle("채팅 보내기", for: .normal)
@@ -120,11 +124,11 @@ class OtherProfileViewController: UIViewController {
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.layer.cornerRadius = 19
         $0.layer.masksToBounds = true
+        $0.addTarget(self, action: #selector(apiSendChatRequest), for: .touchUpInside)
     }
     // MARK: - 탭바제거
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //tabBarController?.tabBar.isHidden = true
         // 커스텀 탭바를 숨깁니다.
         if let tabBarController = self.tabBarController {
             tabBarController.tabBar.isHidden = true
@@ -132,7 +136,6 @@ class OtherProfileViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-       // tabBarController?.tabBar.isHidden = false
         // 다른 화면으로 넘어갈 때 커스텀 탭바를 다시 보이게 합니다.
         if let tabBarController = self.tabBarController {
             tabBarController.tabBar.isHidden = false
@@ -140,12 +143,13 @@ class OtherProfileViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPieChart()
+        setupPieChart(pieValue: 80)
         addSubviews()
         configUI()
         loadImage()
         configureCollectionView()
         navigationController()
+        apiOtherProfile()
        
         tabBarController?.tabBar.isTranslucent = true
        
@@ -279,8 +283,8 @@ class OtherProfileViewController: UIViewController {
             $0.width.equalTo(160)
         }
     }
-    func setupPieChart() {
-        let entries = [PieChartDataEntry(value: 90), PieChartDataEntry(value: 10)]
+    func setupPieChart(pieValue: Double) {
+        let entries = [PieChartDataEntry(value: pieValue), PieChartDataEntry(value: 100-pieValue)]
 
         let dataSet = PieChartDataSet(entries: entries)
         if let customPinkColor = UIColor.primary {
@@ -301,6 +305,133 @@ class OtherProfileViewController: UIViewController {
         guard let url = URL(string:"https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg") else { return }
         cupidImageView.kf.setImage(with: url)
     }
+    /**
+     * API 응답 구현체 값
+     */
+    struct AFDataResponse<T: Codable>: Codable {
+        
+        // 응답 결과값
+        let data: T?
+        
+        // 응답 코드
+        let status: String?
+        
+        // 응답 메시지
+        let message: String?
+        
+        enum CodingKeys: CodingKey {
+            case data, status, message
+        }
+        
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            
+            status = (try? values.decode(String.self, forKey: .status)) ?? nil
+            message = (try? values.decode(String.self, forKey: .message)) ?? nil
+            data = (try? values.decode(T.self, forKey: .data)) ?? nil
+        }
+    }
+    func apiReport() -> Void{
+        let url = "https://api.yeonba.co.kr/users/\(id!)/report";
+        let body : Parameters = ["category" : "\(whyviewMode.title)", "reason":""]
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .post,
+            parameters: body,
+            encoding: JSONEncoding.default
+        )
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+        
+    }
+    func apiBlock() -> Void{
+        let url = "https://api.yeonba.co.kr/users/\(id!)/block";
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default
+        )
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+        
+    }
+    func apiSendArrow() -> Void{
+        let url = "https://api.yeonba.co.kr/users/\(id!)/arrow";
+        // Alamofire 를 통한 API 통신
+        let body : Parameters = ["arrows": 10]
+        AF.request(
+            url,
+            method: .post,
+            parameters: body,
+            encoding: JSONEncoding.default
+        )
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+    }
+    @objc func apiSendChatRequest() -> Void{
+        let url = "https://api.yeonba.co.kr/users/\(id!)/chat";
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default
+        )
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+    }
+    func apiOtherProfile() -> Void {
+        let url = "https://api.yeonba.co.kr/users/" + id!;
+
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: AFDataResponse<OtherProfileResponse>.self) {response in
+            switch response.result {
+                // [CASE] API 통신에 성공한 경우
+            case .success(let value):
+                print("성공하였습니다 :: \(value)")
+                if let data = value.data?.data {
+                    self.configure(data: (value.data?.data)!)
+                    self.aboutmeCollectionView.reloadData()
+                    self.aboutmeCollectionView.setNeedsLayout()
+                    self.aboutmeCollectionView.layoutIfNeeded()
+                }
+                // [CASE] API 통신에 실패한 경우
+            case .failure(let error):
+                print("실패하였습니다 :: \(error)" )
+            }
+        }
+    }
+    func apiBookmark(id : String) -> Void{
+        let url = "https://api.yeonba.co.kr/favorites/" + id;
+
+        // Alamofire 를 통한 API 통신
+        AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<500)
+        .responseJSON{response in print(response)}
+    }
+    func configure(data : OtherProfileDataModel) {
+        setupPieChart(pieValue: data.photoSyncRate!)
+        self.nameLabel.text = data.nickname!
+        self.heartLabel.text = "\(data.arrows!)"
+        self.preferenceLabel.text = "\(data.photoSyncRate!)%"
+        self.aboutData = ["\(data.age!)살", "\(data.height!)cm", data.activityArea!, data.vocalRange!, data.lookAlikeAnimal!]
+        if(data.alreadySentArrow!){
+            self.sendBtn.isEnabled = false
+            self.sendBtn.backgroundColor = UIColor.gray2
+            self.sendBtn.layer.borderColor = UIColor.gray2?.cgColor
+            self.sendBtn.setTitleColor(.white, for: .normal)
+            
+        }
+    }
 //MARK: -- Action
     @objc func declarButtonTapped() {
         print("declare")
@@ -310,8 +441,16 @@ class OtherProfileViewController: UIViewController {
     }
     @objc func favoriteButtonTapped() {
         if let currentImage = favoriteBtn.imageView?.image {
-            let newImage = currentImage == UIImage(named: "PinkFavorites") ? UIImage(named: "WhiteFavorites") : UIImage(named: "PinkFavorites")
-            favoriteBtn.setImage(newImage, for: .normal)
+            if(currentImage == UIImage(named: "PinkFavorites")){
+                let newImage = UIImage(named: "WhiteFavorites")
+                favoriteBtn.setImage(newImage, for: .normal)
+                apiBookmark(id: id!)
+            }
+            else {
+                let newImage = UIImage(named: "PinkFavorites")
+                favoriteBtn.setImage(newImage, for: .normal)
+                apiBookmark(id: id!)
+            }
         }
     }
     //뒤로가기
@@ -319,6 +458,12 @@ class OtherProfileViewController: UIViewController {
          self.navigationController?.popViewController(animated: true)
         print("back click")
      }
+    @objc func arrowBtnTapped() {
+        apiSendArrow()
+    }
+    @objc func chatBtnTapped() {
+        apiSendChatRequest()
+    }
 }
 //MARK: -- OtherProfileViewController UICollectionViewDelegate,UICollectionViewDataSource
 extension OtherProfileViewController: UICollectionViewDelegate {
@@ -329,7 +474,7 @@ extension OtherProfileViewController: UICollectionViewDataSource {
         if collectionView == aboutmeCollectionView {
             return 5
         } else if collectionView == preferenceCollectionView {
-            return 4
+            return 6
         }
         return 0
     }
@@ -340,12 +485,13 @@ extension OtherProfileViewController: UICollectionViewDataSource {
                 
                 return UICollectionViewCell()
             }
-            
+            cell.configure(with: aboutData[indexPath.row])
             return cell
         } else if collectionView == preferenceCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PreferenceCollectionViewCell.reuseIdentifier, for: indexPath) as? PreferenceCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            cell.configure(with: preferenceData[indexPath.row])
             return cell
         }
         return UICollectionViewCell()
@@ -379,6 +525,7 @@ extension OtherProfileViewController: ModeSelectViewControllerDelegate {
             print("daily")
         case .cut:
             print("weekly")
+            apiBlock()
            
         }
     }
@@ -389,20 +536,7 @@ extension OtherProfileViewController: WhyDeclareViewControllerDelegate {
         guard let mode = WhyMode(rawValue: indexPath) else { return }
         
         whyviewMode = mode
-        
-        switch whyviewMode {
-        case .fuck:
-            print("")
-        case .badchat:
-            print("")
-        case .badprofile:
-            print("")
-        case .other:
-            print("")
-        case .maner:
-            print("")
-        }
-        
+        apiReport()
     }
 }
 

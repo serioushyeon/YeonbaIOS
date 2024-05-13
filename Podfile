@@ -13,6 +13,12 @@ target 'YeonBa' do
 	pod 'Charts'
 	pod 'SCLAlertView'
 	pod 'Alamofire', '~> 5.4.4'
+	pod 'KakaoSDKAuth'
+  	pod 'KakaoSDKUser'
+  	pod 'KakaoSDKCommon'
+	pod 'Firebase/Core'
+	pod 'Firebase/Messaging'
+	pod 'SwiftKeychainWrapper'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing
