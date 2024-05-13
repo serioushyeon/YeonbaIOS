@@ -9,213 +9,213 @@ import UIKit
 import AVFoundation
 import Vision
 
+import UIKit
+import AVFoundation
+import Vision
+
 class FaceDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    var sequenceHandler = VNSequenceRequestHandler()
-    var captureSession = AVCaptureSession()
-    var isUsingFrontCamera = false
-    var frontCameraInput: AVCaptureDeviceInput!
-    var backCameraInput: AVCaptureDeviceInput!
-    let cameraToggleButton = UIButton()
+    private let captureSession = AVCaptureSession()
+    private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+    private let videoDataOutput = AVCaptureVideoDataOutput()
+    private var drawings: [CAShapeLayer] = []
+    private let captureButton = UIButton(type: .system)
+    private let stillImageOutput = AVCaptureStillImageOutput()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 카메라 설정 및 시작
-        setupCamera()
-        // 카메라 전환 버튼 설정
-        setupCameraToggleButton()
+        self.addCameraInput()
+        self.showCameraFeed()
+        self.getCameraFrames()
+        self.setupStillImageOutput()
+        self.captureSession.startRunning()
+        self.setupCaptureButton()
     }
     
-    func setupCamera() {
-        // captureSession은 이미 전역 변수로 정의되어 있으므로 let을 제거합니다.
-        captureSession.sessionPreset = .photo
-        
-        guard let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-              let frontCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
-              let backInput = try? AVCaptureDeviceInput(device: backCameraDevice),
-              let frontInput = try? AVCaptureDeviceInput(device: frontCameraDevice) else {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let navigationController = self.navigationController {
+            let topInset = navigationController.navigationBar.frame.height
+            let totalTopInset = topInset
+            let newFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+            self.previewLayer.frame = newFrame
+        } else {
+            self.previewLayer.frame = self.view.frame
+        }
+        self.layoutCaptureButton()
+    }
+    
+    private func setupCaptureButton() {
+        self.captureButton.setTitle("Capture", for: .normal)
+        self.captureButton.addTarget(self, action: #selector(captureButtonTapped), for: .touchUpInside)
+        self.view.addSubview(self.captureButton)
+        self.captureButton.isEnabled = false // 처음에는 비활성화된 상태로 시작
+    }
+    
+    private func layoutCaptureButton() {
+        let buttonWidth: CGFloat = 100
+        let buttonHeight: CGFloat = 40
+        let buttonX = (self.view.bounds.width - buttonWidth) / 2
+        let buttonY = self.view.bounds.height - buttonHeight - 20 // 버튼이 화면 하단에 위치하도록 설정
+        self.captureButton.frame = CGRect(x: buttonX, y: buttonY, width: buttonWidth, height: buttonHeight)
+    }
+    
+    private func setupStillImageOutput() {
+        if self.captureSession.canAddOutput(self.stillImageOutput) {
+            self.captureSession.addOutput(self.stillImageOutput)
+        }
+    }
+    
+    @objc private func captureButtonTapped() {
+        guard let videoConnection = self.stillImageOutput.connection(with: .video) else {
+            debugPrint("Failed to get video connection")
             return
         }
         
-        backCameraInput = backInput
-        frontCameraInput = frontInput
-        
-        // 기본 카메라로 뒷면 카메라를 설정합니다.
-        if captureSession.canAddInput(frontCameraInput) {
-            captureSession.addInput(frontCameraInput)
-        }
-
-        captureSession.startRunning()
-        
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.bounds
-        view.layer.addSublayer(previewLayer)
-        
-        let dataOutput = AVCaptureVideoDataOutput()
-        dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
-        if captureSession.canAddOutput(dataOutput) {
-            captureSession.addOutput(dataOutput)
-        }
-    }
-    
-    func setupCameraToggleButton() {
-        // 버튼 속성 설정
-        cameraToggleButton.setTitle("전환", for: .normal)
-        cameraToggleButton.backgroundColor = .lightGray
-        cameraToggleButton.layer.cornerRadius = 10
-        cameraToggleButton.addTarget(self, action: #selector(toggleCamera), for: .touchUpInside)
-        
-        // 뷰에 버튼 추가
-        view.addSubview(cameraToggleButton)
-        
-        cameraToggleButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cameraToggleButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            cameraToggleButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            cameraToggleButton.widthAnchor.constraint(equalToConstant: 60),
-            cameraToggleButton.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        view.bringSubviewToFront(cameraToggleButton)
-    }
-    // AVCaptureVideoDataOutputSampleBufferDelegate 메서드
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        
-        // 얼굴 특징을 포함한 얼굴 인식 요청 생성
-        let request = VNDetectFaceLandmarksRequest { [unowned self] request, error in
-            guard error == nil else {
-                print("Face detection error: \(error!.localizedDescription)")
+        // 셀카를 찍기 위해 비디오 피드의 현재 프레임을 캡처합니다.
+        self.stillImageOutput.captureStillImageAsynchronously(from: videoConnection) { (buffer, error) in
+            guard let buffer = buffer, error == nil else {
+                debugPrint("Error capturing still image: \(error?.localizedDescription ?? "")")
                 return
             }
-            self.handleFaceDetectionResults(request.results)
-        }
-        
-        // 시퀀스 핸들러 사용하여 이미지 분석
-        try? sequenceHandler.perform([request], on: pixelBuffer, orientation: .leftMirrored)
-    }
-    
-    func handleFaceDetectionResults(_ results: [Any]?) {
-        guard let faceObservations = results as? [VNFaceObservation] else { return }
-        
-        DispatchQueue.main.async { [unowned self] in
-            self.view.layer.sublayers?.removeSubrange(1...)
             
-            for face in faceObservations {
-                let faceRect = self.transformRect(fromRect: face.boundingBox, toViewRect: self.view)
-                if let landmarks = face.landmarks {
-                    // 이미 landmarks가 있는지 확인했으므로 직접 사용할 수 있습니다.
-                    let faceLayer = self.createFaceLayer(withRect: faceRect, landmarks: landmarks)
-                    self.view.layer.addSublayer(faceLayer)
-                    // 눈
-                    if let leftEye = landmarks.leftEye {
-                        let leftEyeLayer = self.createFeatureLayer(feature: leftEye, faceRect: faceRect, viewRect: self.view)
-                        self.view.layer.addSublayer(leftEyeLayer)
-                    }
+            // 캡처한 이미지 데이터를 UIImage로 변환합니다.
+            if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer),
+               let capturedImage = UIImage(data: imageData) {
+                
+                // 캡처한 이미지를 SignDataManager.selfieImage에 저장합니다.
+                SignDataManager.shared.selfieImage = capturedImage
+                
+                // 이미지 저장 후에 필요한 추가 작업 수행 가능
+                
+                // 예: 캡처된 이미지를 다른 뷰 컨트롤러에 전달하거나 표시하는 등의 작업
+                let ASVC = AnalysisSyncViewController()
+                self.navigationController?.pushViewController(ASVC, animated: true)
+                // UI 업데이트는 메인 스레드에서 수행되어야 합니다.
+                DispatchQueue.main.async {
                     
-                    if let rightEye = landmarks.rightEye {
-                        let rightEyeLayer = self.createFeatureLayer(feature: rightEye, faceRect: faceRect, viewRect: self.view)
-                        self.view.layer.addSublayer(rightEyeLayer)
-                    }
-                    
-                    // 코
-                    if let nose = landmarks.nose {
-                        let noseLayer = self.createFeatureLayer(feature: nose, faceRect: faceRect, viewRect: self.view)
-                        self.view.layer.addSublayer(noseLayer)
-                    }
-                    
-                    // 입
-                    if let outerLips = landmarks.outerLips {
-                        let outerLipsLayer = self.createFeatureLayer(feature: outerLips, faceRect: faceRect, viewRect: self.view)
-                        self.view.layer.addSublayer(outerLipsLayer)
-                    }
                 }
-            }
-        }
-    }
-    
-    
-    func createFeatureLayer(feature: VNFaceLandmarkRegion2D, faceRect: CGRect, viewRect: UIView) -> CALayer {
-        let layer = CAShapeLayer()
-        let path = UIBezierPath()
-        for i in 0..<feature.pointCount {
-            let point = feature.normalizedPoints[i]
-            let absolutePoint = CGPoint(x: CGFloat(point.x) * faceRect.width + faceRect.origin.x,
-                                        y: CGFloat(1 - point.y) * faceRect.height + faceRect.origin.y)
-            if i == 0 {
-                path.move(to: absolutePoint)
             } else {
-                path.addLine(to: absolutePoint)
+                debugPrint("Failed to convert image data to UIImage")
             }
         }
-        path.close()
-        
-        layer.path = path.cgPath
-        layer.strokeColor = UIColor.blue.cgColor // 특징의 경계 색상
-        layer.fillColor = nil // 내부 채우기 색상 없음
-        layer.lineWidth = 1.0 // 경계 선 두께
-        
-        return layer
     }
     
-    func transformRect(fromRect: CGRect, toViewRect view: UIView) -> CGRect {
-        let width = view.bounds.width * fromRect.size.width
-        let height = view.bounds.height * fromRect.size.height
-        let x = view.bounds.width * fromRect.origin.x
-        let y = view.bounds.height * (1 - fromRect.origin.y) - height
-        return CGRect(x: x, y: y, width: width, height: height)
+    func captureOutput(
+        _ output: AVCaptureOutput,
+        didOutput sampleBuffer: CMSampleBuffer,
+        from connection: AVCaptureConnection) {
+        
+        guard let frame = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            debugPrint("unable to get image from sample buffer")
+            return
+        }
+        self.detectFace(in: frame)
     }
-    func createFaceLayer(withRect rect: CGRect, landmarks: VNFaceLandmarks2D) -> CALayer {
-        let layer = CAShapeLayer()
-        layer.frame = rect
-
-        // 얼굴 골격을 그리는 경로를 생성합니다.
-        let path = CGMutablePath()
-        if let faceContour = landmarks.faceContour {
-            for i in 0..<faceContour.pointCount {
-                let point = faceContour.normalizedPoints[i]
-                if i == 0 {
-                    path.move(to: CGPoint(x: point.x * rect.width + rect.origin.x, y: point.y * rect.height + rect.origin.y))
+    
+    private func addCameraInput() {
+        guard let device = AVCaptureDevice.DiscoverySession(
+            deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
+            mediaType: .video,
+            position: .front).devices.first else {
+                fatalError("No back camera device found, please make sure to run SimpleLaneDetection in an iOS device and not a simulator")
+        }
+        let cameraInput = try! AVCaptureDeviceInput(device: device)
+        self.captureSession.addInput(cameraInput)
+    }
+    
+    private func showCameraFeed() {
+        self.previewLayer.videoGravity = .resizeAspectFill
+        self.view.layer.addSublayer(self.previewLayer)
+        self.previewLayer.frame = self.view.frame
+    }
+    
+    private func getCameraFrames() {
+        self.videoDataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA)] as [String : Any]
+        self.videoDataOutput.alwaysDiscardsLateVideoFrames = true
+        self.videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "camera_frame_processing_queue"))
+        self.captureSession.addOutput(self.videoDataOutput)
+        guard let connection = self.videoDataOutput.connection(with: AVMediaType.video),
+            connection.isVideoOrientationSupported else { return }
+        connection.videoOrientation = .portrait
+    }
+    
+    private func detectFace(in image: CVPixelBuffer) {
+        let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
+            DispatchQueue.main.async {
+                if let results = request.results as? [VNFaceObservation] {
+                    self.handleFaceDetectionResults(results)
                 } else {
-                    path.addLine(to: CGPoint(x: point.x * rect.width + rect.origin.x, y: point.y * rect.height + rect.origin.y))
+                    self.clearDrawings()
+                    self.captureButton.isEnabled = false // 얼굴이 인식되지 않으면 촬영 버튼 비활성화
                 }
             }
-        }
-        
-        // 경로를 사용하여 얼굴 골격을 레이어에 추가합니다.
-        layer.path = path
-        layer.strokeColor = UIColor.red.cgColor
-        layer.fillColor = nil
-        layer.lineWidth = 2.0
-
-        return layer
-    }
-    func switchCameraInput() {
-        captureSession.beginConfiguration()
-        
-        // 3. 새로운 카메라 입력을 세션에 추가하고 이전 입력을 제거합니다.
-        let newCameraInput: AVCaptureDeviceInput
-        if isUsingFrontCamera {
-            newCameraInput = frontCameraInput
-        } else {
-            newCameraInput = backCameraInput
-        }
-        
-        if let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput {
-            captureSession.removeInput(currentInput)
-            if captureSession.canAddInput(newCameraInput) {
-                captureSession.addInput(newCameraInput)
-            }
-        }
-        
-        captureSession.commitConfiguration()
-    }
-    @objc func toggleCamera() {
-        // 2. 버튼의 액션 메서드에서 현재 카메라의 전후면 방향을 토글합니다.
-        isUsingFrontCamera = !isUsingFrontCamera
-        switchCameraInput()
+        })
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .leftMirrored, options: [:])
+        try? imageRequestHandler.perform([faceDetectionRequest])
     }
     
+    private func handleFaceDetectionResults(_ observedFaces: [VNFaceObservation]) {
+        self.clearDrawings()
+        
+        if observedFaces.isEmpty {
+            self.captureButton.isEnabled = false // 얼굴이 인식되지 않으면 촬영 버튼 비활성화
+            return
+        }
+        
+        let facesBoundingBoxes: [CAShapeLayer] = observedFaces.flatMap({ (observedFace: VNFaceObservation) -> [CAShapeLayer] in
+            let faceBoundingBoxOnScreen = self.previewLayer.layerRectConverted(fromMetadataOutputRect: observedFace.boundingBox)
+            let faceBoundingBoxPath = CGPath(rect: faceBoundingBoxOnScreen, transform: nil)
+            let faceBoundingBoxShape = CAShapeLayer()
+            faceBoundingBoxShape.path = faceBoundingBoxPath
+            faceBoundingBoxShape.fillColor = UIColor.clear.cgColor
+            faceBoundingBoxShape.strokeColor = UIColor.green.cgColor
+            var newDrawings = [CAShapeLayer]()
+            newDrawings.append(faceBoundingBoxShape)
+            if let landmarks = observedFace.landmarks {
+                newDrawings = newDrawings + self.drawFaceFeatures(landmarks, screenBoundingBox: faceBoundingBoxOnScreen)
+            }
+            return newDrawings
+        })
+        facesBoundingBoxes.forEach({ faceBoundingBox in self.view.layer.addSublayer(faceBoundingBox) })
+        self.drawings = facesBoundingBoxes
+        
+        self.captureButton.isEnabled = true // 얼굴이 인식되면 촬영 버튼 활성화
+    }
+    
+    private func clearDrawings() {
+        self.drawings.forEach({ drawing in drawing.removeFromSuperlayer() })
+    }
+    
+    private func drawFaceFeatures(_ landmarks: VNFaceLandmarks2D, screenBoundingBox: CGRect) -> [CAShapeLayer] {
+        var faceFeaturesDrawings: [CAShapeLayer] = []
+        if let leftEye = landmarks.leftEye {
+            let eyeDrawing = self.drawEye(leftEye, screenBoundingBox: screenBoundingBox)
+            faceFeaturesDrawings.append(eyeDrawing)
+        }
+        if let rightEye = landmarks.rightEye {
+            let eyeDrawing = self.drawEye(rightEye, screenBoundingBox: screenBoundingBox)
+            faceFeaturesDrawings.append(eyeDrawing)
+        }
+        // draw other face features here
+        return faceFeaturesDrawings
+    }
+    
+    private func drawEye(_ eye: VNFaceLandmarkRegion2D, screenBoundingBox: CGRect) -> CAShapeLayer {
+        let eyePath = CGMutablePath()
+        let eyePathPoints = eye.normalizedPoints
+            .map({ eyePoint in
+                CGPoint(
+                    x: eyePoint.y * screenBoundingBox.height + screenBoundingBox.origin.x,
+                    y: eyePoint.x * screenBoundingBox.width + screenBoundingBox.origin.y)
+            })
+        eyePath.addLines(between: eyePathPoints)
+        eyePath.closeSubpath()
+        let eyeDrawing = CAShapeLayer()
+        eyeDrawing.path = eyePath
+        eyeDrawing.fillColor = UIColor.clear.cgColor
+        eyeDrawing.strokeColor = UIColor.green.cgColor
+        
+        return eyeDrawing
+    }
 }
-
-
