@@ -1,10 +1,3 @@
-//
-//  SignDataManager.swift
-//  YeonBa
-//
-//  Created by 김민솔 on 5/3/24.
-//
-
 import Foundation
 import SwiftKeychainWrapper
 
@@ -52,6 +45,7 @@ class SignDataManager {
             }
         }
     }
+    
     var birthDate: String? {
         get {
             return KeychainWrapper.standard.string(forKey: "birthDate") // keychain 반환
@@ -127,6 +121,20 @@ class SignDataManager {
             } else {
                 KeychainWrapper.standard.removeObject(forKey: "job")
             }
+        }
+    }
+    
+    var mbti: String? {
+        get {
+            return KeychainWrapper.standard.string(forKey: "mbti")
+        }
+        set {
+            if let newValue = newValue {
+                KeychainWrapper.standard.set(newValue, forKey: "mbti")
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: "mbti")
+            }
+            
         }
     }
     
