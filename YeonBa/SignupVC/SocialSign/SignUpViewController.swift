@@ -177,7 +177,7 @@ extension SignUpViewController {
         SignDataManager.shared.socialId = self.socialID
         SignDataManager.shared.loginType = self.loginType
         print("소셜ID: \(String(describing: SignDataManager.shared.socialId))")
-        print("소셜ID: \(String(describing: SignDataManager.shared.loginType))")
+        print("로그인타입: \(String(describing: SignDataManager.shared.loginType))")
         phonenumberVC.socialID = self.socialID
         phonenumberVC.loginType = self.loginType
         navigationController?.pushViewController(phonenumberVC, animated: true)
@@ -224,8 +224,8 @@ extension SignUpViewController:
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
     }
 }
-
-
-
-
-
+//
+//
+//
+//
+//
