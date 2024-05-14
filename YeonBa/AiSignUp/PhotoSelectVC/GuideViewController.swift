@@ -15,6 +15,7 @@ class GuideViewController: UIViewController {
     let instructionsTitle = UILabel().then {
         $0.text = "가이드를 꼭 준수해주세요."
         $0.font = UIFont.pretendardBold(size: 26)
+        $0.textColor = .black
     }
     
     let instructionsLabel1 = UILabel().then {
@@ -22,6 +23,7 @@ class GuideViewController: UIViewController {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.font = UIFont.pretendardMedium(size: 16)
+        $0.textColor = .black
     }
     
     let instructionsLabel2 = UILabel().then {
@@ -29,6 +31,7 @@ class GuideViewController: UIViewController {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.font = UIFont.pretendardMedium(size: 16)
+        $0.textColor = .black
     }
     
     let instructionsLabel3 = UILabel().then {
@@ -36,6 +39,7 @@ class GuideViewController: UIViewController {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.font = UIFont.pretendardMedium(size: 16)
+        $0.textColor = .black
     }
     
     let goodLabel = UILabel().then {

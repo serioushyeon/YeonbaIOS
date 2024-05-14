@@ -21,6 +21,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         $0.text = "회원님의 사진 2장을 선택해 주세요."
         $0.font = UIFont.pretendardBold(size: 26)
         $0.numberOfLines = 0
+        $0.textColor = .black
     }
     
     let subInstructionLabel = UILabel().then {
@@ -90,6 +91,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         view.backgroundColor = .white
         addSubViews()
         configUI()
+        setupNavigationBar()
         setupActions()
         setupInitialPieChart()
         photoPlaceholderView.delegate = self
@@ -102,6 +104,10 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     // MARK: - UI Layout
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "유사도 분석"
+    }
     private func addSubViews(){
         // Add subviews
         [instructionLabel, subInstructionLabel, horizontalStackView, progressCircleView, photoGuideButton, goToCameraButton, addButton, addButton2, similarityLabel].forEach {
@@ -263,49 +269,9 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
                 print("프로필 사진은 반드시 2장이어야 합니다.")
                 return
             }
-        let signUpRequest = SignUpRequest (
-            socialId: dataManager.socialId!,
-            loginType: dataManager.loginType!,
-            gender: dataManager.gender!,
-            phoneNumber: dataManager.phoneNumber!,
-            birth: dataManager.birthDate!,
-            nickname: dataManager.nickName!,
-            height: dataManager.height,
-            bodyType: dataManager.bodyType!,
-            job: dataManager.job!,
-            activityArea: dataManager.activityArea!,
-            mbti: dataManager.mbti!,
-            vocalRange: dataManager.vocalRange!,
-            profilePhotos: imageDatas,
-            photoSyncRate: 90,
-            lookAlikeAnimal: dataManager.lookAlikeAnimal!,
-            preferredAnimal: dataManager.preferredAnimal!,
-            preferredArea: dataManager.preferredArea!,
-            preferredVocalRange: dataManager.preferredVocalRange!,
-            preferredAgeLowerBound: dataManager.preferredAgeLowerBound,
-            preferredAgeUpperBound: dataManager.preferredAgeUpperBound,
-            preferredHeightLowerBound: dataManager.preferredHeightLowerBound!,
-            preferredHeightUpperBound: dataManager.preferredHeightUpperBound!,
-            preferredBodyType: dataManager.preferredBodyType!,
-            preferredMbti: dataManager.preferredMbti!
-        )
-        print(signUpRequest)
-        NetworkService.shared.signUpService.signUp(bodyDTO: signUpRequest) { response in
-            switch response {
-            case .success(let data):
-                guard let data = data.data else { return }
-                print("회원가입 성공")
-            default:
-                print("회원가입 에러")
-            }
-        }
-//        let faceDetectionVC = FaceDetectionViewController()
-//        
-//        // 프레젠트 방식을 전체 화면으로 설정
-//        faceDetectionVC.modalPresentationStyle = .fullScreen
-//        
-//        // 현재 뷰 컨트롤러에서 FaceDetectionViewController를 프레젠트
-//        self.present(faceDetectionVC, animated: true, completion: nil)
+        SignDataManager.shared.profilePhotos = imageDatas
+        let cameraVC = FaceDetectionViewController()
+        navigationController?.pushViewController(cameraVC, animated: true)
     }
 }
 

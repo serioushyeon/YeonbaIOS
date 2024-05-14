@@ -11,12 +11,12 @@ import Alamofire
 protocol SignUpServiceProtocol {
     func nicknameCheck(queryDTO: NicknameRequest, completion: @escaping (NetworkResult<StatusResponse<NicknameResponse>>) -> Void)
     func signUp(bodyDTO: SignUpRequest, completion: @escaping (NetworkResult<BaseResponse<SignUpResponse>>) -> Void)
-    func phoneNumberCheck(queryDTO: PhoneNumberRequest,completion: @escaping (NetworkResult<BaseResponse<PhoneNumberResponse>>) -> Void)
+    func phoneNumberCheck(queryDTO: PhoneNumberRequest,completion: @escaping (NetworkResult<StatusResponse<PhoneNumberResponse>>) -> Void)
 }
 
 final class SignUpService: APIRequestLoader<SignUpTarget>, SignUpServiceProtocol {
-    func phoneNumberCheck(queryDTO: PhoneNumberRequest, completion: @escaping (NetworkResult<BaseResponse<PhoneNumberResponse>>) -> Void) {
-        fetchData(target: .phoneNumberCheck(queryDTO), responseData: BaseResponse<PhoneNumberResponse>.self, completion: completion)
+    func phoneNumberCheck(queryDTO: PhoneNumberRequest, completion: @escaping (NetworkResult<StatusResponse<PhoneNumberResponse>>) -> Void) {
+        fetchData(target: .phoneNumberCheck(queryDTO), responseData: StatusResponse<PhoneNumberResponse>.self, completion: completion)
     }
     
     func nicknameCheck(queryDTO: NicknameRequest, completion: @escaping (NetworkResult<StatusResponse<NicknameResponse>>) -> Void) {

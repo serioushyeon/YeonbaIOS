@@ -41,7 +41,7 @@ extension SignUpTarget: TargetType {
         case .signUp:
             return "/users/join"
         case .phoneNumberCheck:
-            return "/users/nicknames/used"
+            return "/users/phone-numbers/used"
         case .nicknameCheck:
             return "/users/nicknames/used"
         case .login:

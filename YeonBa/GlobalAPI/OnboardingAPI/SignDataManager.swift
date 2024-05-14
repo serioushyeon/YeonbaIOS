@@ -13,6 +13,22 @@ class SignDataManager {
     
     private init() {}
     var selectedImages: [UIImage] = []
+    var profilePhotos : [Data]? = []
+    var selfieImage : UIImage = UIImage()
+    
+    var confidence: Int? {
+        get {
+            return KeychainWrapper.standard.integer(forKey: "confidence")
+        }
+        set {
+            if let newValue = newValue {
+                KeychainWrapper.standard.set(newValue, forKey: "confidence")
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: "confidence")
+            }
+        }
+    }
+    
     var socialId: Int? {
         get {
             return KeychainWrapper.standard.integer(forKey: "socialId") // keychain 반환
@@ -116,7 +132,7 @@ class SignDataManager {
             }
         }
     }
-    
+
     var job: String? {
         get {
             return KeychainWrapper.standard.string(forKey: "job")

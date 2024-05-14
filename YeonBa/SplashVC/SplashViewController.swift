@@ -75,23 +75,31 @@ class SplashViewController: UIViewController {
                 self.changeRootViewController(rootViewController: self.signUpViewController)
             } else {
                 //어세스 토큰이 존재하는 경우
+                getUserInfo()
                 self.changeRootViewController(rootViewController: self.tabbarController)
             }
         }
         // MARK: Network Function
-        //    func getUserInfo() {
-        //        NetworkService.shared.loginService.login(bodyDTO: LoginRequest) { [weak self] response in
-        //            guard let self = self else { return }
-        //            switch response {
-        //            case .success(let data):
-        //                guard let data = data.data else { return }
-        //
-        //
-        //            }
-        //
-        //
-        //        }
-        //    }
+            func getUserInfo() {
+                let loginRequest = LoginRequest (
+                    socialId : SignDataManager.shared.socialId!,
+                    loginType : SignDataManager.shared.loginType!,
+                    phoneNumber :SignDataManager.shared.phoneNumber!
+                )
+                NetworkService.shared.loginService.login(bodyDTO: loginRequest) { [weak self] response in
+                    guard let self = self else { return }
+                    switch response {
+                    case .success(let data):
+                        guard let data = data.data else { return }
+                        print("로그인 성공")
+                    default:
+                        print("로그인 실패")
+        
+                    }
+        
+        
+                }
+            }
         
     }
 }
