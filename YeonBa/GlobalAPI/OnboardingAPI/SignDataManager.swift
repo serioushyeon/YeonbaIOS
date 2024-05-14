@@ -1,3 +1,10 @@
+//
+//  SignDataManager.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 5/3/24.
+//
+
 import Foundation
 import SwiftKeychainWrapper
 
@@ -6,26 +13,22 @@ class SignDataManager {
     
     private init() {}
     var selectedImages: [UIImage] = []
-    var profilePhotos: [Data]? {
+    var profilePhotos : [Data]? = []
+    var selfieImage : UIImage = UIImage()
+    
+    var confidence: Int? {
         get {
-            if let data = KeychainWrapper.standard.data(forKey: "profilePhotos") {
-                // Keychain에서 데이터를 가져와서 배열로 변환하여 반환
-                return [data]
-            } else {
-                return nil
-            }
+            return KeychainWrapper.standard.integer(forKey: "confidence")
         }
         set {
-            if let newValue = newValue, let firstPhotoData = newValue.first {
-                // 배열이 새로운 값을 가지고 있고, 첫 번째 요소의 데이터를 Keychain에 저장
-                KeychainWrapper.standard.set(firstPhotoData, forKey: "profilePhotos")
+            if let newValue = newValue {
+                KeychainWrapper.standard.set(newValue, forKey: "confidence")
             } else {
-                // 새로운 값이 nil이거나 배열이 비어 있을 경우 Keychain에서 데이터를 삭제
-                KeychainWrapper.standard.removeObject(forKey: "profilePhotos")
+                KeychainWrapper.standard.removeObject(forKey: "confidence")
             }
         }
     }
-    var selfieImage : UIImage = UIImage()
+    
     var socialId: Int? {
         get {
             return KeychainWrapper.standard.integer(forKey: "socialId") // keychain 반환
@@ -129,7 +132,7 @@ class SignDataManager {
             }
         }
     }
-    
+
     var job: String? {
         get {
             return KeychainWrapper.standard.string(forKey: "job")
