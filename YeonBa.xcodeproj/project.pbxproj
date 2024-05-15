@@ -88,7 +88,6 @@
 		589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD632BE7E74400BA332F /* YeonBaRequestInterceptor.swift */; };
 		589CDD662BE7E78400BA332F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD652BE7E78400BA332F /* NetworkService.swift */; };
 		589CDD692BE89F0800BA332F /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD682BE89F0800BA332F /* SignUpResponse.swift */; };
-		589CDD6B2BE8B1F600BA332F /* TallJKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD6A2BE8B1F600BA332F /* TallJKSlider.swift */; };
 		589DF3262B9073BB003F03C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3252B9073BB003F03C5 /* HomeViewController.swift */; };
 		589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF3282B90747B003F03C5 /* SearchViewController.swift */; };
 		589DF32B2B9074B0003F03C5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589DF32A2B9074B0003F03C5 /* TabBarController.swift */; };
@@ -196,6 +195,11 @@
 		58D1395A2BF48D750048C228 /* ChatSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D139592BF48D750048C228 /* ChatSection.swift */; };
 		58D1395D2BF493340048C228 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D1395C2BF493340048C228 /* SendView.swift */; };
 		58D1395F2BF496E20048C228 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D1395E2BF496E20048C228 /* Sender.swift */; };
+		58D139652BF49A5D0048C228 /* NotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D139642BF49A5D0048C228 /* NotificationResponse.swift */; };
+		58D139672BF49A700048C228 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D139662BF49A700048C228 /* NotificationService.swift */; };
+		58D139692BF49A890048C228 /* NotificationTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D139682BF49A890048C228 /* NotificationTarget.swift */; };
+		58D139722BF49C770048C228 /* NotificationDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D139712BF49C770048C228 /* NotificationDataResponse.swift */; };
+		58D139742BF49CEE0048C228 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D139732BF49CEE0048C228 /* Notification.swift */; };
 		58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E922B90585700EB74E9 /* AppDelegate.swift */; };
 		58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D15E942B90585700EB74E9 /* SceneDelegate.swift */; };
 		58D15E9C2B90585A00EB74E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D15E9B2B90585A00EB74E9 /* Assets.xcassets */; };
@@ -334,7 +338,6 @@
 		589CDD632BE7E74400BA332F /* YeonBaRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeonBaRequestInterceptor.swift; sourceTree = "<group>"; };
 		589CDD652BE7E78400BA332F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		589CDD682BE89F0800BA332F /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
-		589CDD6A2BE8B1F600BA332F /* TallJKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallJKSlider.swift; sourceTree = "<group>"; };
 		589DF3252B9073BB003F03C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		589DF3282B90747B003F03C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		589DF32A2B9074B0003F03C5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -443,6 +446,11 @@
 		58D139592BF48D750048C228 /* ChatSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSection.swift; sourceTree = "<group>"; };
 		58D1395C2BF493340048C228 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		58D1395E2BF496E20048C228 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		58D139642BF49A5D0048C228 /* NotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponse.swift; sourceTree = "<group>"; };
+		58D139662BF49A700048C228 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		58D139682BF49A890048C228 /* NotificationTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTarget.swift; sourceTree = "<group>"; };
+		58D139712BF49C770048C228 /* NotificationDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataResponse.swift; sourceTree = "<group>"; };
+		58D139732BF49CEE0048C228 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		58D15E8F2B90585700EB74E9 /* YeonBa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YeonBa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D15E922B90585700EB74E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D15E942B90585700EB74E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -521,13 +529,13 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		582DB1762BBE89CB00600EA7 /* AlramVC */ = {
+		582DB1762BBE89CB00600EA7 /* AlaramVC */ = {
 			isa = PBXGroup;
 			children = (
 				582DB1792BBE89EA00600EA7 /* Cell */,
 				582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */,
 			);
-			path = AlramVC;
+			path = AlaramVC;
 			sourceTree = "<group>";
 		};
 		582DB1792BBE89EA00600EA7 /* Cell */ = {
@@ -769,7 +777,7 @@
 		589CDCF52BE504F400BA332F /* GlobalAPI */ = {
 			isa = PBXGroup;
 			children = (
-				58D138102BEE71DC0048C228 /* LoginAPI */,
+				58D139602BF49A220048C228 /* NotificationAPI */,
 				58580F202BE20BA60055F3E8 /* OnboardingAPI */,
 				589CDCF62BE5050900BA332F /* NetworkResult.swift */,
 				589CDCF82BE5054600BA332F /* BaseResponse.swift */,
@@ -809,7 +817,6 @@
 			isa = PBXGroup;
 			children = (
 				589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */,
-				589CDD6A2BE8B1F600BA332F /* TallJKSlider.swift */,
 			);
 			path = Gloabal;
 			sourceTree = "<group>";
@@ -1106,13 +1113,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		58D138102BEE71DC0048C228 /* LoginAPI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LoginAPI;
-			sourceTree = "<group>";
-		};
 		58D138EB2BF22E700048C228 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
@@ -1278,6 +1278,66 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		58D139602BF49A220048C228 /* NotificationAPI */ = {
+			isa = PBXGroup;
+			children = (
+				58D139632BF49A490048C228 /* Router */,
+				58D139622BF49A410048C228 /* Service */,
+				58D139612BF49A360048C228 /* DTO */,
+			);
+			path = NotificationAPI;
+			sourceTree = "<group>";
+		};
+		58D139612BF49A360048C228 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				58D1396B2BF49BC00048C228 /* Request */,
+				58D1396A2BF49BB60048C228 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		58D139622BF49A410048C228 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				58D139662BF49A700048C228 /* NotificationService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		58D139632BF49A490048C228 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				58D139682BF49A890048C228 /* NotificationTarget.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		58D1396A2BF49BB60048C228 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				58D1396D2BF49C0A0048C228 /* List */,
+				58D139642BF49A5D0048C228 /* NotificationResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		58D1396B2BF49BC00048C228 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		58D1396D2BF49C0A0048C228 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				58D139712BF49C770048C228 /* NotificationDataResponse.swift */,
+				58D139732BF49CEE0048C228 /* Notification.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		58D15E862B90585700EB74E9 = {
 			isa = PBXGroup;
 			children = (
@@ -1314,7 +1374,7 @@
 				589CDCF52BE504F400BA332F /* GlobalAPI */,
 				58A467A42BDBA7F700BBA7FB /* GoogleService-Info.plist */,
 				58A467A32BDBA27D00BBA7FB /* YeonBa.entitlements */,
-				582DB1762BBE89CB00600EA7 /* AlramVC */,
+				582DB1762BBE89CB00600EA7 /* AlaramVC */,
 				58BB87142BBBECDD00F90050 /* SignupVC */,
 				58BB86222BB54DAF00F90050 /* NameSpace */,
 				58BB858B2BB1D3D500F90050 /* OtherProfileVC */,
@@ -1672,6 +1732,7 @@
 				58580F012BE13E490055F3E8 /* AnimalMode.swift in Sources */,
 				589CDD5E2BE7E6DB00BA332F /* APIRequestLoader.swift in Sources */,
 				58D1394F2BF328720048C228 /* ProfileEditViewController.swift in Sources */,
+				58D139722BF49C770048C228 /* NotificationDataResponse.swift in Sources */,
 				58580F182BE142870055F3E8 /* OtherProfileDataModel.swift in Sources */,
 				58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */,
 				58D139422BF328720048C228 /* AccountManagementViewController.swift in Sources */,
@@ -1706,6 +1767,7 @@
 				58580EEC2BE13E490055F3E8 /* FavoriteAgeViewController.swift in Sources */,
 				58BB867B2BB7DC9C00F90050 /* VoicePresentationController.swift in Sources */,
 				58580EA92BE0B9E30055F3E8 /* BirthDateSettingViewController.swift in Sources */,
+				58D139692BF49A890048C228 /* NotificationTarget.swift in Sources */,
 				58580F032BE13E490055F3E8 /* SignLocationMode.swift in Sources */,
 				58D137EF2BEA3E060048C228 /* AgeViewController.swift in Sources */,
 				58580F1B2BE1F5F30055F3E8 /* MyFavoriteListViweController.swift in Sources */,
@@ -1717,6 +1779,7 @@
 				58D138E42BF219B70048C228 /* NicknameRequest.swift in Sources */,
 				58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */,
 				58580F192BE142870055F3E8 /* OtherProfileResponse.swift in Sources */,
+				58D139652BF49A5D0048C228 /* NotificationResponse.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				58580EAD2BE0B9F10055F3E8 /* BodyShapeViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
@@ -1736,13 +1799,14 @@
 				58D138162BEE72AA0048C228 /* LoginService.swift in Sources */,
 				58580EAB2BE0B9EA0055F3E8 /* BodyInfoViewController.swift in Sources */,
 				58580EF32BE13E490055F3E8 /* FavoriteBodyViewControllerDelegate.swift in Sources */,
+				58D139742BF49CEE0048C228 /* Notification.swift in Sources */,
 				589CDCF72BE5050900BA332F /* NetworkResult.swift in Sources */,
+				58D139672BF49A700048C228 /* NotificationService.swift in Sources */,
 				58D139502BF328720048C228 /* VoiceEditDelegate.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
 				58580EF52BE13E490055F3E8 /* FavoriteLocationViewController.swift in Sources */,
 				58580F0C2BE141E30055F3E8 /* CollectResponse.swift in Sources */,
 				58D138E82BF22D210048C228 /* PhoneNumberRequest.swift in Sources */,
-				589CDD6B2BE8B1F600BA332F /* TallJKSlider.swift in Sources */,
 				58D1390A2BF3127E0048C228 /* VoiceRecordingViewController.swift in Sources */,
 				58580EEB2BE13E490055F3E8 /* FavoriteAgePresentationController.swift in Sources */,
 				58D139152BF3127E0048C228 /* VoicePopupViewcontroller.swift in Sources */,
