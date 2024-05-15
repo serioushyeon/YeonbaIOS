@@ -70,14 +70,17 @@ class SplashViewController: UIViewController {
     }
     func branchProcessing() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5 ) {
-            if KeychainHandler.shared.accessToken.isEmpty {
-                //어세스 토큰이 없는 경우
-                self.changeRootViewController(rootViewController: self.signUpViewController)
-            } else {
-                //어세스 토큰이 존재하는 경우
-                getUserInfo()
-                self.changeRootViewController(rootViewController: self.tabbarController)
-            }
+            print("accesstoken:\(KeychainHandler.shared.accessToken)")
+            self.changeRootViewController(rootViewController: self.tabbarController)
+
+//            if KeychainHandler.shared.accessToken.isEmpty {
+//                //어세스 토큰이 없는 경우
+//                self.changeRootViewController(rootViewController: self.signUpViewController)
+//            } else {
+//                //어세스 토큰이 존재하는 경우
+//               // getUserInfo()
+//                self.changeRootViewController(rootViewController: self.tabbarController)
+//            }
         }
         // MARK: Network Function
             func getUserInfo() {
