@@ -5,10 +5,7 @@ import Then
 class NotificationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - UI Components
-    let titleLabel = UILabel().then{
-        $0.text = "알림"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
+    
     let backButton = UIButton(type: .system).then {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
         let image = UIImage(named: "BackButton")
@@ -41,7 +38,6 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
     private func addSubViews(){
         view.addSubview(tableView)
         view.addSubview(backButton)
-        view.addSubview(titleLabel)
     }
     private func configUI() {
         tableView.snp.makeConstraints { make in
@@ -51,16 +47,11 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
             make.top.equalToSuperview().offset(55)
             make.leading.equalToSuperview().offset(21)
         }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.centerX.equalToSuperview()
-        }
+
     }
 
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of notification types for simplicity
         return 3
     }
 

@@ -1,43 +1,27 @@
+//
+//  ChattingRoomViewController.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 5/15/24.
+//
+
 import UIKit
 import SnapKit
 import Then
 
-struct ChatMessage {
-    var sender: Sender
-    var message: String
-    var date: Date
-}
-
-// 채팅 메시지를 날짜별로 분류한 구조체
-struct ChatSection {
-    var date: Date
-    var messages: [ChatMessage]
-}
 
 enum Sender {
     case me
     case other
 }
-
 class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-        
+    
     var messagesDateString = "yyyy년 MM월 dd일"
     var messages: [ChatMessage] = [] // 채팅 데이터를 저장할 배열
     // 날짜별로 섹션화된 채팅 데이터
     var chatSections: [ChatSection] = []
-    
+    var sendView = SendView()
     //MARK: - UI Components
-    let titleLabel = UILabel().then{
-        $0.text = "박원빈"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "BackButton")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
     let galleryButton = UIButton().then {
         $0.setImage(UIImage(named: "GalleryIcon"), for: .normal) // 갤러리 아이콘 이미지 설정
         $0.contentMode = .scaleAspectFit
@@ -60,7 +44,7 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
     let sendButton = UIButton().then {
         $0.setImage(UIImage(named: "SendIcon"), for: .normal) // 전송 아이콘 이미지 설정
         $0.contentMode = .scaleAspectFit
-        }
+    }
     lazy var tableView = UITableView(frame: .zero, style: .grouped).then{
         $0.register(MyMessageCell.self, forCellReuseIdentifier: "MyMessageCell")
         $0.register(OtherMessageCell.self, forCellReuseIdentifier: "OtherMessageCell")
@@ -82,56 +66,37 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.title = "변우석"
         addSubViews()
         configUI()
         loadChatData() // 가짜 데이터 로드 함수
         
     }
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         self.navigationItem.hidesBackButton = true
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+    
     }
     
     // MARK: - UI Layout
     func addSubViews(){
-        view.addSubview(titleLabel)
-        view.addSubview(backButton)
-        view.addSubview(galleryButton)
-        view.addSubview(messageTextField)
-        view.addSubview(sendButton)
+        view.addSubview(sendView)
         view.addSubview(tableView)
     }
     func configUI() {
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.centerX.equalToSuperview()
-        }
-        galleryButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.bottom.equalToSuperview().offset(-62)
-            make.width.height.equalTo(26) // 아이콘 크기
-        }
-        messageTextField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(60)
-            make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-55)
-            make.height.equalTo(40)
-        }
-        
-        sendButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-35)
-            make.centerY.equalTo(messageTextField.snp.centerY)
-            make.width.height.equalTo(20) // 아이콘 크기
+        sendView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(50)
         }
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(21)
+            make.top.equalToSuperview().offset(21)
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-105)
+            make.bottom.equalTo(sendView.snp.top)
         }
         
         
