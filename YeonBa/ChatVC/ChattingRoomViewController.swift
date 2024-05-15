@@ -9,11 +9,6 @@ import UIKit
 import SnapKit
 import Then
 
-
-enum Sender {
-    case me
-    case other
-}
 class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var messagesDateString = "yyyy년 MM월 dd일"
@@ -22,29 +17,6 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
     var chatSections: [ChatSection] = []
     var sendView = SendView()
     //MARK: - UI Components
-    let galleryButton = UIButton().then {
-        $0.setImage(UIImage(named: "GalleryIcon"), for: .normal) // 갤러리 아이콘 이미지 설정
-        $0.contentMode = .scaleAspectFit
-    }
-    
-    let messageTextField = UITextField().then {
-        $0.placeholder = "메시지 보내기"
-        $0.borderStyle = .none
-        $0.backgroundColor = .gray2
-        $0.textColor = .customgray4
-        $0.font = UIFont.pretendardRegular(size: 13)
-        $0.layer.cornerRadius = 20
-        $0.layer.masksToBounds = true
-        $0.textAlignment = .left
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: $0.frame.height))
-        $0.leftViewMode = .always
-        $0.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40)) // sendButton의 width와 동일하게 설정
-        $0.rightViewMode = .always
-    }
-    let sendButton = UIButton().then {
-        $0.setImage(UIImage(named: "SendIcon"), for: .normal) // 전송 아이콘 이미지 설정
-        $0.contentMode = .scaleAspectFit
-    }
     lazy var tableView = UITableView(frame: .zero, style: .grouped).then{
         $0.register(MyMessageCell.self, forCellReuseIdentifier: "MyMessageCell")
         $0.register(OtherMessageCell.self, forCellReuseIdentifier: "OtherMessageCell")
@@ -98,8 +70,6 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
             make.left.right.equalToSuperview()
             make.bottom.equalTo(sendView.snp.top)
         }
-        
-        
     }
     
     func loadChatData() {
