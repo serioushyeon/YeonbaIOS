@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
-
+import SwiftKeychainWrapper
 class SplashViewController: UIViewController {
     let signUpViewController = SignUpViewController()
     let tabbarController = TabBarController()
@@ -25,7 +25,7 @@ class SplashViewController: UIViewController {
         let attributedText = NSMutableAttributedString(string: "연애는\n바로지금,")
         attributedText.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: attributedText.length)) // 전체 텍스트의 글자색 변경
         attributedText.addAttribute(.font, value: UIFont.pretendardSemiBold(size: 50), range: NSRange(location: 0, length: attributedText.length)) // 전체 텍스트의 폰트 변경
-
+        
         let label = UILabel()
         label.attributedText = attributedText
         label.numberOfLines = 0
@@ -39,7 +39,7 @@ class SplashViewController: UIViewController {
         $0.font = .pretendardSemiBold(size: 60)
         $0.textAlignment = .left
     }
-
+    
     private let LineImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         let image = UIImage(named: "line") // 이미지 이름에 따라 수정하세요
@@ -59,7 +59,7 @@ class SplashViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: Select RootViewController Function
@@ -70,39 +70,40 @@ class SplashViewController: UIViewController {
     }
     func branchProcessing() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5 ) {
+            //SignDataManager.shared.clearAll()
             print("accesstoken:\(KeychainHandler.shared.accessToken)")
-            self.changeRootViewController(rootViewController: self.tabbarController)
-
-//            if KeychainHandler.shared.accessToken.isEmpty {
-//                //어세스 토큰이 없는 경우
-//                self.changeRootViewController(rootViewController: self.signUpViewController)
-//            } else {
-//                //어세스 토큰이 존재하는 경우
-//               // getUserInfo()
-//                self.changeRootViewController(rootViewController: self.tabbarController)
-//            }
+            print("kakao아이디: \(SignDataManager.shared.socialId)")
+            print("phonenumber: \(SignDataManager.shared.phoneNumber)")
+            //회원이 아닌 유저일 경우
+            if KeychainHandler.shared.accessToken.isEmpty {
+                //어세스 토큰이 없는 경우
+                self.changeRootViewController(rootViewController: self.signUpViewController)
+            } else { //이미 가입된 유저일 경우
+                //어세스 토큰이 존재하는 경우
+                getUserInfo()
+                self.changeRootViewController(rootViewController: self.tabbarController)
+            }
         }
         // MARK: Network Function
-            func getUserInfo() {
-                let loginRequest = LoginRequest (
-                    socialId : SignDataManager.shared.socialId!,
-                    loginType : SignDataManager.shared.loginType!,
-                    phoneNumber :SignDataManager.shared.phoneNumber!
-                )
-                NetworkService.shared.loginService.login(bodyDTO: loginRequest) { [weak self] response in
-                    guard let self = self else { return }
-                    switch response {
-                    case .success(let data):
-                        guard let data = data.data else { return }
-                        print("로그인 성공")
-                    default:
-                        print("로그인 실패")
-        
-                    }
-        
-        
+        func getUserInfo() {
+            let loginRequest = LoginRequest (
+                socialId : SignDataManager.shared.socialId!,
+                loginType : SignDataManager.shared.loginType!,
+                phoneNumber :SignDataManager.shared.phoneNumber!
+            )
+            NetworkService.shared.loginService.login(bodyDTO: loginRequest) { [weak self] response in
+                guard let self = self else { return }
+                switch response {
+                case .success(let data):
+                    guard let data = data.data else { return }
+                    print("로그인 성공")
+                default:
+                    print("로그인 실패")
+                    
                 }
+                
             }
+        }
         
     }
 }

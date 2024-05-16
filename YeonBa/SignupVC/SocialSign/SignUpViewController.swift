@@ -54,17 +54,18 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         view.layer.insertSublayer(gradientLayer, at: 0)
         gradientLayer.frame = CGRect(x: 0, y: -UIApplication.shared.statusBarFrame.height, width: view.bounds.width, height: view.bounds.height + UIApplication.shared.statusBarFrame.height)
-
+        
         setupViews()
         setupProviderLoginView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        tabBarController?.tabBar.isHidden = true
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
-      navigationController?.setNavigationBarHidden(false, animated: true) 
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func setupProviderLoginView() {
@@ -92,7 +93,7 @@ class SignUpViewController: UIViewController {
             make.right.equalTo(logoLabel.snp.left).offset(10)
             make.width.height.equalTo(60)
         }
-
+        
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(logoLabel.snp.bottom).offset(100)
             make.centerX.equalToSuperview()
@@ -224,8 +225,4 @@ extension SignUpViewController:
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
     }
 }
-//
-//
-//
-//
-//
+
