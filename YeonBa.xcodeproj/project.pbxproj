@@ -202,6 +202,7 @@
 		58E88DFC2BF5FB1500775F06 /* VoiceEditPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88DE02BF5FB1500775F06 /* VoiceEditPresentationController.swift */; };
 		58E88DFD2BF5FB1500775F06 /* VoiceEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88DE12BF5FB1500775F06 /* VoiceEditTableViewCell.swift */; };
 		58E88DFE2BF5FB1500775F06 /* VoiceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88DE22BF5FB1500775F06 /* VoiceEditViewController.swift */; };
+		58E88E002BF6013E00775F06 /* NotificationPageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88DFF2BF6013E00775F06 /* NotificationPageRequest.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -451,6 +452,7 @@
 		58E88DE02BF5FB1500775F06 /* VoiceEditPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceEditPresentationController.swift; sourceTree = "<group>"; };
 		58E88DE12BF5FB1500775F06 /* VoiceEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceEditTableViewCell.swift; sourceTree = "<group>"; };
 		58E88DE22BF5FB1500775F06 /* VoiceEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceEditViewController.swift; sourceTree = "<group>"; };
+		58E88DFF2BF6013E00775F06 /* NotificationPageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPageRequest.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -743,6 +745,7 @@
 		589CDCF52BE504F400BA332F /* GlobalAPI */ = {
 			isa = PBXGroup;
 			children = (
+				58E88E012BF6027A00775F06 /* mudpd */,
 				58D139602BF49A220048C228 /* NotificationAPI */,
 				58580F202BE20BA60055F3E8 /* OnboardingAPI */,
 				589CDCF62BE5050900BA332F /* NetworkResult.swift */,
@@ -1241,6 +1244,7 @@
 		58D1396B2BF49BC00048C228 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				58E88DFF2BF6013E00775F06 /* NotificationPageRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1388,6 +1392,13 @@
 				58E88DE22BF5FB1500775F06 /* VoiceEditViewController.swift */,
 			);
 			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
+		58E88E012BF6027A00775F06 /* mudpd */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = mudpd;
 			sourceTree = "<group>";
 		};
 		73DBD3DD5A263E9104BB9837 /* Frameworks */ = {
@@ -1805,6 +1816,7 @@
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				58D139092BF3127E0048C228 /* FullScreenImageViewController.swift in Sources */,
+				58E88E002BF6013E00775F06 /* NotificationPageRequest.swift in Sources */,
 				582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */,
 				589CDD602BE7E6FC00BA332F /* APIEventLogger.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
