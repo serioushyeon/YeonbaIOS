@@ -315,8 +315,8 @@ class SignDataManager {
             }
         }
     }
-    func clearAll() {
-        KeychainWrapper.standard.removeAllKeys()
-    }
+//    func clearAll() {
+//        KeychainWrapper.standard.removeAllKeys()
+//    }
     
 }

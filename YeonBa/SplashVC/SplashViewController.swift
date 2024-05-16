@@ -71,18 +71,19 @@ class SplashViewController: UIViewController {
     func branchProcessing() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5 ) {
             //SignDataManager.shared.clearAll()
+            getUserInfo()
+            self.changeRootViewController(rootViewController: self.tabbarController)
             print("accesstoken:\(KeychainHandler.shared.accessToken)")
-            print("kakao아이디: \(SignDataManager.shared.socialId)")
-            print("phonenumber: \(SignDataManager.shared.phoneNumber)")
+            print("refreshToken:\(KeychainHandler.shared.refreshToken)")
             //회원이 아닌 유저일 경우
-            if KeychainHandler.shared.accessToken.isEmpty {
-                //어세스 토큰이 없는 경우
-                self.changeRootViewController(rootViewController: self.signUpViewController)
-            } else { //이미 가입된 유저일 경우
-                //어세스 토큰이 존재하는 경우
-                getUserInfo()
-                self.changeRootViewController(rootViewController: self.tabbarController)
-            }
+//            if KeychainHandler.shared.accessToken.isEmpty {
+//                //어세스 토큰이 없는 경우
+//                self.changeRootViewController(rootViewController: self.signUpViewController)
+//            } else { //이미 가입된 유저일 경우
+//                //어세스 토큰이 존재하는 경우
+//                getUserInfo()
+//                self.changeRootViewController(rootViewController: self.tabbarController)
+//            }
         }
         // MARK: Network Function
         func getUserInfo() {

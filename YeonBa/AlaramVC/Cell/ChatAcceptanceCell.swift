@@ -8,7 +8,7 @@ class ChatAcceptanceCell: ArrowNotificationCell {
     override func configUI() {
         super.configUI() // 부모 클래스의 configUI를 호출하여 기본 레이아웃을 설정합니다.
         
-        messageLabel.text = "친친님이 채팅을 수락했어요!"
+        messageLabel.text = "선재님이 채팅을 수락했어요!"
         actionButton.setTitle("채팅하러 가기", for: .normal)
         actionButton.addTarget(self, action: #selector(chatBtnTapped), for: .touchUpInside)
     }
