@@ -103,29 +103,23 @@ class BodyEditViewController: UIViewController {
 
     @objc private func bodyTypeSelected(_ sender: UIButton) {
         // Reset all buttons to default state first
-        bodyTypeButtons.forEach {
-            $0.backgroundColor = .white
-            $0.setTitleColor(.black, for: .normal)
-            $0.layer.borderColor = UIColor.black.cgColor
-        }
+            bodyTypeButtons.forEach {
+                $0.backgroundColor = .white
+                $0.setTitleColor(.black, for: .normal)
+                $0.layer.borderColor = UIColor.black.cgColor
+            }
 
-        // Now update the selected button
-        sender.backgroundColor = .white // If you want to change background color on selection, adjust this
-        sender.setTitleColor(UIColor.primary, for: .normal) // Make sure UIColor.primary is defined, otherwise use a specific color
-        sender.layer.borderColor = UIColor.primary?.cgColor // Similarly, ensure UIColor.primary is correctly defined
+            // Now update the selected button
+            sender.backgroundColor = .white // If you want to change background color on selection, adjust this
+            sender.setTitleColor(UIColor.primary, for: .normal) // Make sure UIColor.primary is defined, otherwise use a specific color
+            sender.layer.borderColor = UIColor.primary?.cgColor // Similarly, ensure UIColor.primary is correctly defined
 
-        selectedBodyType = sender.title(for: .normal) // Save the selected type
-        updateDoneButton(enabled: true)
+            selectedBodyType = sender.title(for: .normal) // Save the selected type
+            updateDoneButton(enabled: true) 
     }
     
  
 
-
-    @objc private func dismissWithoutSelection() {
-        dismiss(animated: true, completion: nil)
-    }
-       
-   
     @objc private func dismissWithSelection() {
         if let type = selectedBodyType {
             delegate?.didSelectBodyType(type)
@@ -133,10 +127,14 @@ class BodyEditViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    private func updateDoneButton(enabled: Bool) {
-        doneButton.isEnabled = enabled
-        doneButton.setTitleColor(enabled ? .black : .lightGray, for: .normal)
-        doneButton.layer.borderColor = enabled ? UIColor.black.cgColor : UIColor.lightGray.cgColor
+    @objc private func dismissWithoutSelection() {
+        dismiss(animated: true, completion: nil)
     }
+       
+   private func updateDoneButton(enabled: Bool) {
+       doneButton.isEnabled = enabled
+       doneButton.setTitleColor(enabled ? .black : .lightGray, for: .normal)
+       doneButton.layer.borderColor = enabled ? UIColor.black.cgColor : UIColor.lightGray.cgColor
+   }
 
 }

@@ -3,20 +3,46 @@ import SnapKit
 import Then
 import Kingfisher
 
-class ProfileEditViewController: UIViewController, UIViewControllerTransitioningDelegate, HeightEditViewControllerDelegate,VoiceEditViewControllerDelegate, LivingAreaViewControllerDelegate, BodyEditViewControllerDelegate, FaceEditViewControllerDelegate, MbtiEditViewControllerDelegate, AnimalPreferenceViewControllerDelegate{
-    func didSelectFaceType1(_ type: String) {
-        if let faceTypeButton = infoFields.first(where: { $0.titleLabel?.text == "선호하는 얼굴상" }) {
-            faceTypeButton.setTitle(type, for: .normal)
+class ProfileEditViewController: UIViewController, UIViewControllerTransitioningDelegate, HeightEditViewControllerDelegate,VoiceEditViewControllerDelegate, LivingAreaViewControllerDelegate, BodyEditViewControllerDelegate, FaceEditViewControllerDelegate, MbtiEditViewControllerDelegate, AnimalPreferenceViewControllerDelegate, RegionPreferenceViewControllerDelegate, VoicePreferenceViewControllerDelegate, BodyTypePreferenceViewControllerDelegate, MBTIPreferenceViewControllerDelegate{
+    
+    func didSelectMBTI1(_ type: String) {
+        if let mbtiButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 MBTI" }) {
+            mbtiButton.setTitle(type, for: .normal)
+        }
+       
+    }
+    
+    func didSelectBodyType1(_ type: String) {
+        if let bodyButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 체형" }) {
+            bodyButton.setTitle(type, for: .normal)
         }
     }
     
+    func voicePreferenceSelected(_ voiceType: String) {
+        if let voiceButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 목소리" }) {
+            voiceButton.setTitle(voiceType, for: .normal)
+        }
+    }
     
+    func didSelectRegionPreference(_ area: String) {
+        if let areaButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 지역" }) {
+            areaButton.setTitle(area, for: .normal)
+        }
+    }
+    
+    func didSelectFaceType1(_ type: String) {
+        if let faceTypeButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 얼굴상" }) {
+            faceTypeButton.setTitle(type, for: .normal)
+        }
+    }
+
     
     
     func didSelectMBTI(_ type: String) {
         if let mbtiButton = infoFields.first(where: { $0.titleLabel?.text == "MBTI" }) {
             mbtiButton.setTitle(type, for: .normal)
         }
+       
     }
 
     
@@ -34,18 +60,15 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         heightButton.setTitle("\(height)cm", for: .normal)
     }
 
-    func didCancelSelection() {
-        print("Height selection was cancelled.")
-    }
+   
     
     func voiceSelected(_ voiceType: String) {
         if let voiceButton = infoFields.first(where: { $0.titleLabel?.text == "목소리" }) {
             voiceButton.setTitle(voiceType, for: .normal)
         }
     }
+    
 
-    func didCancelVoiceSelection() {
-    }
 
     func didSelectLivingArea(_ area: String) {
         if let areaButton = infoFields.first(where: { $0.titleLabel?.text == "사는 지역" }) {
@@ -107,24 +130,6 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
 
-    private let preferenceFields = ["선호하는 동물상", "선호하는 지역", "선호하는 목소리", "선호하는 나이대", "선호하는 체형", "선호하는 MBTI"].map { title in
-        UIButton().then {
-            $0.setTitle(title, for: .normal)
-            $0.backgroundColor = .white  // 동일하게 하얀 배경
-            $0.layer.borderColor = UIColor.gray.cgColor  // 회색 테두리
-            $0.layer.borderWidth = 1  // 테두리 두께
-            $0.layer.cornerRadius = 8  // 둥근 모서리
-            $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-            $0.setTitleColor(.black, for: .normal)  // 텍스트 색상
-            $0.snp.makeConstraints { make in  // 높이 설정
-                make.height.equalTo(51)
-
-            }
-            $0.addTarget(ProfileEditViewController.self, action: #selector(preferenceButtonTapped(_:)), for: .touchUpInside)
-            
-        }
-    }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,9 +137,10 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         setupLayout()
         setupNavigationBar()
         setupInfoFields()  // 정보 필드 설정
+        setupPreferenceFields()
         configurePhotoPicker()  // 사진 선택기 구성
         setupContentLayout()  // 컨텐츠 레이아웃 구성
-        
+        setupNavigationBarButton()
     }
 
 
@@ -192,40 +198,74 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
             mbtiEditVC.delegate = self
             mbtiEditVC.modalPresentationStyle = .pageSheet
             present(mbtiEditVC, animated: true)
+            
+        default:
+            break
+        }
+    }
+
+    private let preferenceFieldstitle = ["선호하는 얼굴상", "선호하는 지역", "선호하는 목소리", "선호하는 나이대", "선호하는 체형", "선호하는 MBTI"]
+    private var preferenceFields: [UIButton] = []
+                
+    private func setupPreferenceFields() {
+        preferenceFields = preferenceFieldstitle.enumerated().map { index, title in
+            let button = UIButton().then {
+                $0.setTitle(title, for: .normal)
+                $0.backgroundColor = .white
+                $0.layer.borderColor = UIColor.gray.cgColor
+                $0.layer.borderWidth = 1
+                $0.layer.cornerRadius = 8
+                $0.setTitleColor(.black, for: .normal)
+                $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
+                $0.snp.makeConstraints { make in  // 버튼의 높이를 51로 설정
+                    make.height.equalTo(51)
+                }
+                $0.tag = index
+                $0.addTarget(self, action: #selector(preferenceButtonTapped(_:)), for: .touchUpInside)
+            }
+            return button
+        }
+    }
+
+    @objc private func preferenceButtonTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            let animalPreferenceVC = AnimalPreferenceViewController()
+            animalPreferenceVC.delegate = self
+            animalPreferenceVC.modalPresentationStyle = .pageSheet
+            present(animalPreferenceVC, animated: true)
+        case 1:
+            let regionPreferenceVC = RegionPreferenceViewController()
+            regionPreferenceVC.delegate = self
+            regionPreferenceVC.modalPresentationStyle = .pageSheet
+            present(regionPreferenceVC, animated: true)
+        case 2:
+            let voicePreferenceVC = VoicePreferenceViewController()
+            voicePreferenceVC.delegate = self
+            voicePreferenceVC.modalPresentationStyle = .pageSheet
+            present(voicePreferenceVC, animated: true)
+            
+            
+        case 4:
+            let bodyTypePreferenceVC = BodyTypePreferenceViewController()
+            bodyTypePreferenceVC.delegate = self
+            bodyTypePreferenceVC.modalPresentationStyle = .pageSheet
+            present(bodyTypePreferenceVC, animated: true)
+        case 5:
+            let MBTIPreferenceVC = MBTIPreferenceViewController()
+            MBTIPreferenceVC.delegate = self
+            MBTIPreferenceVC.modalPresentationStyle = .pageSheet
+            present(MBTIPreferenceVC, animated: true)
+            
+            
+            
         default:
             break
         }
     }
 
 
-    @objc private func preferenceButtonTapped(_ sender: UIButton) {
-        guard let title = sender.title(for: .normal) else { return }
-
-        switch title {
-        case "선호하는 동물상": break
-            let animalPreferenceVC = AnimalPreferenceViewController()
-            animalPreferenceVC.delegate = self
-            present(animalPreferenceVC, animated: true)
-
-        case "선호하는 지역":
-            let regionPreferenceVC = RegionPreferenceViewController()
-            navigationController?.pushViewController(regionPreferenceVC, animated: true)
-        case "선호하는 목소리":
-            let voicePreferenceVC = VoicePreferenceViewController()
-            navigationController?.pushViewController(voicePreferenceVC, animated: true)
-        case "선호하는 나이대":
-            let agePreferenceVC = AgePreferenceViewController()
-            navigationController?.pushViewController(agePreferenceVC, animated: true)
-        case "선호하는 체형":
-            let bodyTypePreferenceVC = BodyTypePreferenceViewController()
-            navigationController?.pushViewController(bodyTypePreferenceVC, animated: true)
-        case "선호하는 MBTI":
-            let mbtiPreferenceVC = MBTIPreferenceViewController()
-            navigationController?.pushViewController(mbtiPreferenceVC, animated: true)
-        default:
-            print("Unknown preference")
-        }
-    }
+ 
 
 
     private func navigateToViewController(_ viewController: UIViewController) {
@@ -300,6 +340,13 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         }
     }
     
-    
+    private func setupNavigationBarButton() {
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonTapped))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+
+    @objc private func doneButtonTapped() {
+        print("완료 버튼이 눌렸습니다.")
+    }
 }
 

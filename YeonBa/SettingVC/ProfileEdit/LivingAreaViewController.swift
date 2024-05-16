@@ -96,7 +96,7 @@ class LivingAreaViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
 
     @objc private func cancelAreaPicker() {
-        dismiss(animated: true, completion: nil)  // 취소 버튼을 누를 때 뷰 컨트롤러 닫기
+        dismiss(animated: true, completion: nil)
     }
 
 

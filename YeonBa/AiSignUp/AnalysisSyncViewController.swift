@@ -80,6 +80,8 @@ class AnalysisSyncViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        profileImage1.image = SignDataManager.shared.selectedImages[0]
+        profileImage2.image = SignDataManager.shared.selectedImages[1]
         setupNavigationBar()
         addSubViews()
         configUI()
