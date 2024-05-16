@@ -155,9 +155,9 @@ class PhoneNumberViewController: UIViewController {
         nextButton.backgroundColor = .systemBlue
     }
     // 토큰 가져오기
-    func retrieveAccessToken() -> String? {
-        return KeychainWrapper.standard.string(forKey: "accessToken")
-    }
+//    func retrieveAccessToken() -> String? {
+//        return KeychainWrapper.standard.string(forKey: "accessToken")
+//    }
     func getUserInfo() {
         let loginRequest = LoginRequest (
             socialId : SignDataManager.shared.socialId!,
@@ -217,22 +217,18 @@ class PhoneNumberViewController: UIViewController {
         checkPhoneNumber()
         if isValidPhoneNumber(phoneNumber) {
             // 전화번호가 유효한 경우
-            SignDataManager.shared.phoneNumber = phoneNumber
-
-            let birthVC = BirthDateSettingViewController()
-            navigationController?.pushViewController(birthVC, animated: true)
-//            if KeychainHandler.shared.accessToken.isEmpty {
-//                //유저가 존재하지 않을 경우
-//                SignDataManager.shared.phoneNumber = phoneNumber
-//                
-//                let birthVC = BirthDateSettingViewController()
-//                navigationController?.pushViewController(birthVC, animated: true)
-//            } else {
-//                //유저가 존재할 경우
-//                getUserInfo()
-//                let tabVC = TabBarController()
-//                self.changeRootViewController(rootViewController: tabVC)
-//            }
+            if KeychainHandler.shared.accessToken.isEmpty {
+                SignDataManager.shared.phoneNumber = phoneNumber
+                
+                let birthVC = BirthDateSettingViewController()
+                navigationController?.pushViewController(birthVC, animated: true)
+            } else {
+                //유저가 존재할 경우
+                getUserInfo()
+                let tabVC = TabBarController()
+                self.changeRootViewController(rootViewController: tabVC)
+                
+            }
         } else {
             // 전화번호가 유효하지 않은 경우
             showAlert(message: "전화번호는 11자리의 숫자여야 합니다.")
