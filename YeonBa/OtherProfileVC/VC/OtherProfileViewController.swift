@@ -18,7 +18,8 @@ class OtherProfileViewController: UIViewController {
     private var viewMode: DeclareMode = .declare
     private var whyviewMode: WhyMode = .maner
     var id : String?
-    private var userData : CollectDataUserModel?
+    var isFavorite : Bool = false
+    private var userData : UserProfileResponse?
     private var aboutData = ["25살", "165cm", "서울", "고음", "토끼 상"]
     private var preferenceData = ["강아지 상", "서울", "저음", "20~25세", "마른체형", "INTP"]
     private let cupidImageView = UIImageView().then {
@@ -54,6 +55,7 @@ class OtherProfileViewController: UIViewController {
         $0.text = "쥬하"
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 24)
+        $0.textColor = .black
 
     }
     private let totalLabel = UILabel().then {
@@ -305,132 +307,127 @@ class OtherProfileViewController: UIViewController {
         guard let url = URL(string:"https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg") else { return }
         cupidImageView.kf.setImage(with: url)
     }
-    /**
-     * API 응답 구현체 값
-     */
-    struct AFDataResponse<T: Codable>: Codable {
-        
-        // 응답 결과값
-        let data: T?
-        
-        // 응답 코드
-        let status: String?
-        
-        // 응답 메시지
-        let message: String?
-        
-        enum CodingKeys: CodingKey {
-            case data, status, message
-        }
-        
-        init(from decoder: Decoder) throws {
-            let values = try decoder.container(keyedBy: CodingKeys.self)
-            
-            status = (try? values.decode(String.self, forKey: .status)) ?? nil
-            message = (try? values.decode(String.self, forKey: .message)) ?? nil
-            data = (try? values.decode(T.self, forKey: .data)) ?? nil
-        }
-    }
-    func apiReport() -> Void{
-        let url = "https://api.yeonba.co.kr/users/\(id!)/report";
-        let body : Parameters = ["category" : "\(whyviewMode.title)", "reason":""]
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .post,
-            parameters: body,
-            encoding: JSONEncoding.default
-        )
-        .validate(statusCode: 200..<500)
-        .responseJSON{response in print(response)}
-        
-    }
-    func apiBlock() -> Void{
-        let url = "https://api.yeonba.co.kr/users/\(id!)/block";
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .post,
-            encoding: JSONEncoding.default
-        )
-        .validate(statusCode: 200..<500)
-        .responseJSON{response in print(response)}
-        
-    }
-    func apiSendArrow() -> Void{
-        let url = "https://api.yeonba.co.kr/users/\(id!)/arrow";
-        // Alamofire 를 통한 API 통신
-        let body : Parameters = ["arrows": 10]
-        AF.request(
-            url,
-            method: .post,
-            parameters: body,
-            encoding: JSONEncoding.default
-        )
-        .validate(statusCode: 200..<500)
-        .responseJSON{response in print(response)}
-    }
-    @objc func apiSendChatRequest() -> Void{
-        let url = "https://api.yeonba.co.kr/users/\(id!)/chat";
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .post,
-            encoding: JSONEncoding.default
-        )
-        .validate(statusCode: 200..<500)
-        .responseJSON{response in print(response)}
-    }
-    func apiOtherProfile() -> Void {
-        let url = "https://api.yeonba.co.kr/users/" + id!;
-
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .get,
-            encoding: JSONEncoding.default)
-        .validate(statusCode: 200..<500)
-        .responseDecodable(of: AFDataResponse<OtherProfileResponse>.self) {response in
-            switch response.result {
-                // [CASE] API 통신에 성공한 경우
-            case .success(let value):
-                print("성공하였습니다 :: \(value)")
-                if let data = value.data?.data {
-                    self.configure(data: (value.data?.data)!)
-                    self.aboutmeCollectionView.reloadData()
-                    self.aboutmeCollectionView.setNeedsLayout()
-                    self.aboutmeCollectionView.layoutIfNeeded()
-                }
-                // [CASE] API 통신에 실패한 경우
-            case .failure(let error):
-                print("실패하였습니다 :: \(error)" )
+    func apiReport(){
+        let reportRequest = ReportRequest.init(id: id!, category: "\(String(describing: whyviewMode.title))", reason: "")
+        NetworkService.shared.otherProfileService.report(bodyDTO: reportRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("신고 성공")
+            default:
+                print("신고 실패")
+                
             }
         }
     }
-    func apiBookmark(id : String) -> Void{
-        let url = "https://api.yeonba.co.kr/favorites/" + id;
-
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .post,
-            encoding: JSONEncoding.default)
-        .validate(statusCode: 200..<500)
-        .responseJSON{response in print(response)}
+    func apiBlock() -> Void{
+        let blockRequest = BlockRequest.init(id: id!)
+        NetworkService.shared.otherProfileService.block(bodyDTO: blockRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("차단 성공")
+            default:
+                print("차단 실패")
+                
+            }
+        }
     }
-    func configure(data : OtherProfileDataModel) {
-        setupPieChart(pieValue: data.photoSyncRate!)
-        self.nameLabel.text = data.nickname!
-        self.heartLabel.text = "\(data.arrows!)"
-        self.preferenceLabel.text = "\(data.photoSyncRate!)%"
-        self.aboutData = ["\(data.age!)살", "\(data.height!)cm", data.activityArea!, data.vocalRange!, data.lookAlikeAnimal!]
-        if(data.alreadySentArrow!){
+    func apiSendArrow(){
+        let sendArrowRequest = SendArrowRequest.init(id: id!)
+        NetworkService.shared.otherProfileService.sendArrow(bodyDTO: sendArrowRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("화살 보내기 성공")
+            default:
+                print("화살 보내기 실패")
+                
+            }
+        }
+    }
+    @objc func apiSendChatRequest(){
+        let sendChatRequest = SendChatRequest.init(id: id!)
+        NetworkService.shared.otherProfileService.sendChat(bodyDTO: sendChatRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("채팅 요청 성공")
+            default:
+                print("채팅 요청 실패")
+                
+            }
+        }
+    }
+    func apiOtherProfile() {
+        let otherProfileRequest = OtherProfileRequest.init(id: id!)
+        NetworkService.shared.otherProfileService.getOtherProfile(bodyDTO: otherProfileRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("조회 성공")
+                self.configure(data: data)
+                self.aboutmeCollectionView.reloadData()
+                self.aboutmeCollectionView.setNeedsLayout()
+                self.aboutmeCollectionView.layoutIfNeeded()
+            default:
+                print("프로필 조회 실패")
+
+            }
+        }
+    }
+    
+    func apiBookmark(id : String){
+        let bookmarkRequest = BookmarkRequest.init(id: id )
+        NetworkService.shared.otherProfileService.bookmark(bodyDTO: bookmarkRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("북마크 성공")
+            default:
+                print("북마크 실패")
+                
+            }
+        }
+    }
+    func apiDeleteBookmark(id : String){
+        let bookmarkRequest = BookmarkRequest.init(id: id )
+        NetworkService.shared.otherProfileService.deleteBookmark(bodyDTO: bookmarkRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("북마크 성공")
+            default:
+                print("북마크 실패")
+                
+            }
+        }
+    }
+
+    func configure(data : OtherProfileResponse) {
+        setupPieChart(pieValue: Double(data.photoSyncRate))
+        self.nameLabel.text = data.nickname
+        self.heartLabel.text = "\(data.arrows)"
+        self.preferenceLabel.text = "\(data.photoSyncRate)%"
+        self.aboutData = ["\(data.age)살", "\(data.height)cm", data.activityArea, data.vocalRange, data.lookAlikeAnimalName]
+        if(data.alreadySentArrow){
             self.sendBtn.isEnabled = false
             self.sendBtn.backgroundColor = UIColor.gray2
             self.sendBtn.layer.borderColor = UIColor.gray2?.cgColor
             self.sendBtn.setTitleColor(.white, for: .normal)
-            
         }
+        guard let url = URL(string:data.profilePhotosUrls[0]) else { return }
+        self.cupidImageView.kf.setImage(with: url)
+        let whiteImage = UIImage(named: "WhiteFavorites")
+        let pinkImage = UIImage(named: "PinkFavorites")
+        self.isFavorite ? self.favoriteBtn.setImage(pinkImage, for: .normal) : self.favoriteBtn.setImage(pinkImage, for: .normal)
     }
 //MARK: -- Action
     @objc func declarButtonTapped() {
@@ -444,7 +441,7 @@ class OtherProfileViewController: UIViewController {
             if(currentImage == UIImage(named: "PinkFavorites")){
                 let newImage = UIImage(named: "WhiteFavorites")
                 favoriteBtn.setImage(newImage, for: .normal)
-                apiBookmark(id: id!)
+                apiDeleteBookmark(id: id!)
             }
             else {
                 let newImage = UIImage(named: "PinkFavorites")

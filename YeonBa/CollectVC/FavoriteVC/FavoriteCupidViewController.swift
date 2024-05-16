@@ -10,69 +10,12 @@ import Then
 import SnapKit
 import Alamofire
 class FavoriteCupidViewController: UIViewController {
-    /**
-     * API 응답 구현체 값
-     */
-    struct AFDataResponse<T: Codable>: Codable {
-        
-        // 응답 결과값
-        let data: T?
-        
-        // 응답 코드
-        let status: String?
-        
-        // 응답 메시지
-        let message: String?
-        
-        enum CodingKeys: CodingKey {
-            case data, status, message
-        }
-        
-        init(from decoder: Decoder) throws {
-            let values = try decoder.container(keyedBy: CodingKeys.self)
-            
-            status = (try? values.decode(String.self, forKey: .status)) ?? nil
-            message = (try? values.decode(String.self, forKey: .message)) ?? nil
-            data = (try? values.decode(T.self, forKey: .data)) ?? nil
-        }
-    }
-    func apiFavoriteList() -> Void{
-        let url = "https://api.yeonba.co.kr/users?type=BOOKMARKD&page=0&size=6";
-
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .get,
-            encoding: JSONEncoding.default)
-        .validate(statusCode: 200..<500)
-        //.responseJSON{response in print(response)}
-        .responseDecodable(of: AFDataResponse<CollectResponse>.self) { response in
-            switch response.result {
-                // [CASE] API 통신에 성공한 경우
-            case .success(let value):
-                print("성공하였습니다 :: \(value)")
-                if let users = value.data?.data?.users, !users.isEmpty {
-                    // 유저 데이터가 존재하는 경우
-                    self.colletModel = users
-                    self.addSubviews()
-                    self.configUI()
-                    self.initialize()
-                } else {
-                    // 유저 데이터가 없는 경우
-                    self.addEmptySubviews()
-                    self.configEmptyUI()
-                }
-                // [CASE] API 통신에 실패한 경우
-            case .failure(let error):
-                print("실패하였습니다 :: \(error)" )
-            }
-        }
-    }
     
-    var colletModel : [CollectDataUserModel]? = [
-        CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음"),
-        CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음"),
-        CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음")]
+    var colletModel : [UserProfileResponse]? = [
+        UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ),
+        UserProfileResponse(id: "12", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false),
+        UserProfileResponse(id: "12", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false)]
+    
     // MARK: - UI Components
     private let bodyStackView = UIStackView().then {
       $0.axis = .vertical
@@ -99,15 +42,45 @@ class FavoriteCupidViewController: UIViewController {
         }
         return collectionView
     }()
+    
+    func apiFavoriteList() -> Void{
+        let userListRequest = UserListRequest.init(type: "FAVORITES")
+        NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                if((data.users?.isEmpty) != nil){
+                    // 유저 데이터가 없는 경우
+                    self.addEmptySubviews()
+                    self.configEmptyUI()
+                }
+                else{
+                    self.colletModel = data.users
+                    self.addSubviews()
+                    self.configUI()
+                    self.initialize()
+                }
+                
+            default:
+                print("프로필 조회 실패")
+                // 유저 데이터가 없는 경우
+                self.addEmptySubviews()
+                self.configEmptyUI()
+
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         apiFavoriteList()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
-    
     func initialize() {
         collectionview.dataSource = self
         collectionview.delegate = self
@@ -148,7 +121,7 @@ extension FavoriteCupidViewController : UICollectionViewDataSource {
         }
         // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
         let model = colletModel?[indexPath.row]
-        cell.configure(with: model ??  CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음"))
+        cell.configure(with: model ??  UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
         return cell
     }
 }
@@ -158,6 +131,7 @@ extension FavoriteCupidViewController : UICollectionViewDelegate {
     func collectionView(_ collectionview: UICollectionView, didSelectItemAt indexPath : IndexPath) {
         let otherProfileVC = OtherProfileViewController()
         otherProfileVC.id = colletModel![indexPath.row].id
+        otherProfileVC.isFavorite = colletModel![indexPath.row].isFavorite
         self.navigationController?.pushViewController(otherProfileVC, animated: true)
     }
 }

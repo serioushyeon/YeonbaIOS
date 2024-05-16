@@ -14,7 +14,8 @@ import SCLAlertView
 import Alamofire
 
 class HomeViewController: UIViewController {
-    var colletModel : [CollectDataUserModel]?
+    var colletModel : [UserProfileResponse]?
+    var recommandColletModel : [UserProfileResponse]?
     // MARK: - UI Components
     //스크롤 뷰
     let heartCountLabel = UILabel()
@@ -87,6 +88,7 @@ class HomeViewController: UIViewController {
         configureCollectionView()
         apiDailyCheck()
         apiRecieveList()
+        apiRecommandList()
         apiGetArrowCount()
         tableView.reloadData()
     }
@@ -104,9 +106,23 @@ class HomeViewController: UIViewController {
         navigationItem.hidesBackButton = true
         let heartButton = UIBarButtonItem(image: UIImage(named: "Heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
         
+        // Heart count label wrapped in a UIView
+        let heartCountContainerView = UIView()
+        heartCountContainerView.addSubview(heartCountLabel)
+        
         heartCountLabel.text = "5" // 초기 하트 개수
         heartCountLabel.textColor = UIColor.primary
+        heartCountLabel.font = UIFont.systemFont(ofSize: 16) // 적절한 폰트 크기 설정
         heartCountLabel.sizeToFit()
+        
+        heartCountLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(5) // 라벨의 가장자리에 여백을 설정하여 텍스트가 잘리지 않도록 함
+        }
+        
+        heartCountContainerView.snp.makeConstraints { make in
+            make.width.equalTo(heartCountLabel.snp.width).offset(10) // 여유 공간을 더하여 컨테이너 뷰의 너비 설정
+            make.height.equalTo(heartCountLabel.snp.height).offset(10) // 여유 공간을 더하여 컨테이너 뷰의 높이 설정
+        }
         let heartCountBarButton = UIBarButtonItem(customView: heartCountLabel)
         
         let alarmButton = UIBarButtonItem(image: UIImage(named: "Alarm"), style: .plain, target: self, action: #selector(alarmButtonTapped))
@@ -190,96 +206,62 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    /**
-     * API 응답 구현체 값
-     */
-    struct AFDataResponse<T: Codable>: Codable {
-        
-        // 응답 결과값
-        let data: T?
-        
-        // 응답 코드
-        let status: String?
-        
-        // 응답 메시지
-        let message: String?
-        
-        enum CodingKeys: CodingKey {
-            case data, status, message
-        }
-        
-        init(from decoder: Decoder) throws {
-            let values = try decoder.container(keyedBy: CodingKeys.self)
-            
-            status = (try? values.decode(String.self, forKey: .status)) ?? nil
-            message = (try? values.decode(String.self, forKey: .message)) ?? nil
-            data = (try? values.decode(T.self, forKey: .data)) ?? nil
-        }
-    }
-    func apiRecieveList() -> Void{
-        let url = "https://api.yeonba.co.kr/users?type=RECOMMEND&page=0&size=2";
-
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .get,
-            encoding: JSONEncoding.default)
-        .validate(statusCode: 200..<500)
-        //.responseJSON{response in print(response)}
-        .responseDecodable(of: AFDataResponse<CollectResponse>.self) { response in
-            switch response.result {
-                // [CASE] API 통신에 성공한 경우
-            case .success(let value):
-                print("성공하였습니다 :: \(value)")
-                if let users = value.data?.data?.users, !users.isEmpty {
-                    // 유저 데이터가 존재하는 경우
-                    self.colletModel = users
-                    self.addSubviews()
-                    self.configUI()
-                    self.collectionview.dataSource = self
-                    self.collectionview.delegate = self
-                    self.collectionview.register(RecieveCupidCollectionViewCell.self, forCellWithReuseIdentifier: "RecieveCell")
-                }
-                // [CASE] API 통신에 실패한 경우
-            case .failure(let error):
-                print("실패하였습니다 :: \(error)" )
-            }
-        }
-    }
     func apiGetArrowCount() -> Void{
-        let url = "https://api.yeonba.co.kr/users/arrows";
+        let arrowCountRequest = ArrowCountRequest()
+        NetworkService.shared.homeService.arrowCount(bodyDTO: arrowCountRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                self.heartCountLabel.text = "\(data.arrows)"
+                print("화살 조회 성공")
+            default:
+                print("화살 조회 실패")
 
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .get,
-            encoding: JSONEncoding.default)
-        .validate(statusCode: 200..<500)
-        //.responseJSON{response in print(response)}
-        .responseDecodable(of: AFDataResponse<HomeAPIResponse>.self) { response in
-            switch response.result {
-                // [CASE] API 통신에 성공한 경우
-            case .success(let value):
-                print("성공하였습니다 :: \(value)")
-                if let arrow = value.data?.data?.arrows{
-                    self.heartCountLabel.text = "\(arrow)"
-                }
-                // [CASE] API 통신에 실패한 경우
-            case .failure(let error):
-                print("실패하였습니다 :: \(error)" )
             }
         }
     }
     func apiDailyCheck() -> Void{
-        let url = "https://api.yeonba.co.kr/daily-check";
+        let dailyCheckRequest = DailyCheckRequest()
+        NetworkService.shared.homeService.dailyCheck(bodyDTO: dailyCheckRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("출석 체크 성공")
+            default:
+                print("출석 체크 실패")
 
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .post,
-            encoding: JSONEncoding.default)
-        .validate(statusCode: 200..<500)
-        .responseJSON{response in print(response)}
+            }
+        }
+    }
+    func apiRecieveList(){
+        let userListRequest = UserListRequest.init(type: "ARROW_RECEIVERS")
+        NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                    self.colletModel = data.users
+            default:
+                print("최근 화살 받은 이성 프로필 조회 실패")
+
+            }
+        }
+    }
+    func apiRecommandList(){
+        let recommandUserListRequest = RecommandUserListRequest()
+        NetworkService.shared.otherProfileService.recommandUserList(bodyDTO: recommandUserListRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                    self.recommandColletModel = data.users
+            default:
+                print("추천 프로필 조회 실패")
+
+            }
+        }
     }
     // MARK: - Actions
     @objc func heartButtonTapped() {
@@ -292,7 +274,7 @@ class HomeViewController: UIViewController {
         let alertView = SCLAlertView()
         alertView.iconTintColor = .primary
         alertView.addButton("확인", backgroundColor: .primary, textColor: .white) {
-            
+            self.apiRecommandList()
         }
         alertView.showTitle(
             "다시해보기",
@@ -335,7 +317,7 @@ extension UIButton {
 }
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  colletModel?.count ?? 0
+        return  recommandColletModel?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -343,8 +325,8 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
-        let model = colletModel?[indexPath.row]
-        cell.configure(with: model ??  CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음"))
+        let model = recommandColletModel?[indexPath.row]
+        cell.configure(with: model ??  UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
         return cell
     }
 }
@@ -354,7 +336,7 @@ extension HomeViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let otherProfileVC = OtherProfileViewController()
-        otherProfileVC.id = colletModel![indexPath.row].id
+        otherProfileVC.id = recommandColletModel![indexPath.row].id
         self.navigationController?.pushViewController(otherProfileVC, animated: true)
     }
 }
@@ -370,7 +352,7 @@ extension HomeViewController : UICollectionViewDataSource {
         }
         // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
         let model = colletModel?[indexPath.row]
-        cell.configure(with: model ??  CollectDataUserModel(id: "12", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음"))
+        cell.configure(with: model ??  UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
         return cell
     }
     

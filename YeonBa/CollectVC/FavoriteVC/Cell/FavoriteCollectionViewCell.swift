@@ -14,6 +14,7 @@ import Alamofire
 
 class FavoriteCollectionViewCell: UICollectionViewCell {
     var id : String?
+    var isFavorite : Bool = false
     
     static let sendCupidIdentifier = "FavoriteCell"
     private let cupidImageView = UIImageView().then {
@@ -135,62 +136,58 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         pieChartView.data = data
         pieChartView.legend.enabled = false
     }
-    func configure(with model: CollectDataUserModel) {
+    func configure(with model: UserProfileResponse) {
         nameLabel.text = model.nickname
-        heartLabel.text = "\(model.receivedArrows!)"
-        similarityLabel.text = "\(model.photoSyncRate!)%"
-        setupPieChart(pieValue: model.photoSyncRate!)
-        id = model.id!
+        heartLabel.text = "\(model.receivedArrows)"
+        similarityLabel.text = "\(model.photoSyncRate)%"
+        setupPieChart(pieValue: model.photoSyncRate)
+        id = model.id
+        isFavorite = model.isFavorite
+        let whiteImage = UIImage(named: "WhiteFavorites")
+        let pinkImage = UIImage(named: "PinkFavorites")
+        isFavorite ? cupidFavoriteButton.setImage(pinkImage, for: .normal) : cupidFavoriteButton.setImage(pinkImage, for: .normal)
         //나이
         //ageLabel.text = "\(model.age)"
-        // 이미지 로딩
-        //if let url = URL(string: model.imageURL) {
-        //    cupidImageView.kf.setImage(with: url)
-        //}
-    }
-    /**
-     * API 응답 구현체 값
-     */
-    struct AFDataResponse<T: Codable>: Codable {
-        
-        // 응답 결과값
-        let data: T?
-        
-        // 응답 코드
-        let status: String?
-        
-        // 응답 메시지
-        let message: String?
-        
-        enum CodingKeys: CodingKey {
-            case data, status, message
-        }
-        
-        init(from decoder: Decoder) throws {
-            let values = try decoder.container(keyedBy: CodingKeys.self)
-            
-            status = (try? values.decode(String.self, forKey: .status)) ?? nil
-            message = (try? values.decode(String.self, forKey: .message)) ?? nil
-            data = (try? values.decode(T.self, forKey: .data)) ?? nil
+        if let url = URL(string: model.profilePhotoUrl) {
+            cupidImageView.kf.setImage(with: url)
         }
     }
-    func apiBookmark(id : String) -> Void{
-        let url = "https://api.yeonba.co.kr/favorites/" + id;
 
-        // Alamofire 를 통한 API 통신
-        AF.request(
-            url,
-            method: .post,
-            encoding: JSONEncoding.default)
-        .validate(statusCode: 200..<500)
-        .responseJSON{response in print(response)}
+    func apiBookmark(id : String){
+        let bookmarkRequest = BookmarkRequest.init(id: id )
+        NetworkService.shared.otherProfileService.bookmark(bodyDTO: bookmarkRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("북마크 성공")
+            default:
+                print("북마크 실패")
+                
+            }
+        }
     }
+    func apiDeleteBookmark(id : String){
+        let bookmarkRequest = BookmarkRequest.init(id: id )
+        NetworkService.shared.otherProfileService.deleteBookmark(bodyDTO: bookmarkRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("북마크 성공")
+            default:
+                print("북마크 실패")
+                
+            }
+        }
+    }
+
     @objc func favoriteButtonTapped() {
         if let currentImage = cupidFavoriteButton.imageView?.image {
             if(currentImage == UIImage(named: "PinkFavorites")){
                 let newImage = UIImage(named: "WhiteFavorites")
                 cupidFavoriteButton.setImage(newImage, for: .normal)
-                apiBookmark(id: id!)
+                apiDeleteBookmark(id: id!)
             }
             else {
                 let newImage = UIImage(named: "PinkFavorites")
