@@ -6,3 +6,24 @@
 //
 
 import Foundation
+import Alamofire
+
+
+enum NotificationTarget {
+    case unread
+    case watchIng(_ queryDTO: NotificationPageRequest)
+}
+
+//extension NotificationTarget: TargetType {
+//    
+//    var method: HTTPMethod {
+//        switch self {
+//        case .unread:
+//            return .get
+//        case .watchIng:
+//            return .patch
+//            
+//        }
+//        
+//    }
+//}
