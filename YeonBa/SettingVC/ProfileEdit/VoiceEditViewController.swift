@@ -4,7 +4,6 @@ import Then
 
 protocol VoiceEditViewControllerDelegate: AnyObject {
     func voiceSelected(_ voiceType: String)
-    func didCancelVoiceSelection()
 }
 
 class VoiceEditViewController: UIViewController{
@@ -134,7 +133,6 @@ class VoiceEditViewController: UIViewController{
     }
     
     @objc private func cancelAction() {
-        delegate?.didCancelVoiceSelection()
         dismiss(animated: true, completion: nil)
     }
 
@@ -144,6 +142,7 @@ class VoiceEditViewController: UIViewController{
         }
         dismiss(animated: true, completion: nil)
     }
+    
 
     private func updateDoneButton(enabled: Bool) {
         doneButton.isEnabled = enabled

@@ -4,7 +4,6 @@ import Then
 
 protocol HeightEditViewControllerDelegate: AnyObject {
     func didSelectHeight(_ height: Int)
-    func didCancelSelection()
 }
 class HeightEditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -84,7 +83,6 @@ class HeightEditViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     @objc private func cancelPicker() {
-        delegate?.didCancelSelection()
         dismiss(animated: true, completion: nil)
     }
 

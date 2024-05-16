@@ -1,11 +1,7 @@
-//
-//  RegionPreferenceViewController.swift
-//  YeonBa
-//
-//  Created by 심규민 on 5/14/24.
-//
-
 import UIKit
+import SnapKit
+import Then
+
 protocol RegionPreferenceViewControllerDelegate: AnyObject {
     func didSelectRegionPreference(_ area: String)
 }
@@ -24,22 +20,23 @@ class RegionPreferenceViewController: UIViewController, UIPickerViewDataSource, 
         $0.font = UIFont.pretendardSemiBold(size: 24)
     }
     
-    let doneButton = ActualGradientButton().then {
+    let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = .white
+        $0.setTitleColor(.lightGray, for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
+        $0.layer.cornerRadius = 20
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.masksToBounds = true
+        $0.isEnabled = false
         
     }
     
-    let cancelButton = UIButton().then {
+    let cancelButton = ActualGradientButton().then {
         $0.setTitle("취소", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
-        $0.backgroundColor = .white
-        $0.layer.cornerRadius = 20
-        $0.layer.borderColor = UIColor.black.cgColor
-        $0.layer.borderWidth = 1
-        $0.layer.masksToBounds = true
     }
     
     override func viewDidLoad() {
@@ -70,7 +67,7 @@ class RegionPreferenceViewController: UIViewController, UIPickerViewDataSource, 
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
 
-        let buttonStackView = UIStackView(arrangedSubviews: [cancelButton, doneButton])
+        let buttonStackView = UIStackView(arrangedSubviews: [doneButton, cancelButton])
         buttonStackView.axis = .horizontal
         buttonStackView.distribution = .fillEqually
         buttonStackView.spacing = 10
@@ -115,5 +112,11 @@ class RegionPreferenceViewController: UIViewController, UIPickerViewDataSource, 
         return areas[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       
+        doneButton.isEnabled = true
+        doneButton.setTitleColor(.black, for: .normal)
+        doneButton.layer.borderColor = UIColor.black.cgColor
+    }
 
 }

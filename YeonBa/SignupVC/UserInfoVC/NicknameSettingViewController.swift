@@ -143,6 +143,19 @@ class NicknameSettingViewController: UIViewController {
     //닉네임 중복확인
     @objc func nicknameCheckTapped() {
         guard let nickname = nicknameTextField.text else { return }
+
+        // Validation for nickname
+        let nicknamePattern = "^[a-zA-Z0-9가-힣]{1,8}$"
+        let nicknamePredicate = NSPredicate(format: "SELF MATCHES %@", nicknamePattern)
+        let isValidNickname = nicknamePredicate.evaluate(with: nickname)
+
+        if !isValidNickname {
+            nicknameBool.isHidden = false
+            nicknameBool.numberOfLines = 0
+            nicknameBool.text = "닉네임은 공백 없이 영어 대소문자, 한글, 숫자로 \n구성되어야 하며 최대 8자까지 가능합니다."
+            return
+        }
+        
         let nicknameRequest = NicknameRequest(nickname: nickname)
         print(nicknameRequest)
         
@@ -175,5 +188,6 @@ class NicknameSettingViewController: UIViewController {
             }
         }
     }
+
 
 }

@@ -36,8 +36,7 @@ class SettingViewController: UIViewController {
         $0.spacing = 10
     }
     private let button1 = UIButton().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setTitle("프로필 수정하기", for: .normal)
+        $0.setTitle(" 프로필 수정하기", for: .normal)
         $0.layer.borderWidth = 2.0 // 테두리 두께
         $0.layer.borderColor = UIColor.black.cgColor // 테두리 색상
         $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
@@ -47,12 +46,11 @@ class SettingViewController: UIViewController {
         $0.contentHorizontalAlignment = .center // 버튼1 이미지를 가로로 가운데 정렬
     }
     private let button2 = UIButton().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setTitle("남은 화살 수", for: .normal)
+        $0.setTitle(" 남은 화살 수 52", for: .normal)
         $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
         $0.backgroundColor = .primary
         $0.setTitleColor(UIColor.white, for: .normal) // 텍스트 색상
-        $0.setImage(UIImage(named: "heart")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        $0.setImage(UIImage(named: "arrowProfile")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .white
         $0.contentHorizontalAlignment = .center // 버튼2 이미지를 가로로 가운데 정렬
     }
@@ -172,7 +170,10 @@ class SettingViewController: UIViewController {
         }
     }
 
-
+    func updateArrowNumber(number: Int) {
+        let arrowNumber = number
+        button2.titleLabel?.text = "남은 화살수 \(arrowNumber)"
+    }
             
 
     func setupActions() {

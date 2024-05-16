@@ -99,12 +99,10 @@ class SplashViewController: UIViewController {
                     print("로그인 성공")
                 default:
                     print("로그인 실패")
-                    
                 }
                 
             }
         }
-        
     }
 }
 

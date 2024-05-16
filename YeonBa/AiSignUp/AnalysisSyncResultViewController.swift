@@ -52,14 +52,10 @@ class AnalysisSyncResultViewController: UIViewController {
         $0.textColor = UIColor.gray
     }
     
-    let selfieBtn = UIButton().then {
+    let selfieBtn = ActualGradientButton().then {
         $0.setTitle("셀카 다시찍기", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.layer.cornerRadius = 30
-        $0.layer.borderColor = UIColor.black.cgColor
-        $0.layer.borderWidth = 1.4
-        $0.backgroundColor = UIColor.white
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(reSelfieBtnTapped), for: .touchUpInside)
     }
@@ -142,6 +138,8 @@ class AnalysisSyncResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        profileImage1.image = SignDataManager.shared.selectedImages[0]
+        profileImage2.image = SignDataManager.shared.selectedImages[1]
         setupNavigationBar()
         // Create a dispatch group
         let dispatchGroup = DispatchGroup()
@@ -249,7 +247,7 @@ class AnalysisSyncResultViewController: UIViewController {
         selfieImage.snp.makeConstraints{ make in
             make.top.equalTo(view.safeAreaHeight).offset(20)
             make.right.equalTo(view.snp.centerX).offset(20)
-            make.width.equalTo(219)
+            make.left.equalTo(view.snp.left).offset(20)
             make.height.equalTo(314)
             
         }
@@ -257,14 +255,14 @@ class AnalysisSyncResultViewController: UIViewController {
         profileImage1.snp.makeConstraints{ make in
             make.top.equalTo(view.safeAreaHeight).offset(20)
             make.left.equalTo(selfieImage.snp.right).offset(10)
-            make.width.equalTo(124)
+            make.right.equalTo(view.snp.right).offset(-20)
             make.height.equalTo(152)
             
         }
         profileImage2.snp.makeConstraints{ make in
             make.top.equalTo(profileImage1.snp.bottom).offset(10)
             make.left.equalTo(selfieImage.snp.right).offset(10)
-            make.width.equalTo(124)
+            make.right.equalTo(view.snp.right).offset(-20)
             make.height.equalTo(152)
             
         }
@@ -284,14 +282,8 @@ class AnalysisSyncResultViewController: UIViewController {
         }
         selfieBtn.snp.makeConstraints{make in
             make.bottom.equalTo(view.snp.bottom).offset(-55)
-            make.right.equalTo(view.snp.centerX).offset(-2.5)
-            make.width.equalTo(174)
-            make.height.equalTo(56)
-        }
-        aiBtn.snp.makeConstraints{make in
-            make.bottom.equalTo(view.snp.bottom).offset(-55)
-            make.left.equalTo(view.snp.centerX).offset(2.5)
-            make.width.equalTo(174)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(353)
             make.height.equalTo(56)
         }
         //유사도 높으면 바로 시작
@@ -313,7 +305,6 @@ class AnalysisSyncResultViewController: UIViewController {
         view.addSubview(text2)
         view.addSubview(explainText)
         view.addSubview(selfieBtn)
-        view.addSubview(aiBtn)
         //유사도 높으면 시작 버튼
         view.addSubview(startBtn)
     }

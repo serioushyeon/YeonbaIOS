@@ -3,7 +3,7 @@ import SnapKit
 import Then
 
 protocol FaceEditViewControllerDelegate: AnyObject {
-    func didSelectFaceType1(_ type: String)
+    func didSelectFaceType(_ type: String)
 }
 
 class FaceEditViewController: UIViewController {
@@ -52,9 +52,9 @@ class FaceEditViewController: UIViewController {
             let button = UIButton().then {
                 $0.setTitle(type, for: .normal)
                 $0.backgroundColor = .white
-                $0.setTitleColor(.gray2, for: .normal)
+                $0.setTitleColor(.black, for: .normal)
                 $0.layer.borderWidth = 1
-                $0.layer.borderColor = UIColor.gray2?.cgColor
+                $0.layer.borderColor = UIColor.black.cgColor
                 $0.layer.cornerRadius = 8
                 $0.addTarget(self, action: #selector(faceTypeSelected(_:)), for: .touchUpInside)
             }
@@ -63,7 +63,7 @@ class FaceEditViewController: UIViewController {
     }
     
     private func layoutView() {
-        let gridStack = UIStackView(arrangedSubviews: faceTypeButtons.chunked(into: 3).map { row in
+        let gridStack = UIStackView(arrangedSubviews: faceTypeButtons.chunked(into: 2).map { row in
             let rowStack = UIStackView(arrangedSubviews: row)
             rowStack.axis = .horizontal
             rowStack.distribution = .fillEqually
@@ -126,13 +126,14 @@ class FaceEditViewController: UIViewController {
             updateDoneButton(enabled: true)
         }
 
+    
         @objc private func dismissWithSelection() {
             if let type = selectedFaceType {
-                delegate?.didSelectFaceType1(type)
+                print("Selected type: \(type)")
+                delegate?.didSelectFaceType(type)
             }
             dismiss(animated: true, completion: nil)
         }
-    
 
         @objc private func dismissWithoutSelection() {
             dismiss(animated: true, completion: nil)

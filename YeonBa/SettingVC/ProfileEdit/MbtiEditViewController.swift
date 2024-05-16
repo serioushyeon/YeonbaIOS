@@ -18,6 +18,7 @@ class MbtiEditViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 24)
     }
     
+    
     private let mbtiTypes = [
         "INTJ", "INTP", "ENTJ", "ENTP",
         "INFJ", "INFP", "ENFJ", "ENFP",
@@ -26,22 +27,22 @@ class MbtiEditViewController: UIViewController {
     ]
     private var mbtiButtons: [UIButton] = []
     
-    let doneButton = ActualGradientButton().then {
+    let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
-        
-    }
-    
-    let cancelButton = UIButton().then {
-        $0.setTitle("취소", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
         $0.backgroundColor = .white
+        $0.setTitleColor(.lightGray, for: .normal)
+        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
         $0.layer.cornerRadius = 20
-        $0.layer.borderColor = UIColor.black.cgColor
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.layer.borderWidth = 1
         $0.layer.masksToBounds = true
+        $0.isEnabled = false
+    }
+    
+    let cancelButton = ActualGradientButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
     }
 
     override func viewDidLoad() {
@@ -95,14 +96,14 @@ class MbtiEditViewController: UIViewController {
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
 
-        cancelButton.snp.makeConstraints { make in
+        doneButton.snp.makeConstraints { make in
             make.top.equalTo(gridStack.snp.bottom).offset(20)
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.trailing.equalTo(view.snp.centerX).offset(-10)
             make.height.equalTo(50)
         }
 
-        doneButton.snp.makeConstraints { make in
+        cancelButton.snp.makeConstraints { make in
             make.top.equalTo(gridStack.snp.bottom).offset(20)
             make.leading.equalTo(view.snp.centerX).offset(10)
             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
@@ -129,10 +130,17 @@ class MbtiEditViewController: UIViewController {
         
         
         selectedmbtiType = sender.title(for: .normal)
+        
+        updateDoneButton(enabled: true)
     }
     
+    
+
+    
+
     @objc private func dismissWithSelection() {
         if let type = selectedmbtiType {
+            print("Selected type: \(type)") 
             delegate?.didSelectMBTI(type)
         }
         dismiss(animated: true, completion: nil)
@@ -142,5 +150,12 @@ class MbtiEditViewController: UIViewController {
     @objc private func dismissWithoutSelection() {
         dismiss(animated: true, completion: nil)
     }
+    
+    private func updateDoneButton(enabled: Bool) {
+        doneButton.isEnabled = enabled
+        doneButton.setTitleColor(enabled ? .black : .lightGray, for: .normal)
+        doneButton.layer.borderColor = enabled ? UIColor.black.cgColor : UIColor.lightGray.cgColor
+    }
+
 }
 
