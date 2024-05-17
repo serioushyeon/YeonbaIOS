@@ -58,7 +58,7 @@ class AgeViewController: UIViewController {
     }
     
     private let nextButton = ActualGradientButton().then {
-        $0.setTitle("다음", for: .normal)
+        $0.setTitle("취소", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.masksToBounds = true

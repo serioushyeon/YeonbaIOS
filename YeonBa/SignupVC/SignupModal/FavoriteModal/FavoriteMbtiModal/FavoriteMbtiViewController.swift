@@ -65,11 +65,13 @@ final class FavoriteMbtiViewController: UIViewController {
         $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
-        $0.setTitle("다음", for: .normal)
+        $0.setTitle("취소", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
+        $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+
     }
     
     init(passMode: MbtiMode) {
@@ -113,6 +115,9 @@ final class FavoriteMbtiViewController: UIViewController {
     @objc private func finishButtonTapped() {
         // Finish 버튼을 터치했을 때의 동작
         delegate?.mbtiSelected(selectedMode!)
+        self.dismiss(animated: true)
+    }
+    @objc private func nextButtonTapped() {
         self.dismiss(animated: true)
     }
     private func updateButtonSelection() {
