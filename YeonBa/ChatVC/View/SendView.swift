@@ -42,13 +42,15 @@ final class SendView : UIView {
     }
     
     func setUI() {
+        
         addSubviews(messageTextField,sendButton)
     }
     
     func setLayout() {
         messageTextField.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(5)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         sendButton.snp.makeConstraints { make in

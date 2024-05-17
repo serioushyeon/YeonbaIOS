@@ -96,7 +96,7 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
     func presentServiceWithLogout() {
         let alert = UIAlertController(title: "서비스 로그아웃 확인", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "로그아웃", style: .destructive) { action in
-            KeychainHandler.shared.clearTokens()
+//            KeychainHandler.shared.clearTokens()
             let signupVC = SignUpViewController()
             self.navigationController?.pushViewController(signupVC, animated: true)
             print("로그아웃 처리")

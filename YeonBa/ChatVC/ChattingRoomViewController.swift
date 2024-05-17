@@ -42,6 +42,7 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         addSubViews()
         configUI()
         loadChatData() // 가짜 데이터 로드 함수
+        tabBarController?.tabBar.isTranslucent = true
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -63,10 +64,10 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         sendView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(100)
         }
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(21)
+            make.top.equalToSuperview()
             make.left.right.equalToSuperview()
             make.bottom.equalTo(sendView.snp.top)
         }
@@ -75,7 +76,7 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
     func loadChatData() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        let dates = ["2024년 04월 03일", "2024년 04월 04일"].compactMap { dateFormatter.date(from: $0) }
+        let dates = ["2024년 05월 15일", "2024년 06월 10일"].compactMap { dateFormatter.date(from: $0) }
         
         // 가짜 데이터 생성
         for date in dates {
@@ -105,7 +106,7 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         case .other:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherMessageCell", for: indexPath) as! OtherMessageCell
             cell.messageLabel.text = chatMessage.message
-            cell.profileImageView.image = UIImage(named: "GuideGoodImage1")
+            cell.profileImageView.image = UIImage(named: "woosuck")
             // 날짜 설정, 셀 스타일링 등
             return cell
         }
