@@ -29,6 +29,24 @@ class PhoneNumberViewController: UIViewController {
         $0.numberOfLines = 0
     }
     
+    let phoneNumberBool = UILabel().then {
+        $0.text = "전화번호가 이미 존재합니다."
+        $0.textColor = .primary
+        $0.textAlignment = .left
+        $0.font = .pretendardSemiBold(size: 15)
+        $0.isHidden = true
+    }
+    
+    let phoneNumberCheck = UIButton().then {
+        $0.setTitle("인증", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+        $0.addTarget(self, action: #selector(phoneNumberCheckTapped), for: .touchUpInside)
+    }
+    
     let phoneNumberUnderlineView = UIView().then {
         $0.backgroundColor = .gray
     }
@@ -64,7 +82,7 @@ class PhoneNumberViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.addSubviews(instructionLabel,instructionLabel2,phoneNumberUnderlineView,verificationCodeUnderlineView,phoneNumberTextField,nextButton)
+        view.addSubviews(instructionLabel,instructionLabel2,phoneNumberUnderlineView,verificationCodeUnderlineView,phoneNumberTextField,phoneNumberCheck,phoneNumberBool,nextButton)
         
         instructionLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
@@ -76,11 +94,10 @@ class PhoneNumberViewController: UIViewController {
             make.leading.equalToSuperview().inset(20)
         }
         
-        
         phoneNumberTextField.borderStyle = .none
         phoneNumberTextField.snp.makeConstraints { make in
             make.top.equalTo(instructionLabel2.snp.top).offset(100)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
         
@@ -88,6 +105,19 @@ class PhoneNumberViewController: UIViewController {
             make.top.equalTo(phoneNumberTextField.snp.bottom)
             make.leading.trailing.equalTo(phoneNumberTextField)
             make.height.equalTo(1)
+        }
+        
+        phoneNumberCheck.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumberTextField.snp.top)
+            make.leading.equalTo(phoneNumberTextField.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(20)
+            make.width.equalTo(80)
+            make.height.equalTo(50)
+        }
+        
+        phoneNumberBool.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumberTextField.snp.bottom).offset(10)
+            make.leading.equalTo(phoneNumberTextField.snp.leading)
         }
         
         nextButton.snp.makeConstraints { make in
@@ -125,12 +155,14 @@ class PhoneNumberViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
-    
+    //MARK: -- Action
     @objc private func dismissKeyboard() {
         // 키보드를 숨깁니다.
         view.endEditing(true)
     }
-    //MARK: -- Action
+    @objc private func phoneNumberCheckTapped() {
+        checkPhoneNumber()
+    }
     //전송 버튼을 눌를 경우
     @objc func sendCodeButtonTapped() {
         guard let phoneNumber = phoneNumberTextField.text else {
@@ -154,10 +186,7 @@ class PhoneNumberViewController: UIViewController {
         nextButton.isEnabled = true
         nextButton.backgroundColor = .systemBlue
     }
-    // 토큰 가져오기
-//    func retrieveAccessToken() -> String? {
-//        return KeychainWrapper.standard.string(forKey: "accessToken")
-//    }
+
     func getUserInfo() {
         let loginRequest = LoginRequest (
             socialId : SignDataManager.shared.socialId!,
@@ -189,9 +218,12 @@ class PhoneNumberViewController: UIViewController {
                 if let data = StatusResponse.data {
                     if data.isUsedPhoneNumber {
                         print("전화번호 이미 존재")
-                        self.showAlert(message: "전화번호가 이미 존재합니다.")
+                        self.phoneNumberBool.isHidden = false
+                        self.phoneNumberBool.text = "전화번호가 이미 존재합니다."
                     } else {
                         print("전화번호 사용 가능")
+                        self.phoneNumberBool.isHidden = false
+                        self.phoneNumberBool.text = "전화번호 사용 가능합니다."
                     }
                 } else {
                     print("응답 데이터 없음")
@@ -214,7 +246,6 @@ class PhoneNumberViewController: UIViewController {
             return
         }
         verificationSuccessful()
-        checkPhoneNumber()
         if isValidPhoneNumber(phoneNumber) {
             // 전화번호가 유효한 경우
             if KeychainHandler.shared.accessToken.isEmpty {

@@ -1,3 +1,9 @@
+//
+//  NotificationsViewController.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 5/15/24.
+//
 import UIKit
 import SnapKit
 import Then
@@ -5,14 +11,8 @@ import Then
 class NotificationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - UI Components
+    var notifications : [Notification] = []
     
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "BackButton")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
     lazy var tableView = UITableView().then {
         $0.register(ArrowNotificationCell.self, forCellReuseIdentifier: "ArrowNotificationCell")
         $0.register(ChatAcceptanceCell.self, forCellReuseIdentifier: "ChatAcceptanceCell")
@@ -20,51 +20,73 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         $0.dataSource = self
         $0.delegate = self
     }
-    
-    //MARK: - Actions
-    @objc func backButtonTapped() {
-        // 뒤로 가기 로직을 구현
-        dismiss(animated: true, completion: nil)
-    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "알림"
         addSubViews()
         configUI()
+        fetchNotifications(page: 0)
     }
 
     // MARK: - UI Layout
     private func addSubViews(){
         view.addSubview(tableView)
-        view.addSubview(backButton)
     }
     private func configUI() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(21)
-        }
 
     }
+    // MARK: - Networking
+    func fetchNotifications(page: Int) {
+        let requestDTO = NotificationPageRequest(page: page)
+        NetworkService.shared.notificationService.NotificationList(queryDTO: requestDTO) { response in
+            switch response {
+            case .success(let statusResponse):
+                if let data = statusResponse.data {
+                    DispatchQueue.main.async {
+                        self.notifications = data.nofications
+                        self.tableView.reloadData()
+                    }
+                }
+            case .requestErr(let statusResponse):
+                print("요청 에러: \(statusResponse.message)")
+            case .pathErr:
+                print("경로 에러")
+            case .serverErr:
+                print("서버 에러")
+            case .networkErr:
+                print("네트워크 에러")
+            case .failure:
+                print("실패")
+            }
+        }
+    }
 
+            
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return notifications.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
+        let notification = notifications[indexPath.row]
+        
+        switch notification.notificationType {
+        case "ARROW_RECEIVED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ArrowNotificationCell", for: indexPath) as! ArrowNotificationCell
+            cell.configure(with: notification)
             return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatAcceptanceCell", for: indexPath) as! ChatAcceptanceCell
-            return cell
-        case 2:
+        case "CHAT_REQUESTED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRequestCell", for: indexPath) as! ChatRequestCell
+            cell.configure(with: notification)
+            return cell
+        case "CHAT_REQUEST_ACCEPTED":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatAcceptanceCell", for: indexPath) as! ChatAcceptanceCell
+            cell.configure(with: notification)
             return cell
         default:
             return UITableViewCell()

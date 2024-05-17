@@ -152,7 +152,10 @@ class BirthDateSettingViewController: UIViewController {
         view.endEditing(true)
     }
     @objc func nextButtonTapped() {
-        guard let year = yearTextField.text,let month = monthTextField.text,let day = dayTextField.text else {
+        guard let year = yearTextField.text, !year.isEmpty,let month = monthTextField.text, !month.isEmpty,let day = dayTextField.text, !day.isEmpty else {
+            let alert = UIAlertController(title: "생년월일", message: "생년월일을 입력해 주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
         

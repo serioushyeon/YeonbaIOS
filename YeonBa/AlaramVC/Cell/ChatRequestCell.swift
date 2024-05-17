@@ -10,7 +10,7 @@ class ChatRequestCell: ArrowNotificationCell {
     //MARK: - UI Layout
     override func configUI() {
         super.configUI()
-        messageLabel.text = "친친님이 채팅을 요청했어요!"
+        messageLabel.text = "선재님이 채팅을 요청했어요!"
         
         actionButton.setTitle("수락", for: .normal)
         
@@ -42,4 +42,7 @@ class ChatRequestCell: ArrowNotificationCell {
         super.addSubViews()
         contentView.addSubview(rejectButton)
     }
+    override func configure(with notification: Notification) {
+        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+       }
 }

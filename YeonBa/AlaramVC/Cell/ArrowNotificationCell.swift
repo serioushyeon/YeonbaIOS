@@ -6,13 +6,13 @@ class ArrowNotificationCell: UITableViewCell {
     
     // MARK: - UI Components
     let profileImageView = UIImageView().then{
-        $0.image = UIImage(named: "GuideGoodImage1")
+        $0.image = UIImage(named: "woosuck")
         $0.layer.cornerRadius = 20
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
     let messageLabel = UILabel().then{
-        $0.text = "친친님이 화살을 보냈어요!"
+        $0.text = "선재님이 화살을 보냈어요!"
         $0.font = UIFont.pretendardSemiBold(size: 16)
     }
     let actionButton = UIButton().then{
@@ -67,12 +67,12 @@ class ArrowNotificationCell: UITableViewCell {
     
     func configUI() {
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(15)
             make.leading.equalToSuperview().offset(20)
             make.width.height.equalTo(40) // Assuming a square image
         }
         messageLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.top).offset(8)
+            make.top.equalTo(profileImageView.snp.top)
             make.leading.equalTo(profileImageView.snp.trailing).offset(15)
         }
         actionButton.snp.makeConstraints { make in
@@ -88,5 +88,10 @@ class ArrowNotificationCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-20)
             make.top.equalToSuperview().offset(10)
         }
+    }
+    
+    func configure(with notification: Notification) {
+        //시간
+        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
     }
 }
