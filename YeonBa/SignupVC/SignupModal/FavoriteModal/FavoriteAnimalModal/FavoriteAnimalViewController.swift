@@ -61,7 +61,7 @@ final class FavoriteAnimalViewController: UIViewController {
         $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
-        $0.setTitle("다음", for: .normal)
+        $0.setTitle("취소", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.masksToBounds = true
@@ -116,11 +116,7 @@ final class FavoriteAnimalViewController: UIViewController {
     }
     
     @objc private func nextButtonTapped() {
-        dismiss(animated: true) {
-            let locationVC = FavoriteLocationViewController(passMode: self.locationViewMode)
-            // 새로운 모달 창 표시
-            self.present(locationVC, animated: true)
-        }
+        dismiss(animated: true) 
     }
     
     private func updateButtonSelection() {
