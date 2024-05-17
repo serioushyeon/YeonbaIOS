@@ -16,4 +16,7 @@ class ChatAcceptanceCell: ArrowNotificationCell {
     @objc func chatBtnTapped() {
         print("chatBtnTapped tapped")
     }
+    override func configure(with notification: Notification) {
+        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+    }
 }

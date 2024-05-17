@@ -89,4 +89,9 @@ class ArrowNotificationCell: UITableViewCell {
             make.top.equalToSuperview().offset(10)
         }
     }
+    
+    func configure(with notification: Notification) {
+        //시간
+        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+    }
 }

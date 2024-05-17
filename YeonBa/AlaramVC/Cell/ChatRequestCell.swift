@@ -42,4 +42,7 @@ class ChatRequestCell: ArrowNotificationCell {
         super.addSubViews()
         contentView.addSubview(rejectButton)
     }
+    override func configure(with notification: Notification) {
+        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+       }
 }
