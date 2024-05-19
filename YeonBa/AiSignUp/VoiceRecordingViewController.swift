@@ -123,8 +123,6 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     // MARK: - UI Layout
     func addSubViews() {
-        view.addSubview(backButton)
-        view.addSubview(titleLabel)
         view.addSubview(recordingIndicatorView)
         view.addSubview(recordingLabel)
         view.addSubview(profileImageBGView)
@@ -260,43 +258,186 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         startRecordingTimer()
         startUpdatingWaveform()
     }
+    func loadAudioFile(url: URL) -> (sampleRate: Int, data: [Float])? {
+        do {
+            let audioFile = try AVAudioFile(forReading: url)
+            let sampleRate = Int(audioFile.fileFormat.sampleRate)
+            let frameCount = Int(audioFile.length)
+            let format = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: Double(sampleRate), channels: 1, interleaved: false)!
+            guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(frameCount)) else {
+                print("Failed to create AVAudioPCMBuffer")
+                return nil
+            }
+            try audioFile.read(into: buffer)
+            let floatArray = Array(UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: frameCount))
+            return (sampleRate, floatArray)
+        } catch {
+            print("Error reading audio file: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    func normalizeAndPadData(data: [Float], targetLength: Int) -> [[Float]] {
+        let normalizedData = data.map { $0 / 32767.0 } // Assuming the data is 16-bit PCM
+        let paddedData = Array(normalizedData.prefix(targetLength)) + Array(repeating: Float(0), count: max(0, targetLength - data.count))
+        let reshapedData = stride(from: 0, to: paddedData.count, by: targetLength/8).map { Array(paddedData[$0..<$0+targetLength/8]) }
+        return reshapedData
+    }
+    func convertNormalizedAndPaddedDataToMLMultiArray(data: [[Float]]) -> MLMultiArray? {
+        let targetLength = 100000 // 목표 길이
+        do {
+            let mlMultiArray = try MLMultiArray(shape: [1, 8, targetLength, 1] as [NSNumber], dataType: .float32)
+            let pointer = UnsafeMutablePointer<Float>(OpaquePointer(mlMultiArray.dataPointer))
+            for (frameIndex, frame) in data.enumerated() {
+                guard frame.count == targetLength/8 else {
+                    print("Frame \(frameIndex) length is not correct.")
+                    return nil
+                }
+                for (sampleIndex, value) in frame.enumerated() {
+                    let index = frameIndex * targetLength/8 + sampleIndex
+                    pointer[index] = value
+                }
+            }
+            return mlMultiArray
+        } catch {
+            print("Error creating MLMultiArray: \(error.localizedDescription)")
+            return nil
+        }
+    }
     private func stopRecording() {
         // 녹음 중지
         audioRecorder?.stop()
         stopRecordingTimer()
-        if let audioFile = try? AVAudioFile(forReading: audioRecorder!.url){
-            if let audioFormat = try? AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: audioFile.fileFormat.sampleRate, channels: 1, interleaved: false){
-                let pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
-                let mpcmBuffer =  computeMFCC(audioBuffer: pcmBuffer!)
-                if let multiArray = preprocessData(data: mpcmBuffer!) {
-                    print("MultiArray:", multiArray)
-                    do {
-                        let output = try model!.prediction(conv2d_input: multiArray)
-                        result = argmax(output.IdentityShapedArray.strides)
-                        switch result {
-                        case 0 :
-                            voiceMode = "저음"
-                            SignDataManager.shared.vocalRange = voiceMode
-                        case 1 :
-                            voiceMode = "중음"
-                            SignDataManager.shared.vocalRange = voiceMode
-                        case 2 :
-                            voiceMode = "고음"
-                            SignDataManager.shared.vocalRange = voiceMode
-                        case .none:
-                            voiceMode = "중음"
-                            SignDataManager.shared.vocalRange = voiceMode
-                        case .some(_):
-                            voiceMode = "중음"
-                            SignDataManager.shared.vocalRange = voiceMode
-                        }
-                        print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
-                    } catch {
-                        print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
+        if let url = try? AVAudioFile(forReading: audioRecorder!.url).url,
+           let (sampleRate, data) = loadAudioFile(url: url) {
+            print("Sample Rate: \(sampleRate)")
+            print("Data Length: \(data.count)")
+            let normalizedAndPaddedData = normalizeAndPadData(data: data, targetLength: 100000)
+            print("Normalized and Padded Data:", data.count)
+            if let mlMultiArray = convertNormalizedAndPaddedDataToMLMultiArray(data: normalizedAndPaddedData) {
+                print("Successfully converted to MLMultiArray")
+                // Use mlMultiArray as needed
+                do {
+                    let output = try model!.prediction(conv2d_input: mlMultiArray)
+                    print(output.IdentityShapedArray.scalars)
+                    result = argmax(output.IdentityShapedArray.scalars)
+                    print("result: \(result)")
+                    if let maxProbabilityIndex = output.IdentityShapedArray.scalars.argmax() {
+                        print("Highest probability index:", maxProbabilityIndex)
+                        // 이 인덱스를 사용하여 해당하는 클래스 레이블을 가져올 수 있습니다.
+                        // 예를 들어, 클래스 레이블 배열이 있다고 가정하고:
+                        // let classLabels = ["Class 1", "Class 2", "Class 3", ...]
+                        // let predictedClass = classLabels[maxProbabilityIndex]
+                    } else {
+                        print("Failed to find highest probability index")
                     }
+                    switch result {
+                    case 0 :
+                        voiceMode = "저음"
+                        SignDataManager.shared.vocalRange = voiceMode
+                    case 1 :
+                        voiceMode = "중음"
+                        SignDataManager.shared.vocalRange = voiceMode
+                    case 2 :
+                        voiceMode = "고음"
+                        SignDataManager.shared.vocalRange = voiceMode
+                    case .none:
+                        voiceMode = "중음"
+                        SignDataManager.shared.vocalRange = voiceMode
+                    case .some(_):
+                        voiceMode = "중음"
+                        SignDataManager.shared.vocalRange = voiceMode
+                    }
+                    print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
+                } catch {
+                    print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
                 }
+            } else {
+                print("Failed to convert normalized and padded data to MLMultiArray")
             }
+        } else {
+            print("Failed to load audio file")
         }
+        /*if let url = try? AVAudioFile(forReading: audioRecorder!.url).url,
+         let audioBuffer = loadAudioFile(url: url) {
+         print(url)
+         print(audioBuffer)
+         let targetLength = 100000
+         if let mlMultiArray = convertAudioBufferToMLMultiArray(audioBuffer: audioBuffer, targetLength: targetLength) {
+         print("Successfully converted to MLMultiArray", mlMultiArray.strides[0])
+         // Use mlMultiArray as needed
+         do {
+         let mlMultiArray = try MLMultiArray(shape: [1, 8, targetLength, 1] as [NSNumber], dataType: .float32)
+         let output = try model!.prediction(conv2d_input: mlMultiArray)
+         print(output.IdentityShapedArray.strides)
+         result = argmax(output.IdentityShapedArray.strides)
+         print("result: \(result)")
+         switch result {
+         case 0 :
+         voiceMode = "저음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case 1 :
+         voiceMode = "중음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case 2 :
+         voiceMode = "고음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case .none:
+         voiceMode = "중음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case .some(_):
+         voiceMode = "중음"
+         SignDataManager.shared.vocalRange = voiceMode
+         }
+         print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
+         } catch {
+         print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
+         }
+         } else {
+         print("Failed to convert audio buffer to MLMultiArray")
+         }
+         } else {
+         print("Failed to load audio file")
+         }*/
+        /* if let audioFile = try? AVAudioFile(forReading: audioRecorder!.url){
+         if let audioFormat = try? AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: audioFile.fileFormat.sampleRate, channels: 1, interleaved: false){
+         let pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
+         print("pcm:", pcmBuffer?.floatChannelData)
+         
+         let mpcmBuffer =  computeMFCC(audioBuffer: pcmBuffer!)
+         print("mpcm:", mpcmBuffer)
+         
+         if let multiArray = preprocessData(data: mpcmBuffer!) {
+         print("MultiArray:", multiArray)
+         do {
+         let output = try model!.prediction(conv2d_input: multiArray)
+         print(output.IdentityShapedArray.strides)
+         result = argmax(output.IdentityShapedArray.strides)
+         print("result: \(result)")
+         switch result {
+         case 0 :
+         voiceMode = "저음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case 1 :
+         voiceMode = "중음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case 2 :
+         voiceMode = "고음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case .none:
+         voiceMode = "중음"
+         SignDataManager.shared.vocalRange = voiceMode
+         case .some(_):
+         voiceMode = "중음"
+         SignDataManager.shared.vocalRange = voiceMode
+         }
+         print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
+         } catch {
+         print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
+         }
+         }
+         }
+         }*/
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .light)
         let image = UIImage(systemName: "mic.circle.fill", withConfiguration: imageConfig)
         recordButton.setImage(image, for: .normal)
@@ -319,7 +460,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         
         return maxIndex
     }
-
+    
     private func startRecordingTimer() {
         recordingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             self?.recordingDuration += 1
@@ -396,13 +537,13 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     
     //AI 모델 관련 코드
-
+    
     func preprocessData(data: [Float]) -> MLMultiArray? {
         let paddedData = padData(data: data, targetLength: 800000)
         let reshapedData = reshapeData(data: paddedData, rows: 8, columns: 100000)
         return convertToMultiArray(data: reshapedData)
     }
-
+    
     func padData(data: [Float], targetLength: Int) -> [Float] {
         var paddedData = data
         if data.count < targetLength {
@@ -422,6 +563,40 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         }
         return reshapedData
     }
+    func convertAudioBufferToMLMultiArray(audioBuffer: AVAudioPCMBuffer, targetLength: Int) -> MLMultiArray? {
+        guard let floatChannelData = audioBuffer.floatChannelData else {
+            print("No channel data found")
+            return nil
+        }
+
+        let channelData = floatChannelData[0]
+        let frameLength = Int(audioBuffer.frameLength)
+        
+        // Create a float array with the required target length
+        var audioData = [Float](repeating: 0.0, count: targetLength)
+        
+        // Copy the audio buffer data into the float array
+        let copyLength = min(frameLength, targetLength)
+        for i in 0..<copyLength {
+            audioData[i] = channelData[i]
+        }
+        
+        // Create MLMultiArray
+        do {
+            let mlMultiArray = try MLMultiArray(shape: [1, 8, targetLength, 1] as [NSNumber], dataType: .float32)
+            
+            // Fill MLMultiArray with audio data
+            let pointer = UnsafeMutablePointer<Float>(OpaquePointer(mlMultiArray.dataPointer))
+            for i in 0..<audioData.count {
+                pointer[i] = audioData[i]
+            }
+            
+            return mlMultiArray
+        } catch {
+            print("Error creating MLMultiArray: \(error.localizedDescription)")
+            return nil
+        }
+    }
     //모델에 넣기 위한 변환
     func convertToMultiArray(data: [[Float]]) -> MLMultiArray? {
         let multiArray = try? MLMultiArray(shape: [1, 8, 100000, 1] as [NSNumber], dataType: .float32)
@@ -431,71 +606,73 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         }
         return multiArray
     }
-    //오디오를 버퍼로 변환후  MFCC 변환을 위한 함수
     func computeMFCC(audioBuffer: AVAudioPCMBuffer) -> [Float]? {
         let sampleRate = audioBuffer.format.sampleRate
-        let frameLength = vDSP_Length(0.025 * Double(sampleRate)) // Frame length (25ms)
-        let frameStep = vDSP_Length(0.01 * Double(sampleRate)) // Frame step (10ms)
-        
-        guard let audioData = audioBuffer.floatChannelData?.pointee else {
+        let frameLength = Int(0.025 * Double(sampleRate)) // Frame length (25ms)
+        let frameStep = Int(0.01 * Double(sampleRate)) // Frame step (10ms)
+
+        guard let audioData = audioBuffer.floatChannelData?[0] else {
             return nil
         }
-        
+
         let audioDataCount = Int(audioBuffer.frameLength)
-        
+
+        // Debug print statements to ensure the values are correct
+        print("Sample Rate: \(sampleRate)")
+        print("Frame Length: \(frameLength)")
+        print("Frame Step: \(frameStep)")
+        print("Audio Data Count: \(audioDataCount)")
+
         // Split audio data into frames
-        var frames = [Array<Float>]()
+        var frames = [[Float]]()
         var i = 0
-        while i + Int(frameLength) <= audioDataCount {
-            let frame = Array(arrayLiteral: audioData[i])
+        while i + frameLength <= audioDataCount {
+            let frame = Array(UnsafeBufferPointer(start: audioData + i, count: frameLength))
             frames.append(frame)
-            i += Int(frameStep)
+            i += frameStep
         }
-        
+
         // Pre-emphasis (optional)
         let preEmphasisCoeff: Float = 0.97
         var preEmphasizedFrames = frames.map { frame -> [Float] in
             var outputFrame = [Float](repeating: 0.0, count: frame.count)
             outputFrame[0] = frame[0]
-            for i in 1..<frame.count {
-                outputFrame[i] = frame[i] - preEmphasisCoeff * frame[i - 1]
+            for j in 1..<frame.count {
+                outputFrame[j] = frame[j] - preEmphasisCoeff * frame[j - 1]
             }
             return outputFrame
         }
-        
+
         // Hamming window
-        var window = [Float](repeating: 0.0, count: Int(frameLength))
-        vDSP_hann_window(&window, vDSP_Length(frameLength), Int32(vDSP_HANN_NORM))
-        
+        var window = [Float](repeating: 0.0, count: frameLength)
+        vDSP_hamm_window(&window, vDSP_Length(frameLength), Int32(0))
+
         // Apply Hamming window to frames
         for i in 0..<preEmphasizedFrames.count {
             var frame = preEmphasizedFrames[i]
             vDSP_vmul(frame, 1, window, 1, &frame, 1, vDSP_Length(frameLength))
             preEmphasizedFrames[i] = frame
         }
-        // DCT를 위한 설정 생성
-        var setup: vDSP_DFT_Setup? = vDSP_DFT_CreateSetup(nil, vDSP_Length(frameLength))
-        defer {
-            vDSP_DFT_DestroySetup(setup)
+
+        // DCT setup
+        guard let dctSetup = vDSP_DCT_CreateSetup(nil, vDSP_Length(frameLength), vDSP_DCT_Type.II) else {
+            print("Error creating DCT setup.")
+            return nil
         }
-        
-        
+
         // Compute MFCCs
         var mfccs = [Float]()
         for frame in preEmphasizedFrames {
-            // frame을 DCT로 변환하여 mfcc 계산
             var dctInput = frame
-            var dctOutput = [Float](repeating: 0, count: Int(frameLength))
-            vDSP_DCT_Execute(setup!, &dctInput, &dctOutput)
-            
-            // 계산된 MFCC를 mfccs 배열에 추가
-            mfccs.append(contentsOf: dctOutput)
+            var dctOutput = [Float](repeating: 0, count: frameLength)
+            vDSP_DCT_Execute(dctSetup, &dctInput, &dctOutput)
+
+            // Append first 13 coefficients (excluding the 0th coefficient)
+            mfccs.append(contentsOf: dctOutput[1..<14])
         }
-        
+
         return mfccs
     }
-    
-    
 }
 
 extension UIColor {
@@ -535,5 +712,28 @@ extension UIFont {
             return UIFont.systemFont(ofSize: size, weight: .regular)
         }
         return font
+    }
+}
+extension Array where Element: Comparable {
+    func argmax() -> Index? {
+        return indices.max(by: { self[$0] < self[$1] })
+    }
+    
+    func argmin() -> Index? {
+        return indices.min(by: { self[$0] < self[$1] })
+    }
+}
+
+extension Array {
+    func argmax(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows-> Index? {
+        return try indices.max { (i, j) throws -> Bool in
+            try areInIncreasingOrder(self[i], self[j])
+        }
+    }
+    
+    func argmin(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows-> Index? {
+        return try indices.min { (i, j) throws -> Bool in
+            try areInIncreasingOrder(self[i], self[j])
+        }
     }
 }

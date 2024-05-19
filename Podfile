@@ -19,7 +19,7 @@ target 'YeonBa' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Messaging'
 	pod 'SwiftKeychainWrapper'
-	pod 'Socket.IO-Client-Swift', '~> 15.2.0'
+	pod 'Socket.IO-Client-Swift'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing
