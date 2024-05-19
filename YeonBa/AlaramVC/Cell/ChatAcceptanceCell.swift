@@ -16,7 +16,12 @@ class ChatAcceptanceCell: ArrowNotificationCell {
     @objc func chatBtnTapped() {
         print("chatBtnTapped tapped")
     }
-    override func configure(with notification: Notification) {
+    override func configure(with notification: Notifications) {
+        messageLabel.text = notification.content
         timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+        print("알림내용:\(notification.content)")
+        if let url = URL(string: Config.s3URLPrefix + notification.senderProfilePhotoUrl) {
+            profileImageView.kf.setImage(with: url)
+        }
     }
 }

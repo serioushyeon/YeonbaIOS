@@ -1,6 +1,8 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
+
 // 화살 알림 셀 (Arrow Notification Cell)
 class ArrowNotificationCell: UITableViewCell {
     
@@ -90,8 +92,15 @@ class ArrowNotificationCell: UITableViewCell {
         }
     }
     
-    func configure(with notification: Notification) {
-        //시간
+    func configure(with notification: Notifications) {
+        messageLabel.text = notification.content
         timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+        print("알림내용:\(notification.content)")
+        if let url = URL(string: Config.s3URLPrefix + notification.senderProfilePhotoUrl) {
+                print("Loading image from URL: \(url)")
+                profileImageView.kf.setImage(with: url)
+            } else {
+                print("Invalid URL: \(Config.s3URLPrefix + notification.senderProfilePhotoUrl)")
+            }
     }
 }

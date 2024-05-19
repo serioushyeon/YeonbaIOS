@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Notification: Codable {
+struct Notifications: Codable {
     let notificationType: String
     let content : String
     let senderId: Int

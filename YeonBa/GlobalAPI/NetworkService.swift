@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class NetworkService {
     static let shared = NetworkService()
@@ -17,4 +18,15 @@ final class NetworkService {
     let notificationService : NotificationServiceProtocol = NotificationService( apiLogger: APIEventLogger())
     let otherProfileService : OtherProfileServiceProtocol = OtherProfileService( apiLogger: APIEventLogger())
     let homeService : HomeServiceProtocol = HomeService( apiLogger: APIEventLogger())
+    
+    private var sessionManager: Session = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = HTTPHeaders.default.dictionary
+        return Session(configuration: configuration, eventMonitors: [APIEventLogger()])
+    }()
+    
+    func setAuthorizationHeader(token: String) {
+        sessionManager.sessionConfiguration.headers.add(name: "Authorization", value: "Bearer \(token)")
+    }
+    
 }

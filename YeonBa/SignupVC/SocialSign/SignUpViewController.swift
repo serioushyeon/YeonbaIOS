@@ -199,30 +199,30 @@ extension SignUpViewController:
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
             
-            if  let authorizationCode = appleIDCredential.authorizationCode,
-                let identityToken = appleIDCredential.identityToken,
-                let authString = String(data: authorizationCode, encoding: .utf8),
-                let tokenString = String(data: identityToken, encoding: .utf8) {
-                print("authorizationCode: \(authorizationCode)")
-                print("identityToken: \(identityToken)")
-                print("authString: \(authString)")
-                print("tokenString: \(tokenString)")
+            if let familyName = fullName?.familyName, let givenName = fullName?.givenName {
+                let userName = String(describing: familyName) + String(describing: givenName)
+                KeychainHandler.shared.userName = userName 
             }
-            
-            
-        case let passwordCredential as ASPasswordCredential:
-            let username = passwordCredential.user
-            let password = passwordCredential.password
-            
-            print("username: \(username)")
-            print("password: \(password)")
+            if let identityToken = appleIDCredential.identityToken,
+                let identifyTokenString = String(data: identityToken, encoding: .utf8) {
+                KeychainHandler.shared.providerToken = identifyTokenString
+            }
+            let userName = KeychainHandler.shared.userName
+            KeychainHandler.shared.userID = appleIDCredential.user
+            SignDataManager.shared.loginType = "APPLE"
+            print("로그인타입: \(String(describing: SignDataManager.shared.loginType))")
+            let phonenumberVC = PhoneNumberViewController()
+            navigationController?.pushViewController(phonenumberVC, animated: true)
             
         default:
             break
         }
     }
     
+    ///로그인 실패했을 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        print("login failed - \(error.localizedDescription)")
+
     }
 }
 

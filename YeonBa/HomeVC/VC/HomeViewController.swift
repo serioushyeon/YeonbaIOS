@@ -119,6 +119,7 @@ class HomeViewController: UIViewController {
                 guard let data = data.data else { return }
                 if data.exist {
                     DispatchQueue.main.async {
+                        //alarmButton.image = UIImage(named: "AlarmActive")
                         alarmButton.image = UIImage(named: "AlarmActive")
                         print("읽지 않은 알람 존재 \(data.exist)")
                     }

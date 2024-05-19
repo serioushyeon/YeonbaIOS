@@ -215,6 +215,12 @@
 		58E88E582BF7916400775F06 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E4D2BF7916400775F06 /* SendView.swift */; };
 		58E88E592BF7916400775F06 /* ChattingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E4F2BF7916400775F06 /* ChattingRoomViewController.swift */; };
 		58E88E5A2BF7916400775F06 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E502BF7916400775F06 /* ChattingViewController.swift */; };
+		58E88E5C2BF8830600775F06 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E5B2BF8830600775F06 /* Config.swift */; };
+		58E88E642BF88F6200775F06 /* ChatTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E632BF88F6200775F06 /* ChatTarget.swift */; };
+		58E88E662BF88F7A00775F06 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E652BF88F7A00775F06 /* ChatService.swift */; };
+		58E88E682BF88F9400775F06 /* ChatListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E672BF88F9400775F06 /* ChatListResponse.swift */; };
+		58E88E6A2BF892D400775F06 /* ChatContentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E692BF892D400775F06 /* ChatContentRequest.swift */; };
+		58E88E8A2BF9D95700775F06 /* ChatSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E892BF9D95700775F06 /* ChatSocketManager.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -477,6 +483,12 @@
 		58E88E4D2BF7916400775F06 /* SendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		58E88E4F2BF7916400775F06 /* ChattingRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingRoomViewController.swift; sourceTree = "<group>"; };
 		58E88E502BF7916400775F06 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		58E88E5B2BF8830600775F06 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		58E88E632BF88F6200775F06 /* ChatTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTarget.swift; sourceTree = "<group>"; };
+		58E88E652BF88F7A00775F06 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		58E88E672BF88F9400775F06 /* ChatListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListResponse.swift; sourceTree = "<group>"; };
+		58E88E692BF892D400775F06 /* ChatContentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContentRequest.swift; sourceTree = "<group>"; };
+		58E88E892BF9D95700775F06 /* ChatSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSocketManager.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -740,6 +752,7 @@
 		589CDCF52BE504F400BA332F /* GlobalAPI */ = {
 			isa = PBXGroup;
 			children = (
+				58E88E5D2BF88F2200775F06 /* ChatAPI */,
 				58E88E3E2BF790C900775F06 /* NotificationAPI */,
 				58E88E2C2BF7896D00775F06 /* HomeAPI */,
 				58E88E142BF7896300775F06 /* ProfileAPI */,
@@ -782,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */,
+				58E88E5B2BF8830600775F06 /* Config.swift */,
 			);
 			path = Gloabal;
 			sourceTree = "<group>";
@@ -1497,8 +1511,60 @@
 				58E88E4E2BF7916400775F06 /* View */,
 				58E88E4F2BF7916400775F06 /* ChattingRoomViewController.swift */,
 				58E88E502BF7916400775F06 /* ChattingViewController.swift */,
+				58E88E892BF9D95700775F06 /* ChatSocketManager.swift */,
 			);
 			path = ChatVC;
+			sourceTree = "<group>";
+		};
+		58E88E5D2BF88F2200775F06 /* ChatAPI */ = {
+			isa = PBXGroup;
+			children = (
+				58E88E622BF88F4C00775F06 /* Service */,
+				58E88E612BF88F4500775F06 /* Router */,
+				58E88E5E2BF88F2F00775F06 /* DTO */,
+			);
+			path = ChatAPI;
+			sourceTree = "<group>";
+		};
+		58E88E5E2BF88F2F00775F06 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				58E88E602BF88F3D00775F06 /* Response */,
+				58E88E5F2BF88F3600775F06 /* Request */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		58E88E5F2BF88F3600775F06 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				58E88E692BF892D400775F06 /* ChatContentRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		58E88E602BF88F3D00775F06 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				58E88E672BF88F9400775F06 /* ChatListResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		58E88E612BF88F4500775F06 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				58E88E632BF88F6200775F06 /* ChatTarget.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		58E88E622BF88F4C00775F06 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				58E88E652BF88F7A00775F06 /* ChatService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		73DBD3DD5A263E9104BB9837 /* Frameworks */ = {
@@ -1807,6 +1873,7 @@
 				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
 				58E88E522BF7916400775F06 /* ChattingListCell.swift in Sources */,
 				58D138ED2BF251B20048C228 /* StatusResponse.swift in Sources */,
+				58E88E5C2BF8830600775F06 /* Config.swift in Sources */,
 				58D138062BECBCD30048C228 /* MBTIViewController.swift in Sources */,
 				58580F042BE13E490055F3E8 /* SignVoiceMode.swift in Sources */,
 				589CDCFF2BE514A500BA332F /* KeychainHandler.swift in Sources */,
@@ -1839,6 +1906,7 @@
 				589CDD5E2BE7E6DB00BA332F /* APIRequestLoader.swift in Sources */,
 				58E88DEE2BF5FB1500775F06 /* RegionPreferenceViewController.swift in Sources */,
 				58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */,
+				58E88E662BF88F7A00775F06 /* ChatService.swift in Sources */,
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
 				582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */,
 				58580EF02BE13E490055F3E8 /* FavoriteBodyPresentationController.swift in Sources */,
@@ -1852,6 +1920,7 @@
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
 				58D139162BF3127E0048C228 /* VoicePopupView.swift in Sources */,
+				58E88E642BF88F6200775F06 /* ChatTarget.swift in Sources */,
 				589CDCFD2BE50A2A00BA332F /* HTTPHeaderField.swift in Sources */,
 				58D1390F2BF3127E0048C228 /* AiPhotoshopViewController.swift in Sources */,
 				58E88E542BF7916400775F06 /* OtherMessageCell.swift in Sources */,
@@ -1896,6 +1965,7 @@
 				58E88DF52BF5FB1500775F06 /* HeightEditDelegate.swift in Sources */,
 				589CDCF72BE5050900BA332F /* NetworkResult.swift in Sources */,
 				58E88DE82BF5FB1500775F06 /* NomeetingViewController.swift in Sources */,
+				58E88E682BF88F9400775F06 /* ChatListResponse.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
 				58580EF52BE13E490055F3E8 /* FavoriteLocationViewController.swift in Sources */,
 				58E88DF12BF5FB1500775F06 /* AccountManagementViewController.swift in Sources */,
@@ -1950,6 +2020,7 @@
 				589CDCFB2BE5091800BA332F /* TargetType.swift in Sources */,
 				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
 				58580EB92BE0BA120055F3E8 /* NicknameSettingViewController.swift in Sources */,
+				58E88E6A2BF892D400775F06 /* ChatContentRequest.swift in Sources */,
 				589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */,
 				58E88DFA2BF5FB1500775F06 /* ProfileEditViewController.swift in Sources */,
 				58E88E2F2BF7896E00775F06 /* ArrowCountResponse.swift in Sources */,
@@ -1974,6 +2045,7 @@
 				58E88DF82BF5FB1500775F06 /* LivingAreaViewController.swift in Sources */,
 				58E88DF62BF5FB1500775F06 /* HeightEditPresentationController.swift in Sources */,
 				58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */,
+				58E88E8A2BF9D95700775F06 /* ChatSocketManager.swift in Sources */,
 				58D139072BF3127E0048C228 /* PhotoCollectionViewCell.swift in Sources */,
 				58BB86852BB7F9FA00F90050 /* WeightViewController.swift in Sources */,
 				58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */,
