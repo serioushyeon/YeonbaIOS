@@ -18,6 +18,10 @@
 		<string>kakaolink</string>
 		<string>kakaokompassauth</string>
 	</array>
+	<key>NSUserActivityTypes</key>
+	<string>INSendMessagingIntent</string>
+	<key>S3URLPrefix</key>
+	<string>https://yeonba-bucket.s3.ap-northeast-2.amazonaws.com/</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Bold.otf</string>
@@ -43,8 +47,6 @@
 			</array>
 		</dict>
 	</dict>
-	<key>NSUserActivityTypes</key>
-	<string>INSendMessagingIntent</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

@@ -123,6 +123,9 @@ PODS:
   - PromisesObjC (2.4.0)
   - SCLAlertView (0.8)
   - SnapKit (5.7.1)
+  - Socket.IO-Client-Swift (16.1.0):
+    - Starscream (~> 4.0.6)
+  - Starscream (4.0.8)
   - SwiftAlgorithms (1.0.0)
   - SwiftKeychainWrapper (4.0.1)
   - Tabman (3.2.0):
@@ -140,6 +143,7 @@ DEPENDENCIES:
   - Kingfisher
   - SCLAlertView
   - SnapKit
+  - Socket.IO-Client-Swift
   - SwiftKeychainWrapper
   - Tabman
   - Then
@@ -166,6 +170,8 @@ SPEC REPOS:
     - PromisesObjC
     - SCLAlertView
     - SnapKit
+    - Socket.IO-Client-Swift
+    - Starscream
     - SwiftAlgorithms
     - SwiftKeychainWrapper
     - Tabman
@@ -192,11 +198,13 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Socket.IO-Client-Swift: ee4b8f80a3db18dd7f32b266ddf273310609443c
+  Starscream: 19b5533ddb925208db698f0ac508a100b884a1b9
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: d8c66785cd88bf8de24d3a8ac03eb31faf1934a2
+PODFILE CHECKSUM: e86e16c99776aa290db4541767cb565743668a28
 
 COCOAPODS: 1.15.2

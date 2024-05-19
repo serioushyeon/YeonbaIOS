@@ -11,7 +11,7 @@ import Then
 class NotificationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - UI Components
-    var notifications : [Notification] = []
+    var notifications : [Notifications] = []
     
     lazy var tableView = UITableView().then {
         $0.register(ArrowNotificationCell.self, forCellReuseIdentifier: "ArrowNotificationCell")
@@ -48,7 +48,8 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
             case .success(let statusResponse):
                 if let data = statusResponse.data {
                     DispatchQueue.main.async {
-                        self.notifications = data.nofications
+                        print("Fetched Notifications: \(data.notifications)")
+                        self.notifications = data.notifications
                         self.tableView.reloadData()
                     }
                 }
@@ -73,20 +74,20 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let notification = notifications[indexPath.row]
+        let notifications = notifications[indexPath.row]
         
-        switch notification.notificationType {
+        switch notifications.notificationType {
         case "ARROW_RECEIVED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ArrowNotificationCell", for: indexPath) as! ArrowNotificationCell
-            cell.configure(with: notification)
+            cell.configure(with: notifications)
             return cell
         case "CHAT_REQUESTED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRequestCell", for: indexPath) as! ChatRequestCell
-            cell.configure(with: notification)
+            cell.configure(with: notifications)
             return cell
         case "CHAT_REQUEST_ACCEPTED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatAcceptanceCell", for: indexPath) as! ChatAcceptanceCell
-            cell.configure(with: notification)
+            cell.configure(with: notifications)
             return cell
         default:
             return UITableViewCell()

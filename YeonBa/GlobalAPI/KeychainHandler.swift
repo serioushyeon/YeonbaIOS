@@ -12,17 +12,20 @@ struct KeychainHandler {
     static var shared = KeychainHandler()
     
     private let keychain = KeychainWrapper(serviceName: "YeonBa", accessGroup: "YeonBa.iOS")
-    private let accessTokenKey: KeychainWrapper.Key = "accessToken"
-    private let refreshTokenKey: KeychainWrapper.Key = "refreshToken"
-    private let kakaoUserIDKey: KeychainWrapper.Key = "kakaoUserID"
-    private let providerTokenKey: KeychainWrapper.Key = "providerToken"
+    private let accessTokenKey = "accessToken"
+    private let refreshTokenKey = "refreshToken"
+    private let kakaoUserIDKey = "kakaoUserID"
+    private let providerTokenKey = "providerToken"
+    private let authorizationCodeKey = "authorizationCode"
+    private let userIDKey = "userID"
+    private let userNameKey = "userName"
     
     var accessToken: String {
         get {
             return KeychainWrapper.standard.string(forKey: accessTokenKey) ?? ""
         }
         set {
-            KeychainWrapper.standard.set(newValue, forKey: accessTokenKey.rawValue)
+            KeychainWrapper.standard.set(newValue, forKey: accessTokenKey)
         }
     }
     
@@ -31,7 +34,7 @@ struct KeychainHandler {
             return KeychainWrapper.standard.string(forKey: refreshTokenKey) ?? ""
         }
         set {
-            KeychainWrapper.standard.set(newValue, forKey: refreshTokenKey.rawValue)
+            KeychainWrapper.standard.set(newValue, forKey: refreshTokenKey)
         }
     }
     
@@ -40,7 +43,7 @@ struct KeychainHandler {
             return KeychainWrapper.standard.string(forKey: kakaoUserIDKey) ?? ""
         }
         set {
-            KeychainWrapper.standard.set(newValue, forKey: kakaoUserIDKey.rawValue)
+            KeychainWrapper.standard.set(newValue, forKey: kakaoUserIDKey)
         }
     }
     
@@ -49,15 +52,27 @@ struct KeychainHandler {
             return KeychainWrapper.standard.string(forKey: providerTokenKey) ?? ""
         }
         set {
-            KeychainWrapper.standard.set(newValue, forKey: providerTokenKey.rawValue)
+            KeychainWrapper.standard.set(newValue, forKey: providerTokenKey)
         }
     }
     
-    func clearTokens() {
-        KeychainWrapper.standard.remove(forKey: accessTokenKey)
-        KeychainWrapper.standard.remove(forKey: refreshTokenKey)
-        KeychainWrapper.standard.remove(forKey: kakaoUserIDKey)
-        KeychainWrapper.standard.remove(forKey: providerTokenKey)
+    var userID: String {
+        get {
+            return KeychainWrapper.standard.string(forKey: userIDKey) ?? ""
+        }
+        set {
+            KeychainWrapper.standard.set(newValue, forKey: userIDKey)
+        }
     }
+    
+    var userName: String {
+        get {
+            return KeychainWrapper.standard.string(forKey: userNameKey) ?? ""
+        }
+        set {
+            KeychainWrapper.standard.set(newValue, forKey: userNameKey)
+        }
+    }
+
 }
 

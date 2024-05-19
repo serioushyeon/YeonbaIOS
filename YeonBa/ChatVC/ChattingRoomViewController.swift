@@ -42,19 +42,32 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         addSubViews()
         configUI()
         loadChatData() // 가짜 데이터 로드 함수
+        setupKeyboardDismissal()
         tabBarController?.tabBar.isTranslucent = true
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = false
-    
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    private func setupKeyboardDismissal() {
+        // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
     // MARK: - UI Layout
     func addSubViews(){
         view.addSubview(sendView)
@@ -139,5 +152,23 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         }
         
         return header
+    }
+    
+    // MARK: -- objc
+    
+    @objc func keyboardUp(notification: NSNotification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+               let keyboardRectangle = keyboardFrame.cgRectValue
+           
+                UIView.animate(
+                    withDuration: 0.3
+                    , animations: {
+                        self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                    }
+                )
+            }
+    }
+    @objc func keyboardDown() {
+        self.view.transform = .identity
     }
 }

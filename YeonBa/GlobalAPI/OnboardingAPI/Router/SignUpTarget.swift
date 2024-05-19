@@ -76,7 +76,7 @@ extension SignUpTarget: TargetType {
         case .nicknameCheck:
             return .plain
         case .login:
-            return .providerToken
+            return .hasToken
         case .postRefreshToken:
             return .refreshToken
         }
@@ -91,7 +91,7 @@ extension SignUpTarget: TargetType {
         case .nicknameCheck:
             return .unauthorization
         case .login:
-            return .socialAuthorization
+            return .authorization
         case .postRefreshToken:
             return .reAuthorization
         }

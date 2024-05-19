@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKAuth
+import AuthenticationServices
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -28,6 +29,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
                 _ = AuthController.handleOpenUrl(url: url)
+            }
+        }
+    }
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let userID = KeychainHandler.shared.userID
+        
+        if !userID.isEmpty {
+            appleIDProvider.getCredentialState(forUserID: userID ) { (credentialState, error) in
+                switch credentialState {
+                case .authorized:
+                    print("해당 ID는 연동되어있습니다.")
+                case .revoked, .notFound:
+                    print("해당 ID는 연동되어있지않습니다.")
+                    DispatchQueue.main.async {
+                        let splashViewController = SplashViewController()
+                        let navigationController = BaseNavigationController(rootViewController: splashViewController)
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()
+
+                    }
+                default:
+                    break
+                }
             }
         }
     }
