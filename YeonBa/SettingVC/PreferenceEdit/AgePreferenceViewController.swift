@@ -1,13 +1,13 @@
 //
-//  ArrowchargingViewController.swift
+//  AgePreferenceViewController.swift
 //  YeonBa
 //
-//  Created by 심규민 on 5/3/24.
+//  Created by 심규민 on 5/14/24.
 //
 
 import UIKit
 
-class ArrowchargingViewController: UITabBarController {
+class AgePreferenceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -18,6 +18,8 @@
 		<string>kakaolink</string>
 		<string>kakaokompassauth</string>
 	</array>
+	<key>NSUserActivityTypes</key>
+	<string>INSendMessagingIntent</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Bold.otf</string>
@@ -43,11 +45,7 @@
 			</array>
 		</dict>
 	</dict>
-	<key>NSUserActivityTypes</key>
-	<string>INSendMessagingIntent</string>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
+	<array/>
 </dict>
 </plist>

@@ -40,8 +40,6 @@
 		584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF712B9FF1040081149F /* SendCupidCollectionViewCell.swift */; };
 		584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */; };
 		584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF7B2BA1A5880081149F /* JKSlider.swift */; };
-		58580E9F2BDF76560055F3E8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580E9E2BDF76560055F3E8 /* NotificationService.swift */; };
-		58580EA32BDF76560055F3E8 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 58580E9C2BDF76560055F3E8 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		58580EA92BE0B9E30055F3E8 /* BirthDateSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EA82BE0B9E30055F3E8 /* BirthDateSettingViewController.swift */; };
 		58580EAB2BE0B9EA0055F3E8 /* BodyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EAA2BE0B9EA0055F3E8 /* BodyInfoViewController.swift */; };
 		58580EAD2BE0B9F10055F3E8 /* BodyShapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58580EAC2BE0B9F10055F3E8 /* BodyShapeViewController.swift */; };
@@ -97,7 +95,6 @@
 		589CDD012BE51D8300BA332F /* SignDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD002BE51D8200BA332F /* SignDataManager.swift */; };
 		589CDD052BE5F0C800BA332F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD042BE5F0C800BA332F /* UIView+.swift */; };
 		589CDD082BE5FE0700BA332F /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */; };
-		589CDD522BE78ECE00BA332F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 589CDD512BE78ECE00BA332F /* Media.xcassets */; };
 		589CDD5A2BE7E3AC00BA332F /* SignUpTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD592BE7E3AC00BA332F /* SignUpTarget.swift */; };
 		589CDD5C2BE7E69300BA332F /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD5B2BE7E69300BA332F /* SignUpService.swift */; };
 		589CDD5E2BE7E6DB00BA332F /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CDD5D2BE7E6DB00BA332F /* APIRequestLoader.swift */; };
@@ -152,10 +149,9 @@
 		58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */; };
 		58D137EF2BEA3E060048C228 /* AgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137EE2BEA3E060048C228 /* AgeViewController.swift */; };
 		58D137FB2BECAFD90048C228 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F02BECAFD80048C228 /* AccountManagementViewController.swift */; };
-		58D137FC2BECAFD90048C228 /* ArrowchargingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F12BECAFD80048C228 /* ArrowchargingViewController.swift */; };
+		58D137FC2BECAFD90048C228 /* ArrowRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F12BECAFD80048C228 /* ArrowRechargeViewController.swift */; };
 		58D137FD2BECAFD90048C228 /* BlockingmanagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F22BECAFD80048C228 /* BlockingmanagementViewController.swift */; };
 		58D137FE2BECAFD90048C228 /* CustomercenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F32BECAFD80048C228 /* CustomercenterViewController.swift */; };
-		58D137FF2BECAFD90048C228 /* NomeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F42BECAFD80048C228 /* NomeetingViewController.swift */; };
 		58D138002BECAFD90048C228 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F52BECAFD80048C228 /* NoticeViewController.swift */; };
 		58D138012BECAFD90048C228 /* NotificationsettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F62BECAFD80048C228 /* NotificationsettingsViewController.swift */; };
 		58D138022BECAFD90048C228 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D137F72BECAFD80048C228 /* PolicyViewController.swift */; };
@@ -174,17 +170,26 @@
 		58D644682BCFB3C3008DCC9F /* FaceDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D644672BCFB3C3008DCC9F /* FaceDetectionViewController.swift */; };
 		58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
+		C1024BB82BECBCAE00A32BA1 /* HeightEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BB72BECBCAE00A32BA1 /* HeightEditViewController.swift */; };
+		C1024BC62BECE14100A32BA1 /* VoiceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BC52BECE14100A32BA1 /* VoiceEditViewController.swift */; };
+		C1024BC82BF2650700A32BA1 /* LivingAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BC72BF2650700A32BA1 /* LivingAreaViewController.swift */; };
+		C1024BCA2BF2694100A32BA1 /* BodyEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BC92BF2694100A32BA1 /* BodyEditViewController.swift */; };
+		C1024BCC2BF2F45F00A32BA1 /* FaceEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BCB2BF2F45F00A32BA1 /* FaceEditViewController.swift */; };
+		C1024BCE2BF300B800A32BA1 /* MbtiEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BCD2BF300B800A32BA1 /* MbtiEditViewController.swift */; };
+		C1024BD32BF3064900A32BA1 /* AnimalPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BD22BF3064900A32BA1 /* AnimalPreferenceViewController.swift */; };
+		C1024BD52BF3065D00A32BA1 /* RegionPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BD42BF3065D00A32BA1 /* RegionPreferenceViewController.swift */; };
+		C1024BD72BF3066A00A32BA1 /* VoicePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BD62BF3066A00A32BA1 /* VoicePreferenceViewController.swift */; };
+		C1024BD92BF3067C00A32BA1 /* AgePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BD82BF3067C00A32BA1 /* AgePreferenceViewController.swift */; };
+		C1024BDB2BF3068E00A32BA1 /* BodyTypePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BDA2BF3068E00A32BA1 /* BodyTypePreferenceViewController.swift */; };
+		C1024BDD2BF3069B00A32BA1 /* MBTIPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BDC2BF3069B00A32BA1 /* MBTIPreferenceViewController.swift */; };
+		C1024BDF2BF5FF4E00A32BA1 /* changeGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BDE2BF5FF4E00A32BA1 /* changeGradientButton.swift */; };
+		C1024BE12BFB0C8200A32BA1 /* Ad1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BE02BFB0C8200A32BA1 /* Ad1ViewController.swift */; };
+		C1024BE32BFB108C00A32BA1 /* Ad2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BE22BFB108C00A32BA1 /* Ad2ViewController.swift */; };
+		C1024BE52BFB18DA00A32BA1 /* Ad3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BE42BFB18DA00A32BA1 /* Ad3ViewController.swift */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		58580EA12BDF76560055F3E8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 58D15E872B90585700EB74E9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 58580E9B2BDF76560055F3E8;
-			remoteInfo = NotificationService;
-		};
 		58D15EA62B90585B00EB74E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 58D15E872B90585700EB74E9 /* Project object */;
@@ -208,7 +213,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				58580EA32BDF76560055F3E8 /* NotificationService.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,7 +258,6 @@
 		584DCF742BA003C70081149F /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		584DCF792BA07A780081149F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		584DCF7B2BA1A5880081149F /* JKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JKSlider.swift; sourceTree = "<group>"; };
-		58580E9C2BDF76560055F3E8 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		58580E9E2BDF76560055F3E8 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		58580EA02BDF76560055F3E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58580EA82BE0B9E30055F3E8 /* BirthDateSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthDateSettingViewController.swift; sourceTree = "<group>"; };
@@ -368,10 +371,9 @@
 		58BB871D2BBBED0A00F90050 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		58D137EE2BEA3E060048C228 /* AgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewController.swift; sourceTree = "<group>"; };
 		58D137F02BECAFD80048C228 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
-		58D137F12BECAFD80048C228 /* ArrowchargingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowchargingViewController.swift; sourceTree = "<group>"; };
+		58D137F12BECAFD80048C228 /* ArrowRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowRechargeViewController.swift; sourceTree = "<group>"; };
 		58D137F22BECAFD80048C228 /* BlockingmanagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockingmanagementViewController.swift; sourceTree = "<group>"; };
 		58D137F32BECAFD80048C228 /* CustomercenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomercenterViewController.swift; sourceTree = "<group>"; };
-		58D137F42BECAFD80048C228 /* NomeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeetingViewController.swift; sourceTree = "<group>"; };
 		58D137F52BECAFD80048C228 /* NoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		58D137F62BECAFD80048C228 /* NotificationsettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsettingsViewController.swift; sourceTree = "<group>"; };
 		58D137F72BECAFD80048C228 /* PolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
@@ -398,17 +400,26 @@
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0DF527006E58E137EE2EE0 /* Pods-YeonBaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa_YeonBaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1024BB72BECBCAE00A32BA1 /* HeightEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightEditViewController.swift; sourceTree = "<group>"; };
+		C1024BC52BECE14100A32BA1 /* VoiceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceEditViewController.swift; sourceTree = "<group>"; };
+		C1024BC72BF2650700A32BA1 /* LivingAreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivingAreaViewController.swift; sourceTree = "<group>"; };
+		C1024BC92BF2694100A32BA1 /* BodyEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyEditViewController.swift; sourceTree = "<group>"; };
+		C1024BCB2BF2F45F00A32BA1 /* FaceEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceEditViewController.swift; sourceTree = "<group>"; };
+		C1024BCD2BF300B800A32BA1 /* MbtiEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbtiEditViewController.swift; sourceTree = "<group>"; };
+		C1024BD22BF3064900A32BA1 /* AnimalPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPreferenceViewController.swift; sourceTree = "<group>"; };
+		C1024BD42BF3065D00A32BA1 /* RegionPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionPreferenceViewController.swift; sourceTree = "<group>"; };
+		C1024BD62BF3066A00A32BA1 /* VoicePreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicePreferenceViewController.swift; sourceTree = "<group>"; };
+		C1024BD82BF3067C00A32BA1 /* AgePreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgePreferenceViewController.swift; sourceTree = "<group>"; };
+		C1024BDA2BF3068E00A32BA1 /* BodyTypePreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTypePreferenceViewController.swift; sourceTree = "<group>"; };
+		C1024BDC2BF3069B00A32BA1 /* MBTIPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIPreferenceViewController.swift; sourceTree = "<group>"; };
+		C1024BDE2BF5FF4E00A32BA1 /* changeGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = changeGradientButton.swift; sourceTree = "<group>"; };
+		C1024BE02BFB0C8200A32BA1 /* Ad1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad1ViewController.swift; sourceTree = "<group>"; };
+		C1024BE22BFB108C00A32BA1 /* Ad2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad2ViewController.swift; sourceTree = "<group>"; };
+		C1024BE42BFB18DA00A32BA1 /* Ad3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad3ViewController.swift; sourceTree = "<group>"; };
 		FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		58580E992BDF76560055F3E8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58D15E8C2B90585700EB74E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1073,16 +1084,20 @@
 		58D137FA2BECAFD80048C228 /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
+				58D137F92BECAFD80048C228 /* SettingViewController.swift */,
 				58D137F02BECAFD80048C228 /* AccountManagementViewController.swift */,
-				58D137F12BECAFD80048C228 /* ArrowchargingViewController.swift */,
+				58D137F12BECAFD80048C228 /* ArrowRechargeViewController.swift */,
+				C1024BE42BFB18DA00A32BA1 /* Ad3ViewController.swift */,
+				C1024BE02BFB0C8200A32BA1 /* Ad1ViewController.swift */,
+				C1024BE22BFB108C00A32BA1 /* Ad2ViewController.swift */,
 				58D137F22BECAFD80048C228 /* BlockingmanagementViewController.swift */,
 				58D137F32BECAFD80048C228 /* CustomercenterViewController.swift */,
-				58D137F42BECAFD80048C228 /* NomeetingViewController.swift */,
 				58D137F52BECAFD80048C228 /* NoticeViewController.swift */,
 				58D137F62BECAFD80048C228 /* NotificationsettingsViewController.swift */,
 				58D137F72BECAFD80048C228 /* PolicyViewController.swift */,
-				58D137F82BECAFD80048C228 /* ProfileEditViewController.swift */,
-				58D137F92BECAFD80048C228 /* SettingViewController.swift */,
+				C1024BB62BECBC9000A32BA1 /* ProfileEdit */,
+				C1024BCF2BF3012500A32BA1 /* PreferenceEdit */,
+				C1024BDE2BF5FF4E00A32BA1 /* changeGradientButton.swift */,
 			);
 			path = SettingVC;
 			sourceTree = "<group>";
@@ -1106,7 +1121,6 @@
 				58D15E8F2B90585700EB74E9 /* YeonBa.app */,
 				58D15EA52B90585B00EB74E9 /* YeonBaTests.xctest */,
 				58D15EAF2B90585B00EB74E9 /* YeonBaUITests.xctest */,
-				58580E9C2BDF76560055F3E8 /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1193,26 +1207,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C1024BB62BECBC9000A32BA1 /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				58D137F82BECAFD80048C228 /* ProfileEditViewController.swift */,
+				C1024BB72BECBCAE00A32BA1 /* HeightEditViewController.swift */,
+				C1024BC52BECE14100A32BA1 /* VoiceEditViewController.swift */,
+				C1024BC72BF2650700A32BA1 /* LivingAreaViewController.swift */,
+				C1024BC92BF2694100A32BA1 /* BodyEditViewController.swift */,
+				C1024BCB2BF2F45F00A32BA1 /* FaceEditViewController.swift */,
+				C1024BCD2BF300B800A32BA1 /* MbtiEditViewController.swift */,
+			);
+			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
+		C1024BCF2BF3012500A32BA1 /* PreferenceEdit */ = {
+			isa = PBXGroup;
+			children = (
+				C1024BD22BF3064900A32BA1 /* AnimalPreferenceViewController.swift */,
+				C1024BD42BF3065D00A32BA1 /* RegionPreferenceViewController.swift */,
+				C1024BD62BF3066A00A32BA1 /* VoicePreferenceViewController.swift */,
+				C1024BD82BF3067C00A32BA1 /* AgePreferenceViewController.swift */,
+				C1024BDA2BF3068E00A32BA1 /* BodyTypePreferenceViewController.swift */,
+				C1024BDC2BF3069B00A32BA1 /* MBTIPreferenceViewController.swift */,
+			);
+			path = PreferenceEdit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58580E9B2BDF76560055F3E8 /* NotificationService */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 58580EA42BDF76560055F3E8 /* Build configuration list for PBXNativeTarget "NotificationService" */;
-			buildPhases = (
-				58580E982BDF76560055F3E8 /* Sources */,
-				58580E992BDF76560055F3E8 /* Frameworks */,
-				58580E9A2BDF76560055F3E8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NotificationService;
-			productName = NotificationService;
-			productReference = 58580E9C2BDF76560055F3E8 /* NotificationService.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		58D15E8E2B90585700EB74E9 /* YeonBa */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58D15EB92B90585B00EB74E9 /* Build configuration list for PBXNativeTarget "YeonBa" */;
@@ -1227,7 +1251,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				58580EA22BDF76560055F3E8 /* PBXTargetDependency */,
 			);
 			name = YeonBa;
 			productName = YeonBa;
@@ -1283,9 +1306,6 @@
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					58580E9B2BDF76560055F3E8 = {
-						CreatedOnToolsVersion = 15.3;
-					};
 					58D15E8E2B90585700EB74E9 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -1315,20 +1335,11 @@
 				58D15E8E2B90585700EB74E9 /* YeonBa */,
 				58D15EA42B90585B00EB74E9 /* YeonBaTests */,
 				58D15EAE2B90585B00EB74E9 /* YeonBaUITests */,
-				58580E9B2BDF76560055F3E8 /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		58580E9A2BDF76560055F3E8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				589CDD522BE78ECE00BA332F /* Media.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58D15E8D2B90585700EB74E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1461,14 +1472,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		58580E982BDF76560055F3E8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				58580E9F2BDF76560055F3E8 /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58D15E8B2B90585700EB74E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1479,7 +1482,6 @@
 				58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				582DB2392BC7739B00600EA7 /* PhotoEssentialView.swift in Sources */,
-				58D137FF2BECAFD90048C228 /* NomeetingViewController.swift in Sources */,
 				582DB1582BBE88D900600EA7 /* VoicePopupView.swift in Sources */,
 				58580F002BE13E490055F3E8 /* AgeMode.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
@@ -1503,6 +1505,7 @@
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
 				58D138032BECAFD90048C228 /* ProfileEditViewController.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
+				C1024BCA2BF2694100A32BA1 /* BodyEditViewController.swift in Sources */,
 				58580F012BE13E490055F3E8 /* AnimalMode.swift in Sources */,
 				589CDD5E2BE7E6DB00BA332F /* APIRequestLoader.swift in Sources */,
 				58580F182BE142870055F3E8 /* OtherProfileDataModel.swift in Sources */,
@@ -1516,15 +1519,20 @@
 				58580F0B2BE141E30055F3E8 /* CollectDataUserModel.swift in Sources */,
 				58580EF02BE13E490055F3E8 /* FavoriteBodyPresentationController.swift in Sources */,
 				58D644642BCF8B21008DCC9F /* PhotoCollectionViewCell.swift in Sources */,
+				C1024BB82BECBCAE00A32BA1 /* HeightEditViewController.swift in Sources */,
+				C1024BD92BF3067C00A32BA1 /* AgePreferenceViewController.swift in Sources */,
 				582DB15F2BBE88D900600EA7 /* AiPhotoshopViewController.swift in Sources */,
 				589CDD5C2BE7E69300BA332F /* SignUpService.swift in Sources */,
 				589CDCF92BE5054600BA332F /* BaseResponse.swift in Sources */,
 				58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */,
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
+				C1024BD52BF3065D00A32BA1 /* RegionPreferenceViewController.swift in Sources */,
 				58580EFB2BE13E490055F3E8 /* FavoriteTallViewController.swift in Sources */,
+				C1024BDB2BF3068E00A32BA1 /* BodyTypePreferenceViewController.swift in Sources */,
 				589CDCFD2BE50A2A00BA332F /* HTTPHeaderField.swift in Sources */,
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
+				C1024BCC2BF2F45F00A32BA1 /* FaceEditViewController.swift in Sources */,
 				582DB1732BBE89A000600EA7 /* FindPwViewController.swift in Sources */,
 				58BB86892BB7FA2E00F90050 /* WeightPresentationController.swift in Sources */,
 				58580EFA2BE13E490055F3E8 /* FavoriteTallPresentationController.swift in Sources */,
@@ -1545,6 +1553,7 @@
 				58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */,
 				58580F192BE142870055F3E8 /* OtherProfileResponse.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
+				C1024BC82BF2650700A32BA1 /* LivingAreaViewController.swift in Sources */,
 				58D137FE2BECAFD90048C228 /* CustomercenterViewController.swift in Sources */,
 				58580F122BE142400055F3E8 /* WaveFormView.swift in Sources */,
 				582DB15D2BBE88D900600EA7 /* PhotoSelectionViewController.swift in Sources */,
@@ -1571,10 +1580,12 @@
 				58580EF92BE13E490055F3E8 /* FavoriteTallDelegate.swift in Sources */,
 				58BB86D52BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift in Sources */,
 				58580EB32BE0BA030055F3E8 /* InterestsViewController.swift in Sources */,
+				C1024BE52BFB18DA00A32BA1 /* Ad3ViewController.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				582DB15E2BBE88D900600EA7 /* GuideViewController.swift in Sources */,
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
 				58580F052BE13E490055F3E8 /* SignWeightMode.swift in Sources */,
+				C1024BD72BF3066A00A32BA1 /* VoicePreferenceViewController.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				589CDD012BE51D8300BA332F /* SignDataManager.swift in Sources */,
 				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
@@ -1582,6 +1593,7 @@
 				582DB15A2BBE88D900600EA7 /* AnalysisSyncResultViewController.swift in Sources */,
 				58BB86D72BBAFC7000F90050 /* CategoryCollectionViewCell.swift in Sources */,
 				582DB1632BBE891C00600EA7 /* ChattingViewController.swift in Sources */,
+				C1024BD32BF3064900A32BA1 /* AnimalPreferenceViewController.swift in Sources */,
 				589CDD602BE7E6FC00BA332F /* APIEventLogger.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
 				58580EEA2BE13E490055F3E8 /* FavoriteAgeDelegate.swift in Sources */,
@@ -1591,6 +1603,7 @@
 				58580EEF2BE13E490055F3E8 /* FavoriteAnimalViewController.swift in Sources */,
 				582DB1752BBE89C100600EA7 /* FindIdResultViewController.swift in Sources */,
 				58580EFC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift in Sources */,
+				C1024BC62BECE14100A32BA1 /* VoiceEditViewController.swift in Sources */,
 				58580EFE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
@@ -1604,6 +1617,10 @@
 				589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */,
 				58D137FD2BECAFD90048C228 /* BlockingmanagementViewController.swift in Sources */,
 				58580EFD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift in Sources */,
+				C1024BDD2BF3069B00A32BA1 /* MBTIPreferenceViewController.swift in Sources */,
+				C1024BE32BFB108C00A32BA1 /* Ad2ViewController.swift in Sources */,
+				C1024BCE2BF300B800A32BA1 /* MbtiEditViewController.swift in Sources */,
+				C1024BE12BFB0C8200A32BA1 /* Ad1ViewController.swift in Sources */,
 				58580EAF2BE0B9F60055F3E8 /* GenderSelectionViewController.swift in Sources */,
 				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
 				58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */,
@@ -1614,7 +1631,8 @@
 				58BB868E2BB843C100F90050 /* LocationLabel.swift in Sources */,
 				582DB2372BC683EA00600EA7 /* PhotoPlaceHolderView.swift in Sources */,
 				58BB86832BB7F9E800F90050 /* WeightTableViewCell.swift in Sources */,
-				58D137FC2BECAFD90048C228 /* ArrowchargingViewController.swift in Sources */,
+				C1024BDF2BF5FF4E00A32BA1 /* changeGradientButton.swift in Sources */,
+				58D137FC2BECAFD90048C228 /* ArrowRechargeViewController.swift in Sources */,
 				58BB85DD2BB445FE00F90050 /* PreferenceCollectionViewCell.swift in Sources */,
 				58BB861D2BB5440A00F90050 /* ModalSelectCell.swift in Sources */,
 				58BB86852BB7F9FA00F90050 /* WeightViewController.swift in Sources */,
@@ -1650,11 +1668,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		58580EA22BDF76560055F3E8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 58580E9B2BDF76560055F3E8 /* NotificationService */;
-			targetProxy = 58580EA12BDF76560055F3E8 /* PBXContainerItemProxy */;
-		};
 		58D15EA72B90585B00EB74E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 58D15E8E2B90585700EB74E9 /* YeonBa */;
@@ -1679,67 +1692,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		58580EA52BDF76560055F3E8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NotificationService/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa.NotificationService;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		58580EA62BDF76560055F3E8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NotificationService/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa.NotificationService;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		58D15EB72B90585B00EB74E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1863,9 +1815,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
@@ -1884,6 +1838,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = minsolkim_Development;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1899,9 +1854,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YeonBa/YeonBa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G62DUX396A;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
@@ -1920,6 +1877,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.YeonBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = minsolkim_Development;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2009,15 +1967,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58580EA42BDF76560055F3E8 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				58580EA52BDF76560055F3E8 /* Debug */,
-				58580EA62BDF76560055F3E8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		58D15E8A2B90585700EB74E9 /* Build configuration list for PBXProject "YeonBa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
