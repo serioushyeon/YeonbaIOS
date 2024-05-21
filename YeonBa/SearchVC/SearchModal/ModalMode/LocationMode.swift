@@ -26,8 +26,9 @@ enum LocationMode: Int, CaseIterable {
     case gyeongnam
     case sejong
     case jeju
+    case empty
     
-    var title: String {
+    var title: String? {
         switch self {
         case .seoul:
             return "서울"
@@ -46,7 +47,7 @@ enum LocationMode: Int, CaseIterable {
         case .ulsan:
             return "울산"
         case .gangwon:
-            return "강원도"
+            return "강원"
         case .chungbuk:
             return "충북"
         case .chungnam:
@@ -63,6 +64,8 @@ enum LocationMode: Int, CaseIterable {
             return "세종"
         case .jeju:
             return "제주"
+        case .empty:
+            return nil
         }
     }
 }

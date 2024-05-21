@@ -5,7 +5,7 @@ import Then
 class SettingViewController: UIViewController {
 
     // MARK: - UI Components
-    private let scrollview = UIScrollView().then {
+    private let scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
     }
@@ -22,7 +22,7 @@ class SettingViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "연바" // 원하는 이름으로 수정
         $0.textAlignment = .center
-        $0.font = UIFont.boldSystemFont(ofSize: 24) 
+        $0.font = UIFont.boldSystemFont(ofSize: 24)
     }
     let nameLabel2 = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -46,31 +46,40 @@ class SettingViewController: UIViewController {
         $0.contentHorizontalAlignment = .center // 버튼1 이미지를 가로로 가운데 정렬
     }
     private let button2 = UIButton().then {
-        $0.setTitle(" 남은 화살 수 52", for: .normal)
+        $0.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
         $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
         $0.backgroundColor = .primary
         $0.setTitleColor(UIColor.white, for: .normal) // 텍스트 색상
         $0.setImage(UIImage(named: "arrowProfile")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .white
         $0.contentHorizontalAlignment = .center // 버튼2 이미지를 가로로 가운데 정렬
+        $0.isUserInteractionEnabled = false
     }
     private let bottomView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
         configUI()
         setupActions()
+        NotificationCenter.default.addObserver(self, selector: #selector(arrowCountDidChange), name: .arrowCountDidChange, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .arrowCountDidChange, object: nil)
+    }
+    
+    @objc private func arrowCountDidChange() {
+        button2.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
+    }
+
     //MARK: - UI Layout
     func addSubviews() {
-        view.addSubview(scrollview)
-        scrollview.addSubview(contentView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(nameLabel2)
@@ -81,22 +90,20 @@ class SettingViewController: UIViewController {
     }
     
     func configUI() {
-        // 기존 설정 코드
-        scrollview.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         contentView.snp.makeConstraints {
             $0.width.equalToSuperview()
-            $0.height.equalTo(850)
-            $0.top.bottom.equalToSuperview().inset(70)
+            $0.top.bottom.equalToSuperview()
         }
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(nameLabel.snp.top).offset(-20)
+            make.top.equalToSuperview().offset(20) // contentView 내에서 배치
             make.width.height.equalTo(150)
         }
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalTo(imageView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
         nameLabel2.snp.makeConstraints { make in
@@ -110,11 +117,11 @@ class SettingViewController: UIViewController {
         }
         
         // 하단 스택 뷰 설정
-        let views = (0..<8).map { index -> UIView in
+        let views = (0...6).map { index -> UIView in
             let container = UIView()
             
             let label = UILabel()
-            label.text = ["지인 만나지 않기", "알림 설정", "계정 관리", "차단 관리", "화살 충전", "고객 센터", "이용 약관/개인정보 취급 방침", "공지 사항"][index]
+            label.text = ["알림 설정", "계정 관리", "차단 관리", "화살 충전", "고객 센터", "이용 약관/개인정보 취급 방침", "공지 사항"][index]
             label.textColor = .black
             label.backgroundColor = .gray2
             label.font = UIFont(name: "Pretendard-Medium", size: 18)
@@ -122,7 +129,7 @@ class SettingViewController: UIViewController {
             
             label.snp.makeConstraints { make in
                 make.top.leading.equalToSuperview().inset(20)
-                make.bottom.equalToSuperview().inset(20) // 여백 조정
+                make.bottom.equalToSuperview().inset(20)
             }
             
             let button = UIButton()
@@ -148,6 +155,10 @@ class SettingViewController: UIViewController {
                 make.leading.trailing.bottom.equalToSuperview()
             }
             
+            container.snp.makeConstraints { make in
+                make.height.equalTo(95) // 각 컨테이너 뷰의 높이를 80으로 설정
+            }
+            
             return container
         }
         
@@ -159,23 +170,26 @@ class SettingViewController: UIViewController {
         
         bottomView.addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         bottomView.snp.makeConstraints { make in
             make.top.equalTo(horizontalStackView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(700)
+            make.bottom.equalToSuperview()
+        }
+        
+        // contentView의 높이를 bottomView까지 포함하도록 설정
+        contentView.snp.makeConstraints { make in
+            make.bottom.equalTo(bottomView.snp.bottom).offset(20)
         }
     }
 
     func updateArrowNumber(number: Int) {
         let arrowNumber = number
-        button2.titleLabel?.text = "남은 화살수 \(arrowNumber)"
+        button2.setTitle(" 남은 화살수 \(arrowNumber)", for: .normal)
     }
             
-
     func setupActions() {
         button1.addTarget(self, action: #selector(handleProfileEditTap), for: .touchUpInside)
     }
@@ -184,46 +198,32 @@ class SettingViewController: UIViewController {
         let profileEditViewController = ProfileEditViewController()
         navigationController?.pushViewController(profileEditViewController, animated: true)
     }
-
-           
+    
     @objc func buttonTapped(sender: UIButton) {
         switch sender.tag {
         case 0:
-            let viewController = NomeetingViewController()
-            navigationController?.pushViewController(viewController, animated: true)
-        case 1:
             let viewController = NotificationsettingsViewController()
             navigationController?.pushViewController(viewController, animated: true)
-        case 2:
+        case 1:
             let viewController = AccountManagementViewController()
             navigationController?.pushViewController(viewController, animated: true)
-        case 3:
+        case 2:
             let viewController = BlockingmanagementViewController()
             navigationController?.pushViewController(viewController, animated: true)
-        case 4:
+        case 3:
             let viewController = ArrowRechargeViewController()
             navigationController?.pushViewController(viewController, animated: true)
-        case 5:
+        case 4:
             let viewController = CustomercenterViewController()
             navigationController?.pushViewController(viewController, animated: true)
-        case 6:
+        case 5:
             let viewController = PolicyViewController()
             navigationController?.pushViewController(viewController, animated: true)
-        case 7:
-            let viewController = NoticeViewController()
-            navigationController?.pushViewController(viewController, animated: true)
+        case 6:
+            let noticeViewController = NoticeViewController()
+            navigationController?.pushViewController(noticeViewController, animated: true)
         default:
             break
         }
     }
-            
-            
-            
-
-
-
-        }
-        
-    
-    
-    
+}

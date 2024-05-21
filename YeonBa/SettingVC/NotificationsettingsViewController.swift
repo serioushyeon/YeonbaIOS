@@ -29,7 +29,9 @@ class NotificationsettingsViewController: UIViewController {
         super.viewDidLoad()
         self.setupViews()
         self.setupConstraints()
+        navigationItem.title = "알림 설정"
     }
+    
     
     private func setupViews() {
         view.backgroundColor = .white

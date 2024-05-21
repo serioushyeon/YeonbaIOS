@@ -19,7 +19,7 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     let profileImage1 = UIImageView().then{
-        $0.image = SignDataManager.shared.selectedImages[0]
+        $0.image = SignDataManager.shared.essentialImage
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -27,7 +27,7 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     let profileImage2 = UIImageView().then{
-        $0.image = SignDataManager.shared.selectedImages[1]
+        $0.image = SignDataManager.shared.placeholderImage
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -84,8 +84,14 @@ class AnalysisSyncResultViewController: UIViewController {
         navigationController?.pushViewController(aiVC, animated: true)
     }
     @objc func reSelfieBtnTapped() {
-        let guideVC = GuideViewController()
-        navigationController?.pushViewController(guideVC, animated: true)
+        if let navController = navigationController {
+            for controller in navController.viewControllers {
+                if let photoSelectionVC = controller as? PhotoSelectionViewController {
+                    navController.popToViewController(photoSelectionVC, animated: true)
+                    return
+                }
+            }
+        }
     }
     @objc func startBtnTapped() {
         let dataManager = SignDataManager.shared
@@ -138,8 +144,8 @@ class AnalysisSyncResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        profileImage1.image = SignDataManager.shared.selectedImages[0]
-        profileImage2.image = SignDataManager.shared.selectedImages[1]
+        profileImage1.image = SignDataManager.shared.placeholderImage
+        profileImage2.image = SignDataManager.shared.essentialImage
         setupNavigationBar()
         // Create a dispatch group
         let dispatchGroup = DispatchGroup()
@@ -149,7 +155,7 @@ class AnalysisSyncResultViewController: UIViewController {
         
         // Start the first API request
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.apiSimilarity(upload: SignDataManager.shared.selectedImages[0], real: SignDataManager.shared.selfieImage) { confidence in
+            self.apiSimilarity(upload: SignDataManager.shared.essentialImage, real: SignDataManager.shared.selfieImage) { confidence in
                 // Leave the group when the first API request is completed
                 dispatchGroup.leave()
                 self.confidence1 = confidence
@@ -158,7 +164,7 @@ class AnalysisSyncResultViewController: UIViewController {
         
         // Start the second API request after the first one is completed
         dispatchGroup.notify(queue: .main) {
-            self.apiSimilarity(upload: SignDataManager.shared.selectedImages[1], real: SignDataManager.shared.selfieImage) {confidence in
+            self.apiSimilarity(upload: SignDataManager.shared.placeholderImage, real: SignDataManager.shared.selfieImage) {confidence in
                 self.confidence2 = confidence
                 self.addSubViews()
                 self.configUI()

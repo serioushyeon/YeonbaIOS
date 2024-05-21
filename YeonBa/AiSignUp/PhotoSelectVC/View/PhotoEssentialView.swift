@@ -21,9 +21,9 @@ class PhotoEssentialView: DottedBorderView, PhotoSelectionDelegate {
         imageView.image = image
         let resizedImage = image.resizeImage(image: image, newWidth: 200) // 폭이 200인 이미지로 리사이징
             
-            // 리사이징된 이미지를 배열에 추가
-        SignDataManager.shared.selectedImages.append(resizedImage)
-        print("selectedImages contents: \(SignDataManager.shared.selectedImages)")
+        // 리사이징된 이미지를 배열에 추가
+        SignDataManager.shared.essentialImage = resizedImage
+        print("selectedImages contents: \(SignDataManager.shared.essentialImage)")
         imageView.isHidden = false
         hintLabel.isHidden = true
         delegate?.updateEssentialAddButton()

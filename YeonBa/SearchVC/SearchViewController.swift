@@ -10,10 +10,14 @@ import Then
 import SnapKit
 
 class SearchViewController: UIViewController {
-    let locations = ["서울", "경기도", "인천", "부산", "대전", "광주", "대구", "울산", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "세종", "제주"]
     private var voiceViewMode: VoiceMode = .high
-    private var weightViewMode: WeightMode = .thinBody
-    private var locationViewMode: LocationMode = .gyeonggi
+    private var weightViewMode: WeightMode = .empty
+    private var locationViewMode: LocationMode = .empty
+    private var ageSelectedMode: String?
+    private var heightSelectedMode: String?
+    private var preferLocation : String?
+    private var preferVoice : String?
+    var isAnimalPreferred: Bool = false
     private let verticalStackview = UIStackView().then {
         $0.axis = .vertical
         $0.distribution = .fill
@@ -21,10 +25,11 @@ class SearchViewController: UIViewController {
         $0.spacing = 10
     }
     private let ageSlider = JKSlider().then {
-        $0.minValue = 1
-        $0.maxValue = 100
-        $0.lower = 1
-        $0.upper = 75
+        $0.minValue = 20
+        $0.maxValue = 40
+        $0.lower = 20
+        $0.upper = 40
+        $0.addTarget(self, action: #selector(ageChangeValue), for: .valueChanged)
     }
     private let locationLabel = UILabel().then {
         $0.text = "지역"
@@ -149,10 +154,11 @@ class SearchViewController: UIViewController {
         $0.font = UIFont.pretendardSemiBold(size: 16)
     }
     private let heightSlider = JKSlider().then {
-        $0.minValue = 1
-        $0.maxValue = 100
-        $0.lower = 1
-        $0.upper = 75
+        $0.minValue = 140
+        $0.maxValue = 220
+        $0.lower = 140
+        $0.upper = 220
+        $0.addTarget(self, action: #selector(heightChangeValue), for: .valueChanged)
     }
     private let barView5 = UIView().then {
         $0.layer.borderColor = UIColor.customgray2?.cgColor
@@ -361,6 +367,7 @@ class SearchViewController: UIViewController {
     @objc func showLocationModal() {
         let locationModalVC = LocationModalViewController(passMode: locationViewMode)
         locationModalVC.modalPresentationStyle = .pageSheet
+        locationModalVC.delegate = self
         self.present(locationModalVC, animated: true)
     }
     @objc func voiceModal() {
@@ -373,19 +380,60 @@ class SearchViewController: UIViewController {
         weightVC.delegate = self
         self.present(weightVC, animated: true)
     }
+    //이성 결과 넘어가는 viewcontroller 액션
     @objc func navigateToSearchResultViewController(_ sender: Any) {
-        let searchResultVC = SearchResultViewController()
+        preferLocation = locationChoiceLabel.text
+        preferVoice = voiceChoiceLabel.text
+        let ageLowerBound = Int(ageSlider.lower)
+        let ageUpperBound = Int(ageSlider.upper)
+        let heightLowerBound = Int(heightSlider.lower)
+        let heightUpperBound = Int(heightSlider.upper)
+        let searchUserRequest = SearchUserRequest(
+                page: 0,
+                area: preferLocation,
+                vocalRange: preferVoice,
+                ageLowerBound: ageLowerBound,
+                ageUpperBound: ageUpperBound,
+                heightLowerBound: heightLowerBound,
+                heightUpperBound: heightUpperBound,
+                includePreferredAnimal: isAnimalPreferred
+            )
+        NetworkService.shared.searchService.searchUser(bodyDTO: searchUserRequest) { response in
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                print("유저 검색 성공")
+            default:
+                print("유저 검색 실패")
+            }
+        }
+        let searchResultVC = SearchResultViewController (
+            preferLocation: preferLocation ?? "",
+            preferVoice: preferVoice ?? "",
+            ageRange: "\(ageLowerBound) ~ \(ageUpperBound)세",
+            heightRange: "\(heightLowerBound) ~ \(heightUpperBound)cm"
+            
+        )        
         self.navigationController?.pushViewController(searchResultVC, animated: true)
     }
     @objc func animalButtonTapped() {
-        // 현재 버튼의 상태를 확인하여 이미지를 변경
-           if animalCheckBox.isSelected {
-               animalCheckBox.setImage(UIImage(named: "pinkcheckbox"), for: .normal)
-           } else {
-               animalCheckBox.setImage(UIImage(named: "checkbox"), for: .normal)
-           }
-           // 버튼의 선택 상태를 반전
-           animalCheckBox.isSelected = !animalCheckBox.isSelected
+        // Toggle the button's selected state
+        animalCheckBox.isSelected = !animalCheckBox.isSelected
+        
+        // Update the image based on the selected state
+        let imageName = animalCheckBox.isSelected ? "pinkcheckbox" : "checkbox"
+        animalCheckBox.setImage(UIImage(named: imageName), for: .normal)
+        
+        // Update the property based on the selected state
+        isAnimalPreferred = animalCheckBox.isSelected
+    }
+    @objc func ageChangeValue() {
+        self.ageRangeLabel.text = "\(Int(self.ageSlider.lower)) ~ \(Int(self.ageSlider.upper))세"
+        self.ageSelectedMode = ageRangeLabel.text
+    }
+    @objc func heightChangeValue() {
+        self.heightRangeLabel.text = "\(Int(self.heightSlider.lower)) ~ \(Int(self.heightSlider.upper))cm"
+        self.heightSelectedMode = heightRangeLabel.text
     }
     
 
@@ -395,80 +443,26 @@ extension SearchViewController: LocationViewControllerDelegate {
     func locationSelectedRowAt(indexPath: Int) {
         guard let mode = LocationMode(rawValue: indexPath) else { return }
         locationViewMode = mode
-        switch locationViewMode {
-        case .seoul:
-            print("서울")
-        case .gyeonggi:
-            print("경기")
-        case .incheon:
-            print("인천")
-        case .busan:
-            print("부산")
-        case .daejeon:
-            print("대전")
-        case .gwangju:
-            print("광주")
-        case .daegu:
-            print("대구")
-        case .ulsan:
-            print("울산")
-        case .gangwon:
-            print("강원도")
-        case .chungbuk:
-            print("충북")
-        case .chungnam:
-            print("충남")
-        case .jeonbuk:
-            print("전북")
-        case .jeonnam:
-            print("전남")
-        case .gyeongbuk:
-            print("경북")
-        case .gyeongnam:
-            print("경남")
-        case .sejong:
-            print("세종")
-        case .jeju:
-            print("제주")
-        }
+        locationChoiceLabel.text = mode.title // 라벨 텍스트 변경
+        
     }
 }
 //MARK: -- 음성 delegate
 extension SearchViewController: VoiceViewControllerDelegate {
     func voiceSelectedRowAt(indexPath: Int) {
         guard let mode = VoiceMode(rawValue: indexPath) else { return }
-        
         voiceViewMode = mode
+        voiceChoiceLabel.text = mode.title // 라벨 텍스트 변경
         
-        switch voiceViewMode {
-        case .high:
-            print("고음")
-        case .middle:
-            print("중음")
-        case .low:
-            print("저음")
-        case .allLike:
-            print("")
-        }
     }
 }
 //MARK: -- 체중 delegate
 extension SearchViewController: WeightViewControllerDelegate {
     func weightSelectedRowAt(indexPath: Int) {
         guard let mode = WeightMode(rawValue: indexPath) else { return }
-        
         weightViewMode = mode
+        weightChoiceLabel.text = mode.title
         
-        switch weightViewMode {
-        case .thinBody:
-            print("")
-        case .middleBody:
-            print("")
-        case .littleFatBody:
-            print("")
-        case .fatBody:
-            print("")
-        }
     }
 }
 

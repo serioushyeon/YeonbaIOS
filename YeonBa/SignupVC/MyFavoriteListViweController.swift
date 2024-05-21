@@ -10,7 +10,6 @@ import Then
 
 
 class MyFavoriteListViweController: UIViewController {
-    let locations = ["서울", "경기도", "인천", "부산", "대전", "광주", "대구", "울산", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "세종", "제주"]
     private var voiceViewMode: SignVoiceMode = .empty
     private var bodyViewMode: SignWeightMode = .empty
     private var animalViewMode: AnimalMode = .empty

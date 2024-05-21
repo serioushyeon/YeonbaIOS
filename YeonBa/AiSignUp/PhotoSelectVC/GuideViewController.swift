@@ -119,8 +119,14 @@ class GuideViewController: UIViewController {
     
     //MARK: - Actions
     @objc func didTapButton() {
-        let selectVC = PhotoSelectionViewController()
-        navigationController?.pushViewController(selectVC, animated: true)
+        if let navController = navigationController {
+            for controller in navController.viewControllers {
+                if let photoSelectionVC = controller as? PhotoSelectionViewController {
+                    navController.popToViewController(photoSelectionVC, animated: true)
+                    return
+                }
+            }
+        }
     }
 
     // MARK: - View Lifecycle

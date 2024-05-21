@@ -23,8 +23,8 @@ class PhotoPlaceholderView: DottedBorderView, PhotoSelectionDelegate {
         let resizedImage = image.resizeImage(image: image, newWidth: 200) // 폭이 200인 이미지로 리사이징
             
             // 리사이징된 이미지를 배열에 추가
-        SignDataManager.shared.selectedImages.append(resizedImage)
-        print("selectedImages contents: \(SignDataManager.shared.selectedImages)")
+        SignDataManager.shared.placeholderImage = resizedImage
+        print("selectedImages contents: \(SignDataManager.shared.placeholderImage)")
         imageView.isHidden = false
         hintLabel.isHidden = true
         delegate?.updateAddButton()

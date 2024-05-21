@@ -251,18 +251,20 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         let dataManager = SignDataManager.shared
         // 이미지를 Data로 변환하여 저장
         var imageDatas: [Data] = []
-        for image in dataManager.selectedImages {
-            // UIImage 객체 생성 확인
-            print("UIImage 객체 확인: \(image)")
-            
-            // UIImage를 JPEG 데이터로 변환
-            if let imageData = image.jpegData(compressionQuality: 0.7) {
-                // JPEG 데이터의 유효성 확인
-                print("JPEG 데이터 확인: \(imageData)")
-                imageDatas.append(imageData)
-            } else {
-                print("이미지를 JPEG 데이터로 변환하는 데 실패했습니다.")
-            }
+        // UIImage를 JPEG 데이터로 변환
+        if let imageData = SignDataManager.shared.essentialImage.jpegData(compressionQuality: 0.7) {
+            // JPEG 데이터의 유효성 확인
+            print("JPEG 데이터 확인: \(imageData)")
+            imageDatas.append(imageData)
+        } else {
+            print("이미지를 JPEG 데이터로 변환하는 데 실패했습니다.")
+        }
+        if let imageData = SignDataManager.shared.placeholderImage.jpegData(compressionQuality: 0.7) {
+            // JPEG 데이터의 유효성 확인
+            print("JPEG 데이터 확인: \(imageData)")
+            imageDatas.append(imageData)
+        } else {
+            print("이미지를 JPEG 데이터로 변환하는 데 실패했습니다.")
         }
         print(imageDatas.count)
         if imageDatas.count < 2 {
@@ -275,20 +277,6 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
 }
 
-extension PhotoSelectionViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-            picker.dismiss(animated: true)
-            return
-        }
-//        let resizedImage = image.resizeImage(image: image, newWidth: 200) // 리사이징된 이미지 폭은 200입니다.
-//        picker.dismiss(animated: true)
-
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-}
 class DottedBorderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()

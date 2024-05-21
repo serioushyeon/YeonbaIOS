@@ -27,12 +27,12 @@ class ChatSocketManager {
     }
     
     func joinChat(chatId: Int) {
-        socket.emit("join", with: [chatId], completion: <#(() -> ())?#>)
+       // socket.emit("join", with: [chatId], completion: <#(() -> ())?#>)
     }
     
     func sendMessage(chatId: Int, message: String) {
         let messageData : [String: Any] = ["chatId": chatId, "message": message]
-        socket.emit("message", with: [messageData], completion: <#(() -> ())?#>)
+      //  socket.emit("message", with: [messageData], completion: <#(() -> ())?#>)
     }
     
     func receiveMessage(completion: @escaping (String) -> Void) {
