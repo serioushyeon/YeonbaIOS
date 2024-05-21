@@ -14,7 +14,8 @@ protocol LocationViewControllerDelegate: AnyObject {
 }
 class LocationModalViewController: UIViewController {
     weak var delegate: LocationViewControllerDelegate?
-    private let currentMode: LocationMode
+    private var currentMode: LocationMode
+    private var locationSelect: Int?
     //MARK: -- UI Component
     private let allLabel = UILabel().then {
         $0.text = "지역"
@@ -41,13 +42,15 @@ class LocationModalViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
-        $0.setTitle("다음", for: .normal)
+        $0.setTitle("취소", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 15)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
+        $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     init(passMode: LocationMode) {
         self.currentMode = passMode
@@ -69,7 +72,29 @@ class LocationModalViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = view.bounds.height / 15
     }
-    
+    private func updateFinishButtonState() {
+        if currentMode.title == nil {
+            finishButton.isEnabled = false
+            finishButton.layer.backgroundColor = UIColor.gray2?.cgColor
+        } else {
+            finishButton.isEnabled = true
+            finishButton.layer.borderWidth = 2
+            finishButton.layer.borderColor = UIColor.black.cgColor
+            finishButton.setTitleColor(.black, for: .normal)
+            finishButton.layer.backgroundColor = UIColor.white.cgColor
+        }
+    }
+    //MARK: - Actions
+    @objc private func finishButtonTapped() {
+        guard let locationSelect = locationSelect else { return } // locationSelect가 nil인 경우에는 이후 코드를 실행하지 않음
+        delegate?.locationSelectedRowAt(indexPath: self.locationSelect!)
+        
+        self.dismiss(animated: true)
+        
+    }
+    @objc func nextButtonTapped() {
+        self.dismiss(animated: true)
+    }
     
 
 }
@@ -78,7 +103,7 @@ class LocationModalViewController: UIViewController {
 extension LocationModalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return 17
+        return LocationMode.allCases.filter { $0 != .empty }.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -87,9 +112,9 @@ extension LocationModalViewController: UITableViewDelegate, UITableViewDataSourc
                                                        for: indexPath) as? LocationTableViewCell else {
             return UITableViewCell(style: .default, reuseIdentifier: .none)
         }
-        let mode = LocationMode.allCases[indexPath.row]
+        let mode = LocationMode.allCases.filter { $0 != .empty }[indexPath.row]
         // 이미지를 설정하여 셀에 전달
-        cell.setup(label: mode.title)
+        cell.setup(label: mode.title ?? "")
         cell.selectionStyle = .none
         return cell
     }
@@ -101,11 +126,12 @@ extension LocationModalViewController: UITableViewDelegate, UITableViewDataSourc
         finishButton.titleLabel?.textColor = UIColor.black
         finishButton.layer.backgroundColor = UIColor.white.cgColor
         nextButton.gradientLayer.colors = [UIColor.secondary?.cgColor, UIColor.primary?.cgColor] // 그라디언트 색상 변경
-
-        delegate?.locationSelectedRowAt(indexPath: indexPath.row)
+        self.locationSelect = indexPath.row
+        currentMode = LocationMode(rawValue: indexPath.row) ?? .seoul
+        updateFinishButtonState() // 선택이 변경될 때마다 버튼 상태 업데이트
         //dismissView()
     }
-    
+
 }
 extension LocationModalViewController {
     private func setupViews() {

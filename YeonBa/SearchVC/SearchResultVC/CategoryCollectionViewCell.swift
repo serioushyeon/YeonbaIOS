@@ -32,4 +32,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(with text: String) {
+        categoryLabel.text = text
+    }
 }

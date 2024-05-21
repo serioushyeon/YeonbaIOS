@@ -12,7 +12,6 @@ enum VoiceMode: Int, CaseIterable {
     case high
     case middle
     case low
-    case allLike
     
     var title: String {
        
@@ -23,8 +22,6 @@ enum VoiceMode: Int, CaseIterable {
             return "중음"
         case .low:
             return "저음"
-        case .allLike:
-            return "다 좋아요"
             
         }
         

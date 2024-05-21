@@ -13,11 +13,11 @@ protocol WeightViewControllerDelegate: AnyObject {
     func weightSelectedRowAt(indexPath: Int)
 }
 final class WeightViewController: UIViewController {
-    private var selectedCellIndex: IndexPath?
+    private var selectedCellIndex: Int?
 
     weak var delegate: WeightViewControllerDelegate?
     private let customTransitioningDelegate = WeightDelegate()
-    private let currentMode: WeightMode
+    private var currentMode: WeightMode
     private let titleLabel = UILabel().then {
         $0.text = "체형"
         $0.textColor = UIColor.black
@@ -36,6 +36,7 @@ final class WeightViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -43,6 +44,8 @@ final class WeightViewController: UIViewController {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
+        $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+
     }
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -88,6 +91,15 @@ final class WeightViewController: UIViewController {
     @objc private func dismissView() {
         self.dismiss(animated: true)
     }
+    @objc private func nextButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    @objc private func finishButtonTapped() {
+        // Finish 버튼을 터치했을 때의 동작
+        delegate?.weightSelectedRowAt(indexPath: self.selectedCellIndex!)
+        self.dismiss(animated: true)
+        
+    }
 }
 //MARK: -- 체형 UITableViewDelegate,UITableViewDataSource
 
@@ -105,7 +117,7 @@ extension WeightViewController: UITableViewDelegate, UITableViewDataSource {
         }
         let mode = WeightMode.allCases[indexPath.row]
         // 이미지를 설정하여 셀에 전달
-        cell.setup(label: mode.title)
+        cell.setup(label: mode.title ?? "")
         cell.selectionStyle = .none
         return cell
     }
@@ -116,7 +128,8 @@ extension WeightViewController: UITableViewDelegate, UITableViewDataSource {
         finishButton.layer.borderColor = UIColor.black.cgColor
         finishButton.titleLabel?.textColor = UIColor.black
         finishButton.layer.backgroundColor = UIColor.white.cgColor
-        delegate?.weightSelectedRowAt(indexPath: indexPath.row)
+        selectedCellIndex = indexPath.row
+        currentMode = WeightMode(rawValue: indexPath.row)!
         //dismissView()
     }
     

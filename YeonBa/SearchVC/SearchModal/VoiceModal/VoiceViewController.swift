@@ -13,11 +13,11 @@ protocol VoiceViewControllerDelegate: AnyObject {
     func voiceSelectedRowAt(indexPath: Int)
 }
 final class VoiceViewController: UIViewController {
-    private var selectedCellIndex: IndexPath?
+    private var selectedCellIndex: Int?
 
     weak var delegate: VoiceViewControllerDelegate?
     private let customTransitioningDelegate = VoiceDelegate()
-    private let currentMode: VoiceMode
+    private var currentMode: VoiceMode
     private let titleLabel = UILabel().then {
         $0.text = "음역대"
         $0.textColor = UIColor.black
@@ -36,6 +36,7 @@ final class VoiceViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor.gray2?.cgColor
+        $0.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
     }
     private let nextButton = ActualGradientButton().then {
         $0.setTitle("다음", for: .normal)
@@ -43,6 +44,7 @@ final class VoiceViewController: UIViewController {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 20
+        $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -85,6 +87,15 @@ final class VoiceViewController: UIViewController {
         tableView.rowHeight = view.bounds.height / 15
     }
     
+    @objc private func finishButtonTapped() {
+        // Finish 버튼을 터치했을 때의 동작
+        delegate?.voiceSelectedRowAt(indexPath: self.selectedCellIndex!)
+        self.dismiss(animated: true)
+        
+    }
+    @objc private func nextButtonTapped() {
+        self.dismiss(animated: true)
+    }
     @objc private func dismissView() {
         self.dismiss(animated: true)
     }
@@ -94,7 +105,7 @@ final class VoiceViewController: UIViewController {
 extension VoiceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView,
@@ -116,7 +127,8 @@ extension VoiceViewController: UITableViewDelegate, UITableViewDataSource {
         finishButton.layer.borderColor = UIColor.black.cgColor
         finishButton.titleLabel?.textColor = UIColor.black
         finishButton.layer.backgroundColor = UIColor.white.cgColor
-        delegate?.voiceSelectedRowAt(indexPath: indexPath.row)
+        selectedCellIndex = indexPath.row
+        currentMode = VoiceMode(rawValue: indexPath.row)!
         //dismissView()
     }
     

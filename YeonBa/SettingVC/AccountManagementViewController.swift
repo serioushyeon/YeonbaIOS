@@ -1,5 +1,4 @@
 import UIKit
-import SwiftKeychainWrapper
 
 class AccountManagementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView!
@@ -63,7 +62,7 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         case 1:
             presentServiceWithdrawalAlert()
         case 2:
-            presentServiceWithLogout()
+            presentLogoutConfirmation()
         default:
             print("Selected row at \(indexPath.row)")
         }
@@ -80,32 +79,29 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
+
+    // 서비스 탈퇴 팝업
     func presentServiceWithdrawalAlert() {
        let alert = UIAlertController(title: "서비스 탈퇴 확인", message: "탈퇴 후 24시간 지나야 재가입이 가능합니다. 탈퇴 후 24시간 내 등록은 시 계정 정보가 유지됩니다.", preferredStyle: .alert)
        let confirmAction = UIAlertAction(title: "탈퇴하기", style: .destructive) { action in
-           // 서비스 탈퇴 로직 구현
            print("서비스 탈퇴 처리")
        }
        alert.addAction(confirmAction)
-       
        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
        alert.addAction(cancelAction)
-       
        present(alert, animated: true, completion: nil)
-   }
-    func presentServiceWithLogout() {
-        let alert = UIAlertController(title: "서비스 로그아웃 확인", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "로그아웃", style: .destructive) { action in
-//            KeychainHandler.shared.clearTokens()
-            let signupVC = SignUpViewController()
-            self.navigationController?.pushViewController(signupVC, animated: true)
+    }
+
+    // 로그아웃 확인 팝업
+    func presentLogoutConfirmation() {
+        let alert = UIAlertController(title: "로그아웃", message: "정말로 로그아웃 하시겠습니까?", preferredStyle: .alert)
+        let logoutAction = UIAlertAction(title: "로그아웃하기", style: .destructive) { action in
             print("로그아웃 처리")
+            // 로그아웃 로직을 여기에 구현하세요
         }
-        alert.addAction(confirmAction)
-        
+        alert.addAction(logoutAction)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
-        
         present(alert, animated: true, completion: nil)
     }
 }

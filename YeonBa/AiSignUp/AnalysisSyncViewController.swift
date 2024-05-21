@@ -5,7 +5,7 @@ import Then
 class AnalysisSyncViewController: UIViewController {
     
     let profileImage1 = UIImageView().then{
-        $0.image = SignDataManager.shared.selectedImages[0]
+        $0.image = SignDataManager.shared.placeholderImage
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -13,7 +13,7 @@ class AnalysisSyncViewController: UIViewController {
     }
     
     let profileImage2 = UIImageView().then{
-        $0.image = SignDataManager.shared.selectedImages[1]
+        $0.image = SignDataManager.shared.essentialImage
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -73,15 +73,21 @@ class AnalysisSyncViewController: UIViewController {
         navigationController?.pushViewController(AnaysisSyncResultVC, animated: true)
     }
     @objc func cameraBtnTapped() {
-        let guideVC = GuideViewController()
-        navigationController?.pushViewController(guideVC, animated: true)
+        if let navController = navigationController {
+            for controller in navController.viewControllers {
+                if let photoSelectionVC = controller as? PhotoSelectionViewController {
+                    navController.popToViewController(photoSelectionVC, animated: true)
+                    return
+                }
+            }
+        }
     }
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        profileImage1.image = SignDataManager.shared.selectedImages[0]
-        profileImage2.image = SignDataManager.shared.selectedImages[1]
+        profileImage1.image = SignDataManager.shared.placeholderImage
+        profileImage2.image = SignDataManager.shared.essentialImage
         setupNavigationBar()
         addSubViews()
         configUI()
