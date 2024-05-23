@@ -20,6 +20,7 @@ class OtherProfileViewController: UIViewController {
     var id : String?
     var isFavorite : Bool = false
     private var userData : UserProfileResponse?
+    var images: [UIImage] = []
     private var aboutData = ["25살", "165cm", "서울", "고음", "토끼 상"]
     private var preferenceData = ["강아지 상", "서울", "저음", "20~25세", "마른체형", "INTP"]
     private let cupidImageView = UIImageView().then {
@@ -28,7 +29,6 @@ class OtherProfileViewController: UIViewController {
     }
     private let pieChartView = PieChartView() //유사도
     private let similarityLabel = UILabel().then {
-        $0.text = "80%"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 19.1)
@@ -46,13 +46,11 @@ class OtherProfileViewController: UIViewController {
         $0.image = UIImage(named: "profileheart")
     }
     private let heartLabel = UILabel().then {
-        $0.text = "231"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
         $0.font = UIFont.pretendardRegular(size: 13)
     }
     private let nameLabel = UILabel().then {
-        $0.text = "쥬하"
         $0.textAlignment = .center
         $0.font = UIFont.pretendardSemiBold(size: 24)
         $0.textColor = .black
@@ -125,46 +123,60 @@ class OtherProfileViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(apiSendChatRequest), for: .touchUpInside)
     }
+    //MARK: - 업로드한 사진이 올라가는 스크롤뷰
+    lazy var pageControl: UIPageControl = {
+        let control = UIPageControl()
+        control.pageIndicatorTintColor = UIColor.lightGray // 기본 페이지 색상
+        control.currentPageIndicatorTintColor = UIColor.primary // 현재 페이지 색상
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
+    }()
+    
+    lazy var profileScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     // MARK: - 탭바제거
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 커스텀 탭바를 숨깁니다.
         if let tabBarController = self.tabBarController {
             tabBarController.tabBar.isHidden = true
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // 다른 화면으로 넘어갈 때 커스텀 탭바를 다시 보이게 합니다.
         if let tabBarController = self.tabBarController {
             tabBarController.tabBar.isHidden = false
         }
     }
+    //MARK: -- UI
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPieChart(pieValue: 80)
         addSubviews()
         configUI()
-        loadImage()
         configureCollectionView()
-        navigationController()
         apiOtherProfile()
-       
+        addContentScrollView()
+        setPageControl()
         tabBarController?.tabBar.isTranslucent = true
-       
+        scrollView.delegate = self
+
         view.backgroundColor = .white
     }
-    func navigationController() {
-        let backbutton = UIBarButtonItem(image: UIImage(named: "back2"), style: .plain, target: self, action: #selector(back(_:)))
-        navigationItem.leftBarButtonItem = backbutton
+    private func setPageControl() {
+        pageControl.numberOfPages = images.count
+        
     }
     func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(cupidImageView)
-        [similarityLabel,pieChartView].forEach {
-            cupidImageView.addSubview($0)
-        }
+//        contentView.addSubview(cupidImageView)
+        contentView.addSubviews(profileScrollView,pageControl)
+//        [similarityLabel,pieChartView].forEach {
+//            cupidImageView.addSubview($0)
+//        }
         contentView.addSubview(declareBtn)
         contentView.addSubview(favoriteBtn)
         [nameLabel, totalLabel, heartImage, heartLabel, barView, aboutLabel, aboutmeCollectionView].forEach {
@@ -180,7 +192,6 @@ class OtherProfileViewController: UIViewController {
         
     }
     func configureCollectionView() {
-        
         aboutmeCollectionView.dataSource = self
         aboutmeCollectionView.delegate = self
         aboutmeCollectionView.register(OtherProfileCollectionViewCell.self, forCellWithReuseIdentifier: OtherProfileCollectionViewCell.reuseIdentifier)
@@ -199,38 +210,38 @@ class OtherProfileViewController: UIViewController {
             $0.width.equalTo(scrollView.frameLayoutGuide)
             $0.height.equalTo(800)
         }
-        cupidImageView.snp.makeConstraints {
-            $0.top.equalTo(contentView.snp.top)
+        profileScrollView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.5)
+            $0.top.equalTo(contentView.snp.top)
         }
+        pageControl.snp.makeConstraints {
+            $0.top.equalTo(profileScrollView.snp.bottom).offset(-20)
+            $0.centerX.equalTo(profileScrollView.snp.centerX)
+            $0.height.equalTo(10)
+        }
+//        cupidImageView.snp.makeConstraints {
+//            $0.top.equalTo(contentView.snp.top)
+//            $0.leading.trailing.equalToSuperview()
+//            $0.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.5)
+//        }
         declareBtn.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(40)
         }
-        similarityLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(40)
-            $0.bottom.equalToSuperview().inset(45)
-            $0.height.equalTo(50)
-        }
-        pieChartView.snp.makeConstraints{
-            $0.bottom.equalToSuperview().inset(10)
-            $0.leading.equalToSuperview()
-            $0.height.equalTo(120)
-            $0.width.equalTo(120)
-        }
+
         favoriteBtn.snp.makeConstraints {
             $0.top.equalTo(declareBtn.snp.bottom).offset(255)
             $0.trailing.equalToSuperview().inset(20)
         }
         nameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(cupidImageView.snp.bottom).offset(20)
+            $0.top.equalTo(pageControl.snp.bottom).offset(20)
             $0.bottom.equalTo(totalLabel.snp.bottom)
         }
         totalLabel.snp.makeConstraints {
             $0.trailing.equalTo(heartImage.snp.leading).offset(-7)
-            $0.top.equalTo(cupidImageView.snp.bottom).offset(30)
+            $0.top.equalTo(pageControl.snp.bottom).offset(30)
         }
         heartImage.snp.makeConstraints {
             $0.trailing.equalTo(heartLabel.snp.leading).offset(-5)
@@ -282,6 +293,7 @@ class OtherProfileViewController: UIViewController {
             $0.width.equalTo(180)
         }
     }
+
     func setupPieChart(pieValue: Double) {
         let entries = [PieChartDataEntry(value: pieValue), PieChartDataEntry(value: 100-pieValue)]
 
@@ -299,10 +311,6 @@ class OtherProfileViewController: UIViewController {
         
         pieChartView.data = data
         pieChartView.legend.enabled = false
-    }
-    private func loadImage() {
-        guard let url = URL(string:"https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg") else { return }
-        cupidImageView.kf.setImage(with: url)
     }
     func apiReport(){
         let reportRequest = ReportRequest.init(id: id!, category: "\(String(describing: whyviewMode.title))", reason: "")
@@ -410,6 +418,80 @@ class OtherProfileViewController: UIViewController {
             }
         }
     }
+    //MARK: - PageControl 스크롤뷰 메서드
+    private func addContentScrollView() {
+        profileScrollView.isPagingEnabled = true // 페이지별 스크롤 가능하도록 설정
+        
+        for i in 0..<images.count {
+            let imageView = UIImageView()
+            let xPos = profileScrollView.frame.width * CGFloat(i)
+            imageView.frame = CGRect(x: xPos, y: 0, width: profileScrollView.bounds.width, height: profileScrollView.bounds.height)
+            imageView.image = images[i]
+            imageView.contentMode = .scaleAspectFit
+            profileScrollView.addSubview(imageView)
+            
+            if i == 0 { // 첫 번째 이미지에만 추가
+                imageView.addSubview(similarityLabel)
+                imageView.addSubview(pieChartView)
+                
+                similarityLabel.snp.makeConstraints {
+                    $0.leading.equalToSuperview().inset(40)
+                    $0.bottom.equalToSuperview().inset(45)
+                    $0.height.equalTo(50)
+                }
+                pieChartView.snp.makeConstraints {
+                    $0.bottom.equalToSuperview().inset(10)
+                    $0.leading.equalToSuperview()
+                    $0.height.equalTo(120)
+                    $0.width.equalTo(120)
+                }
+            }
+        }
+        profileScrollView.contentSize = CGSize(width: profileScrollView.frame.width * CGFloat(images.count), height: profileScrollView.frame.height)
+    }
+    
+    
+    private func setPageControlSelectedPage(currentPage:Int) {
+        pageControl.currentPage = currentPage
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        setPageControlSelectedPage(currentPage: pageIndex)
+    }
+    func updateUIWithImages() {
+        // 이미지를 받아올 때마다 UIScrollView를 초기화합니다.
+        profileScrollView.subviews.forEach { $0.removeFromSuperview() }
+        
+        // 서버에서 받아온 이미지를 UIScrollView에 추가하여 화면에 표시합니다.
+        for (index, image) in images.enumerated() {
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFill
+            let xPos = CGFloat(index) * profileScrollView.bounds.width
+            imageView.frame = CGRect(x: xPos, y: 0, width: profileScrollView.bounds.width, height: profileScrollView.bounds.height)
+            profileScrollView.addSubview(imageView)
+            
+            if index == 0 { // 첫 번째 이미지에만 추가
+                imageView.addSubview(similarityLabel)
+                imageView.addSubview(pieChartView)
+                
+                similarityLabel.snp.makeConstraints {
+                    $0.leading.equalToSuperview().inset(40)
+                    $0.bottom.equalToSuperview().inset(45)
+                    $0.height.equalTo(50)
+                }
+                pieChartView.snp.makeConstraints {
+                    $0.bottom.equalToSuperview().inset(10)
+                    $0.leading.equalToSuperview()
+                    $0.height.equalTo(120)
+                    $0.width.equalTo(120)
+                }
+            }
+        }
+        profileScrollView.contentSize = CGSize(width: profileScrollView.bounds.width * CGFloat(images.count), height: profileScrollView.bounds.height)
+        
+        // 페이지 컨트롤을 업데이트합니다.
+        pageControl.numberOfPages = images.count
+    }
     func configure(data : OtherProfileResponse) {
         setupPieChart(pieValue: Double(data.photoSyncRate))
         self.nameLabel.text = data.nickname
@@ -433,18 +515,36 @@ class OtherProfileViewController: UIViewController {
         let pinkImage = UIImage(named: "PinkFavorites")
         self.isFavorite ? self.favoriteBtn.setImage(pinkImage, for: .normal) : self.favoriteBtn.setImage(whiteImage, for: .normal)
         // 이미지 로딩
-        var profilePhotoUrl = data.profilePhotosUrls[0]
-        if !profilePhotoUrl.hasSuffix(".png") {
-            profilePhotoUrl += ".png"
-        }
-        
-        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
-            print("Loading image from URL: \(url)")
-            cupidImageView.kf.setImage(with: url)
-        }else {
-            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
-        }
+        loadProfileImages(urls: data.profilePhotosUrls)
     }
+    private func loadProfileImages(urls: [String]) {
+            images.removeAll()
+            
+            let group = DispatchGroup()
+            
+            for urlString in urls {
+                var fullUrlString = urlString
+                if !fullUrlString.hasSuffix(".png") {
+                    fullUrlString += ".png"
+                }
+                if let url = URL(string: Config.s3URLPrefix + fullUrlString) {
+                    group.enter()
+                    KingfisherManager.shared.retrieveImage(with: url) { result in
+                        switch result {
+                        case .success(let value):
+                            self.images.append(value.image)
+                        case .failure(let error):
+                            print("Error loading image: \(error)")
+                        }
+                        group.leave()
+                    }
+                }
+            }
+            
+            group.notify(queue: .main) {
+                self.updateUIWithImages()
+            }
+        }
 //MARK: -- Action
     @objc func declarButtonTapped() {
         print("declare")

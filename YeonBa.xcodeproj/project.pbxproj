@@ -155,7 +155,6 @@
 		58E88E152BF7896300775F06 /* BlockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E022BF7896300775F06 /* BlockRequest.swift */; };
 		58E88E162BF7896300775F06 /* BookmarkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E032BF7896300775F06 /* BookmarkRequest.swift */; };
 		58E88E172BF7896300775F06 /* OtherProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E042BF7896300775F06 /* OtherProfileRequest.swift */; };
-		58E88E182BF7896300775F06 /* RecommandUserListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E052BF7896300775F06 /* RecommandUserListRequest.swift */; };
 		58E88E192BF7896300775F06 /* ReportRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E062BF7896300775F06 /* ReportRequest.swift */; };
 		58E88E1A2BF7896300775F06 /* SendArrowRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E072BF7896300775F06 /* SendArrowRequest.swift */; };
 		58E88E1B2BF7896300775F06 /* SendChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E082BF7896300775F06 /* SendChatRequest.swift */; };
@@ -165,8 +164,6 @@
 		58E88E1F2BF7896300775F06 /* UserProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E0D2BF7896300775F06 /* UserProfileResponse.swift */; };
 		58E88E202BF7896300775F06 /* OtherProfileTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E102BF7896300775F06 /* OtherProfileTarget.swift */; };
 		58E88E212BF7896300775F06 /* OtherProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E122BF7896300775F06 /* OtherProfileService.swift */; };
-		58E88E2D2BF7896E00775F06 /* ArrowCountRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E222BF7896D00775F06 /* ArrowCountRequest.swift */; };
-		58E88E2E2BF7896E00775F06 /* DailyCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E232BF7896D00775F06 /* DailyCheckRequest.swift */; };
 		58E88E2F2BF7896E00775F06 /* ArrowCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E252BF7896D00775F06 /* ArrowCountResponse.swift */; };
 		58E88E302BF7896E00775F06 /* HomeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E282BF7896D00775F06 /* HomeTarget.swift */; };
 		58E88E312BF7896E00775F06 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E2A2BF7896D00775F06 /* HomeService.swift */; };
@@ -435,7 +432,6 @@
 		58E88E022BF7896300775F06 /* BlockRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockRequest.swift; sourceTree = "<group>"; };
 		58E88E032BF7896300775F06 /* BookmarkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkRequest.swift; sourceTree = "<group>"; };
 		58E88E042BF7896300775F06 /* OtherProfileRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileRequest.swift; sourceTree = "<group>"; };
-		58E88E052BF7896300775F06 /* RecommandUserListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommandUserListRequest.swift; sourceTree = "<group>"; };
 		58E88E062BF7896300775F06 /* ReportRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportRequest.swift; sourceTree = "<group>"; };
 		58E88E072BF7896300775F06 /* SendArrowRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendArrowRequest.swift; sourceTree = "<group>"; };
 		58E88E082BF7896300775F06 /* SendChatRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendChatRequest.swift; sourceTree = "<group>"; };
@@ -445,8 +441,6 @@
 		58E88E0D2BF7896300775F06 /* UserProfileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileResponse.swift; sourceTree = "<group>"; };
 		58E88E102BF7896300775F06 /* OtherProfileTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileTarget.swift; sourceTree = "<group>"; };
 		58E88E122BF7896300775F06 /* OtherProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileService.swift; sourceTree = "<group>"; };
-		58E88E222BF7896D00775F06 /* ArrowCountRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowCountRequest.swift; sourceTree = "<group>"; };
-		58E88E232BF7896D00775F06 /* DailyCheckRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyCheckRequest.swift; sourceTree = "<group>"; };
 		58E88E252BF7896D00775F06 /* ArrowCountResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowCountResponse.swift; sourceTree = "<group>"; };
 		58E88E282BF7896D00775F06 /* HomeTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTarget.swift; sourceTree = "<group>"; };
 		58E88E2A2BF7896D00775F06 /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -1284,7 +1278,6 @@
 				58E88E022BF7896300775F06 /* BlockRequest.swift */,
 				58E88E032BF7896300775F06 /* BookmarkRequest.swift */,
 				58E88E042BF7896300775F06 /* OtherProfileRequest.swift */,
-				58E88E052BF7896300775F06 /* RecommandUserListRequest.swift */,
 				58E88E062BF7896300775F06 /* ReportRequest.swift */,
 				58E88E072BF7896300775F06 /* SendArrowRequest.swift */,
 				58E88E082BF7896300775F06 /* SendChatRequest.swift */,
@@ -1338,15 +1331,6 @@
 			path = ProfileAPI;
 			sourceTree = "<group>";
 		};
-		58E88E242BF7896D00775F06 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				58E88E222BF7896D00775F06 /* ArrowCountRequest.swift */,
-				58E88E232BF7896D00775F06 /* DailyCheckRequest.swift */,
-			);
-			path = Request;
-			sourceTree = "<group>";
-		};
 		58E88E262BF7896D00775F06 /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -1358,7 +1342,6 @@
 		58E88E272BF7896D00775F06 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				58E88E242BF7896D00775F06 /* Request */,
 				58E88E262BF7896D00775F06 /* Response */,
 			);
 			path = DTO;
@@ -2063,7 +2046,6 @@
 				58E88FCE2BFF116700775F06 /* MyPageTarget.swift in Sources */,
 				58E88E542BF7916400775F06 /* OtherMessageCell.swift in Sources */,
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
-				58E88E2E2BF7896E00775F06 /* DailyCheckRequest.swift in Sources */,
 				58BB86892BB7FA2E00F90050 /* WeightPresentationController.swift in Sources */,
 				58580EFF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift in Sources */,
 				58D1390B2BF3127E0048C228 /* converted_model.mlpackage in Sources */,
@@ -2150,7 +2132,6 @@
 				58D139092BF3127E0048C228 /* FullScreenImageViewController.swift in Sources */,
 				589CDD602BE7E6FC00BA332F /* APIEventLogger.swift in Sources */,
 				58E88F922BFCB47700775F06 /* HeightEditViewController.swift in Sources */,
-				58E88E182BF7896300775F06 /* RecommandUserListRequest.swift in Sources */,
 				58E88F902BFCB47700775F06 /* HeightEditDelegate.swift in Sources */,
 				58D15E952B90585700EB74E9 /* SceneDelegate.swift in Sources */,
 				58D1390E2BF3127E0048C228 /* AnalysisSyncResultViewController.swift in Sources */,
@@ -2169,7 +2150,6 @@
 				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
 				58E88FAC2BFCE27F00775F06 /* Ad2ViewController.swift in Sources */,
 				58E88F8F2BFCB47700775F06 /* FaceEditViewController.swift in Sources */,
-				58E88E2D2BF7896E00775F06 /* ArrowCountRequest.swift in Sources */,
 				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
 				58580EB52BE0BA080055F3E8 /* JobSelectionViewController.swift in Sources */,
 				589CDCFB2BE5091800BA332F /* TargetType.swift in Sources */,
