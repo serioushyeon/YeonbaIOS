@@ -27,7 +27,7 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         navigationItem.title = "알림"
         addSubViews()
         configUI()
-        fetchNotifications(page: 0)
+        fetchNotifications(page: 1)
     }
 
     // MARK: - UI Layout
@@ -81,11 +81,11 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
             let cell = tableView.dequeueReusableCell(withIdentifier: "ArrowNotificationCell", for: indexPath) as! ArrowNotificationCell
             cell.configure(with: notifications)
             return cell
-        case "CHAT_REQUESTED":
+        case "CHATTING_REQUESTED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRequestCell", for: indexPath) as! ChatRequestCell
             cell.configure(with: notifications)
             return cell
-        case "CHAT_REQUEST_ACCEPTED":
+        case "CHATTING_REQUEST_ACCEPTED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatAcceptanceCell", for: indexPath) as! ChatAcceptanceCell
             cell.configure(with: notifications)
             return cell

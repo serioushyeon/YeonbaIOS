@@ -96,13 +96,14 @@ class HomeViewController: UIViewController {
     func setupNavigationBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.primary]
         let titleLabel = UILabel()
         titleLabel.text = "Yeonba"
-        titleLabel.textColor = .black
+        titleLabel.textColor = .primary
         titleLabel.sizeToFit()
+        titleLabel.font = .pretendardSemiBold(size: 20)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        navigationItem.hidesBackButton = true
         navigationItem.hidesBackButton = true
         let heartButton = UIBarButtonItem(image: UIImage(named: "Heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
         
@@ -143,6 +144,26 @@ class HomeViewController: UIViewController {
         collectionview.dataSource = self
         collectionview.delegate = self
         collectionview.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "HomeCupidCell")
+    }
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        let rect = CGRect(origin: .zero, size: newSize)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     // MARK: - UI Layout
     func addSubviews() {
@@ -222,7 +243,7 @@ class HomeViewController: UIViewController {
                 print("화살 조회 성공")
             default:
                 print("화살 조회 실패")
-
+                
             }
         }
     }
@@ -236,7 +257,7 @@ class HomeViewController: UIViewController {
                 print("출석 체크 성공")
             default:
                 print("출석 체크 실패")
-
+                
             }
         }
     }
@@ -247,10 +268,10 @@ class HomeViewController: UIViewController {
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
-                    self.colletModel = data.users
+                self.colletModel = data.users
             default:
                 print("최근 화살 받은 이성 프로필 조회 실패")
-
+                
             }
         }
     }
@@ -261,10 +282,10 @@ class HomeViewController: UIViewController {
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
-                    self.recommandColletModel = data.users
+                self.recommandColletModel = data.users
             default:
                 print("추천 프로필 조회 실패")
-
+                
             }
         }
     }
@@ -347,7 +368,7 @@ extension HomeViewController: UITableViewDelegate {
 }
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return colletModel?.count ?? 0
+        return colletModel?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // 셀을 dequeue 하고, SendCupidCollectionViewCell 타입으로 타입 캐스팅합니다.
@@ -375,3 +396,4 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return 5
     }
 }
+
