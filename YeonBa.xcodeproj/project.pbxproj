@@ -230,6 +230,9 @@
 		58E88FAC2BFCE27F00775F06 /* Ad2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */; };
 		58E88FAE2BFCE28E00775F06 /* Ad3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */; };
 		58E88FC42BFDB6FC00775F06 /* ChatAcceptanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FC32BFDB6FC00775F06 /* ChatAcceptanceCell.swift */; };
+		58E88FCE2BFF116700775F06 /* MyPageTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FCD2BFF116700775F06 /* MyPageTarget.swift */; };
+		58E88FD12BFF117D00775F06 /* MyPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD02BFF117D00775F06 /* MyPageService.swift */; };
+		58E88FD32BFF11B600775F06 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD22BFF11B600775F06 /* ProfileResponse.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -507,6 +510,9 @@
 		58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad2ViewController.swift; sourceTree = "<group>"; };
 		58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad3ViewController.swift; sourceTree = "<group>"; };
 		58E88FC32BFDB6FC00775F06 /* ChatAcceptanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAcceptanceCell.swift; sourceTree = "<group>"; };
+		58E88FCD2BFF116700775F06 /* MyPageTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTarget.swift; sourceTree = "<group>"; };
+		58E88FD02BFF117D00775F06 /* MyPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageService.swift; sourceTree = "<group>"; };
+		58E88FD22BFF11B600775F06 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -770,6 +776,7 @@
 		589CDCF52BE504F400BA332F /* GlobalAPI */ = {
 			isa = PBXGroup;
 			children = (
+				58E88FC72BFF112700775F06 /* MyPageAPI */,
 				58E88F132BFB902900775F06 /* SearchAPI */,
 				58E88E5D2BF88F2200775F06 /* ChatAPI */,
 				58E88E3E2BF790C900775F06 /* NotificationAPI */,
@@ -813,6 +820,7 @@
 		589CDD062BE5FDE900BA332F /* Gloabal */ = {
 			isa = PBXGroup;
 			children = (
+				58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */,
 				589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */,
 				58E88E5B2BF8830600775F06 /* Config.swift */,
 			);
@@ -853,7 +861,6 @@
 			children = (
 				58BB85D72BB3E50900F90050 /* VC */,
 				58BB85D62BB3E50200F90050 /* Cell */,
-				58D71EEF2B977C4A00BC3A56 /* ActualGradientButton.swift */,
 				584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */,
 			);
 			path = HomeVC;
@@ -1650,6 +1657,56 @@
 			path = MarketingVC;
 			sourceTree = "<group>";
 		};
+		58E88FC72BFF112700775F06 /* MyPageAPI */ = {
+			isa = PBXGroup;
+			children = (
+				58E88FCA2BFF114200775F06 /* Service */,
+				58E88FC92BFF113900775F06 /* Router */,
+				58E88FC82BFF113300775F06 /* DTO */,
+			);
+			path = MyPageAPI;
+			sourceTree = "<group>";
+		};
+		58E88FC82BFF113300775F06 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				58E88FCC2BFF115400775F06 /* Request */,
+				58E88FCB2BFF114D00775F06 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		58E88FC92BFF113900775F06 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				58E88FCD2BFF116700775F06 /* MyPageTarget.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		58E88FCA2BFF114200775F06 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				58E88FD02BFF117D00775F06 /* MyPageService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		58E88FCB2BFF114D00775F06 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				58E88FD22BFF11B600775F06 /* ProfileResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		58E88FCC2BFF115400775F06 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		73DBD3DD5A263E9104BB9837 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2003,6 +2060,7 @@
 				589CDCFD2BE50A2A00BA332F /* HTTPHeaderField.swift in Sources */,
 				58E88FA52BFCB47700775F06 /* PolicyViewController.swift in Sources */,
 				58D1390F2BF3127E0048C228 /* AiPhotoshopViewController.swift in Sources */,
+				58E88FCE2BFF116700775F06 /* MyPageTarget.swift in Sources */,
 				58E88E542BF7916400775F06 /* OtherMessageCell.swift in Sources */,
 				584DCF752BA003C70081149F /* FavoriteCollectionViewCell.swift in Sources */,
 				58E88E2E2BF7896E00775F06 /* DailyCheckRequest.swift in Sources */,
@@ -2015,6 +2073,7 @@
 				58E88E442BF790C900775F06 /* NotificationService.swift in Sources */,
 				58E88E1D2BF7896300775F06 /* OtherProfileResponse.swift in Sources */,
 				58580EA92BE0B9E30055F3E8 /* BirthDateSettingViewController.swift in Sources */,
+				58E88FD32BFF11B600775F06 /* ProfileResponse.swift in Sources */,
 				58580F032BE13E490055F3E8 /* SignLocationMode.swift in Sources */,
 				58E88F8D2BFCB47700775F06 /* VoicePreferenceViewController.swift in Sources */,
 				58D137EF2BEA3E060048C228 /* AgeViewController.swift in Sources */,
@@ -2035,6 +2094,7 @@
 				58E88FA12BFCB47700775F06 /* ChangeGradientButton.swift in Sources */,
 				58E88F942BFCB47700775F06 /* MbtiEditViewController.swift in Sources */,
 				58580EAD2BE0B9F10055F3E8 /* BodyShapeViewController.swift in Sources */,
+				58E88FD12BFF117D00775F06 /* MyPageService.swift in Sources */,
 				58E88F8C2BFCB47700775F06 /* RegionPreferenceViewController.swift in Sources */,
 				58E88F252BFC888800775F06 /* PhotoPlaceHolderView.swift in Sources */,
 				58E88FA42BFCB47700775F06 /* NotificationsettingsViewController.swift in Sources */,

@@ -19,6 +19,7 @@ final class NetworkService {
     let otherProfileService : OtherProfileServiceProtocol = OtherProfileService( apiLogger: APIEventLogger())
     let homeService : HomeServiceProtocol = HomeService( apiLogger: APIEventLogger())
     let searchService : SearchUserServiceProtocol = SearchUserService( apiLogger: APIEventLogger())
+    let mypageService : MyPageServiceProtocol = MyPageService( apiLogger: APIEventLogger())
     
     private var sessionManager: Session = {
         let configuration = URLSessionConfiguration.default

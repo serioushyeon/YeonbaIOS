@@ -1,6 +1,7 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 class SettingViewController: UIViewController {
 
@@ -13,22 +14,37 @@ class SettingViewController: UIViewController {
         $0.backgroundColor = .clear
     }
     private let imageView = UIImageView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.contentMode = .scaleAspectFit
-        let image = UIImage(named: "profilering") // 이미지 이름에 따라 수정하세요
-        $0.image = image
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 70
+        $0.layer.masksToBounds = true
+        $0.layer.borderColor = UIColor.primary?.cgColor
+        $0.layer.borderWidth = 3
+        
     }
+    private lazy var gradientBorderView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 75
+        view.layer.masksToBounds = true
+        view.layer.addSublayer(gradientLayer)
+        return view
+    }()
+    private lazy var gradientLayer: CAGradientLayer = {
+        let l = CAGradientLayer()
+        l.colors = [UIColor.red.cgColor, UIColor.blue.cgColor] // 원하는 그라데이션 색상 설정
+        l.startPoint = CGPoint(x: 0.5, y: 0)
+        l.endPoint = CGPoint(x: 0.5, y: 1)
+        return l
+    }()
+    private lazy var borderLayer: CAShapeLayer = {
+        let shape = CAShapeLayer()
+        shape.lineWidth = 4.0 // Border width
+        shape.fillColor = UIColor.clear.cgColor
+        return shape
+    }()
     private let nameLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "연바" // 원하는 이름으로 수정
         $0.textAlignment = .center
         $0.font = UIFont.boldSystemFont(ofSize: 24)
-    }
-    let nameLabel2 = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Today"
-        $0.textAlignment = .center
-        $0.textColor = .black // 원하는 색상으로 설정하세요
     }
     private let horizontalStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -46,7 +62,7 @@ class SettingViewController: UIViewController {
         $0.contentHorizontalAlignment = .center // 버튼1 이미지를 가로로 가운데 정렬
     }
     private let button2 = UIButton().then {
-        $0.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
+        $0.setTitle(" 남은 화살 수: 5개", for: .normal)
         $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
         $0.backgroundColor = .primary
         $0.setTitleColor(UIColor.white, for: .normal) // 텍스트 색상
@@ -56,7 +72,6 @@ class SettingViewController: UIViewController {
         $0.isUserInteractionEnabled = false
     }
     private let bottomView = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
     }
     
@@ -65,28 +80,67 @@ class SettingViewController: UIViewController {
         addSubviews()
         configUI()
         setupActions()
-        NotificationCenter.default.addObserver(self, selector: #selector(arrowCountDidChange), name: .arrowCountDidChange, object: nil)
+        updateUserProfile()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .arrowCountDidChange, object: nil)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        applyGradientBorder()
     }
     
-    @objc private func arrowCountDidChange() {
-        button2.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
-    }
-
     //MARK: - UI Layout
     func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(imageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(nameLabel2)
-        contentView.addSubview(horizontalStackView)
+        contentView.addSubviews(gradientBorderView, imageView, nameLabel, horizontalStackView)
         horizontalStackView.addArrangedSubview(button1)
         horizontalStackView.addArrangedSubview(button2)
         contentView.addSubview(bottomView)
+    }
+    
+    func updateUserProfile() {
+        NetworkService.shared.mypageService.myProfile() { response in
+            switch response {
+            case .success(let statusResponse):
+                if let data = statusResponse.data {
+                    self.nameLabel.text = data.name
+                    var profilePhotoUrl = data.profileImageUrl
+                    if !profilePhotoUrl.hasSuffix(".png") {
+                        profilePhotoUrl += ".png"
+                    }
+                    
+                    if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+                        print("Loading image from URL: \(url)")
+                        self.imageView.kf.setImage(with: url, completionHandler: { result in
+                            switch result {
+                            case .success(let value):
+                                print("Image successfully loaded: \(value.source.url?.absoluteString ?? "")")
+                                self.applyGradientBorder()
+                            case .failure(let error):
+                                print("Error loading image: \(error)")
+                            }
+                        })
+                    } else {
+                        print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+                    }
+                }
+            default:
+                print("데이터 안들어옴")
+            }
+        }
+    }
+    
+    func applyGradientBorder() {
+        let radius = imageView.bounds.width / 2
+        gradientBorderView.frame = imageView.frame
+        gradientLayer.frame = gradientBorderView.bounds
+        gradientLayer.cornerRadius = radius
+        
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
+        borderLayer.path = circularPath.cgPath
+        borderLayer.strokeColor = UIColor.clear.cgColor // Hide the temporary color
+        
+        gradientLayer.mask = borderLayer
     }
     
     func configUI() {
@@ -97,21 +151,21 @@ class SettingViewController: UIViewController {
             $0.width.equalToSuperview()
             $0.top.bottom.equalToSuperview()
         }
-        imageView.snp.makeConstraints { make in
+        gradientBorderView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(20) // contentView 내에서 배치
+            make.top.equalToSuperview().offset(20)
             make.width.height.equalTo(150)
         }
+        imageView.snp.makeConstraints { make in
+            make.center.equalTo(gradientBorderView)
+            make.width.height.equalTo(150 - 8) // Adjust size to fit inside border
+        }
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(20)
+            make.top.equalTo(gradientBorderView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
-        nameLabel2.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel.snp.trailing).offset(10)
-            make.centerY.equalTo(nameLabel)
-        }
         horizontalStackView.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel2.snp.bottom).offset(22)
+            make.top.equalTo(nameLabel.snp.bottom).offset(22)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
@@ -156,7 +210,7 @@ class SettingViewController: UIViewController {
             }
             
             container.snp.makeConstraints { make in
-                make.height.equalTo(95) // 각 컨테이너 뷰의 높이를 80으로 설정
+                make.height.equalTo(95)
             }
             
             return container
@@ -179,7 +233,6 @@ class SettingViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-        // contentView의 높이를 bottomView까지 포함하도록 설정
         contentView.snp.makeConstraints { make in
             make.bottom.equalTo(bottomView.snp.bottom).offset(20)
         }

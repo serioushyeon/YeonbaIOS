@@ -187,7 +187,7 @@ class SearchViewController: UIViewController {
         $0.setTitle("이성 찾기", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 23
+        $0.layer.cornerRadius = 25
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(navigateToSearchResultViewController), for: .touchUpInside)
     }
@@ -358,7 +358,7 @@ class SearchViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.top.equalTo(verticalStackview.snp.bottom).offset(10)
            // $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
-            $0.height.equalToSuperview().multipliedBy(0.06) // 수직 스택뷰 높이의 5%로 설정
+            $0.height.equalToSuperview().multipliedBy(0.08) // 수직 스택뷰 높이의 5%로 설정
         }
     }
     
