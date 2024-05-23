@@ -17,10 +17,11 @@ protocol OtherProfileServiceProtocol {
     func bookmark(bodyDTO: BookmarkRequest, completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void)
     func deleteBookmark(bodyDTO: BookmarkRequest, completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void)
     func userList(bodyDTO: UserListRequest, completion: @escaping (NetworkResult<StatusResponse<UserListResponse>>) -> Void)
-    func recommandUserList(bodyDTO: RecommandUserListRequest, completion: @escaping (NetworkResult<StatusResponse<UserListResponse>>) -> Void)
+    func recommandUserList(completion: @escaping (NetworkResult<StatusResponse<UserListResponse>>) -> Void)
 }
 
 final class OtherProfileService: APIRequestLoader<OtherProfileTarget>, OtherProfileServiceProtocol {
+    
     func getOtherProfile(bodyDTO: OtherProfileRequest, completion: @escaping (NetworkResult<StatusResponse<OtherProfileResponse>>) -> Void) {
         fetchData(target: .getOtherProfile(bodyDTO), responseData: StatusResponse<OtherProfileResponse>.self, completion: completion)
     }
@@ -53,7 +54,7 @@ final class OtherProfileService: APIRequestLoader<OtherProfileTarget>, OtherProf
         fetchData(target: .userList(bodyDTO), responseData: StatusResponse<UserListResponse>.self, completion: completion)
     }
     
-    func recommandUserList(bodyDTO: RecommandUserListRequest, completion: @escaping (NetworkResult<StatusResponse<UserListResponse>>) -> Void) {
-        fetchData(target: .recommandUserList(bodyDTO), responseData: StatusResponse<UserListResponse>.self, completion: completion)
+    func recommandUserList(completion: @escaping (NetworkResult<StatusResponse<UserListResponse>>) -> Void) {
+        fetchData(target: .recommandUserList, responseData: StatusResponse<UserListResponse>.self, completion: completion)
     }
 }

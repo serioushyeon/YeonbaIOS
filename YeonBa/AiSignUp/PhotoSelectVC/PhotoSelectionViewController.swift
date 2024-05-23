@@ -129,7 +129,6 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
             make.trailing.equalToSuperview().inset(10)
             
         }
-        
         horizontalStackView.snp.makeConstraints { make in
             make.top.equalTo(subInstructionLabel.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)

@@ -9,17 +9,17 @@ import Foundation
 import Alamofire
 
 protocol HomeServiceProtocol {
-    func arrowCount(bodyDTO: ArrowCountRequest, completion: @escaping (NetworkResult<StatusResponse<ArrowCountResponse>>) -> Void)
-    func dailyCheck(bodyDTO: DailyCheckRequest, completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void)
+    func arrowCount(completion: @escaping (NetworkResult<StatusResponse<ArrowCountResponse>>) -> Void)
+    func dailyCheck(completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void)
 }
 
 final class HomeService: APIRequestLoader<HomeTarget>, HomeServiceProtocol {
-    func arrowCount(bodyDTO: ArrowCountRequest, completion: @escaping (NetworkResult<StatusResponse<ArrowCountResponse>>) -> Void) {
-        fetchData(target: .arrowCount(bodyDTO), responseData: StatusResponse<ArrowCountResponse>.self, completion: completion)
+    func arrowCount(completion: @escaping (NetworkResult<StatusResponse<ArrowCountResponse>>) -> Void) {
+        fetchData(target: .arrowCount, responseData: StatusResponse<ArrowCountResponse>.self, completion: completion)
     }
     
-    func dailyCheck(bodyDTO: DailyCheckRequest, completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void) {
-        fetchData(target: .dailyCheck(bodyDTO), responseData: StatusResponse<String?>.self, completion: completion)
+    func dailyCheck(completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void) {
+        fetchData(target: .dailyCheck, responseData: StatusResponse<String?>.self, completion: completion)
     }
 }
 

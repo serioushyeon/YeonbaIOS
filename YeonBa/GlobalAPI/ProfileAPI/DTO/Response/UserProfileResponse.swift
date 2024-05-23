@@ -7,9 +7,10 @@
 import Foundation
 
 struct UserProfileResponse : Codable{
-    let id: String
+    let id: Int
     let profilePhotoUrl : String
     let nickname: String
+    let age : Int
     let receivedArrows: Int
     let lookAlikeAnimal: String
     let photoSyncRate: Int

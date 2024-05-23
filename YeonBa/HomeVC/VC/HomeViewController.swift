@@ -14,6 +14,7 @@ import SCLAlertView
 import Alamofire
 
 class HomeViewController: UIViewController {
+
     var colletModel : [UserProfileResponse]?
     var recommandColletModel : [UserProfileResponse]?
     // MARK: - UI Components
@@ -67,10 +68,11 @@ class HomeViewController: UIViewController {
     }
     private lazy var collectionview: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
             $0.isScrollEnabled = true
             $0.showsHorizontalScrollIndicator = false
-            $0.showsVerticalScrollIndicator = false
+//            $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
             $0.clipsToBounds = true
         }
@@ -88,10 +90,26 @@ class HomeViewController: UIViewController {
         configureCollectionView()
         apiDailyCheck()
         apiRecieveList()
-        apiRecommandList()
         apiGetArrowCount()
+        loadRecommandList()
+        updateTitle()
         tableView.reloadData()
+        collectionview.reloadData()
     }
+    private func updateTitle() {
+        recommendTitle.text = "\(SignDataManager.shared.nickName!)님을 위한 추천 이성"
+    }
+    private func loadRecommandList() {
+            if let lastFetchDate = UserDefaults.standard.lastFetchDate, Calendar.current.isDateInToday(lastFetchDate), 
+                let savedData = UserDefaults.standard.recommendData {
+                // 캐시된 데이터 사용
+                self.recommandColletModel = savedData
+                self.tableView.reloadData()
+            } else {
+                // 새로운 데이터 호출
+                apiRecommandList()
+            }
+        }
     // MARK: - Navigation
     func setupNavigationBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -107,11 +125,22 @@ class HomeViewController: UIViewController {
         navigationItem.hidesBackButton = true
         let heartButton = UIBarButtonItem(image: UIImage(named: "Heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
         
+        let heartCountContainerView = UIView()
+            heartCountContainerView.addSubview(heartCountLabel)
+        
         heartCountLabel.text = "5" // 초기 하트 개수
         heartCountLabel.textColor = UIColor.primary
         heartCountLabel.sizeToFit()
-        let heartCountBarButton = UIBarButtonItem(customView: heartCountLabel)
+        heartCountLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(5) // 라벨의 가장자리에 여백을 설정하여 텍스트가 잘리지 않도록 함
+        }
+            
+        heartCountContainerView.snp.makeConstraints { make in
+            make.width.equalTo(heartCountLabel.snp.width).offset(10) // 여유 공간을 더하여 컨테이너 뷰의 너비 설정
+            make.height.equalTo(heartCountLabel.snp.height).offset(10) // 여유 공간을 더하여 컨테이너 뷰의 높이 설정
+        }
         
+        let heartCountBarButton = UIBarButtonItem(customView: heartCountLabel)
         let alarmButton = UIBarButtonItem(image: UIImage(named: "Alarm"), style: .plain, target: self, action: #selector(alarmButtonTapped))
         navigationItem.rightBarButtonItems = [alarmButton, heartCountBarButton, heartButton]
         NetworkService.shared.notificationService.UnreadNotification() { response in
@@ -233,8 +262,7 @@ class HomeViewController: UIViewController {
         }
     }
     func apiGetArrowCount() -> Void{
-        let arrowCountRequest = ArrowCountRequest()
-        NetworkService.shared.homeService.arrowCount(bodyDTO: arrowCountRequest) { [weak self] response in
+        NetworkService.shared.homeService.arrowCount() { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let data):
@@ -248,8 +276,7 @@ class HomeViewController: UIViewController {
         }
     }
     func apiDailyCheck() -> Void{
-        let dailyCheckRequest = DailyCheckRequest()
-        NetworkService.shared.homeService.dailyCheck(bodyDTO: dailyCheckRequest) { [weak self] response in
+        NetworkService.shared.homeService.dailyCheck() { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let data):
@@ -262,30 +289,35 @@ class HomeViewController: UIViewController {
         }
     }
     func apiRecieveList(){
-        let userListRequest = UserListRequest.init(type: "ARROW_RECEIVERS")
+        let userListRequest = UserListRequest.init(type: "ARROW_SENDERS")
         NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
                 self.colletModel = data.users
+                DispatchQueue.main.async {
+                    self.collectionview.reloadData() // 메인 스레드에서 컬렉션 뷰를 업데이트합니다.
+                }
             default:
                 print("최근 화살 받은 이성 프로필 조회 실패")
-                
             }
         }
     }
-    func apiRecommandList(){
-        let recommandUserListRequest = RecommandUserListRequest()
-        NetworkService.shared.otherProfileService.recommandUserList(bodyDTO: recommandUserListRequest) { [weak self] response in
+    private func apiRecommandList() {
+        NetworkService.shared.otherProfileService.recommandUserList() { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
                 self.recommandColletModel = data.users
+                UserDefaults.standard.recommendData = data.users
+                UserDefaults.standard.lastFetchDate = Date()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             default:
                 print("추천 프로필 조회 실패")
-                
             }
         }
     }
@@ -352,7 +384,7 @@ extension HomeViewController: UITableViewDataSource {
         }
         // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
         let model = recommandColletModel?[indexPath.row]
-        cell.configure(with: model ??  UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
+        cell.configure(with: model ??  UserProfileResponse(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: 20, receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
         return cell
     }
 }
@@ -362,7 +394,7 @@ extension HomeViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let otherProfileVC = OtherProfileViewController()
-        otherProfileVC.id = recommandColletModel![indexPath.row].id
+        otherProfileVC.id = "\(recommandColletModel![indexPath.row].id)"
         self.navigationController?.pushViewController(otherProfileVC, animated: true)
     }
 }
@@ -378,7 +410,7 @@ extension HomeViewController : UICollectionViewDataSource {
         }
         // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
         let model = colletModel?[indexPath.row]
-        cell.configure(with: model ??  UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
+        cell.configure(with: model ??  UserProfileResponse(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: 20, receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
         return cell
     }
     
@@ -397,3 +429,35 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension UserDefaults {
+    private enum Keys {
+        static let recommendData = "recommendData"
+        static let lastFetchDate = "lastFetchDate"
+    }
+
+    var recommendData: [UserProfileResponse]? {
+        get {
+            if let data = data(forKey: Keys.recommendData) {
+                return try? JSONDecoder().decode([UserProfileResponse].self, from: data)
+            }
+            return nil
+        }
+        set {
+            if let newValue = newValue {
+                let data = try? JSONEncoder().encode(newValue)
+                set(data, forKey: Keys.recommendData)
+            } else {
+                removeObject(forKey: Keys.recommendData)
+            }
+        }
+    }
+
+    var lastFetchDate: Date? {
+        get {
+            return object(forKey: Keys.lastFetchDate) as? Date
+        }
+        set {
+            set(newValue, forKey: Keys.lastFetchDate)
+        }
+    }
+}

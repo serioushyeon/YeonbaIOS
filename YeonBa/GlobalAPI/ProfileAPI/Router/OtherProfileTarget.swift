@@ -18,7 +18,7 @@ enum OtherProfileTarget {
     case bookmark(_ bodyDTO: BookmarkRequest)
     case deleteBookmark(_ bodyDTO: BookmarkRequest)
     case userList(_ queryDTO: UserListRequest)
-    case recommandUserList(_ queryDTO: RecommandUserListRequest)
+    case recommandUserList
 }
 
 extension OtherProfileTarget: TargetType {
@@ -42,7 +42,7 @@ extension OtherProfileTarget: TargetType {
         case .userList:
             return .get
         case .recommandUserList:
-            return .get
+            return .post
         }
         
     }
@@ -65,7 +65,7 @@ extension OtherProfileTarget: TargetType {
             return "/favorites/\(bodyDTO.id)"
         case let .userList(queryDTO):
             return "/users"
-        case let .recommandUserList(queryDTO):
+        case let .recommandUserList:
             return "/users/recommend"
         }
     }
@@ -98,46 +98,46 @@ extension OtherProfileTarget: TargetType {
     var headerType: HTTPHeaderType {
         switch self  {
         case .getOtherProfile:
-            return .plain
+            return .hasToken
         case .report:
-            return .plain
+            return .hasToken
         case .block:
-            return .plain
+            return .hasToken
         case .sendArrow:
-            return .plain
+            return .hasToken
         case .sendChat:
-            return .plain
+            return .hasToken
         case .bookmark:
-            return .plain
+            return .hasToken
         case .deleteBookmark:
-            return .plain
+            return .hasToken
         case .userList:
-            return .plain
+            return .hasToken
         case .recommandUserList:
-            return .plain
+            return .hasToken
         }
     }
     
     var authorization: Authorization {
         switch self {
         case .getOtherProfile:
-            return .unauthorization
+            return .authorization
         case .report:
-            return .unauthorization
+            return .authorization
         case .block:
-            return .unauthorization
+            return .authorization
         case .sendArrow:
-            return .unauthorization
+            return .authorization
         case .sendChat:
-            return .unauthorization
+            return .authorization
         case .bookmark:
-            return .unauthorization
+            return .authorization
         case .deleteBookmark:
-            return .unauthorization
+            return .authorization
         case .userList:
-            return .unauthorization
+            return .authorization
         case .recommandUserList:
-            return .unauthorization
+            return .authorization
         }
     }
 }

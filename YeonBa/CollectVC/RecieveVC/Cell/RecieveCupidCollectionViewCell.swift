@@ -27,13 +27,13 @@ class RecieveCupidCollectionViewCell: UICollectionViewCell {
         $0.text = "80%"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 13.1)
+        $0.font = UIFont.pretendardSemiBold(size: 12)
     }
     private let nameLabel = UILabel().then {
         $0.text = "츄랭이"
         $0.textColor = .white
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 18)
+        $0.font = UIFont.pretendardSemiBold(size: 16)
     }
     private let ageLabel = UILabel().then {
         $0.text = "22"
@@ -93,17 +93,19 @@ class RecieveCupidCollectionViewCell: UICollectionViewCell {
         }
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(cupidImageView.snp.leading).offset(10)
-            $0.bottom.equalTo(heartImage.snp.top).offset(-5)
+            $0.trailing.equalTo(pieChartView.snp.leading).offset(10)
+            $0.bottom.equalTo(ageLabel.snp.top).offset(-5)
             
         }
         ageLabel.snp.makeConstraints {
-            $0.leading.equalTo(nameLabel.snp.trailing).offset(5)
-            $0.bottom.equalTo(nameLabel.snp.bottom)
+            $0.leading.equalTo(nameLabel.snp.leading).offset(5)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+            $0.bottom.equalTo(heartImage.snp.top)
         }
         heartImage.snp.makeConstraints {
             $0.leading.equalTo(nameLabel.snp.leading)
             $0.bottom.equalToSuperview().inset(10)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+            $0.top.equalTo(ageLabel.snp.bottom).offset(5)
         }
         heartLabel.snp.makeConstraints {
             $0.leading.equalTo(heartImage.snp.trailing).offset(5)
@@ -183,15 +185,24 @@ class RecieveCupidCollectionViewCell: UICollectionViewCell {
         heartLabel.text = "\(model.receivedArrows)"
         similarityLabel.text = "\(model.photoSyncRate)%"
         setupPieChart(pieValue: model.photoSyncRate)
-        id = model.id
+        id = "\(model.id)"
         isFavorite = model.isFavorite
         let whiteImage = UIImage(named: "WhiteFavorites")
         let pinkImage = UIImage(named: "PinkFavorites")
-        isFavorite ? cupidFavoriteButton.setImage(pinkImage, for: .normal) : cupidFavoriteButton.setImage(pinkImage, for: .normal)
+        isFavorite ? cupidFavoriteButton.setImage(pinkImage, for: .normal) : cupidFavoriteButton.setImage(whiteImage, for: .normal)
         //나이
-        //ageLabel.text = "\(model.age)"
-        if let url = URL(string: model.profilePhotoUrl) {
+        ageLabel.text = "\(model.age)"
+        // 이미지 로딩
+        var profilePhotoUrl = model.profilePhotoUrl
+        if !profilePhotoUrl.hasSuffix(".png") {
+            profilePhotoUrl += ".png"
+        }
+                    
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
             cupidImageView.kf.setImage(with: url)
+        }else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
         }
     }
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
