@@ -74,10 +74,6 @@ class AnalysisSyncResultViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
     }
-    private func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "사진 앨범"
-    }
     // MARK: - Actions
     @objc func aiBtnTapped() {
         let aiVC = AiPhotoshopViewController()
@@ -146,7 +142,6 @@ class AnalysisSyncResultViewController: UIViewController {
         view.backgroundColor = .white
         profileImage1.image = SignDataManager.shared.placeholderImage
         profileImage2.image = SignDataManager.shared.essentialImage
-        setupNavigationBar()
         // Create a dispatch group
         let dispatchGroup = DispatchGroup()
         

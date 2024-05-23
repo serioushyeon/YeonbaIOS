@@ -16,19 +16,8 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     //MARK: - UI Components
     var waveformView = WaveformView().then{
-        $0.backgroundColor = .clear
-    }
-    let titleLabel = UILabel().then{
-        $0.text = "AI 음역대 측정"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "BackButton")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
+            $0.backgroundColor = .clear
+        }
     
     let recordingIndicatorView = UIView().then {
         $0.backgroundColor = .red
@@ -106,6 +95,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWaveformView()
+        setupNavigationBar()
         setupUI()
         addSubViews()
         configUI()
@@ -119,6 +109,11 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     func setupUI() {
         setupBGColor()
         setupRecording()
+    }
+    // MARK: - UI Layout
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "AI 음역대 측정"
     }
     
     // MARK: - UI Layout
@@ -135,18 +130,8 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func configUI() {
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.centerX.equalToSuperview()
-        }
-        
         recordingLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(171)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.centerX.equalToSuperview()
         }
         
@@ -157,19 +142,19 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(218)
+            make.centerY.equalTo(profileImageBGView.snp.centerY)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(159)
         }
         
         profileImageBGView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(209)
+            make.top.equalTo(recordingLabel.snp.bottom).offset(14)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(175)
         }
         
         instructionLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(30)
+            make.top.equalTo(profileImageBGView.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
         }
         

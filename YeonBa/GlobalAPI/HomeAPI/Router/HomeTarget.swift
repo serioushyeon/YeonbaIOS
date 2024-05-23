@@ -28,18 +28,18 @@ extension HomeTarget: TargetType {
     
     var path: String {
         switch self {
-        case let .arrowCount:
+        case .arrowCount:
             return "/users/arrows"
-        case let .dailyCheck:
+        case .dailyCheck:
             return "/daily-check"
         }
     }
     
     var parameters: RequestParams {
         switch self {
-        case let .arrowCount:
+        case .arrowCount:
             return .requestPlain
-        case let .dailyCheck:
+        case .dailyCheck:
             return .requestPlain
         }
     }
