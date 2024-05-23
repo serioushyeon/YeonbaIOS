@@ -47,18 +47,18 @@ extension HomeTarget: TargetType {
     var headerType: HTTPHeaderType {
         switch self  {
         case .arrowCount:
-            return .plain
+            return .hasToken
         case .dailyCheck:
-            return .plain
+            return .hasToken
         }
     }
     
     var authorization: Authorization {
         switch self {
         case .arrowCount:
-            return .unauthorization
+            return .authorization
         case .dailyCheck:
-            return .unauthorization
+            return .authorization
         }
     }
 }

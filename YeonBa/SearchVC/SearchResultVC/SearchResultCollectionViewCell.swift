@@ -22,6 +22,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     private let favoriteBtn = UIButton().then {
         $0.setImage(UIImage(named: "WhiteFavorites"), for: .normal)
+        $0.addTarget(self, action: #selector(tappedBtn), for: .touchUpInside)
     }
     
     private let pieChartView = PieChartView() //유사도
@@ -84,15 +85,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     private func addSubview() {
-        contentView.addSubview(cupidImageView)
-        contentView.addSubview(favoriteBtn)
-        contentView.addSubview(similarityLabel)
-        contentView.addSubview(pieChartView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(ageLabel)
-        contentView.addSubview(heartImage)
-        contentView.addSubview(heartLabel)
-        contentView.addSubview(horizontalStackView)
+        contentView.addSubviews(cupidImageView,favoriteBtn,similarityLabel,pieChartView,nameLabel,ageLabel,heartImage,heartLabel,horizontalStackView)
         horizontalStackView.addArrangedSubview(watchProfileBtn)
         horizontalStackView.addArrangedSubview(sendChatBtn)
         
@@ -159,6 +152,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
         pieChartView.data = data
         pieChartView.legend.enabled = false
+    }
+    
+    @objc func tappedBtn() {
+        
     }
     
 }

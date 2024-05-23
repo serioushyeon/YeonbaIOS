@@ -11,7 +11,6 @@
 		580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580AAD2B2BA9375200672050 /* LocationModalViewController.swift */; };
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
-		582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17C2BBE8A0200600EA7 /* ChatAcceptanceCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
@@ -230,6 +229,7 @@
 		58E88FAA2BFCE27600775F06 /* Ad1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FA92BFCE27600775F06 /* Ad1ViewController.swift */; };
 		58E88FAC2BFCE27F00775F06 /* Ad2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */; };
 		58E88FAE2BFCE28E00775F06 /* Ad3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */; };
+		58E88FC42BFDB6FC00775F06 /* ChatAcceptanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FC32BFDB6FC00775F06 /* ChatAcceptanceCell.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -279,7 +279,6 @@
 		580AAD2B2BA9375200672050 /* LocationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModalViewController.swift; sourceTree = "<group>"; };
 		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
-		582DB17C2BBE8A0200600EA7 /* ChatAcceptanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAcceptanceCell.swift; sourceTree = "<group>"; };
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
 		582DB1802BBE8A4D00600EA7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		582DB1812BBE8A5300600EA7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -507,6 +506,7 @@
 		58E88FA92BFCE27600775F06 /* Ad1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad1ViewController.swift; sourceTree = "<group>"; };
 		58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad2ViewController.swift; sourceTree = "<group>"; };
 		58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad3ViewController.swift; sourceTree = "<group>"; };
+		58E88FC32BFDB6FC00775F06 /* ChatAcceptanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAcceptanceCell.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -576,8 +576,8 @@
 			isa = PBXGroup;
 			children = (
 				582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */,
-				582DB17C2BBE8A0200600EA7 /* ChatAcceptanceCell.swift */,
 				582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */,
+				58E88FC32BFDB6FC00775F06 /* ChatAcceptanceCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1624,7 +1624,8 @@
 		58E88F872BFCB47700775F06 /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
-				58E88FAF2BFCE2A400775F06 /* New Group */,
+				58E88F862BFCB47700775F06 /* SettingViewController.swift */,
+				58E88FAF2BFCE2A400775F06 /* MarketingVC */,
 				58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */,
 				58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */,
 				58E88FA92BFCE27600775F06 /* Ad1ViewController.swift */,
@@ -1638,16 +1639,15 @@
 				58E88F832BFCB47700775F06 /* NoticeViewController.swift */,
 				58E88F842BFCB47700775F06 /* NotificationsettingsViewController.swift */,
 				58E88F852BFCB47700775F06 /* PolicyViewController.swift */,
-				58E88F862BFCB47700775F06 /* SettingViewController.swift */,
 			);
 			path = SettingVC;
 			sourceTree = "<group>";
 		};
-		58E88FAF2BFCE2A400775F06 /* New Group */ = {
+		58E88FAF2BFCE2A400775F06 /* MarketingVC */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "New Group";
+			path = MarketingVC;
 			sourceTree = "<group>";
 		};
 		73DBD3DD5A263E9104BB9837 /* Frameworks */ = {
@@ -1989,7 +1989,6 @@
 				58E88E662BF88F7A00775F06 /* ChatService.swift in Sources */,
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
 				58E88FAE2BFCE28E00775F06 /* Ad3ViewController.swift in Sources */,
-				582DB17D2BBE8A0200600EA7 /* ChatAcceptanceCell.swift in Sources */,
 				58580EF02BE13E490055F3E8 /* FavoriteBodyPresentationController.swift in Sources */,
 				589CDD5C2BE7E69300BA332F /* SignUpService.swift in Sources */,
 				58E88E302BF7896E00775F06 /* HomeTarget.swift in Sources */,
@@ -2083,6 +2082,7 @@
 				58580F052BE13E490055F3E8 /* SignWeightMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				589CDD012BE51D8300BA332F /* SignDataManager.swift in Sources */,
+				58E88FC42BFDB6FC00775F06 /* ChatAcceptanceCell.swift in Sources */,
 				580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */,
 				58D15E932B90585700EB74E9 /* AppDelegate.swift in Sources */,
 				58E88F9A2BFCB47700775F06 /* AccountManagementViewController.swift in Sources */,

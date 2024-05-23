@@ -93,14 +93,20 @@ class ArrowNotificationCell: UITableViewCell {
     }
     
     func configure(with notification: Notifications) {
-        messageLabel.text = notification.content
-        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
-        print("알림내용:\(notification.content)")
-        if let url = URL(string: Config.s3URLPrefix + notification.senderProfilePhotoUrl) {
+            messageLabel.text = notification.content
+            timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+            print("알림내용:\(notification.content)")
+            
+            var profilePhotoUrl = notification.senderProfilePhotoUrl
+            if !profilePhotoUrl.hasSuffix(".png") {
+                profilePhotoUrl += ".png"
+            }
+            
+            if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                 print("Loading image from URL: \(url)")
                 profileImageView.kf.setImage(with: url)
             } else {
-                print("Invalid URL: \(Config.s3URLPrefix + notification.senderProfilePhotoUrl)")
+                print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
             }
-    }
+        }
 }
