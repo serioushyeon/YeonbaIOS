@@ -186,6 +186,7 @@
 		C1024BE12BFB0C8200A32BA1 /* Ad1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BE02BFB0C8200A32BA1 /* Ad1ViewController.swift */; };
 		C1024BE32BFB108C00A32BA1 /* Ad2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BE22BFB108C00A32BA1 /* Ad2ViewController.swift */; };
 		C1024BE52BFB18DA00A32BA1 /* Ad3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1024BE42BFB18DA00A32BA1 /* Ad3ViewController.swift */; };
+		C10AF9B92BFC83DD00816602 /* ArrowCounterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10AF9B82BFC83DD00816602 /* ArrowCounterManager.swift */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -416,6 +417,7 @@
 		C1024BE02BFB0C8200A32BA1 /* Ad1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad1ViewController.swift; sourceTree = "<group>"; };
 		C1024BE22BFB108C00A32BA1 /* Ad2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad2ViewController.swift; sourceTree = "<group>"; };
 		C1024BE42BFB18DA00A32BA1 /* Ad3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad3ViewController.swift; sourceTree = "<group>"; };
+		C10AF9B82BFC83DD00816602 /* ArrowCounterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowCounterManager.swift; sourceTree = "<group>"; };
 		FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1098,6 +1100,7 @@
 				C1024BB62BECBC9000A32BA1 /* ProfileEdit */,
 				C1024BCF2BF3012500A32BA1 /* PreferenceEdit */,
 				C1024BDE2BF5FF4E00A32BA1 /* changeGradientButton.swift */,
+				C10AF9B82BFC83DD00816602 /* ArrowCounterManager.swift */,
 			);
 			path = SettingVC;
 			sourceTree = "<group>";
@@ -1560,6 +1563,7 @@
 				58580EAD2BE0B9F10055F3E8 /* BodyShapeViewController.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
 				58580EB72BE0BA0E0055F3E8 /* LocalSelectViewController.swift in Sources */,
+				C10AF9B92BFC83DD00816602 /* ArrowCounterManager.swift in Sources */,
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
 				582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */,
 				58580EED2BE13E490055F3E8 /* FavoriteAnimalDelegate.swift in Sources */,

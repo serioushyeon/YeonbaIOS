@@ -3,21 +3,17 @@ import SnapKit
 import Then
 
 class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, Ad2ViewControllerDelegate, Ad3ViewControllerDelegate {
-    private var arrowCount: Int = 31 {
-        didSet {
-            updateArrowCountLabel()
-        }
-    }
     
     private func updateArrowCountLabel() {
-        nextChargeButton.setTitle(" 남은 화살 수: \(arrowCount)개", for: .normal)
+        nextChargeButton.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
     }
 
     func ad3ViewControllerDidClose(_ controller: Ad3ViewController) {
         rechargeOptionButtons.forEach { button in
             button.deactivate()
         }
-        arrowCount += 5
+        ArrowCountManager.shared.incrementArrowCount(by: 5)
+        updateArrowCountLabel()
     }
     
     func ad2ViewControllerDidClose(_ controller: Ad2ViewController) {
@@ -27,7 +23,8 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
         if rechargeOptionButtons.indices.contains(2) {
             rechargeOptionButtons[2].activate()
         }
-        arrowCount += 5
+        ArrowCountManager.shared.incrementArrowCount(by: 5)
+        updateArrowCountLabel()
     }
     
     func ad1ViewControllerDidClose(_ controller: Ad1ViewController) {
@@ -37,7 +34,8 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
         if rechargeOptionButtons.indices.contains(1) {
             rechargeOptionButtons[1].activate()
         }
-        arrowCount += 5
+        ArrowCountManager.shared.incrementArrowCount(by: 5)
+        updateArrowCountLabel()
     }
     
     private let descriptionLabel = UILabel().then {
@@ -54,7 +52,7 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
     }
     
     private let nextChargeButton = UIButton().then {
-        $0.setTitle(" 남은 화살 수: 31개", for: .normal)
+        $0.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
         $0.backgroundColor = .systemPink
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 15
@@ -73,6 +71,21 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
         setupRechargeOptionButtons()
         setupLayout()
         view.layoutIfNeeded()
+        updateArrowCountLabel()
+        
+        // NotificationCenter 설정
+        NotificationCenter.default.addObserver(self, selector: #selector(arrowCountDidChange), name: .arrowCountDidChange, object: nil)
+        
+        // 서버에서 화살 개수 가져오기
+        ArrowCountManager.shared.updateArrowCountFromServer()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func arrowCountDidChange() {
+        updateArrowCountLabel()
     }
     
     private func setupNavigationBar() {
@@ -159,4 +172,3 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
         }
     }
 }
-

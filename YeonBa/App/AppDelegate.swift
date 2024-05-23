@@ -44,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         KakaoSDK.initSDK(appKey: "e6b04f788417448d57a296f48140dfcb")
         // Override point for customization after application launch.
+        // 서버에서 최신 화살 개수를 가져와 업데이트
+        ArrowCountManager.shared.updateArrowCountFromServer()
         return true
     }
     

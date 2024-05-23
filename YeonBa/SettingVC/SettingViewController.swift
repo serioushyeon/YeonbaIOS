@@ -13,16 +13,19 @@ class SettingViewController: UIViewController {
         $0.backgroundColor = .clear
     }
     private let imageView = UIImageView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFit
-        let image = UIImage(named: "profilering") 
+        let image = UIImage(named: "profilering") // 이미지 이름에 따라 수정하세요
         $0.image = image
     }
     private let nameLabel = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "연바" // 원하는 이름으로 수정
         $0.textAlignment = .center
         $0.font = UIFont.boldSystemFont(ofSize: 24)
     }
     let nameLabel2 = UILabel().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Today"
         $0.textAlignment = .center
         $0.textColor = .black // 원하는 색상으로 설정하세요
@@ -43,15 +46,17 @@ class SettingViewController: UIViewController {
         $0.contentHorizontalAlignment = .center // 버튼1 이미지를 가로로 가운데 정렬
     }
     private let button2 = UIButton().then {
-        $0.setTitle(" 남은 화살 수 52", for: .normal)
+        $0.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
         $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
         $0.backgroundColor = .primary
         $0.setTitleColor(UIColor.white, for: .normal) // 텍스트 색상
         $0.setImage(UIImage(named: "arrowProfile")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .white
         $0.contentHorizontalAlignment = .center // 버튼2 이미지를 가로로 가운데 정렬
+        $0.isUserInteractionEnabled = false
     }
     private let bottomView = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
     }
     
@@ -60,8 +65,17 @@ class SettingViewController: UIViewController {
         addSubviews()
         configUI()
         setupActions()
+        NotificationCenter.default.addObserver(self, selector: #selector(arrowCountDidChange), name: .arrowCountDidChange, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .arrowCountDidChange, object: nil)
+    }
+    
+    @objc private func arrowCountDidChange() {
+        button2.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
+    }
+
     //MARK: - UI Layout
     func addSubviews() {
         view.addSubview(scrollView)
@@ -76,7 +90,6 @@ class SettingViewController: UIViewController {
     }
     
     func configUI() {
-        // 기존 설정 코드
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -86,11 +99,11 @@ class SettingViewController: UIViewController {
         }
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(nameLabel.snp.top).offset(-20)
+            make.top.equalToSuperview().offset(20) // contentView 내에서 배치
             make.width.height.equalTo(150)
         }
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalTo(imageView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
         nameLabel2.snp.makeConstraints { make in
@@ -143,7 +156,7 @@ class SettingViewController: UIViewController {
             }
             
             container.snp.makeConstraints { make in
-                make.height.equalTo(90)
+                make.height.equalTo(95) // 각 컨테이너 뷰의 높이를 80으로 설정
             }
             
             return container
@@ -174,9 +187,9 @@ class SettingViewController: UIViewController {
 
     func updateArrowNumber(number: Int) {
         let arrowNumber = number
-        button2.setTitle(" 남은 화살 수 \(arrowNumber)", for: .normal)
+        button2.setTitle(" 남은 화살수 \(arrowNumber)", for: .normal)
     }
-    
+            
     func setupActions() {
         button1.addTarget(self, action: #selector(handleProfileEditTap), for: .touchUpInside)
     }
