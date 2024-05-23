@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 2. device 토큰 획득: application(_:didRegisterForRemoteNotificationsWithDeviceToken:) 메소드 호출
         application.registerForRemoteNotifications()
         KakaoSDK.initSDK(appKey: "e6b04f788417448d57a296f48140dfcb")
+        clearOldRecommandData()
         // Override point for customization after application launch.
         return true
     }
@@ -59,6 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    private func clearOldRecommandData() {
+        if let lastFetchDate = UserDefaults.standard.lastFetchDate, !Calendar.current.isDateInToday(lastFetchDate) {
+            UserDefaults.standard.recommendData = nil
+            UserDefaults.standard.lastFetchDate = nil
+        }
     }
     
     

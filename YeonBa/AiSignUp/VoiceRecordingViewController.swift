@@ -16,19 +16,8 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     //MARK: - UI Components
     var waveformView = WaveformView().then{
-        $0.backgroundColor = .clear
-    }
-    let titleLabel = UILabel().then{
-        $0.text = "AI 음역대 측정"
-        $0.font = UIFont.pretendardMedium(size: 18)
-    }
-    let backButton = UIButton(type: .system).then {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
-        let image = UIImage(named: "BackButton")
-        $0.setImage(image, for: .normal)
-        $0.tintColor = UIColor.black
-        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
+            $0.backgroundColor = .clear
+        }
     
     let recordingIndicatorView = UIView().then {
         $0.backgroundColor = .red
@@ -106,6 +95,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWaveformView()
+        setupNavigationBar()
         setupUI()
         addSubViews()
         configUI()
@@ -119,6 +109,11 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     func setupUI() {
         setupBGColor()
         setupRecording()
+    }
+    // MARK: - UI Layout
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "AI 음역대 측정"
     }
     
     // MARK: - UI Layout
@@ -135,18 +130,8 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func configUI() {
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalToSuperview().offset(21)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.centerX.equalToSuperview()
-        }
-        
         recordingLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(171)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.centerX.equalToSuperview()
         }
         
@@ -157,19 +142,19 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(218)
+            make.centerY.equalTo(profileImageBGView.snp.centerY)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(159)
         }
         
         profileImageBGView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(209)
+            make.top.equalTo(recordingLabel.snp.bottom).offset(14)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(175)
         }
         
         instructionLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(30)
+            make.top.equalTo(profileImageBGView.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
         }
         
@@ -324,10 +309,6 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
                     print("result: \(result)")
                     if let maxProbabilityIndex = output.IdentityShapedArray.scalars.argmax() {
                         print("Highest probability index:", maxProbabilityIndex)
-                        // 이 인덱스를 사용하여 해당하는 클래스 레이블을 가져올 수 있습니다.
-                        // 예를 들어, 클래스 레이블 배열이 있다고 가정하고:
-                        // let classLabels = ["Class 1", "Class 2", "Class 3", ...]
-                        // let predictedClass = classLabels[maxProbabilityIndex]
                     } else {
                         print("Failed to find highest probability index")
                     }
@@ -358,86 +339,6 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         } else {
             print("Failed to load audio file")
         }
-        /*if let url = try? AVAudioFile(forReading: audioRecorder!.url).url,
-         let audioBuffer = loadAudioFile(url: url) {
-         print(url)
-         print(audioBuffer)
-         let targetLength = 100000
-         if let mlMultiArray = convertAudioBufferToMLMultiArray(audioBuffer: audioBuffer, targetLength: targetLength) {
-         print("Successfully converted to MLMultiArray", mlMultiArray.strides[0])
-         // Use mlMultiArray as needed
-         do {
-         let mlMultiArray = try MLMultiArray(shape: [1, 8, targetLength, 1] as [NSNumber], dataType: .float32)
-         let output = try model!.prediction(conv2d_input: mlMultiArray)
-         print(output.IdentityShapedArray.strides)
-         result = argmax(output.IdentityShapedArray.strides)
-         print("result: \(result)")
-         switch result {
-         case 0 :
-         voiceMode = "저음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case 1 :
-         voiceMode = "중음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case 2 :
-         voiceMode = "고음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case .none:
-         voiceMode = "중음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case .some(_):
-         voiceMode = "중음"
-         SignDataManager.shared.vocalRange = voiceMode
-         }
-         print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
-         } catch {
-         print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
-         }
-         } else {
-         print("Failed to convert audio buffer to MLMultiArray")
-         }
-         } else {
-         print("Failed to load audio file")
-         }*/
-        /* if let audioFile = try? AVAudioFile(forReading: audioRecorder!.url){
-         if let audioFormat = try? AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: audioFile.fileFormat.sampleRate, channels: 1, interleaved: false){
-         let pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
-         print("pcm:", pcmBuffer?.floatChannelData)
-         
-         let mpcmBuffer =  computeMFCC(audioBuffer: pcmBuffer!)
-         print("mpcm:", mpcmBuffer)
-         
-         if let multiArray = preprocessData(data: mpcmBuffer!) {
-         print("MultiArray:", multiArray)
-         do {
-         let output = try model!.prediction(conv2d_input: multiArray)
-         print(output.IdentityShapedArray.strides)
-         result = argmax(output.IdentityShapedArray.strides)
-         print("result: \(result)")
-         switch result {
-         case 0 :
-         voiceMode = "저음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case 1 :
-         voiceMode = "중음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case 2 :
-         voiceMode = "고음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case .none:
-         voiceMode = "중음"
-         SignDataManager.shared.vocalRange = voiceMode
-         case .some(_):
-         voiceMode = "중음"
-         SignDataManager.shared.vocalRange = voiceMode
-         }
-         print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
-         } catch {
-         print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
-         }
-         }
-         }
-         }*/
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .light)
         let image = UIImage(systemName: "mic.circle.fill", withConfiguration: imageConfig)
         recordButton.setImage(image, for: .normal)

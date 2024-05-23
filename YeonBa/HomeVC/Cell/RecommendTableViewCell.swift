@@ -56,6 +56,7 @@ class RecommendTableViewCell: UITableViewCell {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.gray.cgColor
         $0.setTitleColor(.black, for: .normal)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
     }
     private let voiceButton = UIButton().then {
         $0.setTitle("저음", for: .normal)
@@ -65,6 +66,7 @@ class RecommendTableViewCell: UITableViewCell {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.gray.cgColor
         $0.setTitleColor(.black, for: .normal)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
     }
     private let similarityLabel = UILabel().then {
         $0.text = "90%"
@@ -203,7 +205,7 @@ class RecommendTableViewCell: UITableViewCell {
     @objc func favoriteButtonTapped() {
         if let currentImage = favoriteButton.imageView?.image {
             if(currentImage == UIImage(named: "PinkFavorites")){
-                let newImage = UIImage(named: "WhiteFavorites")
+                let newImage = UIImage(named: "Favorites")
                 favoriteButton.setImage(newImage, for: .normal)
                 apiDeleteBookmark(id: id!)
             }
@@ -219,17 +221,26 @@ class RecommendTableViewCell: UITableViewCell {
         heartLabel.text = "\(model.receivedArrows)"
         similarityLabel.text = "\(model.photoSyncRate)%"
         setupPieChart(pieValue: model.photoSyncRate)
-        id = model.id
+        id = "\(model.id)"
         isFavorite = model.isFavorite
-        let whiteImage = UIImage(named: "WhiteFavorites")
+        let whiteImage = UIImage(named: "Favorites")
         let pinkImage = UIImage(named: "PinkFavorites")
-        isFavorite ? favoriteButton.setImage(pinkImage, for: .normal) : favoriteButton.setImage(pinkImage, for: .normal)
+        isFavorite ? favoriteButton.setImage(pinkImage, for: .normal) : favoriteButton.setImage(whiteImage, for: .normal)
         //나이
-        //ageLabel.text = "\(model.age)"
+        myAgeLabel.text = "\(model.age)"
         // 이미지 로딩
-        if let url = URL(string: model.profilePhotoUrl) {
-            myImageView.kf.setImage(with: url)
+        var profilePhotoUrl = model.profilePhotoUrl
+        if !profilePhotoUrl.hasSuffix(".png") {
+            profilePhotoUrl += ".png"
         }
+                    
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
+            myImageView.kf.setImage(with: url)
+        }else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+        }
+        animalButton.setTitle(model.lookAlikeAnimal, for: .normal)
+        voiceButton.setTitle(model.vocalRange, for: .normal)
     }
-
 }

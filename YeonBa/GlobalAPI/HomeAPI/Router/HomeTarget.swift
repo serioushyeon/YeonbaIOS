@@ -10,8 +10,8 @@ import Alamofire
 
 
 enum HomeTarget {
-    case arrowCount(_ bodyDTO: ArrowCountRequest)
-    case dailyCheck(_ bodyDTO: DailyCheckRequest)
+    case arrowCount
+    case dailyCheck
 }
 
 extension HomeTarget: TargetType {

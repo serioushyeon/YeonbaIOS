@@ -28,13 +28,13 @@ class HomeCollectionViewCell: UICollectionViewCell {
         $0.text = "80%"
         $0.textColor = UIColor.primary
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 13.1)
+        $0.font = UIFont.pretendardSemiBold(size: 12)
     }
     private let nameLabel = UILabel().then {
         $0.text = "지은잉"
         $0.textColor = .white
         $0.textAlignment = .center
-        $0.font = UIFont.pretendardSemiBold(size: 18)
+        $0.font = UIFont.pretendardSemiBold(size: 16)
     }
     private let ageLabel = UILabel().then {
         $0.text = "27"
@@ -181,16 +181,25 @@ class HomeCollectionViewCell: UICollectionViewCell {
         heartLabel.text = "\(model.receivedArrows)"
         similarityLabel.text = "\(model.photoSyncRate)%"
         setupPieChart(pieValue: model.photoSyncRate)
-        id = model.id
+        id = "\(model.id)"
         //나이
         //ageLabel.text = "\(model.age)"
         // 이미지 로딩
         isFavorite = model.isFavorite
         let whiteImage = UIImage(named: "WhiteFavorites")
         let pinkImage = UIImage(named: "PinkFavorites")
-        isFavorite ? cupidFavoriteButton.setImage(pinkImage, for: .normal) : cupidFavoriteButton.setImage(pinkImage, for: .normal)
-        if let url = URL(string: model.profilePhotoUrl) {
+        isFavorite ? cupidFavoriteButton.setImage(pinkImage, for: .normal) : cupidFavoriteButton.setImage(whiteImage, for: .normal)
+        // 이미지 로딩
+        var profilePhotoUrl = model.profilePhotoUrl
+        if !profilePhotoUrl.hasSuffix(".png") {
+            profilePhotoUrl += ".png"
+        }
+                    
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
             cupidImageView.kf.setImage(with: url)
+        }else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
         }
     }
     private func loadImage() {

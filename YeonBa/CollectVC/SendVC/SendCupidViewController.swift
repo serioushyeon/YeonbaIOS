@@ -12,9 +12,7 @@ import Alamofire
 
 class SendCupidViewController: UIViewController {
     var colletModel : [UserProfileResponse]? = [
-        UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ),
-        UserProfileResponse(id: "12", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false),
-        UserProfileResponse(id: "12", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false)]
+        UserProfileResponse(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: 20, receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false )]
 
     private let bodyStackView = UIStackView().then {
       $0.axis = .vertical
@@ -49,16 +47,17 @@ class SendCupidViewController: UIViewController {
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
-                if((data.users?.isEmpty) != nil){
-                    // 유저 데이터가 없는 경우
+                if(data.users.isEmpty){
                     self.addEmptySubviews()
                     self.configEmptyUI()
                 }
                 else{
+                    print(data.users)
                     self.colletModel = data.users
                     self.addSubviews()
                     self.configUI()
                     self.initialize()
+                    self.collectionview.reloadData()
                 }
                 
             default:
@@ -118,7 +117,7 @@ extension SendCupidViewController : UICollectionViewDataSource {
         }
         // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
         let model = colletModel?[indexPath.row]
-        cell.configure(with: model ??  UserProfileResponse(id: "1", profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
+        cell.configure(with: model ??  UserProfileResponse(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: 20, receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
         return cell
     }
 }
@@ -126,7 +125,7 @@ extension SendCupidViewController : UICollectionViewDelegate {
     //셀 클릭 시 이동
     func collectionView(_ collectionview: UICollectionView, didSelectItemAt indexPath : IndexPath) {
         let otherProfileVC = OtherProfileViewController()
-        otherProfileVC.id = colletModel![indexPath.row].id
+        otherProfileVC.id = "\(colletModel![indexPath.row].id)"
         otherProfileVC.isFavorite = colletModel![indexPath.row].isFavorite
         self.navigationController?.pushViewController(otherProfileVC, animated: true)
     }

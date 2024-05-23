@@ -25,7 +25,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     let subInstructionLabel = UILabel().then {
-        $0.text = "업로드한 사진과 셀카의 유사도를 분석하는 단계입니다. 사진 등록 가이드를 참고하시고 사진을 골라 주세요."
+        $0.text = "업로드한 사진과 셀카의 유사도를 분석하는 단계입니다. \n사진 등록 가이드를 참고하시고 사진을 골라 주세요."
         $0.textColor = UIColor(hex: "616161")
         $0.font = UIFont.pretendardMedium(size: 16)
         $0.numberOfLines = 0
@@ -126,9 +126,9 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         subInstructionLabel.snp.makeConstraints { make in
             make.top.equalTo(instructionLabel.snp.bottom).offset(10)
             make.leading.equalTo(instructionLabel.snp.leading)
-            make.width.equalTo(300)
+            make.trailing.equalToSuperview().inset(10)
+            
         }
-        
         horizontalStackView.snp.makeConstraints { make in
             make.top.equalTo(subInstructionLabel.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)

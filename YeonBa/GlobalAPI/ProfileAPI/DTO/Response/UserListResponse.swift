@@ -7,7 +7,7 @@
 
 import Foundation
 struct UserListResponse : Codable {
-    var users : [UserProfileResponse]?
+    var users : [UserProfileResponse]
     var totalPage : Int
     var totalElements : Int
     var isFirst : Bool

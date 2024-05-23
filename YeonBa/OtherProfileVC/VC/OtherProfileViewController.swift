@@ -71,8 +71,6 @@ class OtherProfileViewController: UIViewController {
     private lazy var aboutmeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 5.0 // <- 셀 간격 설정
-        layout.minimumInteritemSpacing = 0.5
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
@@ -95,8 +93,7 @@ class OtherProfileViewController: UIViewController {
     private lazy var preferenceCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 5.0 // <- 셀 간격 설정
-        layout.minimumInteritemSpacing = 0.5
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
@@ -282,7 +279,7 @@ class OtherProfileViewController: UIViewController {
             $0.leading.equalTo(preferenceLabel.snp.leading)
             $0.top.equalTo(preferenceLabel.snp.bottom).offset(10)
             $0.height.equalTo(150)
-            $0.width.equalTo(160)
+            $0.width.equalTo(180)
         }
     }
     func setupPieChart(pieValue: Double) {
@@ -375,6 +372,9 @@ class OtherProfileViewController: UIViewController {
                 self.aboutmeCollectionView.reloadData()
                 self.aboutmeCollectionView.setNeedsLayout()
                 self.aboutmeCollectionView.layoutIfNeeded()
+                self.preferenceCollectionView.reloadData()
+                self.preferenceCollectionView.setNeedsLayout()
+                self.preferenceCollectionView.layoutIfNeeded()
             default:
                 print("프로필 조회 실패")
 
@@ -410,24 +410,40 @@ class OtherProfileViewController: UIViewController {
             }
         }
     }
-
     func configure(data : OtherProfileResponse) {
         setupPieChart(pieValue: Double(data.photoSyncRate))
         self.nameLabel.text = data.nickname
         self.heartLabel.text = "\(data.arrows)"
-        self.preferenceLabel.text = "\(data.photoSyncRate)%"
+        self.similarityLabel.text = "\(data.photoSyncRate)%"
         self.aboutData = ["\(data.age)살", "\(data.height)cm", data.activityArea, data.vocalRange, data.lookAlikeAnimalName]
+        self.preferenceData = [data.lookAlikeAnimalName,
+                               data.activityArea,
+                               data.vocalRange,
+                               "\(data.preferredAgeLowerBound)~\(data.preferredAgeUpperBound)살",
+                               "\(data.preferredHeightLowerBound)~\(data.preferredHeightUpperBound)cm", 
+                               data.preferredBodyType,
+                               data.preferredMbti]
         if(data.alreadySentArrow){
             self.sendBtn.isEnabled = false
             self.sendBtn.backgroundColor = UIColor.gray2
             self.sendBtn.layer.borderColor = UIColor.gray2?.cgColor
             self.sendBtn.setTitleColor(.white, for: .normal)
         }
-        guard let url = URL(string:data.profilePhotosUrls[0]) else { return }
-        self.cupidImageView.kf.setImage(with: url)
         let whiteImage = UIImage(named: "WhiteFavorites")
         let pinkImage = UIImage(named: "PinkFavorites")
-        self.isFavorite ? self.favoriteBtn.setImage(pinkImage, for: .normal) : self.favoriteBtn.setImage(pinkImage, for: .normal)
+        self.isFavorite ? self.favoriteBtn.setImage(pinkImage, for: .normal) : self.favoriteBtn.setImage(whiteImage, for: .normal)
+        // 이미지 로딩
+        var profilePhotoUrl = data.profilePhotosUrls[0]
+        if !profilePhotoUrl.hasSuffix(".png") {
+            profilePhotoUrl += ".png"
+        }
+        
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
+            cupidImageView.kf.setImage(with: url)
+        }else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+        }
     }
 //MARK: -- Action
     @objc func declarButtonTapped() {
@@ -469,9 +485,9 @@ extension OtherProfileViewController: UICollectionViewDelegate {
 extension OtherProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == aboutmeCollectionView {
-            return 5
+            return aboutData.count
         } else if collectionView == preferenceCollectionView {
-            return 6
+            return preferenceData.count
         }
         return 0
     }
@@ -495,13 +511,37 @@ extension OtherProfileViewController: UICollectionViewDataSource {
     }
 }
 extension OtherProfileViewController: UICollectionViewDelegateFlowLayout {
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            
-            return CGSize(width: 50, height: 35)
+    // 셀의 크기를 설정합니다.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == aboutmeCollectionView {
+            let text = aboutData[indexPath.row]
+            let cell = OtherProfileCollectionViewCell()
+            cell.configure(with: text)
+            cell.layoutIfNeeded()
+            let size = cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            return CGSize(width: size.width, height: 35)
+        } else if collectionView == preferenceCollectionView {
+            let text = preferenceData[indexPath.row]
+            let cell = PreferenceCollectionViewCell()
+            cell.configure(with: text)
+            cell.layoutIfNeeded()
+            let size = cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            return CGSize(width: size.width, height: 35)
         }
-        
+        return CGSize(width: 50, height: 35)
     }
+    
+    // 행 간격을 설정합니다.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5.0 // 원하는 간격으로 설정합니다.
+    }
+    
+    // 항목 간격을 설정합니다.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.5 // 원하는 간격으로 설정합니다.
+    }
+}
+
 // MARK: ModalView Delegate
 extension OtherProfileViewController: ModeSelectViewControllerDelegate {
     func didSelectedRowAt(indexPath: Int) {
