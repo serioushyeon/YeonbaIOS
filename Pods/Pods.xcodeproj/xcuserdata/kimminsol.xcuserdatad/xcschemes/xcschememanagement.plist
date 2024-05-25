@@ -235,54 +235,68 @@
 			<key>orderHint</key>
 			<integer>34</integer>
 		</dict>
-		<key>Starscream-Starscream_Privacy.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>36</integer>
-		</dict>
-		<key>Starscream.xcscheme</key>
+		<key>SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>35</integer>
 		</dict>
-		<key>SwiftAlgorithms.xcscheme</key>
+		<key>Starscream-Starscream_Privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>37</integer>
 		</dict>
-		<key>SwiftKeychainWrapper.xcscheme</key>
+		<key>Starscream.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>36</integer>
+		</dict>
+		<key>StompClientLib.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>38</integer>
 		</dict>
-		<key>Tabman-Tabman.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>40</integer>
-		</dict>
-		<key>Tabman.xcscheme</key>
+		<key>SwiftAlgorithms.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>39</integer>
 		</dict>
-		<key>Then.xcscheme</key>
+		<key>SwiftKeychainWrapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>40</integer>
+		</dict>
+		<key>Tabman-Tabman.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>42</integer>
+		</dict>
+		<key>Tabman.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>41</integer>
+		</dict>
+		<key>Then.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>43</integer>
 		</dict>
 		<key>nanopb-nanopb_Privacy.xcscheme</key>
 		<dict>

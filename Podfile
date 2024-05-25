@@ -20,6 +20,8 @@ target 'YeonBa' do
 	pod 'Firebase/Messaging'
 	pod 'SwiftKeychainWrapper'
 	pod 'Socket.IO-Client-Swift'
+	pod 'Starscream'
+	pod 'StompClientLib'
   target 'YeonBaTests' do
     inherit! :search_paths
     # Pods for testing

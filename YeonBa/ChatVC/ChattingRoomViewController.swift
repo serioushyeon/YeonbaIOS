@@ -8,9 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import StompClientLib
 
 class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+    var socketClient = StompClientLib()
+    var socketURL = NSURL(string: "ws://api.yeonba.co.kr/chat")!
     var messagesDateString = "yyyy년 MM월 dd일"
     var messages: [ChatMessage] = [] // 채팅 데이터를 저장할 배열
     // 날짜별로 섹션화된 채팅 데이터
@@ -29,10 +31,6 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         $0.sectionFooterHeight = 0
     }
     //MARK: - Actions
-    @objc func backButtonTapped() {
-        // 뒤로 가기 로직을 구현
-        dismiss(animated: true, completion: nil)
-    }
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
