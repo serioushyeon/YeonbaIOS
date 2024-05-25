@@ -104,6 +104,7 @@ class SettingViewController: UIViewController {
             case .success(let statusResponse):
                 if let data = statusResponse.data {
                     self.nameLabel.text = data.name
+                    self.button2.setTitle("남은 화살 수: \(data.arrows)개", for: .normal)
                     var profilePhotoUrl = data.profileImageUrl
                     if !profilePhotoUrl.hasSuffix(".png") {
                         profilePhotoUrl += ".png"

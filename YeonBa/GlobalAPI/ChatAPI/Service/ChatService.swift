@@ -9,12 +9,12 @@ import Foundation
 import Alamofire
 
 protocol ChatServiceProtocol {
-    func chatList(completion: @escaping (NetworkResult<StatusResponse<ChatListResponse>>) -> Void)
+    func chatList(completion: @escaping (NetworkResult<ChatParent<ChatListResponse>>) -> Void)
     
 }
 
 final class ChatService: APIRequestLoader<ChatTarget>, ChatServiceProtocol {
-    func chatList(completion: @escaping (NetworkResult<StatusResponse<ChatListResponse>>) -> Void) {
-        fetchData(target: .chattingList, responseData: StatusResponse<ChatListResponse>.self, completion: completion)
+    func chatList(completion: @escaping (NetworkResult<ChatParent<ChatListResponse>>) -> Void) {
+        fetchData(target: .chattingList, responseData: ChatParent<ChatListResponse>.self, completion: completion)
     }
 }

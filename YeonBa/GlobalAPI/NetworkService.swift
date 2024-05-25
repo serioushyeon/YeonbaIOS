@@ -20,6 +20,7 @@ final class NetworkService {
     let homeService : HomeServiceProtocol = HomeService( apiLogger: APIEventLogger())
     let searchService : SearchUserServiceProtocol = SearchUserService( apiLogger: APIEventLogger())
     let mypageService : MyPageServiceProtocol = MyPageService( apiLogger: APIEventLogger())
+    let chatService : ChatServiceProtocol = ChatService( apiLogger: APIEventLogger())
     
     private var sessionManager: Session = {
         let configuration = URLSessionConfiguration.default

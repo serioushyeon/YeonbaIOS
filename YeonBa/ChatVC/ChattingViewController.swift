@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 import Then
-
+import Alamofire
 
 class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+    var chatModel : [ChatListResponse] = []
     // MARK: - UI Components
     let bodyStackView = UIStackView().then {
       $0.axis = .vertical
@@ -37,6 +37,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "채팅"
+        updateChat()
         addSubViews()
         configUI()
     }
@@ -45,66 +46,91 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
          self.navigationItem.hidesBackButton = true
     }
     
-
+    // MARK: - Empty UI Layout
+    func addEmptySubviews() {
+        view.addSubview(bodyStackView)
+        [self.heartImage, self.contentLabel]
+          .forEach(self.bodyStackView.addArrangedSubview(_:))
+    }
+    func configEmptyUI() {
+        self.bodyStackView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+    }
     // MARK: - UI Layout
     private func addSubViews(){
         view.addSubview(tableView)
-        /*view.addSubview(bodyStackView)
-        [self.heartImage, self.contentLabel]
-          .forEach(self.bodyStackView.addArrangedSubview(_:))*/
     }
     private func configUI() {
-        /*self.bodyStackView.snp.makeConstraints {make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }*/
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
-
+    // MARK: - Networking
+    private func updateChat() {
+        NetworkService.shared.chatService.chatList() { response in
+            switch response {
+            case .success(let statusResponse):
+                guard let data = statusResponse.data else { return }
+                
+                if let data = statusResponse.data {
+                    
+                    DispatchQueue.main.async {
+                        print("Fetched chatData: \(data)")
+                        self.chatModel = data
+                        self.tableView.reloadData()
+                    }
+//                    self.configUI()
+//                    self.addSubViews()
+                    
+//                    if(data.isEmpty) {
+//                        self.addEmptySubviews()
+//                        self.configEmptyUI()
+//                    }
+//                    else {
+//                        
+//                    }
+                }
+            default:
+                print("데이터 안들어옴")
+            }
+        }
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of notification types for simplicity
-        return 1
+        return chatModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChattingListCell", for: indexPath) as! ChattingListCell
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChattingListCell", for: indexPath) as! ChattingListCell
-            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChattingListCell", for: indexPath) as! ChattingListCell
-            return cell
-        default:
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChattingListCell.identifier, for: indexPath)as? ChattingListCell else {
             return UITableViewCell()
         }
+        let post = chatModel[indexPath.row]
+        cell.configure(with: post)
+        return cell
     }
 
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100 // Adjust cell height accordingly
     }
-    //스와이프 관련
-    //글자색, 구분선 추가 불가
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // '나가기' 액션
         let leaveAction = UIContextualAction(style: .destructive, title: "나가기") { action, view, completionHandler in
             // 나가기 로직을 구현
             completionHandler(true)
         }
-        leaveAction.backgroundColor = .red
+        leaveAction.backgroundColor = .primary
         
         // '차단' 액션
         let blockAction = UIContextualAction(style: .normal, title: "차단") { action, view, completionHandler in
             // 차단 로직을 구현
             completionHandler(true)
         }
-        blockAction.backgroundColor = .customgray4
+        blockAction.backgroundColor = .gray2
 
         let configuration = UISwipeActionsConfiguration(actions: [leaveAction, blockAction])
         return configuration
