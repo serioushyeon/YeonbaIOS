@@ -163,19 +163,6 @@ class PhoneNumberViewController: UIViewController {
     @objc private func phoneNumberCheckTapped() {
         checkPhoneNumber()
     }
-    //전송 버튼을 눌를 경우
-    @objc func sendCodeButtonTapped() {
-        guard let phoneNumber = phoneNumberTextField.text else {
-            return
-        }
-        if isValidPhoneNumber(phoneNumber) {
-            
-        } else {
-            // 전화번호가 유효하지 않은 경우, 사용자에게 알림 등을 표시할 수 있습니다.
-            print("전화번호는 11자리의 숫자여야 합니다.")
-        }
-    }
-    
     @objc func confirmButtonTapped() {
         // 인증번호 유효성 검사 통과 후
         verificationSuccessful()
@@ -186,7 +173,7 @@ class PhoneNumberViewController: UIViewController {
         nextButton.isEnabled = true
         nextButton.backgroundColor = .systemBlue
     }
-
+    
     func getUserInfo() {
         let loginRequest = LoginRequest (
             socialId : SignDataManager.shared.socialId!,
@@ -201,7 +188,7 @@ class PhoneNumberViewController: UIViewController {
                 print("로그인 성공")
             default:
                 print("로그인 실패")
-
+                
             }
         }
     }
@@ -210,8 +197,15 @@ class PhoneNumberViewController: UIViewController {
         guard let phoneNumber = phoneNumberTextField.text else {
             return
         }
+        // 전화번호 유효성 검사
+        let isValidPhoneNumber = phoneNumber.range(of: "^[0-9]{11}$", options: .regularExpression) != nil
+        if !isValidPhoneNumber {
+            phoneNumberBool.isHidden = false
+            phoneNumberBool.text = "전화번호를 11자리 숫자로 입력해주세요."
+            return
+        }
         let phoneNumberRequest = PhoneNumberRequest(phoneNumber: phoneNumber)
-
+        
         NetworkService.shared.signUpService.phoneNumberCheck(queryDTO: phoneNumberRequest) { response in
             switch response {
             case .success(let StatusResponse):
@@ -247,19 +241,22 @@ class PhoneNumberViewController: UIViewController {
         }
         verificationSuccessful()
         if isValidPhoneNumber(phoneNumber) {
+            let birthVC = BirthDateSettingViewController()
+            SignDataManager.shared.phoneNumber = phoneNumber
+            navigationController?.pushViewController(birthVC, animated: true)
             // 전화번호가 유효한 경우
-            if KeychainHandler.shared.accessToken.isEmpty {
-                SignDataManager.shared.phoneNumber = phoneNumber
-                
-                let birthVC = BirthDateSettingViewController()
-                navigationController?.pushViewController(birthVC, animated: true)
-            } else {
-                //유저가 존재할 경우
-                getUserInfo()
-                let tabVC = TabBarController()
-                self.changeRootViewController(rootViewController: tabVC)
-                
-            }
+//            if KeychainHandler.shared.accessToken.isEmpty {
+//                SignDataManager.shared.phoneNumber = phoneNumber
+//                
+//                let birthVC = BirthDateSettingViewController()
+//                navigationController?.pushViewController(birthVC, animated: true)
+//            } else {
+//                //유저가 존재할 경우
+//                getUserInfo()
+//                let tabVC = TabBarController()
+//                self.changeRootViewController(rootViewController: tabVC)
+//                
+//            }
         } else {
             // 전화번호가 유효하지 않은 경우
             showAlert(message: "전화번호는 11자리의 숫자여야 합니다.")

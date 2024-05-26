@@ -107,7 +107,13 @@ class SplashViewController: UIViewController {
                 // AccessToken 및 RefreshToken 저장
                 KeychainHandler.shared.accessToken = data.accessToken
                 KeychainHandler.shared.refreshToken = data.refreshToken
-                
+                let jwt = JWT(token: data.accessToken)
+                if let userId = jwt?.userId {
+                    KeychainHandler.shared.kakaoUserID = jwt?.userId ?? 0
+                    print("유저 아이디\(KeychainHandler.shared.kakaoUserID)")
+                } else {
+                    
+                }
                 // AccessToken이 제대로 설정되었을 때에만 Authorization 헤더 설정
                 if !data.accessToken.isEmpty {
                     NetworkService.shared.setAuthorizationHeader(token: data.accessToken)

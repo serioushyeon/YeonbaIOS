@@ -137,10 +137,16 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     //아이템 클릭
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let ChattingRoomViewController = ChattingRoomViewController()
-            navigationController?.pushViewController(ChattingRoomViewController, animated: true)
+        let selectedRoomId = chatModel[indexPath.row].id
+        let ChattingRoomViewController = ChattingRoomViewController()
+        ChattingRoomViewController.roomId = selectedRoomId
+        let chatUserName = chatModel[indexPath.row].partnerName
+        let chatUserProfile = chatModel[indexPath.row].partnerProfileImageUrl
+        ChattingRoomViewController.chatUserName = chatUserName
+        ChattingRoomViewController.partnerProfileImageUrl = chatUserProfile
+        navigationController?.pushViewController(ChattingRoomViewController, animated: true)
             // 선택된 셀의 선택을 해제합니다.
-            tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         }
 }
 
