@@ -177,8 +177,6 @@
 		58E88E532BF7916400775F06 /* MyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E462BF7916400775F06 /* MyMessageCell.swift */; };
 		58E88E542BF7916400775F06 /* OtherMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E472BF7916400775F06 /* OtherMessageCell.swift */; };
 		58E88E552BF7916400775F06 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E492BF7916400775F06 /* ChatMessage.swift */; };
-		58E88E562BF7916400775F06 /* ChatSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E4A2BF7916400775F06 /* ChatSection.swift */; };
-		58E88E572BF7916400775F06 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E4B2BF7916400775F06 /* Sender.swift */; };
 		58E88E582BF7916400775F06 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E4D2BF7916400775F06 /* SendView.swift */; };
 		58E88E592BF7916400775F06 /* ChattingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E4F2BF7916400775F06 /* ChattingRoomViewController.swift */; };
 		58E88E5A2BF7916400775F06 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88E502BF7916400775F06 /* ChattingViewController.swift */; };
@@ -230,9 +228,12 @@
 		58E88FCE2BFF116700775F06 /* MyPageTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FCD2BFF116700775F06 /* MyPageTarget.swift */; };
 		58E88FD12BFF117D00775F06 /* MyPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD02BFF117D00775F06 /* MyPageService.swift */; };
 		58E88FD32BFF11B600775F06 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD22BFF11B600775F06 /* ProfileResponse.swift */; };
-		58E88FD52BFFA92A00775F06 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD42BFFA92A00775F06 /* ChatList.swift */; };
 		58E88FD72BFFAF5000775F06 /* ChatParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD62BFFAF5000775F06 /* ChatParent.swift */; };
 		58E88FD92BFFB4A400775F06 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD82BFFB4A400775F06 /* Date.swift */; };
+		58E8C36A2C01AA1D0034E761 /* ChattingRoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C3692C01AA1D0034E761 /* ChattingRoomRequest.swift */; };
+		58E8C36C2C01AA930034E761 /* ChatRoomResonse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C36B2C01AA930034E761 /* ChatRoomResonse.swift */; };
+		58E8C36E2C01CC880034E761 /* ChatRoomIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C36D2C01CC880034E761 /* ChatRoomIdRequest.swift */; };
+		58E8C3722C01D0C60034E761 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C3712C01D0C60034E761 /* JWT.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -457,8 +458,6 @@
 		58E88E462BF7916400775F06 /* MyMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMessageCell.swift; sourceTree = "<group>"; };
 		58E88E472BF7916400775F06 /* OtherMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherMessageCell.swift; sourceTree = "<group>"; };
 		58E88E492BF7916400775F06 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
-		58E88E4A2BF7916400775F06 /* ChatSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSection.swift; sourceTree = "<group>"; };
-		58E88E4B2BF7916400775F06 /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		58E88E4D2BF7916400775F06 /* SendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		58E88E4F2BF7916400775F06 /* ChattingRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingRoomViewController.swift; sourceTree = "<group>"; };
 		58E88E502BF7916400775F06 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
@@ -510,9 +509,12 @@
 		58E88FCD2BFF116700775F06 /* MyPageTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTarget.swift; sourceTree = "<group>"; };
 		58E88FD02BFF117D00775F06 /* MyPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageService.swift; sourceTree = "<group>"; };
 		58E88FD22BFF11B600775F06 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
-		58E88FD42BFFA92A00775F06 /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		58E88FD62BFFAF5000775F06 /* ChatParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatParent.swift; sourceTree = "<group>"; };
 		58E88FD82BFFB4A400775F06 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		58E8C3692C01AA1D0034E761 /* ChattingRoomRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRoomRequest.swift; sourceTree = "<group>"; };
+		58E8C36B2C01AA930034E761 /* ChatRoomResonse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomResonse.swift; sourceTree = "<group>"; };
+		58E8C36D2C01CC880034E761 /* ChatRoomIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomIdRequest.swift; sourceTree = "<group>"; };
+		58E8C3712C01D0C60034E761 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -824,6 +826,7 @@
 				589CDD072BE5FE0700BA332F /* BaseNavigationController.swift */,
 				58E88E5B2BF8830600775F06 /* Config.swift */,
 				58E88FD82BFFB4A400775F06 /* Date.swift */,
+				58E8C3712C01D0C60034E761 /* JWT.swift */,
 			);
 			path = Gloabal;
 			sourceTree = "<group>";
@@ -1455,8 +1458,6 @@
 			isa = PBXGroup;
 			children = (
 				58E88E492BF7916400775F06 /* ChatMessage.swift */,
-				58E88E4A2BF7916400775F06 /* ChatSection.swift */,
-				58E88E4B2BF7916400775F06 /* Sender.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1505,6 +1506,8 @@
 			isa = PBXGroup;
 			children = (
 				58E88E692BF892D400775F06 /* ChatContentRequest.swift */,
+				58E8C3692C01AA1D0034E761 /* ChattingRoomRequest.swift */,
+				58E8C36D2C01CC880034E761 /* ChatRoomIdRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1513,8 +1516,8 @@
 			isa = PBXGroup;
 			children = (
 				58E88E672BF88F9400775F06 /* ChatListResponse.swift */,
-				58E88FD42BFFA92A00775F06 /* ChatList.swift */,
 				58E88FD62BFFAF5000775F06 /* ChatParent.swift */,
+				58E8C36B2C01AA930034E761 /* ChatRoomResonse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1981,7 +1984,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58E88E562BF7916400775F06 /* ChatSection.swift in Sources */,
 				58BB86812BB7E56300F90050 /* VoiceTableViewCell.swift in Sources */,
 				58580F022BE13E490055F3E8 /* MbtiMode.swift in Sources */,
 				58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */,
@@ -2002,6 +2004,7 @@
 				589CDCFF2BE514A500BA332F /* KeychainHandler.swift in Sources */,
 				58E88E1E2BF7896300775F06 /* UserListResponse.swift in Sources */,
 				58D138EA2BF22D2E0048C228 /* PhoneNumberResponse.swift in Sources */,
+				58E8C36E2C01CC880034E761 /* ChatRoomIdRequest.swift in Sources */,
 				58E88E1A2BF7896300775F06 /* SendArrowRequest.swift in Sources */,
 				58E88E172BF7896300775F06 /* OtherProfileRequest.swift in Sources */,
 				58E88E402BF790C900775F06 /* Notification.swift in Sources */,
@@ -2018,12 +2021,13 @@
 				58D139102BF3127E0048C228 /* FaceDetectionViewController.swift in Sources */,
 				58580EF72BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
-				58E88FD52BFFA92A00775F06 /* ChatList.swift in Sources */,
 				58D138182BEE81C30048C228 /* RefreshRequest.swift in Sources */,
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
 				58E88FD92BFFB4A400775F06 /* Date.swift in Sources */,
 				58D1390D2BF3127E0048C228 /* FaceComparisonResult.swift in Sources */,
+				58E8C36A2C01AA1D0034E761 /* ChattingRoomRequest.swift in Sources */,
 				589DF3372B9225D5003F03C5 /* UIColor + Extension.swift in Sources */,
+				58E8C3722C01D0C60034E761 /* JWT.swift in Sources */,
 				58E88E162BF7896300775F06 /* BookmarkRequest.swift in Sources */,
 				58E88F952BFCB47700775F06 /* ProfileEditViewController.swift in Sources */,
 				58580F012BE13E490055F3E8 /* AnimalMode.swift in Sources */,
@@ -2161,13 +2165,13 @@
 				58580EB92BE0BA120055F3E8 /* NicknameSettingViewController.swift in Sources */,
 				58E88E6A2BF892D400775F06 /* ChatContentRequest.swift in Sources */,
 				589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */,
+				58E8C36C2C01AA930034E761 /* ChatRoomResonse.swift in Sources */,
 				58E88E2F2BF7896E00775F06 /* ArrowCountResponse.swift in Sources */,
 				58D1390C2BF3127E0048C228 /* AnalysisSyncViewController.swift in Sources */,
 				58580EFD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift in Sources */,
 				58580EAF2BE0B9F60055F3E8 /* GenderSelectionViewController.swift in Sources */,
 				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
 				58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */,
-				58E88E572BF7916400775F06 /* Sender.swift in Sources */,
 				58580EF82BE13E490055F3E8 /* FavoriteMbtiViewController.swift in Sources */,
 				589CDCF42BE4FFB900BA332F /* SignUpRequest.swift in Sources */,
 				58D71EF02B977C4A00BC3A56 /* ActualGradientButton.swift in Sources */,

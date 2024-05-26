@@ -10,13 +10,12 @@ import SnapKit
 import Then
 import StompClientLib
 
-class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var socketClient = StompClientLib()
-    var socketURL = NSURL(string: "ws://api.yeonba.co.kr/chat")!
+class ChattingRoomViewController: UIViewController {
+    var roomId: Int?
+    var chatUserName: String?
+    var partnerProfileImageUrl: String = ""
     var messagesDateString = "yyyy년 MM월 dd일"
-    var messages: [ChatMessage] = [] // 채팅 데이터를 저장할 배열
-    // 날짜별로 섹션화된 채팅 데이터
-    var chatSections: [ChatSection] = []
+    var messages: [ChatRoomResonse] = [] // 채팅 데이터를 저장할 배열
     var sendView = SendView()
     //MARK: - UI Components
     lazy var tableView = UITableView(frame: .zero, style: .grouped).then{
@@ -36,13 +35,17 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.title = "변우석"
+        navigationItem.title = chatUserName
         addSubViews()
         configUI()
-        loadChatData() // 가짜 데이터 로드 함수
+        loadChatData()
         setupKeyboardDismissal()
         tabBarController?.tabBar.isTranslucent = true
-        
+        if let roomId = roomId {
+            print("Chat Room ID: \(roomId)")
+            sendView.roomId = roomId
+        }
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,7 +78,7 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         sendView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(90)
         }
         tableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -85,75 +88,41 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func loadChatData() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        let dates = ["2024년 05월 15일", "2024년 06월 10일"].compactMap { dateFormatter.date(from: $0) }
-        
-        // 가짜 데이터 생성
-        for date in dates {
-            messages = [
-                ChatMessage(sender: .other, message: "안녕 ㅋㅋㅋ", date: date),
-                ChatMessage(sender: .other, message: "밥은 먹었니? 뭐하고 있니", date: date),
-                ChatMessage(sender: .me, message: "그래 안녕하세요 밥 아직 안먹음 ㅋ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ", date: date),
-                ChatMessage(sender: .me, message: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋ아니 안녕못하는데? ㅋ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ9 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ9 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ ㅋㅋ", date: date)
-            ]
-            let section = ChatSection(date: date, messages: messages)
-            chatSections.append(section)
+        guard let roomId = roomId else { return }
+        let requestDTO = ChatRoomIdRequest(roomId: roomId)
+        NetworkService.shared.chatService.chatRoomList(queryDTO: requestDTO) { response in
+            switch response {
+            case .success(let statusResponse):
+                guard let data = statusResponse.data else { return }
+                
+                if let data = statusResponse.data {
+                    
+                    DispatchQueue.main.async {
+                        print("Fetched chatData: \(data)")
+                        self.messages = statusResponse.data!
+                        print("message카운트:\(self.messages.count)")
+                        self.messages.sort { $0.sentAt < $1.sentAt }
+                        self.tableView.reloadData()
+                    }
+                }
+            case .requestErr(let statusResponse):
+                print("요청 에러: \(statusResponse.message)")
+            case .pathErr:
+                print("경로 에러")
+            case .serverErr:
+                print("서버 에러")
+            case .networkErr:
+                print("네트워크 에러")
+            case .failure:
+                print("실패")
+            }
         }
-        
-        tableView.reloadData()
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let chatMessage = messages[indexPath.row]
-        
-        switch chatMessage.sender {
-        case .me:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
-            cell.messageLabel.text = chatMessage.message
-            // 날짜 설정, 셀 스타일링 등
-            return cell
-        case .other:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherMessageCell", for: indexPath) as! OtherMessageCell
-            cell.messageLabel.text = chatMessage.message
-            cell.profileImageView.image = UIImage(named: "woosuck")
-            // 날짜 설정, 셀 스타일링 등
-            return cell
-        }
-    }
-    // UITableViewDataSource Methods
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return chatSections.count
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatSections[section].messages.count
-    }
-    
-    // 섹션 헤더 뷰
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        header.backgroundColor = .white
-        
-        let label = UILabel()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        label.text = dateFormatter.string(from: chatSections[section].date)
-        label.font = UIFont.pretendardRegular(size: 13)
-        label.textColor = UIColor.darkGray
-        header.addSubview(label)
-        
-        label.snp.makeConstraints { make in
-            make.top.equalTo(header.snp.top).offset(19)
-            make.bottom.equalTo(header.snp.bottom).offset(-19)
-            make.centerX.equalTo(header)
-        }
-        
-        return header
-    }
-    
+
+
     // MARK: -- objc
-    
     @objc func keyboardUp(notification: NSNotification) {
         if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                let keyboardRectangle = keyboardFrame.cgRectValue
@@ -170,3 +139,84 @@ class ChattingRoomViewController: UIViewController, UITableViewDataSource, UITab
         self.view.transform = .identity
     }
 }
+extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate {
+    // 섹션 수를 반환하는 메서드
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // 날짜별로 그룹화한 후 그룹의 수를 반환
+        let groupedMessages = Dictionary(grouping: messages, by: { $0.sentAt.prefix(10) })
+        return groupedMessages.count
+    }
+
+    // 각 섹션에 포함된 행 수를 반환하는 메서드
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 섹션에 해당하는 날짜의 메시지 수를 반환
+        let groupedMessages = Dictionary(grouping: messages, by: { $0.sentAt.prefix(10) })
+        let keys = Array(groupedMessages.keys).sorted()
+        let key = keys[section]
+        return groupedMessages[key]?.count ?? 0
+    }
+
+    // 섹션 헤더 뷰를 설정하는 메서드
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = .white
+
+        let label = UILabel()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+
+        // 섹션의 날짜를 설정
+        let groupedMessages = Dictionary(grouping: messages, by: { $0.sentAt.prefix(10) })
+        let keys = Array(groupedMessages.keys).sorted()
+        let key = keys[section]
+
+        if let date = dateFormatter.date(from: String(key)) {
+            label.text = dateFormatter.string(from: date)
+        } else {
+            label.text = String(key)
+        }
+
+        label.font = UIFont.pretendardRegular(size: 13)
+        label.textColor = UIColor.darkGray
+        header.addSubview(label)
+
+        label.snp.makeConstraints { make in
+            make.top.equalTo(header.snp.top).offset(19)
+            make.bottom.equalTo(header.snp.bottom).offset(-19)
+            make.centerX.equalTo(header)
+        }
+
+        return header
+    }
+
+    // 셀을 구성하는 메서드
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let groupedMessages = Dictionary(grouping: messages, by: { $0.sentAt.prefix(10) })
+        let keys = Array(groupedMessages.keys).sorted()
+        let key = keys[indexPath.section]
+        let chatMessages = groupedMessages[key] ?? []
+        let chatMessage = chatMessages[indexPath.row]
+
+        if chatMessage.userId == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
+            cell.messageLabel.text = chatMessage.content
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherMessageCell", for: indexPath) as! OtherMessageCell
+            cell.messageLabel.text = chatMessage.content
+            var profilePhotoUrl = partnerProfileImageUrl
+            if !profilePhotoUrl.hasSuffix(".png") {
+                profilePhotoUrl += ".png"
+            }
+
+            if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+                print("Loading image from URL: \(url)")
+                cell.profileImageView.kf.setImage(with: url)
+            } else {
+                print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+            }
+            return cell
+        }
+    }
+}
+

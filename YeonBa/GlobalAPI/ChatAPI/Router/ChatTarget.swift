@@ -10,7 +10,8 @@ import Alamofire
 
 
 enum ChatTarget {
-    case chattingList
+    case chattingList //채팅방 목록 조회
+    case chatMessageList(_ queryDTO: ChatRoomIdRequest) //채팅 메시지 목록 조회
     case chatSend(_ queryDTO: ChatContentRequest)
 }
 
@@ -20,6 +21,8 @@ extension ChatTarget: TargetType {
         switch self {
         case .chattingList:
             return .get
+        case .chatMessageList:
+            return .get
         case .chatSend:
             return .post
         }
@@ -27,9 +30,11 @@ extension ChatTarget: TargetType {
     var path: String {
         switch self {
         case .chattingList:
-            return "/chattings"
+            return "/chat-rooms"
+        case let .chatMessageList(queryDTO):
+            return "/chat-rooms/\(queryDTO.roomId)/messages"
         case .chatSend:
-            return ""
+            return "/chat-rooms/"
         }
         
     }
@@ -38,6 +43,8 @@ extension ChatTarget: TargetType {
         switch self {
         case .chattingList:
             return .requestPlain
+        case let .chatMessageList(queryDTO):
+            return .requestQuery(queryDTO)
         case let .chatSend(queryDTO):
             return .requestQuery(queryDTO)
         }
@@ -46,15 +53,19 @@ extension ChatTarget: TargetType {
     var headerType: HTTPHeaderType {
         switch self  {
         case .chattingList:
-            return .providerToken
+            return .hasToken
+        case .chatMessageList:
+            return .hasToken
         case .chatSend:
-            return .providerToken
+            return .hasToken
         }
     }
     
     var authorization: Authorization {
         switch self {
         case .chattingList:
+            return .authorization
+        case .chatMessageList:
             return .authorization
         case .chatSend:
             return .authorization

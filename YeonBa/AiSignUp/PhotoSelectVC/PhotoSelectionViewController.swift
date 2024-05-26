@@ -270,7 +270,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         if imageDatas.count < 2 {
                 print("프로필 사진은 반드시 2장이어야 합니다.")
                 return
-            }
+        }
         SignDataManager.shared.profilePhotos = imageDatas
         let cameraVC = FaceDetectionViewController()
         navigationController?.pushViewController(cameraVC, animated: true)

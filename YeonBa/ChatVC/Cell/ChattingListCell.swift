@@ -14,16 +14,13 @@ class ChattingListCell: UITableViewCell {
         $0.clipsToBounds = true
     }
     let nameLabel = UILabel().then {
-        $0.text = "변우석"
         $0.font = UIFont.pretendardSemiBold(size: 18)
     }
     let messegeLabel = UILabel().then {
-        $0.text = "오늘 밥 먹었니?"
         $0.font = UIFont.pretendardMedium(size: 16)
         $0.textColor = .customgray4
     }
     let timeLabel = UILabel().then {
-        $0.text = "3분 전"
         $0.font = UIFont.pretendardRegular(size: 13)
         $0.textColor = .lightGray
     }
@@ -93,7 +90,6 @@ class ChattingListCell: UITableViewCell {
         nameLabel.text = model.partnerName
         messegeLabel.text = model.lastMessage
         unreadLabel.text = model.unreadMessageNumber.map { "\($0)" } ?? "0"
-        // 서버에서 받아온 날짜를 현재 시간 기준으로 변환하여 표시
         // 서버에서 받아온 날짜를 현재 시간 기준으로 변환하여 표시
         if let dateString = model.lastMessageAt {
             let dateFormatter = DateFormatter()

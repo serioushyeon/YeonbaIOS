@@ -38,9 +38,9 @@ struct KeychainHandler {
         }
     }
     
-    var kakaoUserID: String {
+    var kakaoUserID: Int {
         get {
-            return KeychainWrapper.standard.string(forKey: kakaoUserIDKey) ?? ""
+            return KeychainWrapper.standard.integer(forKey: kakaoUserIDKey) ?? 0
         }
         set {
             KeychainWrapper.standard.set(newValue, forKey: kakaoUserIDKey)
