@@ -2,6 +2,14 @@ import UIKit
 
 class ChangeGradientButton: UIButton {
     private var isActive = false
+    private let circleLabel = UILabel().then {
+        $0.textColor = .black
+        $0.textAlignment = .center
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 15
+        $0.layer.masksToBounds = true
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -15,11 +23,23 @@ class ChangeGradientButton: UIButton {
     
     private func commonInit() {
         applyGradient(isActive: isActive)
+        self.layer.cornerRadius = 30
+        self.layer.masksToBounds = true
+        addSubview(circleLabel)
+        setupCircleLabelConstraints()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        applyGradient(isActive: isActive)  // 버튼 크기가 변경될 때마다 그라디언트 업데이트
+        applyGradient(isActive: isActive)
+    }
+    
+    private func setupCircleLabelConstraints() {
+        circleLabel.snp.makeConstraints { make in
+            make.width.height.equalTo(30)
+            make.trailing.equalToSuperview().offset(-25)
+            make.centerY.equalToSuperview()
+        }
     }
     
     func applyGradient(isActive: Bool) {
@@ -42,6 +62,10 @@ class ChangeGradientButton: UIButton {
         gradientLayer.cornerRadius = self.layer.cornerRadius
         self.layer.insertSublayer(gradientLayer, at: 0)
         self.layer.masksToBounds = true
+    }
+
+    func setCircleLabelText(_ text: String) {
+        circleLabel.text = text
     }
 
     func activate() {
