@@ -3,85 +3,90 @@ import SnapKit
 import Then
 import Kingfisher
 
-class ProfileEditViewController: UIViewController, UIViewControllerTransitioningDelegate, HeightEditViewControllerDelegate,VoiceEditViewControllerDelegate, LivingAreaViewControllerDelegate, BodyEditViewControllerDelegate, FaceEditViewControllerDelegate, MbtiEditViewControllerDelegate, AnimalPreferenceViewControllerDelegate, RegionPreferenceViewControllerDelegate, VoicePreferenceViewControllerDelegate, BodyTypePreferenceViewControllerDelegate, MBTIPreferenceViewControllerDelegate{
+class ProfileEditViewController: UIViewController, UIViewControllerTransitioningDelegate, HeightEditViewControllerDelegate,VoiceEditViewControllerDelegate, LivingAreaViewControllerDelegate, BodyEditViewControllerDelegate, FaceEditViewControllerDelegate, MbtiEditViewControllerDelegate, AnimalPreferenceViewControllerDelegate, RegionPreferenceViewControllerDelegate, VoicePreferenceViewControllerDelegate, BodyTypePreferenceViewControllerDelegate, MBTIPreferenceViewControllerDelegate {
     
-    func didSelectMBTI1(_ type: String) {
-        if let mbtiButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 MBTI" }) {
-            mbtiButton.setTitle(type, for: .normal)
-        }
-       
-    }
+    var profileDetail = ProfileDetailResponse(profilePhotoUrls: [],
+      gender: "남",
+      birth: "1998-01-01",
+      height: 181,
+      phoneNumber: "01011112222",
+      nickname: "존잘남",
+      photoSyncRate: 80,
+      bodyType: "마른 체형",
+      job: "학생",
+      mbti: "ISTP")
     
-    func didSelectBodyType1(_ type: String) {
-        if let bodyButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 체형" }) {
-            bodyButton.setTitle(type, for: .normal)
-        }
-    }
+    var profileEdit = ProfileEditRequest(nickname:"", height: 160, vocalRange: "중음", birth: "2000-12-17", bodyType: "마른체형", job: "직장인", activityArea: "서울", lookAlikeAnimal: "강아지상", mbti: "INTJ", preferredAnimal: "강아지상", preferredArea: "서울", preferredVocalRange: "저음", preferredAgeLowerBound: 22, preferredAgeUpperBound: 24, preferredHeightLowerBound: 181, preferredHeightUpperBound: 185, preferredBodyType: "보통체형", preferredMbti: "INTP")
     
-    func voicePreferenceSelected(_ voiceType: String) {
-        if let voiceButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 목소리" }) {
-            voiceButton.setTitle(voiceType, for: .normal)
-        }
-    }
-    
-    func didSelectRegionPreference(_ area: String) {
-        if let areaButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 지역" }) {
-            areaButton.setTitle(area, for: .normal)
-        }
-    }
-    
-    func didSelectFaceType1(_ type: String) {
-        if let faceTypeButton = preferenceFields.first(where: { $0.titleLabel?.text == "선호하는 얼굴상" }) {
-            faceTypeButton.setTitle(type, for: .normal)
-        }
-    }
-
-    
-    
-    func didSelectMBTI(_ type: String) {
-        if let mbtiButton = infoFields.first(where: { $0.titleLabel?.text == "MBTI" }) {
-            mbtiButton.setTitle(type, for: .normal)
-        }
-       
-    }
-
-    
-    func didSelectFaceType(_ type: String) {
-        if let faceTypeButton = infoFields.first(where: { $0.titleLabel?.text == "얼굴상" }) {
-            faceTypeButton.setTitle(type, for: .normal)
-        }
-    }
-    
-
-    
-    
+    //about me
     func didSelectHeight(_ height: Int) {
-        let heightButton = infoFields[0] 
+        let heightButton = infoFields[0]
         heightButton.setTitle("\(height)cm", for: .normal)
+        profileEdit.height = height
     }
 
-   
-    
     func voiceSelected(_ voiceType: String) {
-        if let voiceButton = infoFields.first(where: { $0.titleLabel?.text == "목소리" }) {
-            voiceButton.setTitle(voiceType, for: .normal)
-        }
+        let voiceButton = infoFields[1]
+        voiceButton.setTitle(voiceType, for: .normal)
+        profileEdit.vocalRange = voiceType
     }
     
-
-
     func didSelectLivingArea(_ area: String) {
-        if let areaButton = infoFields.first(where: { $0.titleLabel?.text == "사는 지역" }) {
-            areaButton.setTitle(area, for: .normal)
-        }
+        let areaButton = infoFields[2]
+        areaButton.setTitle(area, for: .normal)
+        profileEdit.activityArea = area
     }
     
     func didSelectBodyType(_ type: String) {
-        if let bodyButton = infoFields.first(where: { $0.titleLabel?.text == "체형" }) {
-            bodyButton.setTitle(type, for: .normal)
-        }
+        let bodyButton = infoFields[3]
+        bodyButton.setTitle(type, for: .normal)
+        profileEdit.bodyType = type
     }
-
+    
+    func didSelectFaceType(_ type: String) {
+        let faceTypeButton = infoFields[4]
+        faceTypeButton.setTitle(type, for: .normal)
+        profileEdit.lookAlikeAnimal = type
+    }
+    
+    func didSelectMBTI(_ type: String) {
+        let mbtiButton = infoFields[5]
+        mbtiButton.setTitle(type, for: .normal)
+        profileEdit.mbti = type
+    }
+    
+    //preference
+    func didSelectFaceType1(_ type: String) {
+        let faceTypeButton = preferenceFields[0]
+        faceTypeButton.setTitle(type, for: .normal)
+        profileEdit.preferredAnimal = type
+    }
+    
+    func didSelectRegionPreference(_ area: String) {
+        let areaButton = preferenceFields[1]
+        areaButton.setTitle(area, for: .normal)
+        profileEdit.preferredArea = area
+    }
+    
+    func voicePreferenceSelected(_ voiceType: String) {
+        let voiceButton = preferenceFields[2]
+        voiceButton.setTitle(voiceType, for: .normal)
+        profileEdit.preferredVocalRange = voiceType
+    }
+    
+    func didSelectBodyType1(_ type: String) {
+        let bodyButton = preferenceFields[4]
+        bodyButton.setTitle(type, for: .normal)
+        profileEdit.preferredBodyType = type
+    }
+    
+    func didSelectMBTI1(_ type: String) {
+        let mbtiButton = preferenceFields[5]
+        mbtiButton.setTitle(type, for: .normal)
+        profileEdit.preferredMbti = type
+    }
+    
+    
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
@@ -121,7 +126,7 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
 
-    private let infoFieldTitles = ["키", "목소리", "사는 지역", "체형", "얼굴상", "MBTI"]
+    private var infoFieldTitles = ["키", "목소리", "사는 지역", "체형", "얼굴상", "MBTI"]
     private var infoFields: [UIButton] = []
 
 
@@ -129,6 +134,7 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         $0.text = "Preference"
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
+    
 
 
     override func viewDidLoad() {
@@ -145,6 +151,10 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
 
 
     private func setupInfoFields() {
+        infoFieldTitles = ["\(profileDetail.height)cm", "목소리", "사는 지역",profileDetail.bodyType, "얼굴상", profileDetail.mbti]
+        profileEdit.height = profileDetail.height
+        profileEdit.bodyType = profileDetail.bodyType
+        profileEdit.mbti = profileDetail.mbti
         infoFields = infoFieldTitles.enumerated().map { index, title in
             let button = UIButton().then {
                 $0.setTitle(title, for: .normal)
@@ -154,10 +164,10 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
                 $0.layer.cornerRadius = 8
                 $0.setTitleColor(.black, for: .normal)
                 $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-                $0.snp.makeConstraints { make in  // 버튼의 높이를 51로 설정
+                $0.snp.makeConstraints { make in
                     make.height.equalTo(51)
                 }
-                $0.tag = index
+                $0.tag = index // Assign a unique tag
                 $0.addTarget(self, action: #selector(infoButtonTapped(_:)), for: .touchUpInside)
             }
             return button
@@ -198,13 +208,12 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
             mbtiEditVC.delegate = self
             mbtiEditVC.modalPresentationStyle = .pageSheet
             present(mbtiEditVC, animated: true)
-            
         default:
             break
         }
     }
 
-    private let preferenceFieldstitle = ["선호하는 얼굴상", "선호하는 지역", "선호하는 목소리", "선호하는 나이대", "선호하는 체형", "선호하는 MBTI"]
+    private var preferenceFieldstitle = ["선호하는 얼굴상", "선호하는 지역", "선호하는 목소리", "선호하는 나이대", "선호하는 체형", "선호하는 MBTI"]
     private var preferenceFields: [UIButton] = []
                 
     private func setupPreferenceFields() {
@@ -217,10 +226,10 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
                 $0.layer.cornerRadius = 8
                 $0.setTitleColor(.black, for: .normal)
                 $0.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-                $0.snp.makeConstraints { make in  // 버튼의 높이를 51로 설정
+                $0.snp.makeConstraints { make in
                     make.height.equalTo(51)
                 }
-                $0.tag = index
+                $0.tag = index + 100 // Assign a unique tag, ensuring it's different from infoFields tags
                 $0.addTarget(self, action: #selector(preferenceButtonTapped(_:)), for: .touchUpInside)
             }
             return button
@@ -229,44 +238,35 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
 
     @objc private func preferenceButtonTapped(_ sender: UIButton) {
         switch sender.tag {
-        case 0:
+        case 100:
             let animalPreferenceVC = AnimalPreferenceViewController()
             animalPreferenceVC.delegate = self
             animalPreferenceVC.modalPresentationStyle = .pageSheet
             present(animalPreferenceVC, animated: true)
-        case 1:
+        case 101:
             let regionPreferenceVC = RegionPreferenceViewController()
             regionPreferenceVC.delegate = self
             regionPreferenceVC.modalPresentationStyle = .pageSheet
             present(regionPreferenceVC, animated: true)
-        case 2:
+        case 102:
             let voicePreferenceVC = VoicePreferenceViewController()
             voicePreferenceVC.delegate = self
             voicePreferenceVC.modalPresentationStyle = .pageSheet
             present(voicePreferenceVC, animated: true)
-            
-            
-        case 4:
+        case 104:
             let bodyTypePreferenceVC = BodyTypePreferenceViewController()
             bodyTypePreferenceVC.delegate = self
             bodyTypePreferenceVC.modalPresentationStyle = .pageSheet
             present(bodyTypePreferenceVC, animated: true)
-        case 5:
+        case 105:
             let MBTIPreferenceVC = MBTIPreferenceViewController()
             MBTIPreferenceVC.delegate = self
             MBTIPreferenceVC.modalPresentationStyle = .pageSheet
             present(MBTIPreferenceVC, animated: true)
-            
-            
-            
         default:
             break
         }
     }
-
-
- 
-
 
     private func navigateToViewController(_ viewController: UIViewController) {
         navigationController?.pushViewController(viewController, animated: true)
@@ -342,11 +342,26 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
     
     private func setupNavigationBarButton() {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonTapped))
+        doneButton.setTitleTextAttributes([.foregroundColor: UIColor.primary, .font: UIFont.pretendardMedium(size: 19)], for: .normal)
         navigationItem.rightBarButtonItem = doneButton
     }
-
+    func apiEditProfile(){
+        let editRequest = self.profileEdit
+        NetworkService.shared.mypageService.editProfile(bodyDTO: editRequest) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                print("수정 성공")
+            default:
+                print("수정 실패")
+                
+            }
+        }
+    }
     @objc private func doneButtonTapped() {
         print("완료 버튼이 눌렸습니다.")
+        print(self.profileEdit)
+        //apiEditProfile()
     }
 }
 

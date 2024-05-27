@@ -114,6 +114,7 @@ class OtherProfileViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 19
         $0.addTarget(self, action: #selector(arrowBtnTapped), for: .touchUpInside)
+        $0.isHidden = false
     }
     private let sendChatBtn = ActualGradientButton().then {
         $0.setTitle("채팅 보내기", for: .normal)
@@ -122,6 +123,26 @@ class OtherProfileViewController: UIViewController {
         $0.layer.cornerRadius = 19
         $0.layer.masksToBounds = true
         $0.addTarget(self, action: #selector(apiSendChatRequest), for: .touchUpInside)
+    }
+    private var sendDoneBtn = UIButton().then {
+        $0.setTitle("화살 보내기 완료", for: .normal)
+        $0.setTitleColor(UIColor.customgray4, for: .normal)
+        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
+        $0.layer.masksToBounds = true
+        $0.layer.backgroundColor = UIColor.customgray2?.cgColor
+        $0.layer.cornerRadius = 25
+        $0.isEnabled = false
+        $0.isHidden = true
+    }
+    private var sendChatDoneBtn = UIButton().then {
+        $0.setTitle("채팅 요청 완료", for: .normal)
+        $0.setTitleColor(UIColor.customgray4, for: .normal)
+        $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
+        $0.layer.masksToBounds = true
+        $0.layer.backgroundColor = UIColor.customgray2?.cgColor
+        $0.layer.cornerRadius = 25
+        $0.isEnabled = false
+        $0.isHidden = true
     }
     //MARK: - 업로드한 사진이 올라가는 스크롤뷰
     lazy var pageControl: UIPageControl = {
@@ -188,7 +209,10 @@ class OtherProfileViewController: UIViewController {
         view.addSubview(bottomBarView)
         view.addSubview(horizontalStackView)
         horizontalStackView.addArrangedSubview(sendBtn)
+        horizontalStackView.addArrangedSubview(sendDoneBtn)
         horizontalStackView.addArrangedSubview(sendChatBtn)
+        horizontalStackView.addArrangedSubview(sendChatDoneBtn)
+        
         
     }
     func configureCollectionView() {
@@ -346,8 +370,9 @@ class OtherProfileViewController: UIViewController {
             guard let self = self else { return }
             switch response {
             case .success(let data):
-                guard let data = data.data else { return }
                 print("화살 보내기 성공")
+                self.sendBtn.isHidden = true
+                self.sendDoneBtn.isHidden = false
             default:
                 print("화살 보내기 실패")
                 
@@ -360,8 +385,9 @@ class OtherProfileViewController: UIViewController {
             guard let self = self else { return }
             switch response {
             case .success(let data):
-                guard let data = data.data else { return }
                 print("채팅 요청 성공")
+                self.sendChatBtn.isHidden = true
+                self.sendChatDoneBtn.isHidden = false
             default:
                 print("채팅 요청 실패")
                 
@@ -396,7 +422,6 @@ class OtherProfileViewController: UIViewController {
             guard let self = self else { return }
             switch response {
             case .success(let data):
-                guard let data = data.data else { return }
                 print("북마크 성공")
             default:
                 print("북마크 실패")
@@ -410,7 +435,6 @@ class OtherProfileViewController: UIViewController {
             guard let self = self else { return }
             switch response {
             case .success(let data):
-                guard let data = data.data else { return }
                 print("북마크 성공")
             default:
                 print("북마크 실패")
@@ -514,6 +538,12 @@ class OtherProfileViewController: UIViewController {
         let whiteImage = UIImage(named: "WhiteFavorites")
         let pinkImage = UIImage(named: "PinkFavorites")
         self.isFavorite ? self.favoriteBtn.setImage(pinkImage, for: .normal) : self.favoriteBtn.setImage(whiteImage, for: .normal)
+        if(data.alreadySentArrow){
+            self.sendBtn.isHidden = true
+        }
+        else{
+            self.sendDoneBtn.isHidden = false
+        }
         // 이미지 로딩
         loadProfileImages(urls: data.profilePhotosUrls)
     }

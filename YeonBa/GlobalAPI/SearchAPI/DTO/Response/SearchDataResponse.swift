@@ -9,7 +9,7 @@ import Foundation
 
 struct SearchDataResponse : Codable {
     let users: [SearchUsers]
-    let totalPages: Int
+    let totalPage: Int
     let totalElements: Int
     let isFirst: Bool
     let isLast: Bool

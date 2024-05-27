@@ -10,6 +10,8 @@ import Alamofire
 
 enum MyPageTarget {
     case myprofile
+    case editProfile(_ bodyDTO: ProfileEditRequest)
+    case profileDetail
 }
 
 extension MyPageTarget: TargetType {
@@ -17,6 +19,10 @@ extension MyPageTarget: TargetType {
     var method: HTTPMethod {
         switch self {
         case .myprofile:
+            return .get
+        case .editProfile:
+            return .patch
+        case .profileDetail:
             return .get
         }
         
@@ -26,7 +32,10 @@ extension MyPageTarget: TargetType {
         switch self {
         case .myprofile:
             return "/users/profiles"
-        
+        case .editProfile:
+            return "/users/profiles"
+        case .profileDetail:
+            return "/users/profiles/details"
         }
         
     }
@@ -35,13 +44,20 @@ extension MyPageTarget: TargetType {
         switch self {
         case .myprofile:
             return .requestPlain
-        
+        case let .editProfile(bodyDTO):
+            return .requestWithBody(bodyDTO)
+        case .profileDetail:
+            return .requestPlain
         }
     }
     
     var headerType: HTTPHeaderType {
         switch self  {
         case .myprofile:
+            return .hasToken
+        case .editProfile:
+            return .hasToken
+        case .profileDetail:
             return .hasToken
         
         }
@@ -50,6 +66,10 @@ extension MyPageTarget: TargetType {
     var authorization: Authorization {
         switch self {
         case .myprofile:
+            return .authorization
+        case .editProfile:
+            return .authorization
+        case .profileDetail:
             return .authorization
         }
     }
