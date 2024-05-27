@@ -14,8 +14,8 @@ import StompClientLib
 final class SendView: UIView {
     var roomId: Int?
     private var socketClient = StompClientLib()
-    private var socketURL = NSURL(string: "ws://api.yeonba.co.kr/chat")!
-    
+    private var socketURL = NSURL(string: "ws://13.124.72.132:8080/chat/websocket")!
+    private let messageDestinationURL = "ws://api.yeonba.co.kr/chat/pub/chat"
     private let messageTextField = UITextField().then {
         $0.placeholder = "메시지 보내기"
         $0.borderStyle = .none
@@ -34,7 +34,7 @@ final class SendView: UIView {
     private let sendButton = UIButton().then {
         $0.setImage(UIImage(named: "SendIcon"), for: .normal) // 전송 아이콘 이미지 설정
         $0.contentMode = .scaleAspectFit
-        //$0.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
     init(roomId: Int?) {
         self.roomId = roomId
@@ -72,35 +72,35 @@ final class SendView: UIView {
         
         var request = URLRequest(url: socketURL as URL)
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        
-        // Add more headers if needed, e.g., WebSocket protocol
-        // request.addValue("some-value", forHTTPHeaderField: "Some-Header")
-        
         print("Connecting to WebSocket with URL: \(socketURL.absoluteString)")
         print("Headers: \(request.allHTTPHeaderFields ?? [:])")
         
         socketClient.openSocketWithURLRequest(request: request as NSURLRequest, delegate: self)
     }
     @objc func sendMessage() {
-        guard let message = messageTextField.text, !message.isEmpty else {
-            return
-        }
-        let userId = 3
-        let userName = "김민솔123"
-        let sentAt = DateFormatter().then {
-            $0.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            $0.timeZone = TimeZone(secondsFromGMT: 0)
-        }.string(from: Date())
-        let request: [String: Any] = [
-            "roomId": roomId,
-            "userId": userId,
-            "userName": userName,
-            "content": message,
-            "sentAt": ISO8601DateFormatter().string(from: Date())
-        ]
-        let destination = "/pub/chat"
-        socketClient.sendJSONForDict(dict: request as AnyObject, toDestination: destination)
+            print("메시지 보내기 ")
+            guard let message = messageTextField.text, !message.isEmpty else {
+                return
+            }
+            
+            let userId = 3
+            let userName = "김민솔123"
+            let sentAt = DateFormatter().then {
+                $0.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                $0.timeZone = TimeZone(secondsFromGMT: 0)
+            }.string(from: Date())
+            
+            let request: [String: Any] = [
+                "roomId": roomId ?? 0,
+                "userId": userId,
+                "userName": userName,
+                "content": message,
+                "sentAt": ISO8601DateFormatter().string(from: Date())
+            ]
+            print("requeest 값\(request)")
+            socketClient.sendJSONForDict(dict: request as AnyObject, toDestination: messageDestinationURL)
     }
+    
     func showMessageOutput(userId: Int, userName: String, message: String, sentAt: String) {
         let sentAtFormatted = formatDateString(sentAt)
         let newMessage = "User \(userName) (ID: \(userId)): \(message) (at \(sentAtFormatted))\n"
@@ -136,7 +136,7 @@ extension SendView: StompClientLibDelegate {
         print("StompClient is connected")
         print("소켓통신: \(String(describing: roomId))")
         
-        let topic = "/sub/room/\(String(describing: roomId))"
+        let topic = "ws://api.yeonba.co.kr/chat/sub/room/\(roomId)"
         client.subscribe(destination: topic)
         
     }
