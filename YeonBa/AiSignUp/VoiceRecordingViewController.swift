@@ -1,4 +1,10 @@
 //
+//  VoiceViewController.swift
+//  YeonBa
+//
+//  Created by jin on 5/21/24.
+//
+//
 //  VoiceRecordingViewController.swift
 //  YeonBa
 //
@@ -13,11 +19,21 @@ import CoreML
 
 
 class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
-    
-    //MARK: - UI Components
+    //MARK: - UI Comaponents
     var waveformView = WaveformView().then{
-            $0.backgroundColor = .clear
-        }
+        $0.backgroundColor = .clear
+    }
+    let titleLabel = UILabel().then{
+        $0.text = "AI 음역대 측정"
+        $0.font = UIFont.pretendardMedium(size: 18)
+    }
+    let backButton = UIButton(type: .system).then {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .light)
+        let image = UIImage(named: "BackButton")
+        $0.setImage(image, for: .normal)
+        $0.tintColor = UIColor.black
+        $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
     
     let recordingIndicatorView = UIView().then {
         $0.backgroundColor = .red
@@ -84,21 +100,22 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         $0.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
     }
     
+    var audioEngine: AVAudioEngine!
     var audioRecorder: AVAudioRecorder?
     var recordingTimer: Timer?
     var recordingDuration: TimeInterval = 0
     let maxRecordingDuration: TimeInterval = 10
-    let model =  try? converted_model(configuration: MLModelConfiguration())
     var result : Int?  = 1
     var voiceMode : String = "중음"
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWaveformView()
-        setupNavigationBar()
         setupUI()
         addSubViews()
         configUI()
+        setupAudioEngine()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -109,11 +126,6 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     func setupUI() {
         setupBGColor()
         setupRecording()
-    }
-    // MARK: - UI Layout
-    private func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "AI 음역대 측정"
     }
     
     // MARK: - UI Layout
@@ -148,7 +160,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
         profileImageBGView.snp.makeConstraints { make in
-            make.top.equalTo(recordingLabel.snp.bottom).offset(14)
+            make.top.equalTo(recordingLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(175)
         }
@@ -243,101 +255,13 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         startRecordingTimer()
         startUpdatingWaveform()
     }
-    func loadAudioFile(url: URL) -> (sampleRate: Int, data: [Float])? {
-        do {
-            let audioFile = try AVAudioFile(forReading: url)
-            let sampleRate = Int(audioFile.fileFormat.sampleRate)
-            let frameCount = Int(audioFile.length)
-            let format = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: Double(sampleRate), channels: 1, interleaved: false)!
-            guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(frameCount)) else {
-                print("Failed to create AVAudioPCMBuffer")
-                return nil
-            }
-            try audioFile.read(into: buffer)
-            let floatArray = Array(UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: frameCount))
-            return (sampleRate, floatArray)
-        } catch {
-            print("Error reading audio file: \(error.localizedDescription)")
-            return nil
-        }
-    }
-
-    func normalizeAndPadData(data: [Float], targetLength: Int) -> [[Float]] {
-        let normalizedData = data.map { $0 / 32767.0 } // Assuming the data is 16-bit PCM
-        let paddedData = Array(normalizedData.prefix(targetLength)) + Array(repeating: Float(0), count: max(0, targetLength - data.count))
-        let reshapedData = stride(from: 0, to: paddedData.count, by: targetLength/8).map { Array(paddedData[$0..<$0+targetLength/8]) }
-        return reshapedData
-    }
-    func convertNormalizedAndPaddedDataToMLMultiArray(data: [[Float]]) -> MLMultiArray? {
-        let targetLength = 100000 // 목표 길이
-        do {
-            let mlMultiArray = try MLMultiArray(shape: [1, 8, targetLength, 1] as [NSNumber], dataType: .float32)
-            let pointer = UnsafeMutablePointer<Float>(OpaquePointer(mlMultiArray.dataPointer))
-            for (frameIndex, frame) in data.enumerated() {
-                guard frame.count == targetLength/8 else {
-                    print("Frame \(frameIndex) length is not correct.")
-                    return nil
-                }
-                for (sampleIndex, value) in frame.enumerated() {
-                    let index = frameIndex * targetLength/8 + sampleIndex
-                    pointer[index] = value
-                }
-            }
-            return mlMultiArray
-        } catch {
-            print("Error creating MLMultiArray: \(error.localizedDescription)")
-            return nil
-        }
-    }
+    
     private func stopRecording() {
         // 녹음 중지
         audioRecorder?.stop()
         stopRecordingTimer()
-        if let url = try? AVAudioFile(forReading: audioRecorder!.url).url,
-           let (sampleRate, data) = loadAudioFile(url: url) {
-            print("Sample Rate: \(sampleRate)")
-            print("Data Length: \(data.count)")
-            let normalizedAndPaddedData = normalizeAndPadData(data: data, targetLength: 100000)
-            print("Normalized and Padded Data:", data.count)
-            if let mlMultiArray = convertNormalizedAndPaddedDataToMLMultiArray(data: normalizedAndPaddedData) {
-                print("Successfully converted to MLMultiArray")
-                // Use mlMultiArray as needed
-                do {
-                    let output = try model!.prediction(conv2d_input: mlMultiArray)
-                    print(output.IdentityShapedArray.scalars)
-                    result = argmax(output.IdentityShapedArray.scalars)
-                    print("result: \(result)")
-                    if let maxProbabilityIndex = output.IdentityShapedArray.scalars.argmax() {
-                        print("Highest probability index:", maxProbabilityIndex)
-                    } else {
-                        print("Failed to find highest probability index")
-                    }
-                    switch result {
-                    case 0 :
-                        voiceMode = "저음"
-                        SignDataManager.shared.vocalRange = voiceMode
-                    case 1 :
-                        voiceMode = "중음"
-                        SignDataManager.shared.vocalRange = voiceMode
-                    case 2 :
-                        voiceMode = "고음"
-                        SignDataManager.shared.vocalRange = voiceMode
-                    case .none:
-                        voiceMode = "중음"
-                        SignDataManager.shared.vocalRange = voiceMode
-                    case .some(_):
-                        voiceMode = "중음"
-                        SignDataManager.shared.vocalRange = voiceMode
-                    }
-                    print("현재 내 목소리: \(String(describing: SignDataManager.shared.vocalRange))")
-                } catch {
-                    print("모델 예측 도중 오류가 발생했습니다: \(error.localizedDescription)")
-                }
-            } else {
-                print("Failed to convert normalized and padded data to MLMultiArray")
-            }
-        } else {
-            print("Failed to load audio file")
+        if let url = try? AVAudioFile(forReading: audioRecorder!.url).url {
+            analyzeAudioFile(url: url)
         }
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .light)
         let image = UIImage(systemName: "mic.circle.fill", withConfiguration: imageConfig)
@@ -345,21 +269,6 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.backgroundColor = .white
         recordButton.tintColor = UIColor.primary
         presentPopup()
-    }
-    func argmax<T: Comparable>(_ array: [T]) -> Int? {
-        guard !array.isEmpty else { return nil }
-        
-        var maxIndex = 0
-        var maxValue = array[0]
-        
-        for (index, value) in array.enumerated() {
-            if value > maxValue {
-                maxIndex = index
-                maxValue = value
-            }
-        }
-        
-        return maxIndex
     }
     
     private func startRecordingTimer() {
@@ -436,165 +345,167 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    
-    //AI 모델 관련 코드
-    
-    func preprocessData(data: [Float]) -> MLMultiArray? {
-        let paddedData = padData(data: data, targetLength: 800000)
-        let reshapedData = reshapeData(data: paddedData, rows: 8, columns: 100000)
-        return convertToMultiArray(data: reshapedData)
-    }
-    
-    func padData(data: [Float], targetLength: Int) -> [Float] {
-        var paddedData = data
-        if data.count < targetLength {
-            let paddingCount = targetLength - data.count
-            paddedData += [Float](repeating: 0, count: paddingCount)
-        }
-        return paddedData
-    }
-    //차원 변경
-    func reshapeData(data: [Float], rows: Int, columns: Int) -> [[Float]] {
-        var reshapedData = [[Float]]()
-        for i in 0..<rows {
-            let startIndex = i * columns
-            let endIndex = (i + 1) * columns
-            let row = Array(data[startIndex..<endIndex])
-            reshapedData.append(row)
-        }
-        return reshapedData
-    }
-    func convertAudioBufferToMLMultiArray(audioBuffer: AVAudioPCMBuffer, targetLength: Int) -> MLMultiArray? {
-        guard let floatChannelData = audioBuffer.floatChannelData else {
-            print("No channel data found")
-            return nil
-        }
-
-        let channelData = floatChannelData[0]
-        let frameLength = Int(audioBuffer.frameLength)
-        
-        // Create a float array with the required target length
-        var audioData = [Float](repeating: 0.0, count: targetLength)
-        
-        // Copy the audio buffer data into the float array
-        let copyLength = min(frameLength, targetLength)
-        for i in 0..<copyLength {
-            audioData[i] = channelData[i]
-        }
-        
-        // Create MLMultiArray
+    func loadAudioFile(url: URL) -> AVAudioPCMBuffer? {
+        let audioFile: AVAudioFile
         do {
-            let mlMultiArray = try MLMultiArray(shape: [1, 8, targetLength, 1] as [NSNumber], dataType: .float32)
-            
-            // Fill MLMultiArray with audio data
-            let pointer = UnsafeMutablePointer<Float>(OpaquePointer(mlMultiArray.dataPointer))
-            for i in 0..<audioData.count {
-                pointer[i] = audioData[i]
-            }
-            
-            return mlMultiArray
+            audioFile = try AVAudioFile(forReading: url)
         } catch {
-            print("Error creating MLMultiArray: \(error.localizedDescription)")
+            print("Error loading audio file: \(error)")
             return nil
         }
-    }
-    //모델에 넣기 위한 변환
-    func convertToMultiArray(data: [[Float]]) -> MLMultiArray? {
-        let multiArray = try? MLMultiArray(shape: [1, 8, 100000, 1] as [NSNumber], dataType: .float32)
-        let range = NSRange(location: 0, length: data.count * data[0].count)
-        multiArray?.dataPointer.withMemoryRebound(to: Float.self, capacity: data.count * data[0].count) { pointer in
-            pointer.assign(from: data.flatMap { $0 }, count: data.count * data[0].count)
-        }
-        return multiArray
-    }
-    func computeMFCC(audioBuffer: AVAudioPCMBuffer) -> [Float]? {
-        let sampleRate = audioBuffer.format.sampleRate
-        let frameLength = Int(0.025 * Double(sampleRate)) // Frame length (25ms)
-        let frameStep = Int(0.01 * Double(sampleRate)) // Frame step (10ms)
-
-        guard let audioData = audioBuffer.floatChannelData?[0] else {
+        
+        let audioFormat = audioFile.processingFormat
+        let audioFrameCount = UInt32(audioFile.length)
+        guard let audioBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: audioFrameCount) else {
+            print("Unable to create PCM buffer")
             return nil
         }
-
-        let audioDataCount = Int(audioBuffer.frameLength)
-
-        // Debug print statements to ensure the values are correct
-        print("Sample Rate: \(sampleRate)")
-        print("Frame Length: \(frameLength)")
-        print("Frame Step: \(frameStep)")
-        print("Audio Data Count: \(audioDataCount)")
-
-        // Split audio data into frames
-        var frames = [[Float]]()
-        var i = 0
-        while i + frameLength <= audioDataCount {
-            let frame = Array(UnsafeBufferPointer(start: audioData + i, count: frameLength))
-            frames.append(frame)
-            i += frameStep
+        
+        do {
+            try audioFile.read(into: audioBuffer)
+        } catch {
+            print("Error reading audio file into buffer: \(error)")
+            return nil
         }
-
-        // Pre-emphasis (optional)
-        let preEmphasisCoeff: Float = 0.97
-        var preEmphasizedFrames = frames.map { frame -> [Float] in
-            var outputFrame = [Float](repeating: 0.0, count: frame.count)
-            outputFrame[0] = frame[0]
-            for j in 1..<frame.count {
-                outputFrame[j] = frame[j] - preEmphasisCoeff * frame[j - 1]
-            }
-            return outputFrame
+        
+        return audioBuffer
+    }
+    func processAudioBuffer(_ buffer: AVAudioPCMBuffer) -> [Float] {
+        guard let channelData = buffer.floatChannelData?.pointee else {
+            print("Error accessing channel data")
+            return []
         }
-
-        // Hamming window
+        
+        let frameLength = Int(buffer.frameLength)
         var window = [Float](repeating: 0.0, count: frameLength)
-        vDSP_hamm_window(&window, vDSP_Length(frameLength), Int32(0))
-
-        // Apply Hamming window to frames
-        for i in 0..<preEmphasizedFrames.count {
-            var frame = preEmphasizedFrames[i]
-            vDSP_vmul(frame, 1, window, 1, &frame, 1, vDSP_Length(frameLength))
-            preEmphasizedFrames[i] = frame
+        var fftMagnitudes = [Float](repeating: 0.0, count: frameLength / 2)
+        
+        // Hann window 적용
+        vDSP_hann_window(&window, vDSP_Length(frameLength), Int32(vDSP_HANN_NORM))
+        vDSP_vmul(channelData, 1, window, 1, &window, 1, vDSP_Length(frameLength))
+        
+        // FFT 설정
+        let log2n = vDSP_Length(round(log2(Double(frameLength))))
+        guard let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2)) else {
+            print("Error creating FFT setup")
+            return []
         }
-
-        // DCT setup
-        guard let dctSetup = vDSP_DCT_CreateSetup(nil, vDSP_Length(frameLength), vDSP_DCT_Type.II) else {
-            print("Error creating DCT setup.")
-            return nil
+        
+        var realBuffer = [Float](repeating: 0.0, count: frameLength)
+        var imagBuffer = [Float](repeating: 0.0, count: frameLength)
+        var splitComplexBuffer = DSPSplitComplex(realp: &realBuffer, imagp: &imagBuffer)
+        
+        window.withUnsafeBufferPointer { windowPointer in
+            channelData.withMemoryRebound(to: DSPComplex.self, capacity: frameLength) { complexData in
+                vDSP_ctoz(complexData, 2, &splitComplexBuffer, 1, vDSP_Length(frameLength / 2))
+            }
+            
+            // FFT 수행
+            vDSP_fft_zrip(fftSetup, &splitComplexBuffer, 1, log2n, Int32(FFT_FORWARD))
+            vDSP_zvmags(&splitComplexBuffer, 1, &fftMagnitudes, 1, vDSP_Length(frameLength / 2))
         }
-
-        // Compute MFCCs
-        var mfccs = [Float]()
-        for frame in preEmphasizedFrames {
-            var dctInput = frame
-            var dctOutput = [Float](repeating: 0, count: frameLength)
-            vDSP_DCT_Execute(dctSetup, &dctInput, &dctOutput)
-
-            // Append first 13 coefficients (excluding the 0th coefficient)
-            mfccs.append(contentsOf: dctOutput[1..<14])
+        
+        vDSP_destroy_fftsetup(fftSetup)
+        return fftMagnitudes
+    }
+    
+    
+    func calculateAverageFrequency(magnitudes: [Float], sampleRate: Double) -> Double {
+        let binCount = magnitudes.count
+        var totalFrequency: Double = 0.0
+        var totalMagnitude: Float = 0.0
+        
+        for i in 0..<binCount {
+            let frequency = Double(i) * sampleRate / Double(2 * binCount)
+            totalFrequency += frequency * Double(magnitudes[i])
+            totalMagnitude += magnitudes[i]
         }
-
-        return mfccs
+        
+        if totalMagnitude > 0 {
+            return totalFrequency / Double(totalMagnitude)
+        } else {
+            return 0.0 // 또는 다른 값을 반환할 수 있습니다.
+        }
+    }
+    
+    func analyzeAudioFile(url: URL) {
+        guard let audioBuffer = loadAudioFile(url: url) else {
+            print("Failed to load audio file")
+            return
+        }
+        
+        let magnitudes = processAudioBuffer(audioBuffer)
+        let sampleRate = audioBuffer.format.sampleRate
+        let averageFrequency = calculateAverageFrequency(magnitudes: magnitudes, sampleRate: sampleRate) - 300
+        
+        print("Average Frequency: \(averageFrequency) Hz")
+        
+        if(SignDataManager.shared.gender == "남"){
+            
+            if(averageFrequency <= 100){
+                voiceMode = "저음"
+                SignDataManager.shared.vocalRange = voiceMode
+            }
+            else if(averageFrequency <= 150){
+                voiceMode = "중음"
+                SignDataManager.shared.vocalRange = voiceMode
+            }
+            else{
+                voiceMode = "고음"
+                SignDataManager.shared.vocalRange = voiceMode
+            }
+        }
+        else {
+            
+            if(averageFrequency <= 200){
+                voiceMode = "저음"
+                SignDataManager.shared.vocalRange = voiceMode
+            }
+            else if(averageFrequency <= 250){
+                voiceMode = "중음"
+                SignDataManager.shared.vocalRange = voiceMode
+            }
+            else{
+                voiceMode = "고음"
+                SignDataManager.shared.vocalRange = voiceMode
+            }
+        }
+    }
+    
+    func setupAudioEngine() {
+        audioEngine = AVAudioEngine()
+        
+        let inputNode = audioEngine.inputNode
+        let format = inputNode.inputFormat(forBus: 0)
+        
+        let mainMixer = audioEngine.mainMixerNode
+        let eqNode = AVAudioUnitEQ(numberOfBands: 2)
+        
+        // Low-cut filter
+        let lowCut = eqNode.bands[0]
+        lowCut.filterType = .highPass
+        lowCut.frequency = 100.0
+        lowCut.bypass = false
+        
+        // High-cut filter
+        let highCut = eqNode.bands[1]
+        highCut.filterType = .lowPass
+        highCut.frequency = 300.0
+        highCut.bypass = false
+        
+        audioEngine.attach(eqNode)
+        audioEngine.connect(inputNode, to: eqNode, format: format)
+        audioEngine.connect(eqNode, to: mainMixer, format: format)
+        audioEngine.connect(mainMixer, to: audioEngine.outputNode, format: format)
+        
+        do {
+            try audioEngine.start()
+        } catch {
+            print("Error starting audio engine: \(error.localizedDescription)")
+        }
     }
 }
 
-extension UIColor {
-    convenience init(hex: String) {
-        let scanner = Scanner(string: hex)
-        scanner.scanLocation = 0
-        
-        var rgbValue: UInt64 = 0
-        scanner.scanHexInt64(&rgbValue)
-        
-        let r = (rgbValue & 0xff0000) >> 16
-        let g = (rgbValue & 0xff00) >> 8
-        let b = rgbValue & 0xff
-        
-        self.init(
-            red: CGFloat(r) / 0xff,
-            green: CGFloat(g) / 0xff,
-            blue: CGFloat(b) / 0xff, alpha: 1
-        )
-    }
-}
 extension UIFont {
     static func pretendardMedium(size: CGFloat) -> UIFont {
         guard let font = UIFont(name: "Pretendard-Medium", size: size) else {
@@ -613,28 +524,5 @@ extension UIFont {
             return UIFont.systemFont(ofSize: size, weight: .regular)
         }
         return font
-    }
-}
-extension Array where Element: Comparable {
-    func argmax() -> Index? {
-        return indices.max(by: { self[$0] < self[$1] })
-    }
-    
-    func argmin() -> Index? {
-        return indices.min(by: { self[$0] < self[$1] })
-    }
-}
-
-extension Array {
-    func argmax(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows-> Index? {
-        return try indices.max { (i, j) throws -> Bool in
-            try areInIncreasingOrder(self[i], self[j])
-        }
-    }
-    
-    func argmin(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows-> Index? {
-        return try indices.min { (i, j) throws -> Bool in
-            try areInIncreasingOrder(self[i], self[j])
-        }
     }
 }

@@ -398,23 +398,23 @@ class SearchViewController: UIViewController {
                 heightUpperBound: heightUpperBound,
                 includePreferredAnimal: isAnimalPreferred
             )
-        NetworkService.shared.searchService.searchUser(bodyDTO: searchUserRequest) { response in
+        NetworkService.shared.searchService.searchUser(bodyDTO: searchUserRequest) { [self] response in
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
                 print("유저 검색 성공")
+                let searchResultVC = SearchResultViewController (
+                    preferLocation: preferLocation ?? "",
+                    preferVoice: preferVoice ?? "",
+                    ageRange: "\(ageLowerBound) ~ \(ageUpperBound)세",
+                    heightRange: "\(heightLowerBound) ~ \(heightUpperBound)cm"
+                )
+                searchResultVC.colletModel = data.users
+                self.navigationController?.pushViewController(searchResultVC, animated: true)
             default:
                 print("유저 검색 실패")
             }
         }
-        let searchResultVC = SearchResultViewController (
-            preferLocation: preferLocation ?? "",
-            preferVoice: preferVoice ?? "",
-            ageRange: "\(ageLowerBound) ~ \(ageUpperBound)세",
-            heightRange: "\(heightLowerBound) ~ \(heightUpperBound)cm"
-            
-        )        
-        self.navigationController?.pushViewController(searchResultVC, animated: true)
     }
     @objc func animalButtonTapped() {
         // Toggle the button's selected state

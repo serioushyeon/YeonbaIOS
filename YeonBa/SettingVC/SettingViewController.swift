@@ -247,10 +247,24 @@ class SettingViewController: UIViewController {
     func setupActions() {
         button1.addTarget(self, action: #selector(handleProfileEditTap), for: .touchUpInside)
     }
-    
+    func apiDetailProfile(){
+        NetworkService.shared.mypageService.profileDetail{ [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let data):
+                guard let data = data.data else { return }
+                let profileEditViewController = ProfileEditViewController()
+                profileEditViewController.profileDetail = data
+                navigationController?.pushViewController(profileEditViewController, animated: true)
+                print("프로필 상세 조회 성공")
+            default:
+                print("프로필 상세 조회 실패")
+                
+            }
+        }
+    }
     @objc func handleProfileEditTap() {
-        let profileEditViewController = ProfileEditViewController()
-        navigationController?.pushViewController(profileEditViewController, animated: true)
+        apiDetailProfile()
     }
     
     @objc func buttonTapped(sender: UIButton) {

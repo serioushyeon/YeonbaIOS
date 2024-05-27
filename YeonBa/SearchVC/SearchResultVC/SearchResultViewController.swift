@@ -23,7 +23,9 @@ class SearchResultViewController: UIViewController {
         self.heightRange = heightRange
         super.init(nibName: nil, bundle: nil)
     }
-    
+    var colletModel : [SearchUsers]? = [
+        SearchUsers(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: "20", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, voalRange: "저음", isFavorite: false )]
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,7 +34,7 @@ class SearchResultViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10.0
-        layout.minimumInteritemSpacing = 10.0
+        layout.minimumInteritemSpacing = 5.0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
@@ -103,7 +105,7 @@ extension SearchResultViewController: UICollectionViewDataSource {
         if collectionView == categoryCollectionView {
             return 4
         } else if collectionView == resultImageCollectionView {
-            return 4
+            return colletModel?.count ?? 0
         }
         return 0
     }
@@ -133,6 +135,10 @@ extension SearchResultViewController: UICollectionViewDataSource {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.reuseIdentifier, for: indexPath) as? SearchResultCollectionViewCell else {
                     return UICollectionViewCell()
                 }
+                // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
+                let model = colletModel?[indexPath.row]
+                cell.configure(with: model ??  SearchUsers(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: "20", receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, voalRange: "저음", isFavorite: false ))
+                cell.nc = self.navigationController
                 return cell
             }
             return UICollectionViewCell()
