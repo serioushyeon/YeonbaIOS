@@ -220,10 +220,6 @@
 		58E88FA42BFCB47700775F06 /* NotificationsettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88F842BFCB47700775F06 /* NotificationsettingsViewController.swift */; };
 		58E88FA52BFCB47700775F06 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88F852BFCB47700775F06 /* PolicyViewController.swift */; };
 		58E88FA62BFCB47700775F06 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88F862BFCB47700775F06 /* SettingViewController.swift */; };
-		58E88FA82BFCE26D00775F06 /* ArrowRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FA72BFCE26D00775F06 /* ArrowRechargeViewController.swift */; };
-		58E88FAA2BFCE27600775F06 /* Ad1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FA92BFCE27600775F06 /* Ad1ViewController.swift */; };
-		58E88FAC2BFCE27F00775F06 /* Ad2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */; };
-		58E88FAE2BFCE28E00775F06 /* Ad3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */; };
 		58E88FC42BFDB6FC00775F06 /* ChatAcceptanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FC32BFDB6FC00775F06 /* ChatAcceptanceCell.swift */; };
 		58E88FCE2BFF116700775F06 /* MyPageTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FCD2BFF116700775F06 /* MyPageTarget.swift */; };
 		58E88FD12BFF117D00775F06 /* MyPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E88FD02BFF117D00775F06 /* MyPageService.swift */; };
@@ -234,6 +230,10 @@
 		58E8C36C2C01AA930034E761 /* ChatRoomResonse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C36B2C01AA930034E761 /* ChatRoomResonse.swift */; };
 		58E8C36E2C01CC880034E761 /* ChatRoomIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C36D2C01CC880034E761 /* ChatRoomIdRequest.swift */; };
 		58E8C3722C01D0C60034E761 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C3712C01D0C60034E761 /* JWT.swift */; };
+		58E8C3DD2C0426830034E761 /* Ad1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C3DC2C0426830034E761 /* Ad1ViewController.swift */; };
+		58E8C3DF2C04268B0034E761 /* Ad2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C3DE2C04268B0034E761 /* Ad2ViewController.swift */; };
+		58E8C3E12C0426930034E761 /* Ad3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C3E02C0426930034E761 /* Ad3ViewController.swift */; };
+		58E8C3E32C0426EB0034E761 /* ArrowRechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E8C3E22C0426EB0034E761 /* ArrowRechargeViewController.swift */; };
 		AE08BCB7921A78D8873988DB /* Pods_YeonBaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0D6DFD47FC7C37EDEDE5B /* Pods_YeonBaTests.framework */; };
 		EC04885BC3CF8A306DD1E71F /* Pods_YeonBa_YeonBaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC88E1F657E0C527CC571335 /* Pods_YeonBa_YeonBaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -501,10 +501,6 @@
 		58E88F842BFCB47700775F06 /* NotificationsettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsettingsViewController.swift; sourceTree = "<group>"; };
 		58E88F852BFCB47700775F06 /* PolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		58E88F862BFCB47700775F06 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		58E88FA72BFCE26D00775F06 /* ArrowRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowRechargeViewController.swift; sourceTree = "<group>"; };
-		58E88FA92BFCE27600775F06 /* Ad1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad1ViewController.swift; sourceTree = "<group>"; };
-		58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad2ViewController.swift; sourceTree = "<group>"; };
-		58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad3ViewController.swift; sourceTree = "<group>"; };
 		58E88FC32BFDB6FC00775F06 /* ChatAcceptanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAcceptanceCell.swift; sourceTree = "<group>"; };
 		58E88FCD2BFF116700775F06 /* MyPageTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTarget.swift; sourceTree = "<group>"; };
 		58E88FD02BFF117D00775F06 /* MyPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageService.swift; sourceTree = "<group>"; };
@@ -515,6 +511,10 @@
 		58E8C36B2C01AA930034E761 /* ChatRoomResonse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomResonse.swift; sourceTree = "<group>"; };
 		58E8C36D2C01CC880034E761 /* ChatRoomIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomIdRequest.swift; sourceTree = "<group>"; };
 		58E8C3712C01D0C60034E761 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		58E8C3DC2C0426830034E761 /* Ad1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad1ViewController.swift; sourceTree = "<group>"; };
+		58E8C3DE2C04268B0034E761 /* Ad2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad2ViewController.swift; sourceTree = "<group>"; };
+		58E8C3E02C0426930034E761 /* Ad3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ad3ViewController.swift; sourceTree = "<group>"; };
+		58E8C3E22C0426EB0034E761 /* ArrowRechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowRechargeViewController.swift; sourceTree = "<group>"; };
 		6E10A09B9C9BF5C74EAB10D9 /* Pods-YeonBa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.release.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.release.xcconfig"; sourceTree = "<group>"; };
 		763C0AD499C12722DB55744B /* Pods-YeonBa-YeonBaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		87F8400511F4316517C02537 /* Pods_YeonBa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YeonBa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1606,7 +1606,6 @@
 		58E88F792BFCB47700775F06 /* ProfileEdit */ = {
 			isa = PBXGroup;
 			children = (
-				58E88FA72BFCE26D00775F06 /* ArrowRechargeViewController.swift */,
 				58E88F6D2BFCB47700775F06 /* BodyEditViewController.swift */,
 				58E88F6E2BFCB47700775F06 /* FaceEditViewController.swift */,
 				58E88F6F2BFCB47700775F06 /* HeightEditDelegate.swift */,
@@ -1626,10 +1625,11 @@
 		58E88F872BFCB47700775F06 /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
+				58E8C3E22C0426EB0034E761 /* ArrowRechargeViewController.swift */,
+				58E8C3E02C0426930034E761 /* Ad3ViewController.swift */,
+				58E8C3DC2C0426830034E761 /* Ad1ViewController.swift */,
+				58E8C3DE2C04268B0034E761 /* Ad2ViewController.swift */,
 				58E88F862BFCB47700775F06 /* SettingViewController.swift */,
-				58E88FAD2BFCE28E00775F06 /* Ad3ViewController.swift */,
-				58E88FAB2BFCE27F00775F06 /* Ad2ViewController.swift */,
-				58E88FA92BFCE27600775F06 /* Ad1ViewController.swift */,
 				58E88F6C2BFCB47700775F06 /* PreferenceEdit */,
 				58E88F792BFCB47700775F06 /* ProfileEdit */,
 				58E88F7A2BFCB47700775F06 /* AccountManagementViewController.swift */,
@@ -1989,6 +1989,7 @@
 				58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
 				58580F002BE13E490055F3E8 /* AgeMode.swift in Sources */,
+				58E8C3E12C0426930034E761 /* Ad3ViewController.swift in Sources */,
 				58E88E1F2BF7896300775F06 /* UserProfileResponse.swift in Sources */,
 				58E88E5A2BF7916400775F06 /* ChattingViewController.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
@@ -2019,6 +2020,7 @@
 				58D138122BEE720D0048C228 /* LoginResponse.swift in Sources */,
 				58E88F8E2BFCB47700775F06 /* BodyEditViewController.swift in Sources */,
 				58D139102BF3127E0048C228 /* FaceDetectionViewController.swift in Sources */,
+				58E8C3DD2C0426830034E761 /* Ad1ViewController.swift in Sources */,
 				58580EF72BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
 				58D138182BEE81C30048C228 /* RefreshRequest.swift in Sources */,
@@ -2035,7 +2037,6 @@
 				58BB86902BB844CA00F90050 /* LocationMode.swift in Sources */,
 				58E88E662BF88F7A00775F06 /* ChatService.swift in Sources */,
 				58BB867D2BB7DCFA00F90050 /* VoiceDelegate.swift in Sources */,
-				58E88FAE2BFCE28E00775F06 /* Ad3ViewController.swift in Sources */,
 				58580EF02BE13E490055F3E8 /* FavoriteBodyPresentationController.swift in Sources */,
 				589CDD5C2BE7E69300BA332F /* SignUpService.swift in Sources */,
 				58E88E302BF7896E00775F06 /* HomeTarget.swift in Sources */,
@@ -2057,7 +2058,6 @@
 				58580EFF2BE13E490055F3E8 /* FavoriteVoiceViewController.swift in Sources */,
 				58D1390B2BF3127E0048C228 /* converted_model.mlpackage in Sources */,
 				589CDD082BE5FE0700BA332F /* BaseNavigationController.swift in Sources */,
-				58E88FAA2BFCE27600775F06 /* Ad1ViewController.swift in Sources */,
 				58BB867B2BB7DC9C00F90050 /* VoicePresentationController.swift in Sources */,
 				58E88E442BF790C900775F06 /* NotificationService.swift in Sources */,
 				58E88E1D2BF7896300775F06 /* OtherProfileResponse.swift in Sources */,
@@ -2065,6 +2065,7 @@
 				58E88FD32BFF11B600775F06 /* ProfileResponse.swift in Sources */,
 				58580F032BE13E490055F3E8 /* SignLocationMode.swift in Sources */,
 				58E88F8D2BFCB47700775F06 /* VoicePreferenceViewController.swift in Sources */,
+				58E8C3DF2C04268B0034E761 /* Ad2ViewController.swift in Sources */,
 				58D137EF2BEA3E060048C228 /* AgeViewController.swift in Sources */,
 				58E88F892BFCB47700775F06 /* AnimalPreferenceViewController.swift in Sources */,
 				58E88F1D2BFB910500775F06 /* SearchResponse.swift in Sources */,
@@ -2074,7 +2075,6 @@
 				58E88E312BF7896E00775F06 /* HomeService.swift in Sources */,
 				589CDD662BE7E78400BA332F /* NetworkService.swift in Sources */,
 				58D138E42BF219B70048C228 /* NicknameRequest.swift in Sources */,
-				58E88FA82BFCE26D00775F06 /* ArrowRechargeViewController.swift in Sources */,
 				58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */,
 				58E88F882BFCB47700775F06 /* AgePreferenceViewController.swift in Sources */,
 				58E88E3F2BF790C900775F06 /* NotificationPageRequest.swift in Sources */,
@@ -2152,11 +2152,11 @@
 				58E88F972BFCB47700775F06 /* VoiceEditPresentationController.swift in Sources */,
 				58E88F9E2BFCB47700775F06 /* ArrowCounterManager.swift in Sources */,
 				58580EFC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift in Sources */,
+				58E8C3E32C0426EB0034E761 /* ArrowRechargeViewController.swift in Sources */,
 				58580EFE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
 				58BB85CF2BB3ABFB00F90050 /* OtherProfileCollectionViewCell.swift in Sources */,
-				58E88FAC2BFCE27F00775F06 /* Ad2ViewController.swift in Sources */,
 				58E88F8F2BFCB47700775F06 /* FaceEditViewController.swift in Sources */,
 				58BB85D12BB3AC4100F90050 /* OtherProfileViewController.swift in Sources */,
 				58580EB52BE0BA080055F3E8 /* JobSelectionViewController.swift in Sources */,

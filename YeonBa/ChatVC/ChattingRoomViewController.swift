@@ -14,9 +14,8 @@ class ChattingRoomViewController: UIViewController {
     var roomId: Int?
     var chatUserName: String?
     var partnerProfileImageUrl: String = ""
-    var messagesDateString = "yyyy년 MM월 dd일"
     var messages: [ChatRoomResonse] = [] // 채팅 데이터를 저장할 배열
-    var sendView = SendView()
+    lazy var sendView = SendView(roomId: roomId)
     //MARK: - UI Components
     lazy var tableView = UITableView(frame: .zero, style: .grouped).then{
         $0.register(MyMessageCell.self, forCellReuseIdentifier: "MyMessageCell")
@@ -41,10 +40,7 @@ class ChattingRoomViewController: UIViewController {
         loadChatData()
         setupKeyboardDismissal()
         tabBarController?.tabBar.isTranslucent = true
-        if let roomId = roomId {
-            print("Chat Room ID: \(roomId)")
-            sendView.roomId = roomId
-        }
+        sendView.roomId = roomId
 
     }
     override func viewWillAppear(_ animated: Bool) {

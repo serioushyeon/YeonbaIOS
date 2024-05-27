@@ -25,10 +25,20 @@ class Ad3ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tabBarController?.tabBar.isTranslucent = true
         setupView()
         setupLayout()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        tabBarController?.tabBar.isHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        tabBarController?.tabBar.isHidden = false
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateTimerButtonSize()
@@ -82,8 +92,8 @@ class Ad3ViewController: UIViewController {
 
 
     @objc func closeAd() {
-        delegate?.ad3ViewControllerDidClose(self) 
-        dismiss(animated: true, completion: nil)
+        delegate?.ad3ViewControllerDidClose(self)
+        navigationController?.popViewController(animated: true)
     }
 
     deinit {

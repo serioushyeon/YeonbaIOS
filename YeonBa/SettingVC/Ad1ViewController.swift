@@ -28,15 +28,26 @@ class Ad1ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tabBarController?.tabBar.isTranslucent = true
         setupView()
         setupLayout()
+        
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateTimerButtonSize()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        tabBarController?.tabBar.isHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        tabBarController?.tabBar.isHidden = false
+    }
     func setupView() {
         view.addSubview(imageView)
         view.addSubview(timerButton)
@@ -83,8 +94,9 @@ class Ad1ViewController: UIViewController {
     }
 
     @objc func closeAd() {
+        print("1번광고")
         delegate?.ad1ViewControllerDidClose(self)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     deinit {
