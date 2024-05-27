@@ -2,19 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSExtension</key>
-    <dict>
-        <key>NSExtensionPointIdentifier</key>
-        <string>com.apple.usernotifications.service</string>
-        <key>NSExtensionPrincipalClass</key>
-        <string>$(PRODUCT_MODULE_NAME).NotificationService</string>
-        <key>NSUserActivityTypes</key>
-        <array>
-            <string>INSendMessageIntent</string>
-        </array>
-    </dict>
-    <key>S3URLPrefix</key>
-    <string>https://yeonba-bucket.s3.ap-northeast-2.amazonaws.com/</string>
+	<key>WebSocketURL</key>
+	<string>&quot;ws://13.124.72.132:8080/chat/websocket&quot;</string>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.usernotifications.service</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
+		<key>NSUserActivityTypes</key>
+		<array>
+			<string>INSendMessageIntent</string>
+		</array>
+	</dict>
+	<key>S3URLPrefix</key>
+	<string>https://yeonba-bucket.s3.ap-northeast-2.amazonaws.com/</string>
 </dict>
 </plist>
-

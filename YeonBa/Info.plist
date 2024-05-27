@@ -23,6 +23,8 @@
 	<string>INSendMessagingIntent</string>
 	<key>S3URLPrefix</key>
 	<string>https://yeonba-bucket.s3.ap-northeast-2.amazonaws.com/</string>
+    <key>WebSocketURL</key>
+    <string>ws://13.124.72.132:8080/chat/websocket</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Bold.otf</string>

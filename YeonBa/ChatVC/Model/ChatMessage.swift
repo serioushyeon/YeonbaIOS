@@ -20,5 +20,12 @@ struct ChatMessage {
         self.sentAt = response.sentAt
         self.userName = response.userName
     }
+    // Add this initializer
+    init(content: String, userId: Int, sentAt: String, userName: String) {
+            self.content = content
+            self.userId = userId
+            self.sentAt = sentAt
+            self.userName = userName
+    }
 }
 

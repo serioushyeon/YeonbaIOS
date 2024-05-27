@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import StompClientLib
 
-class ChattingRoomViewController: UIViewController {
+class ChattingRoomViewController: UIViewController,SendViewDelegate {
     var roomId: Int?
     var chatUserName: String?
     var partnerProfileImageUrl: String = ""
@@ -116,7 +116,16 @@ class ChattingRoomViewController: UIViewController {
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
     }
-
+    func didSendMessage(_ message: ChatMessage) {
+           tableView.reloadData()
+           scrollToBottom()
+   }
+   
+   private func scrollToBottom() {
+       guard messages.count > 0 else { return }
+       let indexPath = IndexPath(row: messages.count - 1, section: 0)
+       tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+   }
 
     // MARK: -- objc
     @objc func keyboardUp(notification: NSNotification) {
@@ -193,7 +202,7 @@ extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate
         let chatMessages = groupedMessages[key] ?? []
         let chatMessage = chatMessages[indexPath.row]
 
-        if chatMessage.userId == 3 {
+        if chatMessage.userId == KeychainHandler.shared.kakaoUserID {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
             cell.messageLabel.text = chatMessage.content
             return cell
