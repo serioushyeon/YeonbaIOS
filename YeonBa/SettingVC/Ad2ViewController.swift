@@ -81,7 +81,7 @@ class Ad2ViewController: UIViewController {
     @objc func closeAd() {
         print("Closing Ad2ViewController")
         delegate?.ad2ViewControllerDidClose(self)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     deinit {

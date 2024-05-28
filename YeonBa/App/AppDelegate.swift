@@ -13,6 +13,7 @@ import FirebaseMessaging
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    var window: UIWindow?
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         var token: String = ""
@@ -22,6 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("token : \(token)")
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // 앱이 시작될 때 MainViewController를 사용하여 팝업을 확인하고 띄우는 로직
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let mainVC = MainViewController()
+        let navigationController = UINavigationController(rootViewController: mainVC)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+        return true
+        
         // 1. 푸시 권한 요청
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in

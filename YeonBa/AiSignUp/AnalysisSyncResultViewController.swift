@@ -132,8 +132,10 @@ class AnalysisSyncResultViewController: UIViewController {
                 print("회원가입 에러")
             }
         }
-        let tabVC = TabBarController()
-        self.changeRootViewController(rootViewController: tabVC)
+        let welcomePopupVC = WelcomePopupViewController()
+        welcomePopupVC.modalPresentationStyle = .overFullScreen
+        welcomePopupVC.modalTransitionStyle = .crossDissolve
+        present(welcomePopupVC, animated: true, completion: nil)
     }
     @objc func backButtonTapped() {
         // 뒤로 가기 로직을 구현

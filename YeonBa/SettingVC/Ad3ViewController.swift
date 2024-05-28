@@ -82,8 +82,8 @@ class Ad3ViewController: UIViewController {
 
 
     @objc func closeAd() {
-        delegate?.ad3ViewControllerDidClose(self) 
-        dismiss(animated: true, completion: nil)
+        delegate?.ad3ViewControllerDidClose(self)
+        navigationController?.popViewController(animated: true)
     }
 
     deinit {

@@ -30,6 +30,7 @@ class Ad1ViewController: UIViewController {
         view.backgroundColor = .white
         setupView()
         setupLayout()
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -83,8 +84,9 @@ class Ad1ViewController: UIViewController {
     }
 
     @objc func closeAd() {
+        print("1번광고")
         delegate?.ad1ViewControllerDidClose(self)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     deinit {
