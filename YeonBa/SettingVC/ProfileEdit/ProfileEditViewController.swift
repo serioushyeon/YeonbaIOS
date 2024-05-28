@@ -5,16 +5,29 @@ import Kingfisher
 
 class ProfileEditViewController: UIViewController, UIViewControllerTransitioningDelegate, HeightEditViewControllerDelegate,VoiceEditViewControllerDelegate, LivingAreaViewControllerDelegate, BodyEditViewControllerDelegate, FaceEditViewControllerDelegate, MbtiEditViewControllerDelegate, AnimalPreferenceViewControllerDelegate, RegionPreferenceViewControllerDelegate, VoicePreferenceViewControllerDelegate, BodyTypePreferenceViewControllerDelegate, MBTIPreferenceViewControllerDelegate {
     
-    var profileDetail = ProfileDetailResponse(profilePhotoUrls: [],
-      gender: "남",
-      birth: "1998-01-01",
-      height: 181,
-      phoneNumber: "01011112222",
-      nickname: "존잘남",
-      photoSyncRate: 80,
-      bodyType: "마른 체형",
-      job: "학생",
-      mbti: "ISTP")
+    var profileDetail = 
+    ProfileDetailResponse(profilePhotoUrls: [],
+                          gender: "남",
+                          birth: "1998-01-01",
+                          height: 181,
+                          phoneNumber: "01011112222",
+                          nickname: "존잘남",
+                          photoSyncRate: 80,
+                          bodyType: "마른 체형",
+                          job: "학생",
+                          mbti: "ISTP",
+                          vocalRange : "고음",
+                          lookAlikeAnimal: "고양이상", 
+                          activityArea: "서울", 
+                          preferredVocalRange: "중음",
+                          preferredAnimal: "강아지상",
+                          preferredArea: "경기",
+                          preferredAgeLowerBound: 35,
+                          preferredAgeUpperBound: 40,
+                          preferredHeightLowerBound: 170,
+                          preferredHeightUpperBound: 180,
+                          preferredMbti: "ISTJ",
+                          preferredBodyType: "마른체형")
     
     var profileEdit = ProfileEditRequest(nickname:"", height: 160, vocalRange: "중음", birth: "2000-12-17", bodyType: "마른체형", job: "직장인", activityArea: "서울", lookAlikeAnimal: "강아지상", mbti: "INTJ", preferredAnimal: "강아지상", preferredArea: "서울", preferredVocalRange: "저음", preferredAgeLowerBound: 22, preferredAgeUpperBound: 24, preferredHeightLowerBound: 181, preferredHeightUpperBound: 185, preferredBodyType: "보통체형", preferredMbti: "INTP")
     
@@ -151,10 +164,17 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
 
 
     private func setupInfoFields() {
-        infoFieldTitles = ["\(profileDetail.height)cm", "목소리", "사는 지역",profileDetail.bodyType, "얼굴상", profileDetail.mbti]
+        infoFieldTitles = ["\(profileDetail.height)cm", profileDetail.vocalRange, profileDetail.activityArea, profileDetail.bodyType, profileDetail.lookAlikeAnimal, profileDetail.mbti]
+        profileEdit.nickname = profileDetail.nickname
+        profileEdit.birth = profileDetail.birth
+        profileEdit.job = profileDetail.job
         profileEdit.height = profileDetail.height
+        profileEdit.vocalRange = profileDetail.vocalRange
+        profileEdit.activityArea = profileDetail.activityArea
         profileEdit.bodyType = profileDetail.bodyType
+        profileEdit.lookAlikeAnimal = profileDetail.lookAlikeAnimal
         profileEdit.mbti = profileDetail.mbti
+        
         infoFields = infoFieldTitles.enumerated().map { index, title in
             let button = UIButton().then {
                 $0.setTitle(title, for: .normal)
@@ -212,11 +232,25 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
             break
         }
     }
-
     private var preferenceFieldstitle = ["선호하는 얼굴상", "선호하는 지역", "선호하는 목소리", "선호하는 나이대", "선호하는 체형", "선호하는 MBTI"]
     private var preferenceFields: [UIButton] = []
-                
     private func setupPreferenceFields() {
+        preferenceFieldstitle = [profileDetail.preferredAnimal,
+                                profileDetail.preferredArea,
+                                profileDetail.preferredVocalRange,
+                                "선호하는 나이대",
+                                profileDetail.preferredBodyType,
+                                profileDetail.preferredMbti]
+        profileEdit.preferredAnimal = profileDetail.preferredAnimal
+        profileEdit.preferredArea = profileDetail.preferredArea
+        profileEdit.preferredVocalRange = profileDetail.preferredVocalRange
+        profileEdit.preferredBodyType = profileDetail.preferredBodyType
+        profileEdit.preferredMbti = profileDetail.preferredMbti
+        profileEdit.preferredAgeLowerBound = profileDetail.preferredAgeLowerBound
+        profileEdit.preferredAgeUpperBound = profileDetail.preferredAgeUpperBound
+        profileEdit.preferredHeightLowerBound = profileDetail.preferredHeightLowerBound
+        profileEdit.preferredHeightUpperBound = profileDetail.preferredHeightUpperBound
+                    
         preferenceFields = preferenceFieldstitle.enumerated().map { index, title in
             let button = UIButton().then {
                 $0.setTitle(title, for: .normal)
@@ -361,7 +395,8 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
     @objc private func doneButtonTapped() {
         print("완료 버튼이 눌렸습니다.")
         print(self.profileEdit)
-        //apiEditProfile()
+        apiEditProfile()
+        navigationController?.popViewController(animated: true)
     }
 }
 
