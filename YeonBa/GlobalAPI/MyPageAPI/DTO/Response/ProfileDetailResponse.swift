@@ -8,14 +8,26 @@
 import Foundation
 
 struct ProfileDetailResponse : Codable {
-    let profilePhotoUrls : [String]
-    let gender : String
-    let birth : String
-    let height : Int
-    let phoneNumber : String
-    let nickname : String
-    let photoSyncRate : Int
-    let bodyType : String
-    let job : String
-    let mbti : String
+    var profilePhotoUrls : [String]
+    var gender : String
+    var birth : String
+    var height : Int
+    var phoneNumber : String
+    var nickname : String
+    var photoSyncRate : Int
+    var bodyType : String
+    var job : String
+    var mbti : String
+    var vocalRange : String
+    var lookAlikeAnimal : String
+    var activityArea : String
+    var preferredVocalRange : String
+    var preferredAnimal : String
+    var preferredArea : String
+    var preferredAgeLowerBound : Int
+    var preferredAgeUpperBound :Int
+    var preferredHeightLowerBound : Int
+    var preferredHeightUpperBound : Int
+    var preferredMbti : String
+    var preferredBodyType : String
 }

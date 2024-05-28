@@ -522,26 +522,39 @@ class OtherProfileViewController: UIViewController {
         self.heartLabel.text = "\(data.arrows)"
         self.similarityLabel.text = "\(data.photoSyncRate)%"
         self.aboutData = ["\(data.age)살", "\(data.height)cm", data.activityArea, data.vocalRange, data.lookAlikeAnimalName]
-        self.preferenceData = [data.lookAlikeAnimalName,
-                               data.activityArea,
-                               data.vocalRange,
-                               "\(data.preferredAgeLowerBound)~\(data.preferredAgeUpperBound)살",
-                               "\(data.preferredHeightLowerBound)~\(data.preferredHeightUpperBound)cm", 
-                               data.preferredBodyType,
-                               data.preferredMbti]
-        if(data.alreadySentArrow){
-            self.sendBtn.isEnabled = false
-            self.sendBtn.backgroundColor = UIColor.gray2
-            self.sendBtn.layer.borderColor = UIColor.gray2?.cgColor
-            self.sendBtn.setTitleColor(.white, for: .normal)
+        if(data.preferredAgeLowerBound != nil && data.preferredAgeUpperBound != nil){
+            self.preferenceData = [data.lookAlikeAnimalName,
+                                   data.activityArea,
+                                   data.vocalRange,
+                                   "\(data.preferredAgeLowerBound)~\(data.preferredAgeUpperBound)살",
+                                   data.preferredBodyType,
+                                   data.preferredMbti]
+            if(data.preferredHeightLowerBound != nil && data.preferredHeightUpperBound != nil){
+                self.preferenceData = [data.lookAlikeAnimalName,
+                                       data.activityArea,
+                                       data.vocalRange,
+                                       "\(data.preferredAgeLowerBound)~\(data.preferredAgeUpperBound)살",
+                                       "\(data.preferredHeightLowerBound)~\(data.preferredHeightUpperBound)cm",
+                                       data.preferredBodyType,
+                                       data.preferredMbti]
+            }
+            else{
+                self.preferenceData = [data.lookAlikeAnimalName,
+                                       data.activityArea,
+                                       data.vocalRange,
+                                       data.preferredBodyType,
+                                       data.preferredMbti]
+            }
         }
         let whiteImage = UIImage(named: "WhiteFavorites")
         let pinkImage = UIImage(named: "PinkFavorites")
         self.isFavorite ? self.favoriteBtn.setImage(pinkImage, for: .normal) : self.favoriteBtn.setImage(whiteImage, for: .normal)
         if(data.alreadySentArrow){
-            self.sendBtn.isHidden = true
+            self.sendBtn.isHidden = false
+            self.sendDoneBtn.isHidden = true
         }
         else{
+            self.sendBtn.isHidden = true
             self.sendDoneBtn.isHidden = false
         }
         // 이미지 로딩
