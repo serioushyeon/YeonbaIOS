@@ -14,18 +14,17 @@ struct ChatMessage {
     let sentAt: String
     let userName: String
     
-    init(from response: ChatRoomResonse) {
-        self.content = response.content
-        self.userId = response.userId
-        self.sentAt = response.sentAt
-        self.userName = response.userName
-    }
-    // Add this initializer
+//    init(from response: ChatRoomResonse) {
+//        self.content = response.content
+//        self.userId = response.userId
+//        self.sentAt = response.sentAt
+//        self.userName = response.userName
+//    }
     init(content: String, userId: Int, sentAt: String, userName: String) {
-            self.content = content
-            self.userId = userId
-            self.sentAt = sentAt
-            self.userName = userName
+        self.content = content
+        self.userId = userId
+        self.sentAt = sentAt
+        self.userName = userName
     }
 }
 

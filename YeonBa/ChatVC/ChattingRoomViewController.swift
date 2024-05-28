@@ -10,23 +10,26 @@ import SnapKit
 import Then
 import StompClientLib
 
-class ChattingRoomViewController: UIViewController,SendViewDelegate {
+class ChattingRoomViewController: UIViewController, SendViewDelegate {
     var roomId: Int?
     var chatUserName: String?
     var partnerProfileImageUrl: String = ""
     var messages: [ChatRoomResonse] = [] // 채팅 데이터를 저장할 배열
     lazy var sendView = SendView(roomId: roomId)
+    private var tableViewBottomConstraint: Constraint? // 테이블 뷰 bottom constraint를 저장할 변수
     //MARK: - UI Components
-    lazy var tableView = UITableView(frame: .zero, style: .grouped).then{
+    lazy var tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(MyMessageCell.self, forCellReuseIdentifier: "MyMessageCell")
         $0.register(OtherMessageCell.self, forCellReuseIdentifier: "OtherMessageCell")
         $0.dataSource = self
         $0.delegate = self
-        $0.separatorStyle = .none // 셀 사이의 구분선을 제거
-        // 자동 높이 계산 활성화
+        $0.separatorStyle = .none
         $0.rowHeight = UITableView.automaticDimension
-        $0.estimatedRowHeight = 50 // 셀 높이의 적절한 추정치
+        $0.backgroundColor = .white
+        $0.estimatedRowHeight = 50
         $0.sectionFooterHeight = 0
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
     }
     //MARK: - Actions
     
@@ -39,9 +42,9 @@ class ChattingRoomViewController: UIViewController,SendViewDelegate {
         configUI()
         loadChatData()
         setupKeyboardDismissal()
+        sendView.delegate = self
         tabBarController?.tabBar.isTranslucent = true
         sendView.roomId = roomId
-
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,7 +57,6 @@ class ChattingRoomViewController: UIViewController,SendViewDelegate {
         tabBarController?.tabBar.isHidden = false
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     private func setupKeyboardDismissal() {
         // 키보드가 활성화된 상태에서 화면을 터치했을 때 키보드가 사라지도록 설정합니다.
@@ -66,7 +68,7 @@ class ChattingRoomViewController: UIViewController,SendViewDelegate {
         view.endEditing(true)
     }
     // MARK: - UI Layout
-    func addSubViews(){
+    func addSubViews() {
         view.addSubview(sendView)
         view.addSubview(tableView)
     }
@@ -92,10 +94,9 @@ class ChattingRoomViewController: UIViewController,SendViewDelegate {
                 guard let data = statusResponse.data else { return }
                 
                 if let data = statusResponse.data {
-                    
                     DispatchQueue.main.async {
                         print("Fetched chatData: \(data)")
-                        self.messages = statusResponse.data!
+                        self.messages = data
                         print("message카운트:\(self.messages.count)")
                         self.messages.sort { $0.sentAt < $1.sentAt }
                         self.tableView.reloadData()
@@ -117,33 +118,36 @@ class ChattingRoomViewController: UIViewController,SendViewDelegate {
         tableView.layoutIfNeeded()
     }
     func didSendMessage(_ message: ChatMessage) {
-           tableView.reloadData()
-           scrollToBottom()
-   }
+        // messages 배열에 새 메시지 추가
+        let newMessage = ChatRoomResonse(userId: KeychainHandler.shared.kakaoUserID, userName: SignDataManager.shared.nickName ?? "", content: message.content, sentAt: message.sentAt)
+        messages.append(newMessage)
+        tableView.reloadData()
+        scrollToBottom()
+    }
    
-   private func scrollToBottom() {
-       guard messages.count > 0 else { return }
-       let indexPath = IndexPath(row: messages.count - 1, section: 0)
-       tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-   }
+    private func scrollToBottom() {
+        let lastSection = tableView.numberOfSections - 1
+        guard lastSection >= 0 else { return }
+        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+        guard lastRow >= 0 else { return }
+        let indexPath = IndexPath(row: lastRow, section: lastSection)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
 
     // MARK: -- objc
     @objc func keyboardUp(notification: NSNotification) {
-        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-               let keyboardRectangle = keyboardFrame.cgRectValue
-           
-                UIView.animate(
-                    withDuration: 0.3
-                    , animations: {
-                        self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-                    }
-                )
-            }
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+            })
+        }
     }
     @objc func keyboardDown() {
         self.view.transform = .identity
     }
 }
+
 extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate {
     // 섹션 수를 반환하는 메서드
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -168,6 +172,12 @@ extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate
 
         let label = UILabel()
         let dateFormatter = DateFormatter()
+        
+        // Initial format for parsing the date string
+        let initialDateFormat = DateFormatter()
+        initialDateFormat.dateFormat = "yyyy-MM-dd" // assuming the input format is '2024-05-21'
+        
+        // Desired output format
         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
 
         // 섹션의 날짜를 설정
@@ -175,7 +185,7 @@ extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate
         let keys = Array(groupedMessages.keys).sorted()
         let key = keys[section]
 
-        if let date = dateFormatter.date(from: String(key)) {
+        if let date = initialDateFormat.date(from: String(key)) {
             label.text = dateFormatter.string(from: date)
         } else {
             label.text = String(key)
@@ -205,10 +215,12 @@ extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate
         if chatMessage.userId == KeychainHandler.shared.kakaoUserID {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
             cell.messageLabel.text = chatMessage.content
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherMessageCell", for: indexPath) as! OtherMessageCell
             cell.messageLabel.text = chatMessage.content
+            cell.selectionStyle = .none
             var profilePhotoUrl = partnerProfileImageUrl
             if !profilePhotoUrl.hasSuffix(".png") {
                 profilePhotoUrl += ".png"
@@ -224,4 +236,5 @@ extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate
         }
     }
 }
+
 
