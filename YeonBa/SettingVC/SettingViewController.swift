@@ -106,10 +106,6 @@ class SettingViewController: UIViewController {
                     self.nameLabel.text = data.name
                     self.button2.setTitle("남은 화살 수: \(data.arrows)개", for: .normal)
                     var profilePhotoUrl = data.profileImageUrl
-                    if !profilePhotoUrl.hasSuffix(".png") {
-                        profilePhotoUrl += ".png"
-                    }
-                    
                     if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                         print("Loading image from URL: \(url)")
                         self.imageView.kf.setImage(with: url, completionHandler: { result in

@@ -115,11 +115,6 @@ class ChattingListCell: UITableViewCell {
         }
         // Profile 이미지 로딩 및 표시
         var profilePhotoUrl = model.partnerProfileImageUrl
-        if !profilePhotoUrl.hasSuffix(".png") {
-            profilePhotoUrl += ".png"
-        }
-        
-        
         if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
             print("Loading image from URL: \(url)")
             profileImageView.kf.setImage(with: url)

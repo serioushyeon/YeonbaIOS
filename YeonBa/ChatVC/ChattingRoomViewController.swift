@@ -222,10 +222,6 @@ extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate
             cell.messageLabel.text = chatMessage.content
             cell.selectionStyle = .none
             var profilePhotoUrl = partnerProfileImageUrl
-            if !profilePhotoUrl.hasSuffix(".png") {
-                profilePhotoUrl += ".png"
-            }
-
             if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                 print("Loading image from URL: \(url)")
                 cell.profileImageView.kf.setImage(with: url)

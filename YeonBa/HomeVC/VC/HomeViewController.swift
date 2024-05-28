@@ -115,56 +115,52 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.primary]
+        
         let titleLabel = UILabel()
         titleLabel.text = "Yeonba"
         titleLabel.textColor = .primary
-        titleLabel.sizeToFit()
         titleLabel.font = .pretendardSemiBold(size: 20)
+        titleLabel.sizeToFit()
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         navigationItem.hidesBackButton = true
-        navigationItem.hidesBackButton = true
+        
         let heartButton = UIBarButtonItem(image: UIImage(named: "Heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
         
         let heartCountContainerView = UIView()
-            heartCountContainerView.addSubview(heartCountLabel)
+        heartCountContainerView.addSubview(heartCountLabel)
         
         heartCountLabel.text = "5" // 초기 하트 개수
         heartCountLabel.textColor = UIColor.primary
         heartCountLabel.sizeToFit()
+        
+        let heartCountBarButton = UIBarButtonItem(customView: heartCountContainerView)
+        
+        // Constraint 추가
         heartCountLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(5) // 라벨의 가장자리에 여백을 설정하여 텍스트가 잘리지 않도록 함
-        }
-            
-        heartCountContainerView.snp.makeConstraints { make in
-            make.width.equalTo(heartCountLabel.snp.width).offset(10) // 여유 공간을 더하여 컨테이너 뷰의 너비 설정
-            make.height.equalTo(heartCountLabel.snp.height).offset(10) // 여유 공간을 더하여 컨테이너 뷰의 높이 설정
+            make.edges.equalToSuperview().inset(5)
         }
         
-        let heartCountBarButton = UIBarButtonItem(customView: heartCountLabel)
         let alarmButton = UIBarButtonItem(image: UIImage(named: "Alarm"), style: .plain, target: self, action: #selector(alarmButtonTapped))
+        
         navigationItem.rightBarButtonItems = [alarmButton, heartCountBarButton, heartButton]
+        
+        // 알림 버튼 이미지 변경
         NetworkService.shared.notificationService.UnreadNotification() { response in
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
-                if data.exist {
-                    DispatchQueue.main.async {
-                        //alarmButton.image = UIImage(named: "AlarmActive")
-                        alarmButton.image = UIImage(named: "AlarmActive")
-                        print("읽지 않은 알람 존재 \(data.exist)")
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        alarmButton.image = UIImage(named: "Alarm")
-                    }
+                DispatchQueue.main.async {
+                    alarmButton.image = data.exist ? UIImage(named: "AlarmActive") : UIImage(named: "Alarm")
                 }
-                
             default:
                 print("알람 존재하지 않음")
             }
         }
-        
     }
+
+
+
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -289,7 +285,7 @@ class HomeViewController: UIViewController {
         }
     }
     func apiRecieveList(){
-        let userListRequest = UserListRequest.init(type: "ARROW_SENDERS")
+        let userListRequest = UserListRequest.init(type: "ARROW_SENDERS", page: 0)
         NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
             guard let self = self else { return }
             switch response {

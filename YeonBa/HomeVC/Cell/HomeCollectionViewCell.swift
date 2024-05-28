@@ -167,11 +167,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         let whiteImage = UIImage(named: "WhiteFavorites")
         let pinkImage = UIImage(named: "PinkFavorites")
         // 이미지 로딩
-        var profilePhotoUrl = model.profilePhotoUrl
-        if !profilePhotoUrl.hasSuffix(".png") {
-            profilePhotoUrl += ".png"
-        }
-                    
+        var profilePhotoUrl = model.profilePhotoUrl            
         if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
             print("Loading image from URL: \(url)")
             cupidImageView.kf.setImage(with: url)

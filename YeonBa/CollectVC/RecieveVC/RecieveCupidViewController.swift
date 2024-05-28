@@ -42,7 +42,7 @@ class RecieveCupidViewController: UIViewController {
     }()
     
     func apiRecieveList(){
-        let userListRequest = UserListRequest.init(type: "ARROW_RECEIVERS")
+        let userListRequest = UserListRequest.init(type: "ARROW_RECEIVERS", page: 0)
         NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
             guard let self = self else { return }
             switch response {
