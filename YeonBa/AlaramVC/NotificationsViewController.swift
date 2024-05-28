@@ -20,7 +20,9 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         $0.dataSource = self
         $0.delegate = self
     }
-
+    let activityIndicator = UIActivityIndicatorView(style: .large).then {
+        $0.hidesWhenStopped = true
+    }
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +35,20 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - UI Layout
     private func addSubViews(){
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
     }
     private func configUI() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
 
     }
     // MARK: - Networking
     func fetchNotifications(page: Int) {
+        activityIndicator.startAnimating()
         let requestDTO = NotificationPageRequest(page: page)
         NetworkService.shared.notificationService.NotificationList(queryDTO: requestDTO) { response in
             switch response {
@@ -49,6 +56,7 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
                 if let data = statusResponse.data {
                     DispatchQueue.main.async {
                         print("Fetched Notifications: \(data.notifications)")
+                        self.activityIndicator.stopAnimating()
                         self.notifications = data.notifications
                         self.tableView.reloadData()
                     }
