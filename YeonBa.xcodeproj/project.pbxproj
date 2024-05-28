@@ -15,6 +15,7 @@
 		583F03522C05BDF300D68DA9 /* AttendancePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F03512C05BDF300D68DA9 /* AttendancePopupViewController.swift */; };
 		583F03542C05BDF900D68DA9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F03532C05BDF900D68DA9 /* MainViewController.swift */; };
 		583F03562C05BDFE00D68DA9 /* WelcomePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F03552C05BDFE00D68DA9 /* WelcomePopupViewController.swift */; };
+		583F03582C05E13A00D68DA9 /* NotificationIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F03572C05E13A00D68DA9 /* NotificationIdRequest.swift */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
 		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
@@ -292,6 +293,7 @@
 		583F03512C05BDF300D68DA9 /* AttendancePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendancePopupViewController.swift; sourceTree = "<group>"; };
 		583F03532C05BDF900D68DA9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		583F03552C05BDFE00D68DA9 /* WelcomePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePopupViewController.swift; sourceTree = "<group>"; };
+		583F03572C05E13A00D68DA9 /* NotificationIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIdRequest.swift; sourceTree = "<group>"; };
 		584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
@@ -1396,6 +1398,7 @@
 			isa = PBXGroup;
 			children = (
 				58E88E322BF790C900775F06 /* NotificationPageRequest.swift */,
+				583F03572C05E13A00D68DA9 /* NotificationIdRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -2178,6 +2181,7 @@
 				589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */,
 				58E8C36C2C01AA930034E761 /* ChatRoomResonse.swift in Sources */,
 				58E88E2F2BF7896E00775F06 /* ArrowCountResponse.swift in Sources */,
+				583F03582C05E13A00D68DA9 /* NotificationIdRequest.swift in Sources */,
 				58D1390C2BF3127E0048C228 /* AnalysisSyncViewController.swift in Sources */,
 				58580EFD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift in Sources */,
 				58580EAF2BE0B9F60055F3E8 /* GenderSelectionViewController.swift in Sources */,
