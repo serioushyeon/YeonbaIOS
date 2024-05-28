@@ -45,9 +45,6 @@ class RecommendTableViewCell: UITableViewCell {
         $0.textAlignment = .center
         $0.font = UIFont.pretendardRegular(size: 13)
     }
-    private let favoriteButton = UIButton().then {
-        $0.setImage(UIImage(named: "Favorites"), for: .normal)
-    }
     private let animalButton = UIButton().then {
         $0.setTitle("강아지 상", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardRegular(size: 13)
@@ -90,7 +87,6 @@ class RecommendTableViewCell: UITableViewCell {
         contentView.addSubview(heartLabel)
         contentView.addSubview(animalButton)
         contentView.addSubview(voiceButton)
-        contentView.addSubview(favoriteButton)
         
         myImageView.snp.makeConstraints {
             $0.width.equalTo(142)
@@ -131,12 +127,6 @@ class RecommendTableViewCell: UITableViewCell {
         voiceButton.snp.makeConstraints {
             $0.top.equalTo(animalButton.snp.bottom).offset(5)
             $0.leading.equalTo(animalButton.snp.leading)
-        }
-        favoriteButton.snp.makeConstraints {
-            $0.width.equalTo(16)
-            $0.height.equalTo(20)
-            $0.top.equalTo(contentView.snp.top).offset(15)
-            $0.trailing.equalTo(contentView.snp.trailing).offset(-15)
         }
         
     }
@@ -202,20 +192,6 @@ class RecommendTableViewCell: UITableViewCell {
             }
         }
     }
-    @objc func favoriteButtonTapped() {
-        if let currentImage = favoriteButton.imageView?.image {
-            if(currentImage == UIImage(named: "PinkFavorites")){
-                let newImage = UIImage(named: "Favorites")
-                favoriteButton.setImage(newImage, for: .normal)
-                apiDeleteBookmark(id: id!)
-            }
-            else {
-                let newImage = UIImage(named: "PinkFavorites")
-                favoriteButton.setImage(newImage, for: .normal)
-                apiBookmark(id: id!)
-            }
-        }
-    }
     func configure(with model: UserProfileResponse) {
         myNameLabel.text = model.nickname
         heartLabel.text = "\(model.receivedArrows)"
@@ -225,7 +201,6 @@ class RecommendTableViewCell: UITableViewCell {
         isFavorite = model.isFavorite
         let whiteImage = UIImage(named: "Favorites")
         let pinkImage = UIImage(named: "PinkFavorites")
-        isFavorite ? favoriteButton.setImage(pinkImage, for: .normal) : favoriteButton.setImage(whiteImage, for: .normal)
         //나이
         myAgeLabel.text = "\(model.age)"
         // 이미지 로딩
