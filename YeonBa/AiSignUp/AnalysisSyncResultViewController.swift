@@ -128,6 +128,11 @@ class AnalysisSyncResultViewController: UIViewController {
                 print("회원가입 에러")
             }
         }
+        //MARK: -- 팝업
+//        let welcomePopupVC = WelcomePopupViewController()
+//               welcomePopupVC.modalPresentationStyle = .overFullScreen
+//               welcomePopupVC.modalTransitionStyle = .crossDissolve
+//               present(welcomePopupVC, animated: true, completion: nil)
         let tabVC = TabBarController()
         self.changeRootViewController(rootViewController: tabVC)
     }
