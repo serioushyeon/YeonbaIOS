@@ -52,9 +52,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         $0.textAlignment = .center
         $0.font = UIFont.pretendardRegular(size: 13)
     }
-    private let cupidFavoriteButton = UIButton().then {
-        $0.setImage(UIImage(named: "WhiteFavorites"), for: .normal)
-    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -72,7 +69,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         cupidImageView.addSubview(ageLabel)
         cupidImageView.addSubview(heartImage)
         cupidImageView.addSubview(heartLabel)
-        cupidImageView.addSubview(cupidFavoriteButton)
     }
     func setUI() {
         cupidImageView.snp.makeConstraints { make in
@@ -93,26 +89,23 @@ class HomeCollectionViewCell: UICollectionViewCell {
         }
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(cupidImageView.snp.leading).offset(10)
-            $0.top.equalTo(cupidImageView.snp.top).offset(132)
+            $0.trailing.equalTo(pieChartView.snp.leading).offset(10)
+            $0.bottom.equalTo(ageLabel.snp.top).offset(-5)
             
         }
         ageLabel.snp.makeConstraints {
-            $0.leading.equalTo(nameLabel.snp.trailing).offset(5)
-            $0.bottom.equalTo(nameLabel.snp.bottom)
+            $0.leading.equalTo(nameLabel.snp.leading).offset(5)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+            $0.bottom.equalTo(heartImage.snp.top)
         }
         heartImage.snp.makeConstraints {
             $0.leading.equalTo(nameLabel.snp.leading)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+            $0.bottom.equalToSuperview().inset(10)
+            $0.top.equalTo(ageLabel.snp.bottom).offset(5)
         }
         heartLabel.snp.makeConstraints {
             $0.leading.equalTo(heartImage.snp.trailing).offset(5)
             $0.top.equalTo(heartImage.snp.top)
-        }
-        cupidFavoriteButton.snp.makeConstraints {
-            $0.width.equalTo(16)
-            $0.height.equalTo(20)
-            $0.trailing.equalTo(cupidImageView.snp.trailing).offset(-10)
-            $0.top.equalTo(cupidImageView.snp.top).offset(10)
         }
     }
     func setupPieChart(pieValue: Int) {
@@ -161,21 +154,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
-
-    @objc func favoriteButtonTapped() {
-        if let currentImage = cupidFavoriteButton.imageView?.image {
-            if(currentImage == UIImage(named: "PinkFavorites")){
-                let newImage = UIImage(named: "WhiteFavorites")
-                cupidFavoriteButton.setImage(newImage, for: .normal)
-                apiDeleteBookmark(id: id!)
-            }
-            else {
-                let newImage = UIImage(named: "PinkFavorites")
-                cupidFavoriteButton.setImage(newImage, for: .normal)
-                apiBookmark(id: id!)
-            }
-        }
-    }
     func configure(with model: UserProfileResponse) {
         nameLabel.text = model.nickname
         heartLabel.text = "\(model.receivedArrows)"
@@ -188,7 +166,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         isFavorite = model.isFavorite
         let whiteImage = UIImage(named: "WhiteFavorites")
         let pinkImage = UIImage(named: "PinkFavorites")
-        isFavorite ? cupidFavoriteButton.setImage(pinkImage, for: .normal) : cupidFavoriteButton.setImage(whiteImage, for: .normal)
         // 이미지 로딩
         var profilePhotoUrl = model.profilePhotoUrl
         if !profilePhotoUrl.hasSuffix(".png") {

@@ -333,6 +333,7 @@ class HomeViewController: UIViewController {
         alertView.iconTintColor = .primary
         alertView.addButton("확인", backgroundColor: .primary, textColor: .white) {
             self.apiRecommandList()
+            self.apiGetArrowCount()
         }
         alertView.showTitle(
             "다시해보기",
@@ -385,6 +386,7 @@ extension HomeViewController: UITableViewDataSource {
         // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
         let model = recommandColletModel?[indexPath.row]
         cell.configure(with: model ??  UserProfileResponse(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: 20, receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
+        cell.selectionStyle = .none
         return cell
     }
 }
@@ -418,7 +420,11 @@ extension HomeViewController : UICollectionViewDataSource {
 }
 
 extension HomeViewController : UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let otherProfileVC = OtherProfileViewController()
+        otherProfileVC.id = "\(colletModel![indexPath.row].id)"
+        self.navigationController?.pushViewController(otherProfileVC, animated: true)
+    }
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

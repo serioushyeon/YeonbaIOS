@@ -401,8 +401,8 @@ class SearchViewController: UIViewController {
         NetworkService.shared.searchService.searchUser(bodyDTO: searchUserRequest) { [self] response in
             switch response {
             case .success(let data):
-                guard let data = data.data else { return }
                 print("유저 검색 성공")
+                guard let data = data.data else { return }
                 let searchResultVC = SearchResultViewController (
                     preferLocation: preferLocation ?? "",
                     preferVoice: preferVoice ?? "",
