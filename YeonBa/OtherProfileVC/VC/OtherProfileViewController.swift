@@ -526,15 +526,15 @@ class OtherProfileViewController: UIViewController {
             self.preferenceData = [data.lookAlikeAnimalName,
                                    data.activityArea,
                                    data.vocalRange,
-                                   "\(data.preferredAgeLowerBound)~\(data.preferredAgeUpperBound)살",
+                                   "\(data.preferredAgeLowerBound!)~\(data.preferredAgeUpperBound!)살",
                                    data.preferredBodyType,
                                    data.preferredMbti]
             if(data.preferredHeightLowerBound != nil && data.preferredHeightUpperBound != nil){
                 self.preferenceData = [data.lookAlikeAnimalName,
                                        data.activityArea,
                                        data.vocalRange,
-                                       "\(data.preferredAgeLowerBound)~\(data.preferredAgeUpperBound)살",
-                                       "\(data.preferredHeightLowerBound)~\(data.preferredHeightUpperBound)cm",
+                                       "\(data.preferredAgeLowerBound!)~\(data.preferredAgeUpperBound!)살",
+                                       "\(data.preferredHeightLowerBound!)~\(data.preferredHeightUpperBound!)cm",
                                        data.preferredBodyType,
                                        data.preferredMbti]
             }
@@ -550,12 +550,12 @@ class OtherProfileViewController: UIViewController {
         let pinkImage = UIImage(named: "PinkFavorites")
         self.isFavorite ? self.favoriteBtn.setImage(pinkImage, for: .normal) : self.favoriteBtn.setImage(whiteImage, for: .normal)
         if(data.alreadySentArrow){
-            self.sendBtn.isHidden = false
-            self.sendDoneBtn.isHidden = true
-        }
-        else{
             self.sendBtn.isHidden = true
             self.sendDoneBtn.isHidden = false
+        }
+        else{
+            self.sendBtn.isHidden = false
+            self.sendDoneBtn.isHidden = true
         }
         // 이미지 로딩
         loadProfileImages(urls: data.profilePhotosUrls)
