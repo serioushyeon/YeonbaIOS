@@ -210,10 +210,6 @@ extension ChattingRoomViewController: UITableViewDataSource, UITableViewDelegate
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherMessageCell", for: indexPath) as! OtherMessageCell
             cell.messageLabel.text = chatMessage.content
             var profilePhotoUrl = partnerProfileImageUrl
-            if !profilePhotoUrl.hasSuffix(".png") {
-                profilePhotoUrl += ".png"
-            }
-
             if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                 print("Loading image from URL: \(url)")
                 cell.profileImageView.kf.setImage(with: url)

@@ -9,4 +9,5 @@ import Foundation
 
 struct UserListRequest: Codable {
     var type : String
+    var page : Int
 }

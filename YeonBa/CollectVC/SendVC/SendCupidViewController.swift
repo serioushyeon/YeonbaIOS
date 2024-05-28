@@ -41,7 +41,7 @@ class SendCupidViewController: UIViewController {
     }()
     
     func apiSentList() -> Void{
-        let userListRequest = UserListRequest.init(type: "ARROW_SENDERS")
+        let userListRequest = UserListRequest.init(type: "ARROW_SENDERS", page: 0)
         NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
             guard let self = self else { return }
             switch response {

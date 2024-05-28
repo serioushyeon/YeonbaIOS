@@ -42,7 +42,7 @@ class FavoriteCupidViewController: UIViewController {
     }()
     
     func apiFavoriteList() -> Void{
-        let userListRequest = UserListRequest.init(type: "FAVORITES")
+        let userListRequest = UserListRequest.init(type: "FAVORITES", page: 0)
         NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
             guard let self = self else { return }
             switch response {

@@ -194,10 +194,6 @@ class RecieveCupidCollectionViewCell: UICollectionViewCell {
         ageLabel.text = "\(model.age)"
         // 이미지 로딩
         var profilePhotoUrl = model.profilePhotoUrl
-        if !profilePhotoUrl.hasSuffix(".png") {
-            profilePhotoUrl += ".png"
-        }
-                    
         if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
             print("Loading image from URL: \(url)")
             cupidImageView.kf.setImage(with: url)

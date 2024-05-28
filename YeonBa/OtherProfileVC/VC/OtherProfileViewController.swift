@@ -567,9 +567,6 @@ class OtherProfileViewController: UIViewController {
             
             for urlString in urls {
                 var fullUrlString = urlString
-                if !fullUrlString.hasSuffix(".png") {
-                    fullUrlString += ".png"
-                }
                 if let url = URL(string: Config.s3URLPrefix + fullUrlString) {
                     group.enter()
                     KingfisherManager.shared.retrieveImage(with: url) { result in

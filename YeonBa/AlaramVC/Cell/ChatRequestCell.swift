@@ -117,10 +117,6 @@ class ChatRequestCell: UITableViewCell {
             print("알림내용:\(notification.content)")
             
             var profilePhotoUrl = notification.senderProfilePhotoUrl
-            if !profilePhotoUrl.hasSuffix(".png") {
-                profilePhotoUrl += ".png"
-            }
-            
             if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                 print("Loading image from URL: \(url)")
                 profileImageView.kf.setImage(with: url)
