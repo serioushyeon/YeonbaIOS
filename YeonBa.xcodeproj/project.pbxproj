@@ -12,6 +12,9 @@
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
+		583F03522C05BDF300D68DA9 /* AttendancePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F03512C05BDF300D68DA9 /* AttendancePopupViewController.swift */; };
+		583F03542C05BDF900D68DA9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F03532C05BDF900D68DA9 /* MainViewController.swift */; };
+		583F03562C05BDFE00D68DA9 /* WelcomePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F03552C05BDFE00D68DA9 /* WelcomePopupViewController.swift */; };
 		584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */; };
 		584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2A2B9D55830081149F /* SendCupidViewController.swift */; };
 		584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */; };
@@ -286,6 +289,9 @@
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
 		582DB1802BBE8A4D00600EA7 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		582DB1812BBE8A5300600EA7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		583F03512C05BDF300D68DA9 /* AttendancePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendancePopupViewController.swift; sourceTree = "<group>"; };
+		583F03532C05BDF900D68DA9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		583F03552C05BDFE00D68DA9 /* WelcomePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePopupViewController.swift; sourceTree = "<group>"; };
 		584DCF252B9CBA6C0081149F /* PlusCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2A2B9D55830081149F /* SendCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCupidViewController.swift; sourceTree = "<group>"; };
 		584DCF2C2B9D55960081149F /* FavoriteCupidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCupidViewController.swift; sourceTree = "<group>"; };
@@ -1083,6 +1089,9 @@
 		58BB87142BBBECDD00F90050 /* SignupVC */ = {
 			isa = PBXGroup;
 			children = (
+				583F03552C05BDFE00D68DA9 /* WelcomePopupViewController.swift */,
+				583F03532C05BDF900D68DA9 /* MainViewController.swift */,
+				583F03512C05BDF300D68DA9 /* AttendancePopupViewController.swift */,
 				58580F1C2BE1FA3F0055F3E8 /* UserInfoVC */,
 				58580EE92BE13E490055F3E8 /* SignupModal */,
 				58580F1A2BE1F5F30055F3E8 /* MyFavoriteListViweController.swift */,
@@ -2002,6 +2011,7 @@
 				58E88E5C2BF8830600775F06 /* Config.swift in Sources */,
 				58D138062BECBCD30048C228 /* MBTIViewController.swift in Sources */,
 				58580F042BE13E490055F3E8 /* SignVoiceMode.swift in Sources */,
+				583F03562C05BDFE00D68DA9 /* WelcomePopupViewController.swift in Sources */,
 				589CDCFF2BE514A500BA332F /* KeychainHandler.swift in Sources */,
 				58E88E1E2BF7896300775F06 /* UserListResponse.swift in Sources */,
 				58D138EA2BF22D2E0048C228 /* PhoneNumberResponse.swift in Sources */,
@@ -2128,6 +2138,7 @@
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
 				58D138142BEE725E0048C228 /* LoginRequest.swift in Sources */,
+				583F03522C05BDF300D68DA9 /* AttendancePopupViewController.swift in Sources */,
 				58E88E212BF7896300775F06 /* OtherProfileService.swift in Sources */,
 				58580F052BE13E490055F3E8 /* SignWeightMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
@@ -2186,6 +2197,7 @@
 				58D139072BF3127E0048C228 /* PhotoCollectionViewCell.swift in Sources */,
 				58BB86852BB7F9FA00F90050 /* WeightViewController.swift in Sources */,
 				58BB86312BB56C3C00F90050 /* WhyMode.swift in Sources */,
+				583F03542C05BDF900D68DA9 /* MainViewController.swift in Sources */,
 				589CDD692BE89F0800BA332F /* SignUpResponse.swift in Sources */,
 				58E88F962BFCB47700775F06 /* VoiceEditDelegate.swift in Sources */,
 				58D139082BF3127E0048C228 /* CustomPhotoGalleryViewController.swift in Sources */,
