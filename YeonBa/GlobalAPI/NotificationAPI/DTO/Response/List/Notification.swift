@@ -12,6 +12,7 @@ struct Notifications: Codable {
     let content : String
     let senderId: Int
     let senderProfilePhotoUrl: String
-    let senderNickname: String
     let createdAt: String?
+    let notificationId: Int?
+    let chatRoomId: Int?
 }

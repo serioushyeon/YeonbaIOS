@@ -3,8 +3,13 @@ import SnapKit
 import Then
 import Kingfisher
 
+protocol ChatRequestNotificationCellDelegate: AnyObject {
+    func didTapAcceptButton(notificationId: Int)
+}
 // 채팅 요청 알림 셀 (Chat Request Cell)
 class ChatRequestCell: UITableViewCell {
+    weak var delegate: ChatRequestNotificationCellDelegate?
+    var notificationId = 0
     //MARK: - UI Components
     let profileImageView = UIImageView().then{
         $0.image = UIImage(named: "woosuck")
@@ -59,9 +64,11 @@ class ChatRequestCell: UITableViewCell {
         print("rejectBtnTapped tapped")
     }
     @objc func AcceptBtnTapped() {
-      //  let request = NotificationIdRequest(notificationId: <#T##Int#>)
-//    
-//        NetworkService.shared.notificationService.notificationChatAccept(queryDTO: <#T##NotificationIdRequest#>, completion: <#T##(NetworkResult<StatusResponse<Int?>>) -> Void#>)
+        delegate?.didTapAcceptButton(notificationId: notificationId)
+//        print("알람id: \()")
+        //  let request = NotificationIdRequest(notificationId: <#T##Int#>)
+        //
+        //        NetworkService.shared.notificationService.notificationChatAccept(queryDTO: <#T##NotificationIdRequest#>, completion: <#T##(NetworkResult<StatusResponse<Int?>>) -> Void#>)
         print("채팅요청 수락")
     }
     func addSubViews() {
@@ -115,8 +122,9 @@ class ChatRequestCell: UITableViewCell {
         }
     }
     func configure(with notification: Notifications) {
-            messageLabel.text = notification.content
-            print("알림내용:\(notification.content)")
+        messageLabel.text = notification.content
+        notificationId = notification.notificationId ?? 00000
+        print("알림내용:\(notification.content)")
         if let dateString = notification.createdAt {
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -138,12 +146,12 @@ class ChatRequestCell: UITableViewCell {
                 timeLabel.text = "Invalid Date"
             }
         }
-            var profilePhotoUrl = notification.senderProfilePhotoUrl
-            if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
-                print("Loading image from URL: \(url)")
-                profileImageView.kf.setImage(with: url)
-            } else {
-                print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
-            }
+        var profilePhotoUrl = notification.senderProfilePhotoUrl
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
+            profileImageView.kf.setImage(with: url)
+        } else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
         }
+    }
 }

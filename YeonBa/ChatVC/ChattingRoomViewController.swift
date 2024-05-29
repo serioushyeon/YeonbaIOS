@@ -15,8 +15,8 @@ class ChattingRoomViewController: UIViewController, SendViewDelegate {
     var partnerProfileImageUrl: String = ""
     var messages: [ChatRoomResonse] = [] // 채팅 데이터를 저장할 배열
     lazy var sendView = SendView(roomId: roomId)
-    private var sendViewBottomConstraint: Constraint? // sendView bottom constraint를 저장할 변수
-    private var tableViewBottomConstraint: Constraint? // 테이블 뷰 bottom constraint를 저장할 변수
+    private var sendViewBottomConstraint: Constraint?
+    private var tableViewBottomConstraint: Constraint?
     //MARK: - UI Components
     lazy var tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(MyMessageCell.self, forCellReuseIdentifier: "MyMessageCell")
