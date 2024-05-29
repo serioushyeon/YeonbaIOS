@@ -398,6 +398,7 @@ class SearchViewController: UIViewController {
                 heightUpperBound: heightUpperBound,
                 includePreferredAnimal: isAnimalPreferred
             )
+        print(searchUserRequest)
         NetworkService.shared.searchService.searchUser(bodyDTO: searchUserRequest) { [self] response in
             switch response {
             case .success(let data):
@@ -407,7 +408,13 @@ class SearchViewController: UIViewController {
                     preferLocation: preferLocation ?? "",
                     preferVoice: preferVoice ?? "",
                     ageRange: "\(ageLowerBound) ~ \(ageUpperBound)세",
-                    heightRange: "\(heightLowerBound) ~ \(heightUpperBound)cm"
+                    heightRange: "\(heightLowerBound) ~ \(heightUpperBound)cm",
+                    ageLowerBound: ageLowerBound,
+                    ageUpperBound: ageUpperBound,
+                    heightLowerBound: heightLowerBound,
+                    heightUpperBound: heightUpperBound,
+                    includePreferredAnimal : isAnimalPreferred,
+                    totalPage : data.totalPage
                 )
                 searchResultVC.colletModel = data.users
                 self.navigationController?.pushViewController(searchResultVC, animated: true)

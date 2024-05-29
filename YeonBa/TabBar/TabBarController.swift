@@ -7,18 +7,21 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.delegate = self
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.setupViewControllers()
         setupTabBarAppearance()
     }
+    
     private func setupViewControllers() {
         let homeViewController = HomeViewController()
         let searchViewController = SearchViewController()
@@ -31,8 +34,10 @@ class TabBarController: UITabBarController {
         collectViewController.tabBarItem = UITabBarItem(title: "모아보기", image: UIImage(named: "Collect"), selectedImage: UIImage(named: "FillCollect"))
         chattingViewController.tabBarItem = UITabBarItem(title: "채팅", image: UIImage(named: "Chatting"), selectedImage: UIImage(named: "FillChatting"))
         settingViewController.tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: "Setting"), selectedImage: UIImage(named: "FillSetting"))
+        
         viewControllers = [homeViewController, searchViewController, collectViewController, chattingViewController, settingViewController].map { BaseNavigationController(rootViewController: $0) }
     }
+    
     private func setupTabBarAppearance() {
         tabBar.isTranslucent = false
         setTabBarColors(
@@ -48,5 +53,19 @@ class TabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = unselectedItemTintColor
     }
     
+    // UITabBarControllerDelegate method
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let navController = viewController as? UINavigationController,
+           let rootViewController = navController.viewControllers.first {
+            if let homeVC = rootViewController as? HomeViewController {
+                homeVC.reloadData()
+            } else if let collectVC = rootViewController as? CollectViewController {
+                collectVC.reloadData()
+            } else if let chattingVC = rootViewController as? ChattingViewController {
+                chattingVC.reloadData()
+            } else if let settingVC = rootViewController as? SettingViewController {
+                settingVC.reloadData()
+            }
+        }
+    }
 }
-

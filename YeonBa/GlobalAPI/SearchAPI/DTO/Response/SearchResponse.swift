@@ -11,12 +11,12 @@ struct SearchUsers : Codable {
     let id : Int
     let profilePhotoUrl : String
     let nickname : String
-    let age : String
+    let age : Int
     let receivedArrows : Int
     let lookAlikeAnimal : String
     let photoSyncRate : Int
     let activityArea : String
     let height : Int
-    let voalRange : String
+    let vocalRange : String
     let isFavorite : Bool
 }

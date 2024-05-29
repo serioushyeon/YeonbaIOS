@@ -41,6 +41,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         addSubViews()
         configUI()
     }
+    func reloadData() {
+        updateChat()
+    }
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
          self.navigationItem.hidesBackButton = true

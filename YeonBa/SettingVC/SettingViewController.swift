@@ -97,7 +97,9 @@ class SettingViewController: UIViewController {
         horizontalStackView.addArrangedSubview(button2)
         contentView.addSubview(bottomView)
     }
-    
+    func reloadData() {
+        updateUserProfile()
+    }
     func updateUserProfile() {
         NetworkService.shared.mypageService.myProfile() { response in
             switch response {

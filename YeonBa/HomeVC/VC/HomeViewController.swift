@@ -79,6 +79,14 @@ class HomeViewController: UIViewController {
         return collectionView
     }()
     
+    func reloadData() {
+        // API 호출 및 데이터 갱신
+        apiRecieveList()
+        apiGetArrowCount()
+        loadRecommandList()
+        tableView.reloadData()
+        collectionview.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -158,9 +166,6 @@ class HomeViewController: UIViewController {
             }
         }
     }
-
-
-
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -263,7 +268,9 @@ class HomeViewController: UIViewController {
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
-                self.heartCountLabel.text = "\(data.arrows)"
+                DispatchQueue.main.async {
+                    self.heartCountLabel.text = "\(data.arrows)"
+                }
                 print("화살 조회 성공")
             default:
                 print("화살 조회 실패")
@@ -311,6 +318,7 @@ class HomeViewController: UIViewController {
                 UserDefaults.standard.lastFetchDate = Date()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.apiGetArrowCount()
                 }
             default:
                 print("추천 프로필 조회 실패")
@@ -329,7 +337,6 @@ class HomeViewController: UIViewController {
         alertView.iconTintColor = .primary
         alertView.addButton("확인", backgroundColor: .primary, textColor: .white) {
             self.apiRecommandList()
-            self.apiGetArrowCount()
         }
         alertView.showTitle(
             "다시해보기",
@@ -339,9 +346,15 @@ class HomeViewController: UIViewController {
         )
     }
     @objc func plusGenderTapped() {
-        //self.navigationController?.pushViewController(CollectViewController(), animated: true)
+        // 부모 뷰 컨트롤러가 BaseNavigationController인지 확인
+            if let baseNavController = self.navigationController as? BaseNavigationController {
+                // BaseNavigationController에 연결된 탭바 컨트롤러에 접근
+                if let tabBarController = baseNavController.tabBarController {
+                    // 탭바 컨트롤러의 selectedIndex를 변경하여 원하는 탭으로 이동
+                    tabBarController.selectedIndex = 2 // 예시로 두 번째 탭으로 이동
+                }
+            }
     }
-    
     
 }
 extension UIFont {
