@@ -4,7 +4,19 @@ import Then
 import Kingfisher
 
 class SettingViewController: UIViewController {
-
+    var arrowCount = 0
+    private enum Constant {
+        static let thumbnailSize = 170.0
+        static let thumbnailCGSize = CGSize(width: Constant.thumbnailSize, height: Constant.thumbnailSize)
+        static let borderWidth = 5.0
+        static let spacing = 10.0
+    }
+    
+    private let containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
     // MARK: - UI Components
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
@@ -13,36 +25,16 @@ class SettingViewController: UIViewController {
     private let contentView = UIView().then {
         $0.backgroundColor = .clear
     }
+    
     private let imageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
-        $0.layer.cornerRadius = 70
+        //$0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = (Constant.thumbnailSize - Constant.spacing * 2) / 2.0
+        $0.clipsToBounds = true
         $0.layer.masksToBounds = true
-        $0.layer.borderColor = UIColor.primary?.cgColor
-        $0.layer.borderWidth = 3
-        
     }
-    private lazy var gradientBorderView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 75
-        view.layer.masksToBounds = true
-        view.layer.addSublayer(gradientLayer)
-        return view
-    }()
-    private lazy var gradientLayer: CAGradientLayer = {
-        let l = CAGradientLayer()
-        l.colors = [UIColor.red.cgColor, UIColor.blue.cgColor] // 원하는 그라데이션 색상 설정
-        l.startPoint = CGPoint(x: 0.5, y: 0)
-        l.endPoint = CGPoint(x: 0.5, y: 1)
-        return l
-    }()
-    private lazy var borderLayer: CAShapeLayer = {
-        let shape = CAShapeLayer()
-        shape.lineWidth = 4.0 // Border width
-        shape.fillColor = UIColor.clear.cgColor
-        return shape
-    }()
+    
     private let nameLabel = UILabel().then {
-        $0.text = "연바" // 원하는 이름으로 수정
+        $0.text = "연바"
         $0.textAlignment = .center
         $0.font = UIFont.boldSystemFont(ofSize: 24)
     }
@@ -53,22 +45,22 @@ class SettingViewController: UIViewController {
     }
     private let button1 = UIButton().then {
         $0.setTitle(" 프로필 수정하기", for: .normal)
-        $0.layer.borderWidth = 2.0 // 테두리 두께
-        $0.layer.borderColor = UIColor.black.cgColor // 테두리 색상
-        $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
-        $0.setTitleColor(UIColor.black, for: .normal) // 텍스트 색상
+        $0.layer.borderWidth = 2.0
+        $0.layer.borderColor = UIColor.black.cgColor
+        $0.layer.cornerRadius = 20.0
+        $0.setTitleColor(UIColor.black, for: .normal)
         $0.setImage(UIImage(named: "profile")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .black
-        $0.contentHorizontalAlignment = .center // 버튼1 이미지를 가로로 가운데 정렬
+        $0.contentHorizontalAlignment = .center
     }
     private let button2 = UIButton().then {
         $0.setTitle(" 남은 화살 수: 5개", for: .normal)
-        $0.layer.cornerRadius = 20.0 // 테두리 둥글기 반지름
+        $0.layer.cornerRadius = 20.0
         $0.backgroundColor = .primary
-        $0.setTitleColor(UIColor.white, for: .normal) // 텍스트 색상
+        $0.setTitleColor(UIColor.white, for: .normal)
         $0.setImage(UIImage(named: "arrowProfile")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .white
-        $0.contentHorizontalAlignment = .center // 버튼2 이미지를 가로로 가운데 정렬
+        $0.contentHorizontalAlignment = .center
         $0.isUserInteractionEnabled = false
     }
     private let bottomView = UIView().then {
@@ -81,18 +73,39 @@ class SettingViewController: UIViewController {
         configUI()
         setupActions()
         updateUserProfile()
+        
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        applyGradientBorder()
-    }
+       super.viewDidLayoutSubviews()
+       guard
+         self.containerView.bounds != .zero,
+         self.containerView.layer.sublayers?.contains(where: { $0 is CAGradientLayer }) == false
+       else { return }
+
+       let gradient = CAGradientLayer()
+       gradient.frame = CGRect(origin: CGPoint.zero, size: Constant.thumbnailCGSize)
+        gradient.colors = [UIColor.primary, UIColor.secondary].map(\.?.cgColor)
+
+       let shape = CAShapeLayer()
+       shape.lineWidth = Constant.borderWidth
+       shape.path = UIBezierPath(
+         roundedRect: self.containerView.bounds.insetBy(dx: Constant.borderWidth, dy: Constant.borderWidth),
+         cornerRadius: Constant.thumbnailSize / 2.0
+       ).cgPath
+       shape.strokeColor = UIColor.black.cgColor
+       shape.fillColor = UIColor.clear.cgColor
+       gradient.mask = shape
+
+       self.containerView.layer.addSublayer(gradient)
+     }
     
     //MARK: - UI Layout
     func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(gradientBorderView, imageView, nameLabel, horizontalStackView)
+        contentView.addSubviews(containerView, nameLabel, horizontalStackView)
+        containerView.addSubview(imageView)
         horizontalStackView.addArrangedSubview(button1)
         horizontalStackView.addArrangedSubview(button2)
         contentView.addSubview(bottomView)
@@ -106,7 +119,9 @@ class SettingViewController: UIViewController {
             case .success(let statusResponse):
                 if let data = statusResponse.data {
                     self.nameLabel.text = data.name
-                    self.button2.setTitle("남은 화살 수: \(data.arrows)개", for: .normal)
+                    self.arrowCount = data.arrows
+                    ArrowCountManager.shared.setArrowCount(to: data.arrows)
+                    self.button2.setTitle("남은 화살 수: \(self.arrowCount)개", for: .normal)
                     var profilePhotoUrl = data.profileImageUrl
                     if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                         print("Loading image from URL: \(url)")
@@ -114,7 +129,7 @@ class SettingViewController: UIViewController {
                             switch result {
                             case .success(let value):
                                 print("Image successfully loaded: \(value.source.url?.absoluteString ?? "")")
-                                self.applyGradientBorder()
+                                //self.applyGradientBorder()
                             case .failure(let error):
                                 print("Error loading image: \(error)")
                             }
@@ -129,18 +144,6 @@ class SettingViewController: UIViewController {
         }
     }
     
-    func applyGradientBorder() {
-        let radius = imageView.bounds.width / 2
-        gradientBorderView.frame = imageView.frame
-        gradientLayer.frame = gradientBorderView.bounds
-        gradientLayer.cornerRadius = radius
-        
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: radius, y: radius), radius: radius, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
-        borderLayer.path = circularPath.cgPath
-        borderLayer.strokeColor = UIColor.clear.cgColor // Hide the temporary color
-        
-        gradientLayer.mask = borderLayer
-    }
     
     func configUI() {
         scrollView.snp.makeConstraints {
@@ -150,17 +153,20 @@ class SettingViewController: UIViewController {
             $0.width.equalToSuperview()
             $0.top.bottom.equalToSuperview()
         }
-        gradientBorderView.snp.makeConstraints { make in
+        containerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(20)
-            make.width.height.equalTo(150)
+            make.width.height.equalTo(Constant.thumbnailSize)
         }
         imageView.snp.makeConstraints { make in
-            make.center.equalTo(gradientBorderView)
-            make.width.height.equalTo(150 - 8) // Adjust size to fit inside border
+            make.left.equalTo(containerView.snp.left).offset(Constant.spacing)
+            make.right.equalTo(containerView.snp.right).offset(-Constant.spacing)
+            make.bottom.equalTo(containerView.snp.bottom).offset(-Constant.spacing)
+            make.top.equalTo(containerView.snp.top).offset(Constant.spacing)
+            //make.width.height.equalTo(142)
         }
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(gradientBorderView.snp.bottom).offset(20)
+            make.top.equalTo(imageView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
         horizontalStackView.snp.makeConstraints { make in
@@ -168,6 +174,11 @@ class SettingViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
+        bottomView.snp.makeConstraints { make in
+            make.top.equalTo(horizontalStackView.snp.bottom).offset(20)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
         
         // 하단 스택 뷰 설정
         let views = (0...6).map { index -> UIView in
@@ -197,7 +208,7 @@ class SettingViewController: UIViewController {
                 make.width.equalTo(40)
                 make.height.equalTo(40)
             }
-
+            
             // 구분선 추가
             let divider = UIView()
             divider.backgroundColor = .gray3
@@ -236,12 +247,12 @@ class SettingViewController: UIViewController {
             make.bottom.equalTo(bottomView.snp.bottom).offset(20)
         }
     }
-
+    
     func updateArrowNumber(number: Int) {
         let arrowNumber = number
         button2.setTitle(" 남은 화살수 \(arrowNumber)", for: .normal)
     }
-            
+    
     func setupActions() {
         button1.addTarget(self, action: #selector(handleProfileEditTap), for: .touchUpInside)
     }
@@ -277,6 +288,7 @@ class SettingViewController: UIViewController {
             let viewController = BlockingmanagementViewController()
             navigationController?.pushViewController(viewController, animated: true)
         case 3:
+            
             let viewController = ArrowRechargeViewController()
             navigationController?.pushViewController(viewController, animated: true)
         case 4:

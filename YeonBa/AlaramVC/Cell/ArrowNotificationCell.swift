@@ -3,18 +3,21 @@ import SnapKit
 import Then
 import Kingfisher
 
+protocol ArrowNotificationCellDelegate: AnyObject {
+    func didTapProfileButton(senderId: String)
+}
 // 화살 알림 셀 (Arrow Notification Cell)
 class ArrowNotificationCell: UITableViewCell {
-    
+    var notificationModel : [Notifications]?
+    var senderId = 0
+    weak var delegate: ArrowNotificationCellDelegate?
     // MARK: - UI Components
     let profileImageView = UIImageView().then{
-        $0.image = UIImage(named: "woosuck")
         $0.layer.cornerRadius = 20
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
     let messageLabel = UILabel().then{
-        $0.text = "선재님이 화살을 보냈어요!"
         $0.font = UIFont.pretendardSemiBold(size: 16)
     }
     let actionButton = UIButton().then{
@@ -29,7 +32,6 @@ class ArrowNotificationCell: UITableViewCell {
         $0.addTarget(self, action: #selector(profileBtnTapped), for: .touchUpInside)
     }
     let timeLabel = UILabel().then{
-        $0.text = "3분 전"
         $0.font = UIFont.pretendardRegular(size: 13)
         $0.textColor = .lightGray
     }
@@ -56,7 +58,10 @@ class ArrowNotificationCell: UITableViewCell {
     
     //MARK: - Actions
     @objc func profileBtnTapped() {
-        print("profileBtnTapped tapped")
+        delegate?.didTapProfileButton(senderId: "\(senderId)")
+       
+        print("\(notificationModel?.first?.senderId)")
+        print("프로필 보러 가기 요청")
     }
     //MARK: - UI Layout
     func addSubViews() {
@@ -93,8 +98,29 @@ class ArrowNotificationCell: UITableViewCell {
     }
     
     func configure(with notification: Notifications) {
-            messageLabel.text = notification.content
-            timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+        messageLabel.text = notification.content
+        senderId = notification.senderId
+        if let dateString = notification.createdAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            var date: Date?
+            if dateString.contains(".") {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+                date = dateFormatter.date(from: dateString)
+            }
+            if date == nil {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                date = dateFormatter.date(from: dateString)
+            }
+            
+            if let date = date {
+                let timeAgo = date.toRelativeString()
+                timeLabel.text = timeAgo
+            } else {
+                timeLabel.text = "Invalid Date"
+            }
+        }
             print("알림내용:\(notification.content)")
             
             var profilePhotoUrl = notification.senderProfilePhotoUrl

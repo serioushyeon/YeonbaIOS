@@ -11,9 +11,16 @@ import Alamofire
 protocol NotificationServiceProtocol {
     func NotificationList(queryDTO: NotificationPageRequest, completion: @escaping (NetworkResult<StatusResponse<NotificationDataResponse>>) -> Void)
     func UnreadNotification(completion: @escaping (NetworkResult<StatusResponse<NotificationResponse>>) -> Void)
+    func notificationChatAccept(queryDTO: NotificationIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
+    //func NotificationPermission()
+    
 }
 
 final class NotificationService: APIRequestLoader<NotificationTarget>, NotificationServiceProtocol {
+    func notificationChatAccept(queryDTO: NotificationIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void) {
+        fetchData(target: .chatAccept(queryDTO), responseData: StatusResponse<Int?>.self, completion: completion)
+    }
+    
     func UnreadNotification(completion: @escaping (NetworkResult<StatusResponse<NotificationResponse>>) -> Void) {
         fetchData(target: .unread, responseData: StatusResponse<NotificationResponse>.self, completion: completion)
     }

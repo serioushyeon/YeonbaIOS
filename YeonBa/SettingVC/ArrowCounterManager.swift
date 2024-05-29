@@ -11,7 +11,7 @@ class ArrowCountManager {
     static let shared = ArrowCountManager()
     private init() {}
     
-    private(set) var arrowCount: Int = 31 {
+    private(set) var arrowCount: Int = 0 {
         didSet {
             NotificationCenter.default.post(name: .arrowCountDidChange, object: nil)
         }
@@ -29,3 +29,4 @@ class ArrowCountManager {
 extension Notification.Name {
     static let arrowCountDidChange = Notification.Name("arrowCountDidChange")
 }
+

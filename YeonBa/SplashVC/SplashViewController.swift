@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 import SwiftKeychainWrapper
+
 class SplashViewController: UIViewController {
     let signUpViewController = SignUpViewController()
     let tabbarController = TabBarController()
@@ -83,7 +84,30 @@ class SplashViewController: UIViewController {
             }
         }
     }
-    
+    private func updateDeviceTokenOnServer(deviceToken: String) {
+        guard let url = URL(string: "https://api.yeonba.co.kr/users/device-token") else { return }
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(KeychainHandler.shared.accessToken)"
+        ]
+        
+        let parameters: [String: Any] = ["deviceToken": deviceToken]
+        
+        AF.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    if let httpResponse = response.response, httpResponse.statusCode == 200 {
+                        print("Device token updated successfully.")
+                    } else {
+                        print("Failed to update device token. Status code: \(response.response?.statusCode ?? 0)")
+                        print("Response data: \(value)")
+                    }
+                case .failure(let error):
+                    print("Error updating device token: \(error.localizedDescription)")
+                }
+            }
+    }
     // MARK: Network Function
     func getUserInfo() {
         guard let socialId = SignDataManager.shared.socialId,
@@ -117,6 +141,10 @@ class SplashViewController: UIViewController {
                 // AccessToken이 제대로 설정되었을 때에만 Authorization 헤더 설정
                 if !data.accessToken.isEmpty {
                     NetworkService.shared.setAuthorizationHeader(token: data.accessToken)
+                    let deviceToken = KeychainHandler.shared.deviceToken
+                    self.updateDeviceTokenOnServer(deviceToken: deviceToken)
+                    print("device token: \(KeychainHandler.shared.deviceToken)")
+                    
                 }
                 
             default:

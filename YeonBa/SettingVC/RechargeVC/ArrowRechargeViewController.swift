@@ -18,7 +18,7 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
     }
     
     private let nextChargeButton = UIButton().then {
-        $0.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
+        $0.setTitle(" 남은 화살 수: 5개", for: .normal)
         $0.backgroundColor = .systemPink
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 15
@@ -66,6 +66,8 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
         setupLayout()
         setupActions()
         initializeButtonStates()
+        updateArrowCountLabel()
+        //nextChargeButton.setTitle("남은 화살 수: \(arrowCount)개", for: .normal)
     }
     
     private func setupLayout() {
@@ -154,8 +156,27 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
             rechargeOptionButtons[1].activate()
             rechargeOptionButtons[1].isEnabled = true
         }
-        ArrowCountManager.shared.incrementArrowCount(by: 5)
-        updateArrowCountLabel()
+        NetworkService.shared.mypageService.chargeArrow { response in
+            switch response {
+            case .success(let statusResponse):
+                if let data = statusResponse.data {
+                    print("요청 성공")
+                    ArrowCountManager.shared.incrementArrowCount(by: 5)
+                    self.updateArrowCountLabel()
+                }
+            case .requestErr(let statusResponse):
+                print("요청 에러: \(statusResponse.message)")
+            case .pathErr:
+                print("경로 에러")
+            case .serverErr:
+                print("서버 에러")
+            case .networkErr:
+                print("네트워크 에러")
+            case .failure:
+                print("실패")
+            }
+        }
+        
     }
     
     func ad2ViewControllerDidClose(_ controller: Ad2ViewController) {
@@ -166,7 +187,26 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
             rechargeOptionButtons[2].activate()
             rechargeOptionButtons[2].isEnabled = true
         }
-        ArrowCountManager.shared.incrementArrowCount(by: 5)
+        NetworkService.shared.mypageService.chargeArrow { response in
+            switch response {
+            case .success(let statusResponse):
+                if let data = statusResponse.data {
+                    print("요청 성공")
+                    ArrowCountManager.shared.incrementArrowCount(by: 5)
+                    self.updateArrowCountLabel()
+                }
+            case .requestErr(let statusResponse):
+                print("요청 에러: \(statusResponse.message)")
+            case .pathErr:
+                print("경로 에러")
+            case .serverErr:
+                print("서버 에러")
+            case .networkErr:
+                print("네트워크 에러")
+            case .failure:
+                print("실패")
+            }
+        }
         updateArrowCountLabel()
     }
     
@@ -175,10 +215,31 @@ class ArrowRechargeViewController: UIViewController, Ad1ViewControllerDelegate, 
             button.deactivate()
         }
         ArrowCountManager.shared.incrementArrowCount(by: 5)
+        NetworkService.shared.mypageService.chargeArrow { response in
+            switch response {
+            case .success(let statusResponse):
+                if let data = statusResponse.data {
+                    print("요청 성공")
+                    ArrowCountManager.shared.incrementArrowCount(by: 5)
+                    self.updateArrowCountLabel()
+                }
+            case .requestErr(let statusResponse):
+                print("요청 에러: \(statusResponse.message)")
+            case .pathErr:
+                print("경로 에러")
+            case .serverErr:
+                print("서버 에러")
+            case .networkErr:
+                print("네트워크 에러")
+            case .failure:
+                print("실패")
+            }
+        }
         updateArrowCountLabel()
     }
     
     private func updateArrowCountLabel() {
-        nextChargeButton.setTitle(" 남은 화살 수: \(ArrowCountManager.shared.arrowCount)개", for: .normal)
+        let arrowCount = ArrowCountManager.shared.arrowCount ?? 0
+        nextChargeButton.setTitle(" 남은 화살 수: \(arrowCount)개", for: .normal)
     }
 }

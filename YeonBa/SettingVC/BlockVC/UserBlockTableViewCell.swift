@@ -1,8 +1,15 @@
+//
+//  UserBlockTableViewCell.swift
+//  YeonBa
+//
+//  Created by 김민솔 on 5/29/24.
+//
+
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
-    static let identifier = "CustomTableViewCell"
-
+class UserBlockTableViewCell: UITableViewCell {
+    static let identifier = "UserBlockTableViewCell"
+    var blockUserModel : [BlockUsers]?
     private let circleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -62,38 +69,13 @@ class CustomTableViewCell: UITableViewCell {
 
     public func configure(with title: String) {
         titleLabel.text = title
-    }
-}
-
-class BlockingmanagementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
-        return tableView
-    }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.frame = view.bounds
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 // For example
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else {
-            return UITableViewCell()
+        
+        var profilePhotoUrl = blockUserModel?.first?.profileUrl ?? ""
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
+            circleImageView.kf.setImage(with: url)
+        } else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
         }
-        cell.configure(with: "박원빈 님")
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        // Handle cell tap
     }
 }
