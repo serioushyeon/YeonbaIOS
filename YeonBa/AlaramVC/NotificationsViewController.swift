@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 import Then
 
-class NotificationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NotificationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArrowNotificationCellDelegate {
 
     // MARK: - UI Components
     var notifications : [Notifications] = []
@@ -17,6 +17,8 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         $0.register(ArrowNotificationCell.self, forCellReuseIdentifier: "ArrowNotificationCell")
         $0.register(ChatAcceptanceCell.self, forCellReuseIdentifier: "ChatAcceptanceCell")
         $0.register(ChatRequestCell.self, forCellReuseIdentifier: "ChatRequestCell")
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
         $0.dataSource = self
         $0.delegate = self
     }
@@ -46,6 +48,7 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         }
 
     }
+
     // MARK: - Networking
     func fetchNotifications(page: Int) {
         activityIndicator.startAnimating()
@@ -58,6 +61,7 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
                         print("Fetched Notifications: \(data.notifications)")
                         self.activityIndicator.stopAnimating()
                         self.notifications = data.notifications
+                        
                         self.tableView.reloadData()
                     }
                 }
@@ -75,7 +79,13 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
 
-            
+    func didTapProfileButton(senderId: String) {
+        let otherProfileVC = OtherProfileViewController()
+        otherProfileVC.id = senderId
+        self.navigationController?.pushViewController(otherProfileVC, animated: true)
+    }
+    
+
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
@@ -88,13 +98,17 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         case "ARROW_RECEIVED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ArrowNotificationCell", for: indexPath) as! ArrowNotificationCell
             cell.configure(with: notifications)
+            cell.selectionStyle = .none
+            cell.delegate = self
             return cell
         case "CHATTING_REQUESTED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRequestCell", for: indexPath) as! ChatRequestCell
+            cell.selectionStyle = .none
             cell.configure(with: notifications)
             return cell
         case "CHATTING_REQUEST_ACCEPTED":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatAcceptanceCell", for: indexPath) as! ChatAcceptanceCell
+            cell.selectionStyle = .none
             cell.configure(with: notifications)
             return cell
         default:
@@ -104,9 +118,9 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
 
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100 // Adjust cell height accordingly
+        return 100
     }
 }
 
 // MARK: - Extensions
-// Extend UITableViewCell to create a custom cell
+

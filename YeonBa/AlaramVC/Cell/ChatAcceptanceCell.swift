@@ -90,28 +90,49 @@ class ChatAcceptanceCell: UITableViewCell {
     @objc func chatBtnTapped() {
         print("chatBtnTapped tapped")
     }
-//    func configure(with notification: Notifications) {
-//        messageLabel.text = notification.content
-//        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
-//        print("알림내용:\(notification.content)")
-//        if let url = URL(string: Config.s3URLPrefix + notification.senderProfilePhotoUrl) {
-//            print("Loading image from URL: \(url)")
-//            profileImageView.kf.setImage(with: url)
-//        } else {
-//            print("Invalid URL: \(Config.s3URLPrefix + notification.senderProfilePhotoUrl)")
-//        }
-//    }
+    //    func configure(with notification: Notifications) {
+    //        messageLabel.text = notification.content
+    //        timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
+    //        print("알림내용:\(notification.content)")
+    //        if let url = URL(string: Config.s3URLPrefix + notification.senderProfilePhotoUrl) {
+    //            print("Loading image from URL: \(url)")
+    //            profileImageView.kf.setImage(with: url)
+    //        } else {
+    //            print("Invalid URL: \(Config.s3URLPrefix + notification.senderProfilePhotoUrl)")
+    //        }
+    //    }
     func configure(with notification: Notifications) {
-            messageLabel.text = notification.content
-            timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
-            print("알림내용:\(notification.content)")
+        messageLabel.text = notification.content
+        if let dateString = notification.createdAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            var date: Date?
+            if dateString.contains(".") {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+                date = dateFormatter.date(from: dateString)
+            }
+            if date == nil {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                date = dateFormatter.date(from: dateString)
+            }
             
-            var profilePhotoUrl = notification.senderProfilePhotoUrl
-            if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
-                print("Loading image from URL: \(url)")
-                profileImageView.kf.setImage(with: url)
+            if let date = date {
+                let timeAgo = date.toRelativeString()
+                timeLabel.text = timeAgo
             } else {
-                print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+                timeLabel.text = "Invalid Date"
             }
         }
+        
+        print("알림내용:\(notification.content)")
+        
+        var profilePhotoUrl = notification.senderProfilePhotoUrl
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
+            profileImageView.kf.setImage(with: url)
+        } else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+        }
+    }
 }

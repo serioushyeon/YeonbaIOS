@@ -26,7 +26,7 @@ class ChatRequestCell: UITableViewCell {
         $0.layer.borderWidth = 1.4
         $0.backgroundColor = UIColor.white
         $0.layer.masksToBounds = true
-        $0.addTarget(self, action: #selector(chatBtnTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(AcceptBtnTapped), for: .touchUpInside)
     }
     let timeLabel = UILabel().then{
         $0.text = "3분 전"
@@ -58,8 +58,11 @@ class ChatRequestCell: UITableViewCell {
     @objc func rejectBtnTapped() {
         print("rejectBtnTapped tapped")
     }
-    @objc func chatBtnTapped() {
-        print("rejectBtnTapped tapped")
+    @objc func AcceptBtnTapped() {
+      //  let request = NotificationIdRequest(notificationId: <#T##Int#>)
+//    
+//        NetworkService.shared.notificationService.notificationChatAccept(queryDTO: <#T##NotificationIdRequest#>, completion: <#T##(NetworkResult<StatusResponse<Int?>>) -> Void#>)
+        print("채팅요청 수락")
     }
     func addSubViews() {
         contentView.addSubview(profileImageView)
@@ -113,9 +116,28 @@ class ChatRequestCell: UITableViewCell {
     }
     func configure(with notification: Notifications) {
             messageLabel.text = notification.content
-            timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
             print("알림내용:\(notification.content)")
+        if let dateString = notification.createdAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            var date: Date?
+            if dateString.contains(".") {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+                date = dateFormatter.date(from: dateString)
+            }
+            if date == nil {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                date = dateFormatter.date(from: dateString)
+            }
             
+            if let date = date {
+                let timeAgo = date.toRelativeString()
+                timeLabel.text = timeAgo
+            } else {
+                timeLabel.text = "Invalid Date"
+            }
+        }
             var profilePhotoUrl = notification.senderProfilePhotoUrl
             if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                 print("Loading image from URL: \(url)")
