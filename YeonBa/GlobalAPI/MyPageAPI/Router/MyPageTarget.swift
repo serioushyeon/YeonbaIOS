@@ -12,6 +12,8 @@ enum MyPageTarget {
     case myprofile
     case editProfile(_ bodyDTO: ProfileEditRequest)
     case profileDetail
+    case chargeArrow //화살 충전
+    case blockUsers //유저 차단 목록 조회 
 }
 
 extension MyPageTarget: TargetType {
@@ -23,6 +25,10 @@ extension MyPageTarget: TargetType {
         case .editProfile:
             return .patch
         case .profileDetail:
+            return .get
+        case .chargeArrow:
+            return .post
+        case .blockUsers:
             return .get
         }
         
@@ -36,6 +42,10 @@ extension MyPageTarget: TargetType {
             return "/users/profiles"
         case .profileDetail:
             return "/users/profiles/details"
+        case .chargeArrow:
+            return "/users/arrows"
+        case .blockUsers:
+            return "/users/block"
         }
         
     }
@@ -48,6 +58,10 @@ extension MyPageTarget: TargetType {
             return .requestWithBody(bodyDTO)
         case .profileDetail:
             return .requestPlain
+        case .chargeArrow:
+            return .requestPlain
+        case .blockUsers:
+            return .requestPlain
         }
     }
     
@@ -58,6 +72,10 @@ extension MyPageTarget: TargetType {
         case .editProfile:
             return .hasToken
         case .profileDetail:
+            return .hasToken
+        case .chargeArrow:
+            return .hasToken
+        case .blockUsers:
             return .hasToken
         
         }
@@ -70,6 +88,10 @@ extension MyPageTarget: TargetType {
         case .editProfile:
             return .authorization
         case .profileDetail:
+            return .authorization
+        case .chargeArrow:
+            return .authorization
+        case .blockUsers:
             return .authorization
         }
     }

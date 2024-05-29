@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		34B37BAFEBEFCEE711013DFA /* Pods_YeonBa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F8400511F4316517C02537 /* Pods_YeonBa.framework */; };
 		580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580AAD2B2BA9375200672050 /* LocationModalViewController.swift */; };
+		58294B7B2C06F1FE00E7C198 /* PermissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */; };
+		58294B7D2C0707F400E7C198 /* BlockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7C2C0707F400E7C198 /* BlockResponse.swift */; };
+		58294B7F2C07082400E7C198 /* BlockUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7E2C07082400E7C198 /* BlockUsers.swift */; };
+		58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */; };
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
@@ -286,6 +290,10 @@
 		1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.release.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.release.xcconfig"; sourceTree = "<group>"; };
 		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		580AAD2B2BA9375200672050 /* LocationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModalViewController.swift; sourceTree = "<group>"; };
+		58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionResponse.swift; sourceTree = "<group>"; };
+		58294B7C2C0707F400E7C198 /* BlockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockResponse.swift; sourceTree = "<group>"; };
+		58294B7E2C07082400E7C198 /* BlockUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUsers.swift; sourceTree = "<group>"; };
+		58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBlockTableViewCell.swift; sourceTree = "<group>"; };
 		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
@@ -579,6 +587,26 @@
 				1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		58294B802C070AE800E7C198 /* BlockVC */ = {
+			isa = PBXGroup;
+			children = (
+				58E88F802BFCB47700775F06 /* BlockingmanagementViewController.swift */,
+				58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */,
+			);
+			path = BlockVC;
+			sourceTree = "<group>";
+		};
+		58294B832C070DDF00E7C198 /* RechargeVC */ = {
+			isa = PBXGroup;
+			children = (
+				58E8C3DE2C04268B0034E761 /* Ad2ViewController.swift */,
+				58E8C3DC2C0426830034E761 /* Ad1ViewController.swift */,
+				58E8C3E02C0426930034E761 /* Ad3ViewController.swift */,
+				58E8C3E22C0426EB0034E761 /* ArrowRechargeViewController.swift */,
+			);
+			path = RechargeVC;
 			sourceTree = "<group>";
 		};
 		582DB1762BBE89CB00600EA7 /* AlaramVC */ = {
@@ -1418,6 +1446,7 @@
 			children = (
 				58E88E362BF790C900775F06 /* List */,
 				58E88E372BF790C900775F06 /* NotificationResponse.swift */,
+				58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1638,16 +1667,13 @@
 		58E88F872BFCB47700775F06 /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
-				58E8C3E22C0426EB0034E761 /* ArrowRechargeViewController.swift */,
-				58E8C3E02C0426930034E761 /* Ad3ViewController.swift */,
-				58E8C3DC2C0426830034E761 /* Ad1ViewController.swift */,
-				58E8C3DE2C04268B0034E761 /* Ad2ViewController.swift */,
+				58294B832C070DDF00E7C198 /* RechargeVC */,
+				58294B802C070AE800E7C198 /* BlockVC */,
 				58E88F862BFCB47700775F06 /* SettingViewController.swift */,
 				58E88F6C2BFCB47700775F06 /* PreferenceEdit */,
 				58E88F792BFCB47700775F06 /* ProfileEdit */,
 				58E88F7A2BFCB47700775F06 /* AccountManagementViewController.swift */,
 				58E88F7E2BFCB47700775F06 /* ArrowCounterManager.swift */,
-				58E88F802BFCB47700775F06 /* BlockingmanagementViewController.swift */,
 				58E88F812BFCB47700775F06 /* ChangeGradientButton.swift */,
 				58E88F822BFCB47700775F06 /* CustomercenterViewController.swift */,
 				58E88F832BFCB47700775F06 /* NoticeViewController.swift */,
@@ -1697,6 +1723,8 @@
 			children = (
 				583F035B2C06C97500D68DA9 /* ProfileDetailResponse.swift */,
 				58E88FD22BFF11B600775F06 /* ProfileResponse.swift */,
+				58294B7C2C0707F400E7C198 /* BlockResponse.swift */,
+				58294B7E2C07082400E7C198 /* BlockUsers.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2003,11 +2031,13 @@
 				58580F022BE13E490055F3E8 /* MbtiMode.swift in Sources */,
 				58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
+				58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */,
 				58580F002BE13E490055F3E8 /* AgeMode.swift in Sources */,
 				58E8C3E12C0426930034E761 /* Ad3ViewController.swift in Sources */,
 				58E88E1F2BF7896300775F06 /* UserProfileResponse.swift in Sources */,
 				58E88E5A2BF7916400775F06 /* ChattingViewController.swift in Sources */,
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
+				58294B7B2C06F1FE00E7C198 /* PermissionResponse.swift in Sources */,
 				58E88E592BF7916400775F06 /* ChattingRoomViewController.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				58E88E202BF7896300775F06 /* OtherProfileTarget.swift in Sources */,
@@ -2062,6 +2092,7 @@
 				58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */,
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
+				58294B7D2C0707F400E7C198 /* BlockResponse.swift in Sources */,
 				58D139162BF3127E0048C228 /* VoicePopupView.swift in Sources */,
 				58E88E642BF88F6200775F06 /* ChatTarget.swift in Sources */,
 				58E88F992BFCB47700775F06 /* VoiceEditViewController.swift in Sources */,
@@ -2121,6 +2152,7 @@
 				589CDCF72BE5050900BA332F /* NetworkResult.swift in Sources */,
 				58E88E682BF88F9400775F06 /* ChatListResponse.swift in Sources */,
 				58BB862F2BB56BC000F90050 /* WhyDeclareDelegate.swift in Sources */,
+				58294B7F2C07082400E7C198 /* BlockUsers.swift in Sources */,
 				58E88F232BFB9C6D00775F06 /* SearchUserService.swift in Sources */,
 				58E88FA62BFCB47700775F06 /* SettingViewController.swift in Sources */,
 				58580EF52BE13E490055F3E8 /* FavoriteLocationViewController.swift in Sources */,

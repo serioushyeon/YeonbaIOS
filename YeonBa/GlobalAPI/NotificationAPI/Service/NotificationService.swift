@@ -12,7 +12,7 @@ protocol NotificationServiceProtocol {
     func NotificationList(queryDTO: NotificationPageRequest, completion: @escaping (NetworkResult<StatusResponse<NotificationDataResponse>>) -> Void)
     func UnreadNotification(completion: @escaping (NetworkResult<StatusResponse<NotificationResponse>>) -> Void)
     func notificationChatAccept(queryDTO: NotificationIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
-
+    //func NotificationPermission()
     
 }
 

@@ -137,7 +137,6 @@ class ChattingRoomViewController: UIViewController, SendViewDelegate {
         let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let keyboardHeight = keyboardFrame.height
         let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
-        
         sendViewBottomConstraint?.update(offset: -keyboardHeight)
         
         UIView.animate(withDuration: animationDuration) {

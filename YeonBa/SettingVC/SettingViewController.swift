@@ -4,6 +4,7 @@ import Then
 import Kingfisher
 
 class SettingViewController: UIViewController {
+    var arrowCount = 0
     private enum Constant {
         static let thumbnailSize = 170.0
         static let thumbnailCGSize = CGSize(width: Constant.thumbnailSize, height: Constant.thumbnailSize)
@@ -116,7 +117,9 @@ class SettingViewController: UIViewController {
             case .success(let statusResponse):
                 if let data = statusResponse.data {
                     self.nameLabel.text = data.name
-                    self.button2.setTitle("남은 화살 수: \(data.arrows)개", for: .normal)
+                    self.arrowCount = data.arrows
+                    ArrowCountManager.shared.setArrowCount(to: data.arrows)
+                    self.button2.setTitle("남은 화살 수: \(self.arrowCount)개", for: .normal)
                     var profilePhotoUrl = data.profileImageUrl
                     if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
                         print("Loading image from URL: \(url)")
@@ -283,6 +286,7 @@ class SettingViewController: UIViewController {
             let viewController = BlockingmanagementViewController()
             navigationController?.pushViewController(viewController, animated: true)
         case 3:
+            
             let viewController = ArrowRechargeViewController()
             navigationController?.pushViewController(viewController, animated: true)
         case 4:
