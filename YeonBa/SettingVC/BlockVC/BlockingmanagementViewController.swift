@@ -17,6 +17,7 @@ class BlockingmanagementViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(tableView)
         configUI()
+        updateBlockUsers()
     }
     
     func configUI() {
@@ -31,7 +32,9 @@ class BlockingmanagementViewController: UIViewController {
             switch response {
             case .success(let statusResponse):
                 if let data = statusResponse.data {
+                    self.blockUsers = data.blockUsers
                     print("요청 성공")
+                    print("Fetched blockUsers: \(data.blockUsers)")
                 }
             case .requestErr(let statusResponse):
                 print("요청 에러: \(statusResponse.message)")

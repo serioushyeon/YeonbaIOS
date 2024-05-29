@@ -13,6 +13,7 @@
 		58294B7D2C0707F400E7C198 /* BlockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7C2C0707F400E7C198 /* BlockResponse.swift */; };
 		58294B7F2C07082400E7C198 /* BlockUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7E2C07082400E7C198 /* BlockUsers.swift */; };
 		58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */; };
+		58294B852C07112400E7C198 /* BlcokUserIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */; };
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
@@ -294,6 +295,7 @@
 		58294B7C2C0707F400E7C198 /* BlockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockResponse.swift; sourceTree = "<group>"; };
 		58294B7E2C07082400E7C198 /* BlockUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUsers.swift; sourceTree = "<group>"; };
 		58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBlockTableViewCell.swift; sourceTree = "<group>"; };
+		58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlcokUserIdRequest.swift; sourceTree = "<group>"; };
 		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
@@ -1732,6 +1734,7 @@
 		58E88FCC2BFF115400775F06 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */,
 				583F03592C06C96B00D68DA9 /* ProfileEditRequest.swift */,
 			);
 			path = Request;
@@ -2071,6 +2074,7 @@
 				58580EF72BE13E490055F3E8 /* FavoriteMbtiPresentationController.swift in Sources */,
 				58BB862D2BB56ACA00F90050 /* WhyDeclareTableViewCell.swift in Sources */,
 				58D138182BEE81C30048C228 /* RefreshRequest.swift in Sources */,
+				58294B852C07112400E7C198 /* BlcokUserIdRequest.swift in Sources */,
 				58BB867F2BB7E48C00F90050 /* VoiceViewController.swift in Sources */,
 				58E88FD92BFFB4A400775F06 /* Date.swift in Sources */,
 				58D1390D2BF3127E0048C228 /* FaceComparisonResult.swift in Sources */,

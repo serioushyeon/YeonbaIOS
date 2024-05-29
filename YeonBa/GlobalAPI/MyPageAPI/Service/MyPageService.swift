@@ -15,9 +15,14 @@ protocol MyPageServiceProtocol {
     func profileDetail(completion: @escaping (NetworkResult<StatusResponse<ProfileDetailResponse>>) -> Void)
     func chargeArrow(completion: @escaping (NetworkResult<StatusResponse<Int?>>)-> Void)
     func blockUsers(completion: @escaping (NetworkResult<StatusResponse<BlockResponse>>)-> Void)
+    func blockUsersClear(queryDTO: BlcokUserIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
 }
 
 final class MyPageService: APIRequestLoader<MyPageTarget>, MyPageServiceProtocol {
+    func blockUsersClear(queryDTO: BlcokUserIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void) {
+        fetchData(target: .blcokUsersClear(queryDTO), responseData: StatusResponse<Int?>.self, completion: completion)
+    }
+    
     func blockUsers(completion: @escaping (NetworkResult<StatusResponse<BlockResponse>>) -> Void) {
         fetchData(target: .blockUsers, responseData: StatusResponse<BlockResponse>.self, completion: completion)
     }

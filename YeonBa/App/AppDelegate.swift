@@ -68,13 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
 }
 extension AppDelegate: MessagingDelegate {
     // FCM Token 업데이트 시
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("🥳", #function, fcmToken ?? "nil")
         let userInfo: [String: Any] = ["fcmToken": fcmToken ?? ""]
+        KeychainHandler.shared.deviceToken = fcmToken ?? ""
         print(userInfo)
     }
     

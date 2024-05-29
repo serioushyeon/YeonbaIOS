@@ -9,7 +9,7 @@ import UIKit
 
 class UserBlockTableViewCell: UITableViewCell {
     static let identifier = "UserBlockTableViewCell"
-
+    var blockUserModel : [BlockUsers]?
     private let circleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -69,5 +69,13 @@ class UserBlockTableViewCell: UITableViewCell {
 
     public func configure(with title: String) {
         titleLabel.text = title
+        
+        var profilePhotoUrl = blockUserModel?.first?.profileUrl ?? ""
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
+            circleImageView.kf.setImage(with: url)
+        } else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+        }
     }
 }
