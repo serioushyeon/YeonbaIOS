@@ -9,10 +9,18 @@ import UIKit
 import Then
 import SnapKit
 import Alamofire
-class FavoriteCupidViewController: UIViewController {
-    
-    var colletModel : [UserProfileResponse]? = [
-        UserProfileResponse(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: 20, receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false )]
+
+class FavoriteCupidViewController: UIViewController, APIReloadable {
+    private var colletModel: [UserProfileResponse] = []
+    private var currentPage: Int = 0
+    private var totalPage: Int = 1
+    private var isLoading: Bool = false
+
+    func reloadData() {
+        currentPage = 0
+        colletModel.removeAll()
+        apiFavoriteList(page: currentPage)
+    }
     
     // MARK: - UI Components
     private let bodyStackView = UIStackView().then {
@@ -29,7 +37,7 @@ class FavoriteCupidViewController: UIViewController {
         $0.numberOfLines = 0
         $0.font = UIFont.pretendardSemiBold(size: 20)
     }
-    private lazy var collectionview: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
             $0.isScrollEnabled = true
@@ -40,40 +48,53 @@ class FavoriteCupidViewController: UIViewController {
         }
         return collectionView
     }()
-    
-    func apiFavoriteList() -> Void{
-        let userListRequest = UserListRequest.init(type: "FAVORITES", page: 0)
+    private let loadingIndicator = UIActivityIndicatorView(style: .large).then {
+        $0.hidesWhenStopped = true
+    }
+
+    func apiFavoriteList(page: Int) {
+        guard !isLoading && page < totalPage else { return }
+        isLoading = true
+        loadingIndicator.startAnimating()
+        
+        let userListRequest = UserListRequest(type: "FAVORITES", page: page)
         NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
             guard let self = self else { return }
+            self.isLoading = false
+            self.loadingIndicator.stopAnimating()
+            
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
-                if(data.users.isEmpty){
-                    self.addEmptySubviews()
-                    self.configEmptyUI()
-                }
-                else{
-                    print(data.users)
-                    self.colletModel = data.users
+                if data.users.isEmpty {
+                    if self.currentPage == 0 {
+                        self.addEmptySubviews()
+                        self.configEmptyUI()
+                    }
+                } else {
+                    self.colletModel.append(contentsOf: data.users)
+                    self.totalPage = data.totalPage
                     self.addSubviews()
                     self.configUI()
                     self.initialize()
-                    self.collectionview.reloadData()
+                    self.totalPage = data.totalPage// Ensure totalPages is set correctly
+                    self.currentPage += 1
+                    self.collectionView.reloadData()
                 }
-                
             default:
                 print("프로필 조회 실패")
-                // 유저 데이터가 없는 경우
-                self.addEmptySubviews()
-                self.configEmptyUI()
-
+                if self.currentPage == 0 {
+                    self.addEmptySubviews()
+                    self.configEmptyUI()
+                }
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        apiFavoriteList()
+        initialize()
+        reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,64 +102,85 @@ class FavoriteCupidViewController: UIViewController {
     }
 
     func initialize() {
-        collectionview.dataSource = self
-        collectionview.delegate = self
-        collectionview.register(FavoriteCollectionViewCell.self, forCellWithReuseIdentifier: "FavoriteCell")
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(FavoriteCollectionViewCell.self, forCellWithReuseIdentifier: "FavoriteCell")
+        view.addSubview(collectionView)
+        view.addSubview(loadingIndicator)
+        
+        loadingIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
+
     func addSubviews() {
-        view.addSubview(collectionview)
+        view.addSubview(collectionView)
     }
+
     func configUI() {
-        collectionview.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(60)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalToSuperview()
         }
     }
+
     func addEmptySubviews() {
         view.addSubview(bodyStackView)
-        [self.heartImage, self.contentLabel]
-          .forEach(self.bodyStackView.addArrangedSubview(_:))
+        [heartImage, contentLabel]
+            .forEach(bodyStackView.addArrangedSubview(_:))
     }
+
     func configEmptyUI() {
-        self.bodyStackView.snp.makeConstraints {
+        bodyStackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
     }
-    
 }
-extension FavoriteCupidViewController : UICollectionViewDataSource {
+
+extension FavoriteCupidViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colletModel?.count ?? 1
-        
+        return colletModel.count
     }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCell", for: indexPath) as? FavoriteCollectionViewCell else {
             return UICollectionViewCell()
         }
-        // colletModel 배열의 indexPath.row에 해당하는 모델을 가져와서 셀에 전달
-        let model = colletModel?[indexPath.row]
-        cell.configure(with: model ??  UserProfileResponse(id: 1, profilePhotoUrl: "https://static.news.zumst.com/images/58/2023/10/23/0cb287d9a1e2447ea120fc5f3b0fcc11.jpg", nickname: "존잘남", age: 20, receivedArrows: 11, lookAlikeAnimal: "강아지상", photoSyncRate: 80, activityArea: "서울", height: 180, vocalRange: "저음", isFavorite: false ))
+        let model = colletModel[indexPath.row]
+        cell.configure(with: model)
         return cell
     }
 }
 
-extension FavoriteCupidViewController : UICollectionViewDelegate {
-    //셀 클릭 시 이동
-    func collectionView(_ collectionview: UICollectionView, didSelectItemAt indexPath : IndexPath) {
+extension FavoriteCupidViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let otherProfileVC = OtherProfileViewController()
-        otherProfileVC.id = "\(colletModel![indexPath.row].id)"
-        otherProfileVC.isFavorite = colletModel![indexPath.row].isFavorite
+        otherProfileVC.id = "\(colletModel[indexPath.row].id)"
+        otherProfileVC.isFavorite = colletModel[indexPath.row].isFavorite
         self.navigationController?.pushViewController(otherProfileVC, animated: true)
     }
 }
+
 extension FavoriteCupidViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let spacing: CGFloat = 5
         let width = (collectionView.bounds.width - 8 - 8 - spacing) / 2 // 총 가로길이 - leading - trailing - 간격
         let height = (collectionView.bounds.height - 60 - spacing * 2) / 3 // 총 세로길이 - top - bottom - 간격
         return CGSize(width: width, height: height)
+    }
+}
+
+extension FavoriteCupidViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height - 100 {
+            apiFavoriteList(page: currentPage)
+        }
     }
 }
