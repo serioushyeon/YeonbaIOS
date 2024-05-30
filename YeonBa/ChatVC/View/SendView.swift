@@ -13,11 +13,13 @@ import StompClientLib
 
 protocol SendViewDelegate: AnyObject {
     func didSendMessage(_ message: ChatMessage)
+    func didReceiveMessage(_ message: ChatRoomResonse)
 }
 
 final class SendView: UIView {
     var roomId: Int?
     weak var delegate: SendViewDelegate?
+    //weak var chatdelegate: ChatMessageDelegate?
     private var socketClient = StompClientLib()
     private var messages: [ChatMessage] = []
     private var socketURL: NSURL {
@@ -118,7 +120,8 @@ final class SendView: UIView {
         messageTextField.text = ""
     }
     func showMessageOutput(userId: Int, userName: String, message: String, sentAt: String) {
-        let newMessage = "User \(userName) (ID: \(userId)): \(message) (at \(sentAt))\n"
+        let newMessage = ChatRoomResonse(userId: userId, userName: userName, content: message, sentAt: sentAt)
+        delegate?.didReceiveMessage(newMessage)
         print(newMessage)
         
     }

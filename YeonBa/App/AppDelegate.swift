@@ -98,24 +98,36 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
            let alert = aps["alert"] as? [String: Any],
            let title = alert["title"] as? String,
            let body = alert["body"] as? String {
-               if let encodedTitle = title.data(using: .utf8),
-                  let encodedBody = body.data(using: .utf8),
-                  let decodedTitle = String(data: encodedTitle, encoding: .utf8),
-                  let decodedBody = String(data: encodedBody, encoding: .utf8) {
-                      print("Encoded Title: \(title)")
-                      print("Encoded Body: \(body)")
-                      print("Decoded Title: \(decodedTitle)")
-                      print("Decoded Body: \(decodedBody)")
-               }
+            if let encodedTitle = title.data(using: .utf8),
+               let encodedBody = body.data(using: .utf8),
+               let decodedTitle = String(data: encodedTitle, encoding: .utf8),
+               let decodedBody = String(data: encodedBody, encoding: .utf8) {
+                print("Encoded Title: \(title)")
+                print("Encoded Body: \(body)")
+                print("Decoded Title: \(decodedTitle)")
+                print("Decoded Body: \(decodedBody)")
+            }
         }
-        
+
         if #available(iOS 14.0, *) {
             return [.sound, .banner, .list]
         } else {
             return []
         }
+        // 특정 뷰컨트롤러로 이동
+        if let window = UIApplication.shared.windows.first {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(withIdentifier: "NotificationsViewController") as? NotificationsViewController {
+                if let navigationController = window.rootViewController as? UINavigationController {
+                    navigationController.pushViewController(viewController, animated: true)
+                } else {
+                    window.rootViewController = BaseNavigationController(rootViewController: viewController)
+                    window.makeKeyAndVisible()
+                }
+            }
+        }
     }
-
+    
 }
 extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

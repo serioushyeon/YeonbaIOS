@@ -10,6 +10,8 @@ import Then
 import StompClientLib
 
 class ChattingRoomViewController: UIViewController, SendViewDelegate {
+    
+    
     var roomId: Int?
     var chatUserName: String?
     var partnerProfileImageUrl: String = ""
@@ -121,7 +123,11 @@ class ChattingRoomViewController: UIViewController, SendViewDelegate {
         tableView.reloadData()
         scrollToBottom()
     }
-    
+    func didReceiveMessage(_ message: ChatRoomResonse) {
+        messages.append(message)
+        tableView.reloadData()
+        scrollToBottom()
+    }
     private func scrollToBottom() {
         let lastSection = tableView.numberOfSections - 1
         guard lastSection >= 0 else { return }
