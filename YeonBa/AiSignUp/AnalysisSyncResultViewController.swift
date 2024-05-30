@@ -123,7 +123,25 @@ class AnalysisSyncResultViewController: UIViewController {
             switch response {
             case .success(let data):
                 guard let data = data.data else { return }
+                KeychainHandler.shared.accessToken = data.jwt
+                KeychainHandler.shared.refreshToken = data.jwtRefreshToken
                 print("회원가입 성공")
+                let jwt = JWT(token: data.jwt)
+                if let userId = jwt?.userId {
+                    KeychainHandler.shared.kakaoUserID = jwt?.userId ?? 0
+                    print("유저 아이디\(KeychainHandler.shared.kakaoUserID)")
+                } else {
+                    
+                }
+                // AccessToken이 제대로 설정되었을 때에만 Authorization 헤더 설정
+                if !data.jwt.isEmpty {
+                    NetworkService.shared.setAuthorizationHeader(token: data.jwt)
+                    let deviceToken = KeychainHandler.shared.deviceToken
+                    self.updateDeviceTokenOnServer(deviceToken: deviceToken)
+                    print("device token: \(KeychainHandler.shared.deviceToken)")
+                    
+                }
+
             default:
                 print("회원가입 에러")
             }
@@ -135,6 +153,30 @@ class AnalysisSyncResultViewController: UIViewController {
 //               present(welcomePopupVC, animated: true, completion: nil)
         let tabVC = TabBarController()
         self.changeRootViewController(rootViewController: tabVC)
+    }
+    private func updateDeviceTokenOnServer(deviceToken: String) {
+        guard let url = URL(string: "https://api.yeonba.co.kr/users/device-token") else { return }
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(KeychainHandler.shared.accessToken)"
+        ]
+        
+        let parameters: [String: Any] = ["deviceToken": deviceToken]
+        
+        AF.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    if let httpResponse = response.response, httpResponse.statusCode == 200 {
+                        print("Device token updated successfully.")
+                    } else {
+                        print("Failed to update device token. Status code: \(response.response?.statusCode ?? 0)")
+                        print("Response data: \(value)")
+                    }
+                case .failure(let error):
+                    print("Error updating device token: \(error.localizedDescription)")
+                }
+            }
     }
     @objc func backButtonTapped() {
         // 뒤로 가기 로직을 구현

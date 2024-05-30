@@ -14,6 +14,7 @@
 		58294B7F2C07082400E7C198 /* BlockUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7E2C07082400E7C198 /* BlockUsers.swift */; };
 		58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */; };
 		58294B852C07112400E7C198 /* BlcokUserIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */; };
+		58294B872C083DC700E7C198 /* NotificationAcceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */; };
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
@@ -296,6 +297,7 @@
 		58294B7E2C07082400E7C198 /* BlockUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUsers.swift; sourceTree = "<group>"; };
 		58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBlockTableViewCell.swift; sourceTree = "<group>"; };
 		58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlcokUserIdRequest.swift; sourceTree = "<group>"; };
+		58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationAcceptResponse.swift; path = "../../../../../../../../.Trash/finalYeon 오전 10.28.54/YeonbaIOS/YeonBa/GlobalAPI/NotificationAPI/DTO/Response/NotificationAcceptResponse.swift"; sourceTree = "<group>"; };
 		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
@@ -1449,6 +1451,7 @@
 				58E88E362BF790C900775F06 /* List */,
 				58E88E372BF790C900775F06 /* NotificationResponse.swift */,
 				58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */,
+				58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2208,6 +2211,7 @@
 				58E88F9E2BFCB47700775F06 /* ArrowCounterManager.swift in Sources */,
 				58580EFC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift in Sources */,
 				58E8C3E32C0426EB0034E761 /* ArrowRechargeViewController.swift in Sources */,
+				58294B872C083DC700E7C198 /* NotificationAcceptResponse.swift in Sources */,
 				58580EFE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
@@ -2493,7 +2497,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";
@@ -2529,7 +2533,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = G62DUX396A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YeonBa/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근권한";

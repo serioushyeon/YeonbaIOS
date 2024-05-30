@@ -139,7 +139,6 @@ class HomeViewController: UIViewController {
         let heartCountContainerView = UIView()
         heartCountContainerView.addSubview(heartCountLabel)
         
-        heartCountLabel.text = "5" // 초기 하트 개수
         heartCountLabel.textColor = UIColor.primary
         heartCountLabel.sizeToFit()
         
@@ -375,6 +374,13 @@ class HomeViewController: UIViewController {
         attendancePopupVC.modalTransitionStyle = .crossDissolve
         present(attendancePopupVC, animated: true, completion: nil)
     }
+    private func showWelcomePopup() {
+        let welcomePopupVC = WelcomePopupViewController()
+        welcomePopupVC.modalPresentationStyle = .overFullScreen
+        welcomePopupVC.modalTransitionStyle = .crossDissolve
+        present(welcomePopupVC, animated: true, completion: nil)
+    }
+    
     
 }
 extension UIFont {

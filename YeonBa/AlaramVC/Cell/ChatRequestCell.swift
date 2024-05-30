@@ -6,9 +6,13 @@ import Kingfisher
 protocol ChatRequestNotificationCellDelegate: AnyObject {
     func didTapAcceptButton(notificationId: Int)
 }
+protocol ChatRefuseNotificationCellDelegate: AnyObject {
+    func didTapRefuseButton(notificationId: Int)
+}
 // 채팅 요청 알림 셀 (Chat Request Cell)
 class ChatRequestCell: UITableViewCell {
     weak var delegate: ChatRequestNotificationCellDelegate?
+    weak var refuseDelegate: ChatRefuseNotificationCellDelegate?
     var notificationId = 0
     //MARK: - UI Components
     let profileImageView = UIImageView().then{
@@ -61,14 +65,11 @@ class ChatRequestCell: UITableViewCell {
     }
     //MARK: - Actions
     @objc func rejectBtnTapped() {
-        print("rejectBtnTapped tapped")
+        delegate?.didTapAcceptButton(notificationId: notificationId)
+        print("채팅 거절")
     }
     @objc func AcceptBtnTapped() {
         delegate?.didTapAcceptButton(notificationId: notificationId)
-//        print("알람id: \()")
-        //  let request = NotificationIdRequest(notificationId: <#T##Int#>)
-        //
-        //        NetworkService.shared.notificationService.notificationChatAccept(queryDTO: <#T##NotificationIdRequest#>, completion: <#T##(NetworkResult<StatusResponse<Int?>>) -> Void#>)
         print("채팅요청 수락")
     }
     func addSubViews() {

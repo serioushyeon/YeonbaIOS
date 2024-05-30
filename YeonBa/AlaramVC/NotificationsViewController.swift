@@ -8,8 +8,8 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
-class NotificationsViewController: UIViewController, ArrowNotificationCellDelegate, ChatRequestNotificationCellDelegate, ChatGoingNotificationCellDelegate {
-
+class NotificationsViewController: UIViewController, ArrowNotificationCellDelegate, ChatRequestNotificationCellDelegate, ChatGoingNotificationCellDelegate, ChatRefuseNotificationCellDelegate {
+    
     
     // MARK: - UI Components
     var notifications : [Notifications] = []
@@ -35,7 +35,7 @@ class NotificationsViewController: UIViewController, ArrowNotificationCellDelega
         configUI()
         fetchNotifications(page: 1)
     }
-
+    
     // MARK: - UI Layout
     private func addSubViews(){
         view.addSubview(tableView)
@@ -48,9 +48,9 @@ class NotificationsViewController: UIViewController, ArrowNotificationCellDelega
         activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-
+        
     }
-
+    
     // MARK: - Networking
     func fetchNotifications(page: Int) {
         activityIndicator.startAnimating()
@@ -91,9 +91,14 @@ class NotificationsViewController: UIViewController, ArrowNotificationCellDelega
                 if let data = statusResponse.data {
                     DispatchQueue.main.async {
                         print("Fetched 채팅수락: \(data)")
-                        
-//                        let chatRoomVC = ChattingRoomViewController()
-//                        self.navigationController?.pushViewController(chatRoomVC, animated: true)
+                        // notifications 배열에서 해당 알림 삭제
+                        if let index = self.notifications.firstIndex(where: { $0.notificationId == notificationId }) {
+                            self.notifications.remove(at: index)
+                            self.tableView.reloadData()
+                        }
+                        let chatRoomVC = ChattingRoomViewController()
+                        chatRoomVC.roomId = data.chatRoomId
+                        self.navigationController?.pushViewController(chatRoomVC, animated: true)
                     }
                 }
             case .requestErr(let statusResponse):
@@ -110,6 +115,13 @@ class NotificationsViewController: UIViewController, ArrowNotificationCellDelega
         }
         
     }
+    
+    func didTapRefuseButton(notificationId: Int) {
+        if let index = self.notifications.firstIndex(where: { $0.notificationId == notificationId }) {
+            self.notifications.remove(at: index)
+            self.tableView.reloadData()
+        }
+    }
     //MARK: -- 채팅하러 가기 API
     func didTapGoingButton(chatId: Int) {
         let chatRoomVC = ChattingRoomViewController()
@@ -122,12 +134,12 @@ class NotificationsViewController: UIViewController, ArrowNotificationCellDelega
         self.navigationController?.pushViewController(otherProfileVC, animated: true)
     }
     
-
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
     }
-
+    
 }
 
 // MARK: - Extensions
@@ -147,6 +159,7 @@ extension NotificationsViewController: UITableViewDelegate,UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRequestCell", for: indexPath) as! ChatRequestCell
             cell.selectionStyle = .none
             cell.delegate = self
+            cell.refuseDelegate = self
             cell.configure(with: notifications)
             return cell
         case "CHATTING_REQUEST_ACCEPTED":
