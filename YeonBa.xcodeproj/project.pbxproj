@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		34B37BAFEBEFCEE711013DFA /* Pods_YeonBa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F8400511F4316517C02537 /* Pods_YeonBa.framework */; };
+		3CE9A4E22C0850BF00257FC5 /* AlbumImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4D32C0850BF00257FC5 /* AlbumImageCell.swift */; };
+		3CE9A4E32C0850BF00257FC5 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4D52C0850BF00257FC5 /* AlbumViewController.swift */; };
+		3CE9A4E42C0850BF00257FC5 /* FullImageViewContoroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4D62C0850BF00257FC5 /* FullImageViewContoroller.swift */; };
+		3CE9A4E52C0850BF00257FC5 /* EditSimilarityProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4D82C0850BF00257FC5 /* EditSimilarityProgressViewController.swift */; };
+		3CE9A4E62C0850BF00257FC5 /* EditSimilarityResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4D92C0850BF00257FC5 /* EditSimilarityResultViewController.swift */; };
+		3CE9A4E72C0850BF00257FC5 /* ProfilePhotoEditEssentialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4DB2C0850BF00257FC5 /* ProfilePhotoEditEssentialView.swift */; };
+		3CE9A4E82C0850BF00257FC5 /* ProfilePhotoPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4DC2C0850BF00257FC5 /* ProfilePhotoPlaceHolderView.swift */; };
+		3CE9A4E92C0850BF00257FC5 /* FaceDetectionCameraViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4DE2C0850BF00257FC5 /* FaceDetectionCameraViewcontroller.swift */; };
+		3CE9A4EA2C0850BF00257FC5 /* ProfileEditGuidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4DF2C0850BF00257FC5 /* ProfileEditGuidViewController.swift */; };
+		3CE9A4EB2C0850BF00257FC5 /* ProfilePhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */; };
+		3CE9A4ED2C0850E900257FC5 /* PhotoEditRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4EC2C0850E900257FC5 /* PhotoEditRequest.swift */; };
 		580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580AAD2B2BA9375200672050 /* LocationModalViewController.swift */; };
 		58294B7B2C06F1FE00E7C198 /* PermissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */; };
 		58294B7D2C0707F400E7C198 /* BlockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7C2C0707F400E7C198 /* BlockResponse.swift */; };
@@ -290,6 +301,17 @@
 /* Begin PBXFileReference section */
 		135D41D6288D154A8F7BD06C /* Pods-YeonBa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa.debug.xcconfig"; path = "Target Support Files/Pods-YeonBa/Pods-YeonBa.debug.xcconfig"; sourceTree = "<group>"; };
 		1C61A7472D3DC9F43DD3F8AE /* Pods-YeonBaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBaTests.release.xcconfig"; path = "Target Support Files/Pods-YeonBaTests/Pods-YeonBaTests.release.xcconfig"; sourceTree = "<group>"; };
+		3CE9A4D32C0850BF00257FC5 /* AlbumImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumImageCell.swift; sourceTree = "<group>"; };
+		3CE9A4D52C0850BF00257FC5 /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		3CE9A4D62C0850BF00257FC5 /* FullImageViewContoroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewContoroller.swift; sourceTree = "<group>"; };
+		3CE9A4D82C0850BF00257FC5 /* EditSimilarityProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSimilarityProgressViewController.swift; sourceTree = "<group>"; };
+		3CE9A4D92C0850BF00257FC5 /* EditSimilarityResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSimilarityResultViewController.swift; sourceTree = "<group>"; };
+		3CE9A4DB2C0850BF00257FC5 /* ProfilePhotoEditEssentialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoEditEssentialView.swift; sourceTree = "<group>"; };
+		3CE9A4DC2C0850BF00257FC5 /* ProfilePhotoPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoPlaceHolderView.swift; sourceTree = "<group>"; };
+		3CE9A4DE2C0850BF00257FC5 /* FaceDetectionCameraViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceDetectionCameraViewcontroller.swift; sourceTree = "<group>"; };
+		3CE9A4DF2C0850BF00257FC5 /* ProfileEditGuidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditGuidViewController.swift; sourceTree = "<group>"; };
+		3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoEditViewController.swift; sourceTree = "<group>"; };
+		3CE9A4EC2C0850E900257FC5 /* PhotoEditRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditRequest.swift; sourceTree = "<group>"; };
 		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		580AAD2B2BA9375200672050 /* LocationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModalViewController.swift; sourceTree = "<group>"; };
 		58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionResponse.swift; sourceTree = "<group>"; };
@@ -580,6 +602,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3CE9A4D42C0850BF00257FC5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3CE9A4D32C0850BF00257FC5 /* AlbumImageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3CE9A4D72C0850BF00257FC5 /* GalleryVC */ = {
+			isa = PBXGroup;
+			children = (
+				3CE9A4D42C0850BF00257FC5 /* Cell */,
+				3CE9A4D52C0850BF00257FC5 /* AlbumViewController.swift */,
+				3CE9A4D62C0850BF00257FC5 /* FullImageViewContoroller.swift */,
+			);
+			path = GalleryVC;
+			sourceTree = "<group>";
+		};
+		3CE9A4DA2C0850BF00257FC5 /* SimilarityViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3CE9A4D82C0850BF00257FC5 /* EditSimilarityProgressViewController.swift */,
+				3CE9A4D92C0850BF00257FC5 /* EditSimilarityResultViewController.swift */,
+			);
+			path = SimilarityViewController;
+			sourceTree = "<group>";
+		};
+		3CE9A4DD2C0850BF00257FC5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3CE9A4DB2C0850BF00257FC5 /* ProfilePhotoEditEssentialView.swift */,
+				3CE9A4DC2C0850BF00257FC5 /* ProfilePhotoPlaceHolderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3CE9A4E12C0850BF00257FC5 /* ProfilePhotoEditVC */ = {
+			isa = PBXGroup;
+			children = (
+				3CE9A4D72C0850BF00257FC5 /* GalleryVC */,
+				3CE9A4DA2C0850BF00257FC5 /* SimilarityViewController */,
+				3CE9A4DD2C0850BF00257FC5 /* View */,
+				3CE9A4DE2C0850BF00257FC5 /* FaceDetectionCameraViewcontroller.swift */,
+				3CE9A4DF2C0850BF00257FC5 /* ProfileEditGuidViewController.swift */,
+				3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */,
+			);
+			path = ProfilePhotoEditVC;
+			sourceTree = "<group>";
+		};
 		44FA544D8692B790EA8732E3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1672,6 +1743,7 @@
 		58E88F872BFCB47700775F06 /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
+				3CE9A4E12C0850BF00257FC5 /* ProfilePhotoEditVC */,
 				58294B832C070DDF00E7C198 /* RechargeVC */,
 				58294B802C070AE800E7C198 /* BlockVC */,
 				58E88F862BFCB47700775F06 /* SettingViewController.swift */,
@@ -1739,6 +1811,7 @@
 			children = (
 				58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */,
 				583F03592C06C96B00D68DA9 /* ProfileEditRequest.swift */,
+				3CE9A4EC2C0850E900257FC5 /* PhotoEditRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -2045,6 +2118,7 @@
 				58BB86872BB7FA1300F90050 /* WeightDelegate.swift in Sources */,
 				58294B7B2C06F1FE00E7C198 /* PermissionResponse.swift in Sources */,
 				58E88E592BF7916400775F06 /* ChattingRoomViewController.swift in Sources */,
+				3CE9A4E92C0850BF00257FC5 /* FaceDetectionCameraViewcontroller.swift in Sources */,
 				58BB861F2BB544A500F90050 /* ModeSelectViewController.swift in Sources */,
 				58E88E202BF7896300775F06 /* OtherProfileTarget.swift in Sources */,
 				58BB871C2BBBED0300F90050 /* PhoneNumberViewController.swift in Sources */,
@@ -2063,12 +2137,14 @@
 				58E88E402BF790C900775F06 /* Notification.swift in Sources */,
 				58BB86792BB7DA8400F90050 /* WeightMode.swift in Sources */,
 				584DCF2D2B9D55960081149F /* FavoriteCupidViewController.swift in Sources */,
+				3CE9A4EA2C0850BF00257FC5 /* ProfileEditGuidViewController.swift in Sources */,
 				58E88F932BFCB47700775F06 /* LivingAreaViewController.swift in Sources */,
 				58BB86332BB56F2B00F90050 /* WhyDeclarePresentationController.swift in Sources */,
 				58D1380B2BEE49700048C228 /* SplashViewController.swift in Sources */,
 				58580EEE2BE13E490055F3E8 /* FavoriteAnimalPresentationController.swift in Sources */,
 				58E88E152BF7896300775F06 /* BlockRequest.swift in Sources */,
 				58E88E192BF7896300775F06 /* ReportRequest.swift in Sources */,
+				3CE9A4E32C0850BF00257FC5 /* AlbumViewController.swift in Sources */,
 				58D138122BEE720D0048C228 /* LoginResponse.swift in Sources */,
 				583F035A2C06C96B00D68DA9 /* ProfileEditRequest.swift in Sources */,
 				58E88F8E2BFCB47700775F06 /* BodyEditViewController.swift in Sources */,
@@ -2096,6 +2172,7 @@
 				58E88E302BF7896E00775F06 /* HomeTarget.swift in Sources */,
 				589CDCF92BE5054600BA332F /* BaseResponse.swift in Sources */,
 				58D138E62BF219E40048C228 /* NicknameResponse.swift in Sources */,
+				3CE9A4E82C0850BF00257FC5 /* ProfilePhotoPlaceHolderView.swift in Sources */,
 				58BB86242BB54DCB00F90050 /* DeclarLabel.swift in Sources */,
 				58BB86212BB544E300F90050 /* ModeSelectTransitioningDelegate.swift in Sources */,
 				589DF3292B90747B003F03C5 /* SearchViewController.swift in Sources */,
@@ -2133,6 +2210,7 @@
 				58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */,
 				58E88F882BFCB47700775F06 /* AgePreferenceViewController.swift in Sources */,
 				58E88E3F2BF790C900775F06 /* NotificationPageRequest.swift in Sources */,
+				3CE9A4E22C0850BF00257FC5 /* AlbumImageCell.swift in Sources */,
 				584DCF2F2B9D55A60081149F /* RecieveCupidViewController.swift in Sources */,
 				58E88E1C2BF7896300775F06 /* UserListRequest.swift in Sources */,
 				58E88FA12BFCB47700775F06 /* ChangeGradientButton.swift in Sources */,
@@ -2166,6 +2244,7 @@
 				58D138E82BF22D210048C228 /* PhoneNumberRequest.swift in Sources */,
 				58E88E1B2BF7896300775F06 /* SendChatRequest.swift in Sources */,
 				58D1390A2BF3127E0048C228 /* VoiceRecordingViewController.swift in Sources */,
+				3CE9A4E62C0850BF00257FC5 /* EditSimilarityResultViewController.swift in Sources */,
 				58D139152BF3127E0048C228 /* VoicePopupViewcontroller.swift in Sources */,
 				58580EB12BE0B9FC0055F3E8 /* HeightPickerViewController.swift in Sources */,
 				58D139172BF3127E0048C228 /* WaveFormView.swift in Sources */,
@@ -2174,7 +2253,9 @@
 				589DF32B2B9074B0003F03C5 /* TabBarController.swift in Sources */,
 				58E88FD72BFFAF5000775F06 /* ChatParent.swift in Sources */,
 				58BB86D52BBAFC2B00F90050 /* SearchResultCollectionViewCell.swift in Sources */,
+				3CE9A4EB2C0850BF00257FC5 /* ProfilePhotoEditViewController.swift in Sources */,
 				583F035C2C06C97500D68DA9 /* ProfileDetailResponse.swift in Sources */,
+				3CE9A4ED2C0850E900257FC5 /* PhotoEditRequest.swift in Sources */,
 				58E88E412BF790C900775F06 /* NotificationDataResponse.swift in Sources */,
 				58E88F1B2BFB907300775F06 /* SearchUserRequest.swift in Sources */,
 				58580EB32BE0BA030055F3E8 /* InterestsViewController.swift in Sources */,
@@ -2187,6 +2268,7 @@
 				58D138142BEE725E0048C228 /* LoginRequest.swift in Sources */,
 				583F03522C05BDF300D68DA9 /* AttendancePopupViewController.swift in Sources */,
 				58E88E212BF7896300775F06 /* OtherProfileService.swift in Sources */,
+				3CE9A4E52C0850BF00257FC5 /* EditSimilarityProgressViewController.swift in Sources */,
 				58580F052BE13E490055F3E8 /* SignWeightMode.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				589CDD012BE51D8300BA332F /* SignDataManager.swift in Sources */,
@@ -2225,11 +2307,13 @@
 				58E88E6A2BF892D400775F06 /* ChatContentRequest.swift in Sources */,
 				589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */,
 				58E8C36C2C01AA930034E761 /* ChatRoomResonse.swift in Sources */,
+				3CE9A4E42C0850BF00257FC5 /* FullImageViewContoroller.swift in Sources */,
 				58E88E2F2BF7896E00775F06 /* ArrowCountResponse.swift in Sources */,
 				583F03582C05E13A00D68DA9 /* NotificationIdRequest.swift in Sources */,
 				58D1390C2BF3127E0048C228 /* AnalysisSyncViewController.swift in Sources */,
 				58580EFD2BE13E490055F3E8 /* FavoriteVoicePresentationController.swift in Sources */,
 				58580EAF2BE0B9F60055F3E8 /* GenderSelectionViewController.swift in Sources */,
+				3CE9A4E72C0850BF00257FC5 /* ProfilePhotoEditEssentialView.swift in Sources */,
 				58BB85D92BB3E55B00F90050 /* RecommendTableViewCell.swift in Sources */,
 				58BB871E2BBBED0A00F90050 /* SignUpViewController.swift in Sources */,
 				58580EF82BE13E490055F3E8 /* FavoriteMbtiViewController.swift in Sources */,
