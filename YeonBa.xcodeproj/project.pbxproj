@@ -15,6 +15,7 @@
 		58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */; };
 		58294B852C07112400E7C198 /* BlcokUserIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */; };
 		58294B872C083DC700E7C198 /* NotificationAcceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */; };
+		58294B892C0856DA00E7C198 /* ChatResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B882C0856DA00E7C198 /* ChatResponseMessage.swift */; };
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
@@ -298,6 +299,7 @@
 		58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBlockTableViewCell.swift; sourceTree = "<group>"; };
 		58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlcokUserIdRequest.swift; sourceTree = "<group>"; };
 		58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationAcceptResponse.swift; path = "../../../../../../../../.Trash/finalYeon 오전 10.28.54/YeonbaIOS/YeonBa/GlobalAPI/NotificationAPI/DTO/Response/NotificationAcceptResponse.swift"; sourceTree = "<group>"; };
+		58294B882C0856DA00E7C198 /* ChatResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseMessage.swift; sourceTree = "<group>"; };
 		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
@@ -1505,6 +1507,7 @@
 			isa = PBXGroup;
 			children = (
 				58E88E492BF7916400775F06 /* ChatMessage.swift */,
+				58294B882C0856DA00E7C198 /* ChatResponseMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2142,6 +2145,7 @@
 				58E88F8C2BFCB47700775F06 /* RegionPreferenceViewController.swift in Sources */,
 				58E88F252BFC888800775F06 /* PhotoPlaceHolderView.swift in Sources */,
 				58E88FA42BFCB47700775F06 /* NotificationsettingsViewController.swift in Sources */,
+				58294B892C0856DA00E7C198 /* ChatResponseMessage.swift in Sources */,
 				584DCF7C2BA1A5880081149F /* JKSlider.swift in Sources */,
 				58580EB72BE0BA0E0055F3E8 /* LocalSelectViewController.swift in Sources */,
 				58BB862B2BB568A500F90050 /* WhyDeclareViewController.swift in Sources */,
