@@ -1,8 +1,15 @@
+//
+//  EditSimilarityProgressViewController.swift
+//  YeonBa
+//
+//  Created by jin on 5/30/24.
+//
+
 import UIKit
 import SnapKit
 import Then
 
-class AnalysisSyncViewController: UIViewController {
+class EditSimilarityProgressViewController: UIViewController {
     
     let profileImage1 = UIImageView().then{
         $0.image = SignDataManager.shared.placeholderImage
@@ -65,13 +72,13 @@ class AnalysisSyncViewController: UIViewController {
     }
     //MARK: - Actions
     @objc func resultBtnTapped() {
-        let AnaysisSyncResultVC = AnalysisSyncResultViewController()
+        let AnaysisSyncResultVC = EditSimilarityResultViewController()
         navigationController?.pushViewController(AnaysisSyncResultVC, animated: true)
     }
     @objc func cameraBtnTapped() {
         if let navController = navigationController {
             for controller in navController.viewControllers {
-                if let photoSelectionVC = controller as? PhotoSelectionViewController {
+                if let photoSelectionVC = controller as? ProfilePhotoEditViewController {
                     navController.popToViewController(photoSelectionVC, animated: true)
                     return
                 }
@@ -89,20 +96,21 @@ class AnalysisSyncViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
-         self.navigationItem.hidesBackButton = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - UI Layout
     func configUI() {
         profileImage1.snp.makeConstraints{ make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
             make.right.equalTo(view.snp.centerX).offset(-4)
             make.width.equalTo(124)
             make.height.equalTo(152)
             
         }
         profileImage2.snp.makeConstraints{ make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
             make.left.equalTo(view.snp.centerX).offset(4)
             make.width.equalTo(124)
             make.height.equalTo(152)

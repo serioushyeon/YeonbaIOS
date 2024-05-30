@@ -1,15 +1,15 @@
 //
-//  FaceDetectionViewController.swift
+//  FaceDetectionCameraViewcontroller.swift
 //  YeonBa
 //
-//  Created by 김민솔 on 4/17/24.
+//  Created by jin on 5/29/24.
 //
 
 import UIKit
 import AVFoundation
 import Vision
 
-class FaceDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class FaceDetectionCameraViewcontroller: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private let captureSession = AVCaptureSession()
     private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
@@ -85,7 +85,7 @@ class FaceDetectionViewController: UIViewController, AVCaptureVideoDataOutputSam
                 // 이미지 저장 후에 필요한 추가 작업 수행 가능
                 
                 // 예: 캡처된 이미지를 다른 뷰 컨트롤러에 전달하거나 표시하는 등의 작업
-                let ASVC = AnalysisSyncViewController()
+                let ASVC = EditSimilarityProgressViewController()
                 self.navigationController?.pushViewController(ASVC, animated: true)
                 // UI 업데이트는 메인 스레드에서 수행되어야 합니다.
                 DispatchQueue.main.async {

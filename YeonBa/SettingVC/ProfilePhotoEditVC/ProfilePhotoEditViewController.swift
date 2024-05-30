@@ -1,8 +1,8 @@
 //
-//  PhotoSelectionViewController.swift
+//  ProfilePhotoEditViewController.swift
 //  YeonBa
 //
-//  Created by jin on 3/14/24.
+//  Created by jin on 5/29/24.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ import Photos
 import PhotosUI
 import Alamofire
 
-class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelegate, PhotoEssentialViewDelegate {
+class ProfilePhotoEditViewController: UIViewController, ProfilePhotoEditEssentialViewDelegate, ProfilePhotoPlaceHolderViewDelegate {
     // MARK: - UI Components
     
     let instructionLabel = UILabel().then {
@@ -35,11 +35,11 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
         $0.spacing = 20
         $0.distribution = .fillEqually
     }
-    let photoPlaceholderView = PhotoPlaceholderView().then {
+    let photoPlaceholderView = ProfilePhotoPlaceHolderView().then {
         $0.setHintText("대표")
     }
     
-    let essentialPlaceHolderView = PhotoEssentialView().then {
+    let essentialPlaceHolderView = ProfilePhotoEditEssentialView().then {
         $0.setHintText("필수")
     }
     
@@ -89,9 +89,11 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        essentialPlaceHolderView.nc = navigationController
+        photoPlaceholderView.nc = navigationController
+        tabBarController?.tabBar.isTranslucent = true
         addSubViews()
         configUI()
-        setupNavigationBar()
         setupActions()
         setupInitialPieChart()
         photoPlaceholderView.delegate = self
@@ -100,13 +102,8 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.hidesBackButton = true
-    }
-    
-    // MARK: - UI Layout
-    private func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "유사도 분석"
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        tabBarController?.tabBar.isHidden = true
     }
     private func addSubViews(){
         // Add subviews
@@ -234,7 +231,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     // MARK: - Actions
     
     @objc func didTapBack() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
     
     @objc func didTapAddPhoto() {
@@ -242,7 +239,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
     }
     
     @objc func didTapPhotoGuide() {
-        let guideVC = GuideViewController()
+        let guideVC = ProfileEditGuidViewController()
         navigationController?.pushViewController(guideVC, animated: true)
     }
     
@@ -272,41 +269,7 @@ class PhotoSelectionViewController: UIViewController, PhotoPlaceholderViewDelega
                 return
         }
         SignDataManager.shared.profilePhotos = imageDatas
-        let cameraVC = FaceDetectionViewController()
+        let cameraVC = FaceDetectionCameraViewcontroller()
         navigationController?.pushViewController(cameraVC, animated: true)
-    }
-}
-
-class DottedBorderView: UIView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.addDottedBorder()
-    }
-}
-
-extension CALayer {
-    func addDottedBorder() {
-        // 새로운 CAShapeLayer를 생성하기 전에 기존의 dotted layer를 제거합니다.
-        sublayers?.filter { $0.name == "dotted" }.forEach { $0.removeFromSuperlayer() }
-        
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.name = "dotted"
-        shapeLayer.strokeColor = UIColor.gray.cgColor
-        shapeLayer.lineDashPattern = [5,5]
-        shapeLayer.frame = bounds
-        shapeLayer.fillColor = nil
-        shapeLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
-        addSublayer(shapeLayer)
-    }
-}
-extension UIImage{
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        let scale = newWidth / image.size.width // 새 이미지 확대/축소 비율
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return newImage
     }
 }

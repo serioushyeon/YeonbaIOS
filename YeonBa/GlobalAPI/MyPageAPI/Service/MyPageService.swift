@@ -13,9 +13,35 @@ protocol MyPageServiceProtocol {
     func myProfile(completion: @escaping (NetworkResult<StatusResponse<ProfileResponse>>) -> Void)
     func editProfile(bodyDTO: ProfileEditRequest, completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void)
     func profileDetail(completion: @escaping (NetworkResult<StatusResponse<ProfileDetailResponse>>) -> Void)
+<<<<<<< Updated upstream
 }
 
 final class MyPageService: APIRequestLoader<MyPageTarget>, MyPageServiceProtocol {
+=======
+    func chargeArrow(completion: @escaping (NetworkResult<StatusResponse<Int?>>)-> Void)
+    func blockUsers(completion: @escaping (NetworkResult<StatusResponse<BlockResponse>>)-> Void)
+    func blockUsersClear(queryDTO: BlcokUserIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
+    func editPhoto(bodyDTO: PhotoEditRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
+}
+
+final class MyPageService: APIRequestLoader<MyPageTarget>, MyPageServiceProtocol {
+    func editPhoto(bodyDTO: PhotoEditRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void) {
+        fetchData(target: .editPhoto(bodyDTO), responseData: StatusResponse<Int?>.self, completion: completion)
+    }
+    
+    func blockUsersClear(queryDTO: BlcokUserIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void) {
+        fetchData(target: .blcokUsersClear(queryDTO), responseData: StatusResponse<Int?>.self, completion: completion)
+    }
+    
+    func blockUsers(completion: @escaping (NetworkResult<StatusResponse<BlockResponse>>) -> Void) {
+        fetchData(target: .blockUsers, responseData: StatusResponse<BlockResponse>.self, completion: completion)
+    }
+    
+    func chargeArrow(completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void) {
+        fetchData(target: .chargeArrow, responseData: StatusResponse<Int?>.self, completion: completion)
+    }
+    
+>>>>>>> Stashed changes
     func profileDetail(completion: @escaping (NetworkResult<StatusResponse<ProfileDetailResponse>>) -> Void) {
         fetchData(target: .profileDetail , responseData: StatusResponse<ProfileDetailResponse>.self, completion: completion)
     }
