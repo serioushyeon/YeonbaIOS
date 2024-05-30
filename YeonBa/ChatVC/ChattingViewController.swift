@@ -82,6 +82,12 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             make.center.equalToSuperview()
         }
     }
+    
+    func removeEmptySubviews() {
+        self.bodyStackView.removeFromSuperview()
+        self.heartImage.removeFromSuperview()
+        self.contentLabel.removeFromSuperview()
+    }
 
     // MARK: - Networking
     private func updateChat() {
@@ -100,6 +106,8 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
                     if data.isEmpty {
                         self.addEmptySubviews()
                         self.configEmptyUI()
+                    } else {
+                        self.removeEmptySubviews()
                     }
                 }
             default:

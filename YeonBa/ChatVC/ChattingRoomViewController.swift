@@ -119,7 +119,6 @@ class ChattingRoomViewController: UIViewController, SendViewDelegate {
     func didSendMessage(_ message: ChatMessage) {
         // messages 배열에 새 메시지 추가
         let newMessage = ChatRoomResonse(userId: KeychainHandler.shared.kakaoUserID, userName: SignDataManager.shared.nickName ?? "", content: message.content, sentAt: message.sentAt)
-        messages.append(newMessage)
         tableView.reloadData()
         scrollToBottom()
     }

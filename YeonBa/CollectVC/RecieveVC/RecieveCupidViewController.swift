@@ -50,7 +50,13 @@ class RecieveCupidViewController: UIViewController, APIReloadable {
         }
         return collectionView
     }()
-
+    
+    func removeEmptySubviews() {
+        self.bodyStackView.removeFromSuperview()
+        self.heartImage.removeFromSuperview()
+        self.contentLabel.removeFromSuperview()
+    }
+    
     private let loadingIndicator = UIActivityIndicatorView(style: .large).then {
         $0.hidesWhenStopped = true
     }
@@ -79,6 +85,7 @@ class RecieveCupidViewController: UIViewController, APIReloadable {
                         self.configEmptyUI()
                     }
                 } else {
+                    self.removeEmptySubviews()
                     self.colletModel.append(contentsOf: data.users)
                     self.totalPage = data.totalPage
                     self.addSubviews()

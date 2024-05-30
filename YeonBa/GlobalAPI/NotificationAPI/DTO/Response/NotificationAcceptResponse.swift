@@ -9,4 +9,6 @@ import Foundation
 
 struct NotificationAcceptResponse: Codable {
     let chatRoomId : Int?
+    let profilePhotoUrl: String?
+    let nickname: String?
 }
