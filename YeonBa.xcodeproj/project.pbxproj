@@ -19,13 +19,13 @@
 		3CE9A4EA2C0850BF00257FC5 /* ProfileEditGuidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4DF2C0850BF00257FC5 /* ProfileEditGuidViewController.swift */; };
 		3CE9A4EB2C0850BF00257FC5 /* ProfilePhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */; };
 		3CE9A4ED2C0850E900257FC5 /* PhotoEditRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4EC2C0850E900257FC5 /* PhotoEditRequest.swift */; };
+		3CE9A5122C0863EA00257FC5 /* NotificationAcceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A5112C0863EA00257FC5 /* NotificationAcceptResponse.swift */; };
 		580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580AAD2B2BA9375200672050 /* LocationModalViewController.swift */; };
 		58294B7B2C06F1FE00E7C198 /* PermissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */; };
 		58294B7D2C0707F400E7C198 /* BlockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7C2C0707F400E7C198 /* BlockResponse.swift */; };
 		58294B7F2C07082400E7C198 /* BlockUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7E2C07082400E7C198 /* BlockUsers.swift */; };
 		58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */; };
 		58294B852C07112400E7C198 /* BlcokUserIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */; };
-		58294B872C083DC700E7C198 /* NotificationAcceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */; };
 		58294B892C0856DA00E7C198 /* ChatResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B882C0856DA00E7C198 /* ChatResponseMessage.swift */; };
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
@@ -313,6 +313,7 @@
 		3CE9A4DF2C0850BF00257FC5 /* ProfileEditGuidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditGuidViewController.swift; sourceTree = "<group>"; };
 		3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoEditViewController.swift; sourceTree = "<group>"; };
 		3CE9A4EC2C0850E900257FC5 /* PhotoEditRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditRequest.swift; sourceTree = "<group>"; };
+		3CE9A5112C0863EA00257FC5 /* NotificationAcceptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcceptResponse.swift; sourceTree = "<group>"; };
 		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		580AAD2B2BA9375200672050 /* LocationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModalViewController.swift; sourceTree = "<group>"; };
 		58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionResponse.swift; sourceTree = "<group>"; };
@@ -320,7 +321,6 @@
 		58294B7E2C07082400E7C198 /* BlockUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUsers.swift; sourceTree = "<group>"; };
 		58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBlockTableViewCell.swift; sourceTree = "<group>"; };
 		58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlcokUserIdRequest.swift; sourceTree = "<group>"; };
-		58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationAcceptResponse.swift; path = "../../../../../../../../.Trash/finalYeon 오전 10.28.54/YeonbaIOS/YeonBa/GlobalAPI/NotificationAPI/DTO/Response/NotificationAcceptResponse.swift"; sourceTree = "<group>"; };
 		58294B882C0856DA00E7C198 /* ChatResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseMessage.swift; sourceTree = "<group>"; };
 		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
@@ -1524,7 +1524,7 @@
 				58E88E362BF790C900775F06 /* List */,
 				58E88E372BF790C900775F06 /* NotificationResponse.swift */,
 				58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */,
-				58294B862C083DC700E7C198 /* NotificationAcceptResponse.swift */,
+				3CE9A5112C0863EA00257FC5 /* NotificationAcceptResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2269,6 +2269,7 @@
 				58E88E532BF7916400775F06 /* MyMessageCell.swift in Sources */,
 				584DCF262B9CBA6C0081149F /* PlusCupidViewController.swift in Sources */,
 				58BB86772BB7DA1700F90050 /* VoiceMode.swift in Sources */,
+				3CE9A5122C0863EA00257FC5 /* NotificationAcceptResponse.swift in Sources */,
 				58D138142BEE725E0048C228 /* LoginRequest.swift in Sources */,
 				583F03522C05BDF300D68DA9 /* AttendancePopupViewController.swift in Sources */,
 				58E88E212BF7896300775F06 /* OtherProfileService.swift in Sources */,
@@ -2297,7 +2298,6 @@
 				58E88F9E2BFCB47700775F06 /* ArrowCounterManager.swift in Sources */,
 				58580EFC2BE13E490055F3E8 /* FavoriteVoiceDelegate.swift in Sources */,
 				58E8C3E32C0426EB0034E761 /* ArrowRechargeViewController.swift in Sources */,
-				58294B872C083DC700E7C198 /* NotificationAcceptResponse.swift in Sources */,
 				58580EFE2BE13E490055F3E8 /* FavoriteVoiceTableViewCell.swift in Sources */,
 				584DCF2B2B9D55830081149F /* SendCupidViewController.swift in Sources */,
 				58BB861B2BB543CA00F90050 /* ModeSelectPresentationController.swift in Sources */,
