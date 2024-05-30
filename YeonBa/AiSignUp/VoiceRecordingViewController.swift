@@ -319,7 +319,7 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
     
     func presentPopup() {
         // 팝업 뷰 컨트롤러를 생성하고 모달로 띄웁니다.
-        let popupViewController = VoicePopupViewcontroller(title: "연방님은 \(voiceMode)입니다!", desc: "연방님은 \(voiceMode)의 음역대를 가지고 계시군요!\n\(voiceMode)의 목소리를 이성에게 어필해 보세요!", navigation: navigationController)
+        let popupViewController = VoicePopupViewcontroller(title: "\(SignDataManager.shared.nickName!)님은 \(voiceMode)입니다!", desc: "연방님은 \(voiceMode)의 음역대를 가지고 계시군요!\n\(voiceMode)의 목소리를 이성에게 어필해 보세요!", navigation: navigationController)
         popupViewController.modalPresentationStyle = .overFullScreen
         self.present(popupViewController, animated: false)
     }
@@ -442,11 +442,11 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         
         if(SignDataManager.shared.gender == "남"){
             
-            if(averageFrequency <= 100){
+            if(averageFrequency <= 400){
                 voiceMode = "저음"
                 SignDataManager.shared.vocalRange = voiceMode
             }
-            else if(averageFrequency <= 150){
+            else if(averageFrequency <= 700){
                 voiceMode = "중음"
                 SignDataManager.shared.vocalRange = voiceMode
             }
@@ -457,11 +457,11 @@ class VoiceRecordingViewController: UIViewController, AVAudioRecorderDelegate {
         }
         else {
             
-            if(averageFrequency <= 200){
+            if(averageFrequency <= 500){
                 voiceMode = "저음"
                 SignDataManager.shared.vocalRange = voiceMode
             }
-            else if(averageFrequency <= 250){
+            else if(averageFrequency <= 800){
                 voiceMode = "중음"
                 SignDataManager.shared.vocalRange = voiceMode
             }

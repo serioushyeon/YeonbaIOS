@@ -35,7 +35,7 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     let text1 = UILabel().then{
-        $0.text = "연방님의 유사도는"
+        $0.text = "\(SignDataManager.shared.nickName!)님의 유사도는"
         $0.font = UIFont.pretendardExtraBold(size: 32)
         $0.textColor = .black // 검정색으로 설정
     }

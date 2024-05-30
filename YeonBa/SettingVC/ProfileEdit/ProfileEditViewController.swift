@@ -264,6 +264,7 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
             present(heightEditVC, animated: true)
         case 1:
             SignDataManager.shared.gender = profileDetail.gender
+            SignDataManager.shared.nickName = profileDetail.nickname
             let selectVC = ProfileVoiceEditRecodingviceController()
             navigationController?.pushViewController(selectVC, animated: false)
         case 2:
@@ -458,6 +459,7 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         navigationController?.popViewController(animated: true)
     }
     @objc func photoTapped() {
+        SignDataManager.shared.nickName = profileDetail.nickname
         let selectVC = ProfilePhotoEditViewController()
         navigationController?.pushViewController(selectVC, animated: false)
     }
