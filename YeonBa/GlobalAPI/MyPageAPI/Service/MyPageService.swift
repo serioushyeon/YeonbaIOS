@@ -16,7 +16,7 @@ protocol MyPageServiceProtocol {
     func chargeArrow(completion: @escaping (NetworkResult<StatusResponse<Int?>>)-> Void)
     func blockUsers(completion: @escaping (NetworkResult<StatusResponse<BlockResponse>>)-> Void)
     func blockUsersClear(queryDTO: BlcokUserIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
-    func editPhoto(bodyDTO:PhotoEditRequest, completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void)
+    func editPhoto(bodyDTO:PhotoEditRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
 }
 
 final class MyPageService: APIRequestLoader<MyPageTarget>, MyPageServiceProtocol {
