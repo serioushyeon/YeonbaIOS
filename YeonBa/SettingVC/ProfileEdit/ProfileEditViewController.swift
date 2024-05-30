@@ -263,10 +263,9 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
             heightEditVC.modalPresentationStyle = .pageSheet
             present(heightEditVC, animated: true)
         case 1:
-            let voiceEditVC = VoiceEditViewController()
-            voiceEditVC.delegate = self
-            voiceEditVC.modalPresentationStyle = .pageSheet
-            present(voiceEditVC, animated: true)
+            SignDataManager.shared.gender = profileDetail.gender
+            let selectVC = ProfileVoiceEditRecodingviceController()
+            navigationController?.pushViewController(selectVC, animated: false)
         case 2:
             let livingareaEditVC = LivingAreaViewController()
             livingareaEditVC.delegate = self
