@@ -15,6 +15,7 @@ enum MyPageTarget {
     case chargeArrow //화살 충전
     case blockUsers //유저 차단 목록 조회
     case blcokUsersClear(_ queryDTO: BlcokUserIdRequest) //유저 차단 해제
+    case editPhoto(_ bodyDTO: PhotoEditRequest)
 }
 
 extension MyPageTarget: TargetType {
@@ -33,6 +34,8 @@ extension MyPageTarget: TargetType {
             return .get
         case .blcokUsersClear:
             return .delete
+        case .editPhoto:
+            return .put
         }
         
     }
@@ -51,6 +54,8 @@ extension MyPageTarget: TargetType {
             return "/users/block"
         case let .blcokUsersClear(queryDTO):
             return "/users/\(queryDTO.userId)/block"
+        case .editPhoto:
+            return "/users/profile-photos"
         }
         
     }
@@ -69,6 +74,8 @@ extension MyPageTarget: TargetType {
             return .requestPlain
         case let .blcokUsersClear(queryDTO):
             return .requestQuery(queryDTO)
+        case let .editPhoto(bodyDTO):
+            return .requestWithMultipart(bodyDTO.toMultipartFormData())
         }
     }
     
@@ -86,7 +93,14 @@ extension MyPageTarget: TargetType {
             return .hasToken
         case .blcokUsersClear:
             return .hasToken
-        
+        case .chargeArrow:
+            return .hasToken
+        case .blockUsers:
+            return .hasToken
+        case .blcokUsersClear:
+            return .hasToken
+        case .editPhoto:
+            return .hasToken
         }
     }
     
@@ -104,7 +118,22 @@ extension MyPageTarget: TargetType {
             return .authorization
         case .blcokUsersClear:
             return .authorization
+        case .editPhoto:
+            return .authorization
         }
     }
 
 }
+extension PhotoEditRequest {
+    func toMultipartFormData() -> (MultipartFormData) -> Void {
+        return { formData in
+            let profilePhotos = self.profilePhotos
+            for (index, photo) in profilePhotos.enumerated() {
+                print("Index: \(index), Photo: \(photo)")
+                formData.append(photo, withName: "profilePhotos", fileName: "photo\(index).jpg", mimeType: "image/jpeg")
+            }
+            formData.append("\(self.photoSyncRate)".data(using: .utf8) ?? Data(), withName: "photoSyncRate")
+        }
+    }
+}
+

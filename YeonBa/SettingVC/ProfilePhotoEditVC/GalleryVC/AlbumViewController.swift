@@ -1,18 +1,18 @@
 //
-//  CustomPhotoGalleryViewController.swift
+//  AlbumViewController.swift
 //  YeonBa
 //
-//  Created by 김민솔 on 4/17/24.
+//  Created by jin on 5/29/24.
 //
 
 import UIKit
 import Photos
 
-protocol PhotoSelectionDelegate: AnyObject {
+protocol PhotoEditSelectionDelegate: AnyObject {
     func didSelectPhoto(_ image: UIImage)
 }
-class CustomPhotoGalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    weak var delegate: PhotoSelectionDelegate? // 델리게이트 속성 추가
+class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    weak var delegate: PhotoEditSelectionDelegate? // 델리게이트 속성 추가
     var allPhotos: PHFetchResult<PHAsset>!
     
     override func viewDidLoad() {
@@ -25,7 +25,13 @@ class CustomPhotoGalleryViewController: UIViewController, UICollectionViewDelega
         
         setupCollectionView()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "사진 앨범"
@@ -40,16 +46,8 @@ class CustomPhotoGalleryViewController: UIViewController, UICollectionViewDelega
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        collectionView.register(AlbumImageCell.self, forCellWithReuseIdentifier: "PhotoCell")
         view.addSubview(collectionView)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -57,7 +55,7 @@ class CustomPhotoGalleryViewController: UIViewController, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! AlbumImageCell
         let asset = allPhotos.object(at: indexPath.item)
         cell.configure(with: asset)
         return cell
@@ -72,9 +70,9 @@ class CustomPhotoGalleryViewController: UIViewController, UICollectionViewDelega
         PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { [weak self] image, info in
             guard let strongSelf = self, let image = image else { return }
             if let isDegradedImage = info?[PHImageResultIsDegradedKey] as? Bool, !isDegradedImage {
-                let photoDetailVC = FullScreenImageViewController(image: image)
+                let photoDetailVC = FullImageViewContoroller(image: image)
                 photoDetailVC.delegate = self?.delegate
-                self?.navigationController?.pushViewController(photoDetailVC, animated: true)
+                self?.navigationController?.pushViewController(photoDetailVC, animated: false)
             }
         }
     }

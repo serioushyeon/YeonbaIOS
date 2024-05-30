@@ -123,7 +123,7 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         $0.distribution = .fillEqually
     }
 
-    private let addPhotoImageViews = (0..<3).map { _ in UIImageView().then {
+    let addPhotoImageView1 = UIButton().then {
         $0.backgroundColor = .lightGray
         $0.layer.borderColor = UIColor.black.cgColor
         $0.layer.borderWidth = 1
@@ -131,8 +131,23 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.isUserInteractionEnabled = true
-        $0.image = UIImage(named: "Addpicture")
-    }}
+        $0.setImage(UIImage(named: "Addpicture"), for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFill
+        $0.addTarget(self, action: #selector(photoTapped), for: .touchUpInside)
+    }
+    
+    let addPhotoImageView2 = UIButton().then {
+        $0.backgroundColor = .lightGray
+        $0.layer.borderColor = UIColor.black.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 10
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.isUserInteractionEnabled = true
+        $0.setImage(UIImage(named: "Addpicture"), for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFill
+        $0.addTarget(self, action: #selector(photoTapped), for: .touchUpInside)
+    }
 
     private let aboutMeLabel = UILabel().then {
         $0.text = "About Me"
@@ -147,12 +162,56 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         $0.text = "Preference"
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
+    func updatePhotos() {
+        addPhotoImageView1.setImage(SignDataManager.shared.placeholderImage, for: .normal)
+        addPhotoImageView2.setImage(SignDataManager.shared.essentialImage, for: .normal)
+    }
+    // URL에서 UIImage를 생성하는 함수
+    func loadImageFromURL(url: URL) -> UIImage? {
+        do {
+            let data = try Data(contentsOf: url)
+            return UIImage(data: data)
+        } catch {
+            print("Failed to load image from URL:", error.localizedDescription)
+            return nil
+        }
+    }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        tabBarController?.tabBar.isHidden = false
+        setupNavigationBar()
+        setupNavigationBarButton()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        // 사용 예시
+        if let imageURL = URL(string: Config.s3URLPrefix + profileDetail.profilePhotoUrls[0]) {
+            if let image = loadImageFromURL(url: imageURL) {
+                let resizedImage = image.resizeImage(image: image, newWidth: 200) // 폭이 200인 이미지로 리사이징
+                    
+                addPhotoImageView1.setImage(resizedImage, for: .normal)
+            } else {
+                // 이미지 로드 실패
+                print("Failed to load image")
+            }
+        } else {
+            print("Invalid URL")
+        }
+        if let imageURL = URL(string: Config.s3URLPrefix + profileDetail.profilePhotoUrls[1]) {
+            if let image = loadImageFromURL(url: imageURL) {
+                let resizedImage = image.resizeImage(image: image, newWidth: 200) // 폭이 200인 이미지로 리사이징
+                    
+                addPhotoImageView2.setImage(resizedImage, for: .normal)
+            } else {
+                // 이미지 로드 실패
+                print("Failed to load image")
+            }
+        } else {
+            print("Invalid URL")
+        }
         setupLayout()
         setupNavigationBar()
         setupInfoFields()  // 정보 필드 설정
@@ -365,12 +424,13 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
             make.edges.equalToSuperview()
             make.height.equalTo(photoScrollView)
         }
-
-        addPhotoImageViews.forEach { imageView in
-            photoStackView.addArrangedSubview(imageView)
-            imageView.snp.makeConstraints { make in
-                make.size.equalTo(CGSize(width: 150, height: 150))
-            }
+        photoStackView.addArrangedSubview(addPhotoImageView1)
+        addPhotoImageView1.snp.makeConstraints { make in
+            make.size.equalTo(CGSize(width: 150, height: 150))
+        }
+        photoStackView.addArrangedSubview(addPhotoImageView2)
+        addPhotoImageView2.snp.makeConstraints { make in
+            make.size.equalTo(CGSize(width: 150, height: 150))
         }
     }
     
@@ -398,5 +458,10 @@ class ProfileEditViewController: UIViewController, UIViewControllerTransitioning
         apiEditProfile()
         navigationController?.popViewController(animated: true)
     }
+    @objc func photoTapped() {
+        let selectVC = ProfilePhotoEditViewController()
+        navigationController?.pushViewController(selectVC, animated: false)
+    }
 }
+
 

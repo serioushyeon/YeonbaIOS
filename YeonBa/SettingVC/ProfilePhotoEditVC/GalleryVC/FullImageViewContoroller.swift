@@ -1,8 +1,8 @@
 //
-//  FullScreenImageViewController.swift
+//  FullImageViewContoroller.swift
 //  YeonBa
 //
-//  Created by 김민솔 on 4/17/24.
+//  Created by jin on 5/29/24.
 //
 
 import UIKit
@@ -10,9 +10,9 @@ import SnapKit
 import Then
 import Alamofire
 
-class FullScreenImageViewController: UIViewController {
+class FullImageViewContoroller: UIViewController {
     var image: UIImage
-    weak var delegate: PhotoSelectionDelegate?
+    weak var delegate: PhotoEditSelectionDelegate?
     
     private var imageView: UIImageView!
     
@@ -32,11 +32,6 @@ class FullScreenImageViewController: UIViewController {
         setupNavigationBar()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
     private func setupImageView() {
         imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
@@ -47,7 +42,10 @@ class FullScreenImageViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.barStyle = .black
@@ -58,8 +56,8 @@ class FullScreenImageViewController: UIViewController {
         delegate?.didSelectPhoto(image)
         if let navController = navigationController {
             for controller in navController.viewControllers {
-                if let photoSelectionVC = controller as? PhotoSelectionViewController {
-                    navController.popToViewController(photoSelectionVC, animated: true)
+                if let photoSelectionVC = controller as? ProfilePhotoEditViewController {
+                    navController.popToViewController(photoSelectionVC, animated: false)
                     return
                 }
             }

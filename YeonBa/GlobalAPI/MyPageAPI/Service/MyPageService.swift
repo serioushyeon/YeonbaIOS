@@ -16,9 +16,11 @@ protocol MyPageServiceProtocol {
     func chargeArrow(completion: @escaping (NetworkResult<StatusResponse<Int?>>)-> Void)
     func blockUsers(completion: @escaping (NetworkResult<StatusResponse<BlockResponse>>)-> Void)
     func blockUsersClear(queryDTO: BlcokUserIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void)
+    func editPhoto(bodyDTO:PhotoEditRequest, completion: @escaping (NetworkResult<StatusResponse<String?>>) -> Void)
 }
 
 final class MyPageService: APIRequestLoader<MyPageTarget>, MyPageServiceProtocol {
+    
     func blockUsersClear(queryDTO: BlcokUserIdRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void) {
         fetchData(target: .blcokUsersClear(queryDTO), responseData: StatusResponse<Int?>.self, completion: completion)
     }
@@ -42,5 +44,8 @@ final class MyPageService: APIRequestLoader<MyPageTarget>, MyPageServiceProtocol
     func myProfile(completion: @escaping (NetworkResult<StatusResponse<ProfileResponse>>) -> Void) {
         fetchData(target: .myprofile, responseData: StatusResponse<ProfileResponse>.self, completion: completion)
     }
-    
+  
+    func editPhoto(bodyDTO: PhotoEditRequest, completion: @escaping (NetworkResult<StatusResponse<Int?>>) -> Void) {
+        fetchData(target: .editPhoto(bodyDTO), responseData: StatusResponse<Int?>.self, completion: completion)
+    }
 }

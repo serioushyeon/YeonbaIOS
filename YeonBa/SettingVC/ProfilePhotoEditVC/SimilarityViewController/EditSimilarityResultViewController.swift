@@ -1,10 +1,17 @@
+//
+//  EditSimilarityResultViewController.swift
+//  YeonBa
+//
+//  Created by jin on 5/30/24.
+//
+
 
 import UIKit
 import SnapKit
 import Then
 import Alamofire
 
-class AnalysisSyncResultViewController: UIViewController {
+class EditSimilarityResultViewController: UIViewController {
     
     var confidence1 = 0.0
     var confidence2 = 0.0
@@ -68,7 +75,7 @@ class AnalysisSyncResultViewController: UIViewController {
     }
     
     let startBtn = ActualGradientButton().then {
-        $0.setTitle("연바 시작하기", for: .normal)
+        $0.setTitle("프로필 사진 수정", for: .normal)
         $0.titleLabel?.font = UIFont.pretendardSemiBold(size: 16)
         $0.layer.cornerRadius = 30
         $0.layer.masksToBounds = true
@@ -89,101 +96,36 @@ class AnalysisSyncResultViewController: UIViewController {
     @objc func reSelfieBtnTapped() {
         if let navController = navigationController {
             for controller in navController.viewControllers {
-                if let photoSelectionVC = controller as? PhotoSelectionViewController {
+                if let photoSelectionVC = controller as? ProfilePhotoEditViewController {
                     navController.popToViewController(photoSelectionVC, animated: true)
                     return
                 }
             }
         }
     }
-    @objc func startBtnTapped() {
-        let dataManager = SignDataManager.shared
-        let signUpRequest = SignUpRequest (
-            socialId: dataManager.socialId!,
-            loginType: dataManager.loginType!,
-            gender: dataManager.gender!,
-            phoneNumber: dataManager.phoneNumber!,
-            birth: dataManager.birthDate!,
-            nickname: dataManager.nickName!,
-            height: dataManager.height,
-            bodyType: dataManager.bodyType!,
-            job: dataManager.job!,
-            activityArea: dataManager.activityArea!,
-            mbti: dataManager.mbti!,
-            vocalRange: dataManager.vocalRange!,
-            profilePhotos: dataManager.profilePhotos,
-            photoSyncRate: dataManager.confidence,
-            lookAlikeAnimal: dataManager.lookAlikeAnimal!,
-            preferredAnimal: dataManager.preferredAnimal!,
-            preferredArea: dataManager.preferredArea!,
-            preferredVocalRange: dataManager.preferredVocalRange!,
-            preferredAgeLowerBound: dataManager.preferredAgeLowerBound,
-            preferredAgeUpperBound: dataManager.preferredAgeUpperBound,
-            preferredHeightLowerBound: dataManager.preferredHeightLowerBound!,
-            preferredHeightUpperBound: dataManager.preferredHeightUpperBound!,
-            preferredBodyType: dataManager.preferredBodyType!,
-            preferredMbti: dataManager.preferredMbti!
-        )
-        print(signUpRequest)
-        print("프로필사진: \(dataManager.profilePhotos)")
-        NetworkService.shared.signUpService.signUp(bodyDTO: signUpRequest) { response in
+    func apiEditPhoto(){
+        let editRequest = PhotoEditRequest(profilePhotos: SignDataManager.shared.profilePhotos!, photoSyncRate: SignDataManager.shared.confidence!)
+        NetworkService.shared.mypageService.editPhoto(bodyDTO: editRequest) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let data):
-                guard let data = data.data else { return }
-                KeychainHandler.shared.accessToken = data.jwt
-                KeychainHandler.shared.refreshToken = data.jwtRefreshToken
-                print("회원가입 성공")
-                let jwt = JWT(token: data.jwt)
-                if let userId = jwt?.userId {
-                    KeychainHandler.shared.kakaoUserID = jwt?.userId ?? 0
-                    print("유저 아이디\(KeychainHandler.shared.kakaoUserID)")
-                } else {
-                    
-                }
-                // AccessToken이 제대로 설정되었을 때에만 Authorization 헤더 설정
-                if !data.jwt.isEmpty {
-                    NetworkService.shared.setAuthorizationHeader(token: data.jwt)
-                    let deviceToken = KeychainHandler.shared.deviceToken
-                    self.updateDeviceTokenOnServer(deviceToken: deviceToken)
-                    print("device token: \(KeychainHandler.shared.deviceToken)")
-                    
-                }
-
+                print("수정 성공")
             default:
-                print("회원가입 에러")
+                print("수정 실패")
             }
         }
-        //MARK: -- 팝업
-//        let welcomePopupVC = WelcomePopupViewController()
-//               welcomePopupVC.modalPresentationStyle = .overFullScreen
-//               welcomePopupVC.modalTransitionStyle = .crossDissolve
-//               present(welcomePopupVC, animated: true, completion: nil)
-        let tabVC = TabBarController()
-        self.changeRootViewController(rootViewController: tabVC)
     }
-    private func updateDeviceTokenOnServer(deviceToken: String) {
-        guard let url = URL(string: "https://api.yeonba.co.kr/users/device-token") else { return }
-        let headers: HTTPHeaders = [
-            "Content-Type": "application/json",
-            "Authorization": "Bearer \(KeychainHandler.shared.accessToken)"
-        ]
-        
-        let parameters: [String: Any] = ["deviceToken": deviceToken]
-        
-        AF.request(url, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    if let httpResponse = response.response, httpResponse.statusCode == 200 {
-                        print("Device token updated successfully.")
-                    } else {
-                        print("Failed to update device token. Status code: \(response.response?.statusCode ?? 0)")
-                        print("Response data: \(value)")
-                    }
-                case .failure(let error):
-                    print("Error updating device token: \(error.localizedDescription)")
+    @objc func startBtnTapped() {
+        if let navController = navigationController {
+            for controller in navController.viewControllers {
+                if let photoSelectionVC = controller as? ProfileEditViewController {
+                    apiEditPhoto()
+                    photoSelectionVC.updatePhotos()
+                    navController.popToViewController(photoSelectionVC, animated: true)
+                    return
                 }
             }
+        }
     }
     @objc func backButtonTapped() {
         // 뒤로 가기 로직을 구현
@@ -202,7 +144,6 @@ class AnalysisSyncResultViewController: UIViewController {
         view.addSubview(loadingIndicator)
         loadingIndicator.center = view.center
         loadingIndicator.startAnimating()
-        
         
         // Create a dispatch group
         let dispatchGroup = DispatchGroup()
@@ -234,7 +175,7 @@ class AnalysisSyncResultViewController: UIViewController {
                 }
                 else{
                     SignDataManager.shared.confidence = confidence
-                    self.explainText.text = "지금 바로 원하는 이성을 찾아 보세요!"
+                    self.explainText.text = "버튼을 눌러 프로필 사진 수정을 완료할 수 있어요! "
                     self.selfieBtn.isHidden = true
                     self.aiBtn.isHidden = true
                 }
@@ -304,11 +245,14 @@ class AnalysisSyncResultViewController: UIViewController {
          super.viewWillAppear(animated)
          self.navigationItem.hidesBackButton = true
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        tabBarController?.tabBar.isHidden = false
+    }
     // MARK: - UI Layout
     func configUI() {
         selfieImage.snp.makeConstraints{ make in
-            make.top.equalTo(view.safeAreaHeight).offset(20)
+            make.top.equalToSuperview().offset(100)
             make.right.equalTo(view.snp.centerX).offset(20)
             make.left.equalTo(view.snp.left).offset(20)
             make.height.equalTo(314)
@@ -316,7 +260,7 @@ class AnalysisSyncResultViewController: UIViewController {
         }
         
         profileImage1.snp.makeConstraints{ make in
-            make.top.equalTo(view.safeAreaHeight).offset(20)
+            make.top.equalToSuperview().offset(100)
             make.left.equalTo(selfieImage.snp.right).offset(10)
             make.right.equalTo(view.snp.right).offset(-20)
             make.height.equalTo(152)
