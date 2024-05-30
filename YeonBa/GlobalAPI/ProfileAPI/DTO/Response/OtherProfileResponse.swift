@@ -25,4 +25,5 @@ struct OtherProfileResponse: Codable {
     let preferredMbti : String
     let preferredBodyType : String
     let alreadySentArrow : Bool
+    let canChat : Bool
 }

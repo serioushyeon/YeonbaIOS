@@ -557,6 +557,14 @@ class OtherProfileViewController: UIViewController {
             self.sendBtn.isHidden = false
             self.sendDoneBtn.isHidden = true
         }
+        if(data.canChat){
+            self.sendChatBtn.isHidden = false
+            self.sendChatDoneBtn.isHidden = true
+        }
+        else{
+            self.sendChatBtn.isHidden = true
+            self.sendChatDoneBtn.isHidden = false
+        }
         // 이미지 로딩
         loadProfileImages(urls: data.profilePhotosUrls)
     }
