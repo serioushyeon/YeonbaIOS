@@ -12,8 +12,8 @@ import Kingfisher
 import Charts
 
 class SearchResultViewController: UIViewController {
-    private let preferLocation: String
-    private let preferVoice: String
+    private var preferLocation: String
+    private var preferVoice: String
     private let ageRange: String
     private let heightRange: String
     private let ageLowerBound: Int
@@ -26,6 +26,12 @@ class SearchResultViewController: UIViewController {
     init(preferLocation: String, preferVoice: String, ageRange: String, heightRange: String, ageLowerBound: Int, ageUpperBound: Int, heightLowerBound: Int, heightUpperBound: Int, includePreferredAnimal : Bool, totalPage : Int) {
         self.preferLocation = preferLocation
         self.preferVoice = preferVoice
+        if(preferLocation.isEmpty){
+            self.preferLocation = "전체"
+        }
+        if(preferVoice.isEmpty){
+            self.preferVoice = "전체"
+        }
         self.ageRange = ageRange
         self.heightRange = heightRange
         self.ageLowerBound = ageLowerBound

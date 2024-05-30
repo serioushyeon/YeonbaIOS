@@ -382,22 +382,29 @@ class SearchViewController: UIViewController {
     }
     //이성 결과 넘어가는 viewcontroller 액션
     @objc func navigateToSearchResultViewController(_ sender: Any) {
+        
         preferLocation = locationChoiceLabel.text
         preferVoice = voiceChoiceLabel.text
+        if(preferLocation == "전체"){
+            preferLocation = nil
+        }
+        if(preferVoice == "전체"){
+            preferVoice = nil
+        }
         let ageLowerBound = Int(ageSlider.lower)
         let ageUpperBound = Int(ageSlider.upper)
         let heightLowerBound = Int(heightSlider.lower)
         let heightUpperBound = Int(heightSlider.upper)
         let searchUserRequest = SearchUserRequest(
-                page: 0,
-                area: preferLocation,
-                vocalRange: preferVoice,
-                ageLowerBound: ageLowerBound,
-                ageUpperBound: ageUpperBound,
-                heightLowerBound: heightLowerBound,
-                heightUpperBound: heightUpperBound,
-                includePreferredAnimal: isAnimalPreferred
-            )
+            page: 0,
+            area: preferLocation,
+            vocalRange: preferVoice,
+            ageLowerBound: ageLowerBound,
+            ageUpperBound: ageUpperBound,
+            heightLowerBound: heightLowerBound,
+            heightUpperBound: heightUpperBound,
+            includePreferredAnimal: isAnimalPreferred
+        )
         print(searchUserRequest)
         NetworkService.shared.searchService.searchUser(bodyDTO: searchUserRequest) { [self] response in
             switch response {
