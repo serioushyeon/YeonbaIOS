@@ -101,6 +101,7 @@ class HomeViewController: UIViewController {
         apiGetArrowCount()
         loadRecommandList()
         updateTitle()
+        checkAttendance()
         tableView.reloadData()
         collectionview.reloadData()
     }
@@ -138,7 +139,6 @@ class HomeViewController: UIViewController {
         let heartCountContainerView = UIView()
         heartCountContainerView.addSubview(heartCountLabel)
         
-        heartCountLabel.text = "5" // 초기 하트 개수
         heartCountLabel.textColor = UIColor.primary
         heartCountLabel.sizeToFit()
         
@@ -355,6 +355,32 @@ class HomeViewController: UIViewController {
                 }
             }
     }
+    private func checkAttendance() {
+        let lastPopupDateKey = "lastPopupDate"
+        let lastPopupDate = UserDefaults.standard.object(forKey: lastPopupDateKey) as? Date ?? Date.distantPast
+        let currentDate = Date()
+        
+        if !Calendar.current.isDate(lastPopupDate, inSameDayAs: currentDate) {
+            // 하루가 지났다면 팝업을 띄웁니다.
+            showAttendancePopup()
+            // 마지막 팝업 본 시간을 현재 시간으로 업데이트
+            UserDefaults.standard.set(currentDate, forKey: lastPopupDateKey)
+        }
+    }
+
+    private func showAttendancePopup() {
+        let attendancePopupVC = AttendancePopupViewController()
+        attendancePopupVC.modalPresentationStyle = .overFullScreen
+        attendancePopupVC.modalTransitionStyle = .crossDissolve
+        present(attendancePopupVC, animated: true, completion: nil)
+    }
+    private func showWelcomePopup() {
+        let welcomePopupVC = WelcomePopupViewController()
+        welcomePopupVC.modalPresentationStyle = .overFullScreen
+        welcomePopupVC.modalTransitionStyle = .crossDissolve
+        present(welcomePopupVC, animated: true, completion: nil)
+    }
+    
     
 }
 extension UIFont {

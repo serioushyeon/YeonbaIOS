@@ -19,7 +19,16 @@ struct KeychainHandler {
     private let authorizationCodeKey = "authorizationCode"
     private let userIDKey = "userID"
     private let userNameKey = "userName"
+    private let deviceTokenKey = "deviceToken"
     
+    var deviceToken: String {
+        get {
+            return KeychainWrapper.standard.string(forKey: deviceTokenKey) ?? ""
+        }
+        set {
+            KeychainWrapper.standard.set(newValue, forKey: deviceTokenKey)
+        }
+    }
     var accessToken: String {
         get {
             return KeychainWrapper.standard.string(forKey: accessTokenKey) ?? ""

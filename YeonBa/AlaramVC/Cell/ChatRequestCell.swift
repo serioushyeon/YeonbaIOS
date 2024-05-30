@@ -3,8 +3,17 @@ import SnapKit
 import Then
 import Kingfisher
 
+protocol ChatRequestNotificationCellDelegate: AnyObject {
+    func didTapAcceptButton(notificationId: Int)
+}
+protocol ChatRefuseNotificationCellDelegate: AnyObject {
+    func didTapRefuseButton(notificationId: Int)
+}
 // 채팅 요청 알림 셀 (Chat Request Cell)
 class ChatRequestCell: UITableViewCell {
+    weak var delegate: ChatRequestNotificationCellDelegate?
+    weak var refuseDelegate: ChatRefuseNotificationCellDelegate?
+    var notificationId = 0
     //MARK: - UI Components
     let profileImageView = UIImageView().then{
         $0.image = UIImage(named: "woosuck")
@@ -26,7 +35,7 @@ class ChatRequestCell: UITableViewCell {
         $0.layer.borderWidth = 1.4
         $0.backgroundColor = UIColor.white
         $0.layer.masksToBounds = true
-        $0.addTarget(self, action: #selector(chatBtnTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(AcceptBtnTapped), for: .touchUpInside)
     }
     let timeLabel = UILabel().then{
         $0.text = "3분 전"
@@ -56,10 +65,12 @@ class ChatRequestCell: UITableViewCell {
     }
     //MARK: - Actions
     @objc func rejectBtnTapped() {
-        print("rejectBtnTapped tapped")
+        delegate?.didTapAcceptButton(notificationId: notificationId)
+        print("채팅 거절")
     }
-    @objc func chatBtnTapped() {
-        print("rejectBtnTapped tapped")
+    @objc func AcceptBtnTapped() {
+        delegate?.didTapAcceptButton(notificationId: notificationId)
+        print("채팅요청 수락")
     }
     func addSubViews() {
         contentView.addSubview(profileImageView)
@@ -112,16 +123,36 @@ class ChatRequestCell: UITableViewCell {
         }
     }
     func configure(with notification: Notifications) {
-            messageLabel.text = notification.content
-            timeLabel.text = "\(notification.createdAt.timeAgoSinceDate())"
-            print("알림내용:\(notification.content)")
+        messageLabel.text = notification.content
+        notificationId = notification.notificationId ?? 00000
+        print("알림내용:\(notification.content)")
+        if let dateString = notification.createdAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            var date: Date?
+            if dateString.contains(".") {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+                date = dateFormatter.date(from: dateString)
+            }
+            if date == nil {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                date = dateFormatter.date(from: dateString)
+            }
             
-            var profilePhotoUrl = notification.senderProfilePhotoUrl
-            if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
-                print("Loading image from URL: \(url)")
-                profileImageView.kf.setImage(with: url)
+            if let date = date {
+                let timeAgo = date.toRelativeString()
+                timeLabel.text = timeAgo
             } else {
-                print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+                timeLabel.text = "Invalid Date"
             }
         }
+        var profilePhotoUrl = notification.senderProfilePhotoUrl
+        if let url = URL(string: Config.s3URLPrefix + profilePhotoUrl) {
+            print("Loading image from URL: \(url)")
+            profileImageView.kf.setImage(with: url)
+        } else {
+            print("Invalid URL: \(Config.s3URLPrefix + profilePhotoUrl)")
+        }
+    }
 }

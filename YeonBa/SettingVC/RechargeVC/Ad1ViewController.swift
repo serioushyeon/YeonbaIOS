@@ -89,7 +89,7 @@ class Ad1ViewController: UIViewController {
             timerButton.setTitle("X", for: .normal)
             timerButton.removeTarget(self, action: nil, for: .allEvents)
             timerButton.addTarget(self, action: #selector(closeAd), for: .touchUpInside)
-            closeTimer?.invalidate()  // 타이머 중지
+            closeTimer?.invalidate() 
         }
     }
 

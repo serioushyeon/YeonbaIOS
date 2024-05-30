@@ -4,11 +4,12 @@ import Then
 import Alamofire
 
 class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var chatModel : [ChatListResponse] = []
+    var chatModel: [ChatListResponse] = []
+
     // MARK: - UI Components
     let bodyStackView = UIStackView().then {
-      $0.axis = .vertical
-      $0.spacing = 24
+        $0.axis = .vertical
+        $0.spacing = 24
     }
     let heartImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -25,8 +26,11 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         $0.dataSource = self
         $0.delegate = self
     }
-    
-    //MARK: - Actions
+    let activityIndicator = UIActivityIndicatorView(style: .large).then {
+        $0.hidesWhenStopped = true
+    }
+
+    // MARK: - Actions
     @objc func backButtonTapped() {
         // 뒤로 가기 로직을 구현
         dismiss(animated: true, completion: nil)
@@ -37,78 +41,83 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "채팅"
-        updateChat()
         addSubViews()
         configUI()
+        updateChat()
     }
+
     func reloadData() {
         updateChat()
     }
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         self.navigationItem.hidesBackButton = true
+        super.viewWillAppear(animated)
+        self.navigationItem.hidesBackButton = true
     }
-    
+
     // MARK: - Empty UI Layout
     func addEmptySubviews() {
         view.addSubview(bodyStackView)
         [self.heartImage, self.contentLabel]
-          .forEach(self.bodyStackView.addArrangedSubview(_:))
+            .forEach(self.bodyStackView.addArrangedSubview(_:))
     }
+    
     func configEmptyUI() {
         self.bodyStackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
     }
+
     // MARK: - UI Layout
-    private func addSubViews(){
+    private func addSubViews() {
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
     }
+    
     private func configUI() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
+
     // MARK: - Networking
     private func updateChat() {
+        activityIndicator.startAnimating()
+        
         NetworkService.shared.chatService.chatList() { response in
             switch response {
             case .success(let statusResponse):
                 guard let data = statusResponse.data else { return }
                 
-                if let data = statusResponse.data {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.chatModel = data
+                    self.tableView.reloadData()
                     
-                    DispatchQueue.main.async {
-                        print("Fetched chatData: \(data)")
-                        self.chatModel = data
-                        self.tableView.reloadData()
+                    if data.isEmpty {
+                        self.addEmptySubviews()
+                        self.configEmptyUI()
                     }
-//                    self.configUI()
-//                    self.addSubViews()
-                    
-//                    if(data.isEmpty) {
-//                        self.addEmptySubviews()
-//                        self.configEmptyUI()
-//                    }
-//                    else {
-//                        
-//                    }
                 }
             default:
-                print("데이터 안들어옴")
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    print("데이터 안들어옴")
+                }
             }
         }
     }
-    
+
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of notification types for simplicity
         return chatModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChattingListCell.identifier, for: indexPath)as? ChattingListCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChattingListCell.identifier, for: indexPath) as? ChattingListCell else {
             return UITableViewCell()
         }
         let post = chatModel[indexPath.row]
@@ -120,6 +129,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100 // Adjust cell height accordingly
     }
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // '나가기' 액션
         let leaveAction = UIContextualAction(style: .destructive, title: "나가기") { action, view, completionHandler in
@@ -138,20 +148,17 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         let configuration = UISwipeActionsConfiguration(actions: [leaveAction, blockAction])
         return configuration
     }
-    //아이템 클릭
+
+    // 아이템 클릭
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRoomId = chatModel[indexPath.row].id
-        let ChattingRoomViewController = ChattingRoomViewController()
-        ChattingRoomViewController.roomId = selectedRoomId
+        let chattingRoomViewController = ChattingRoomViewController()
+        chattingRoomViewController.roomId = selectedRoomId
         let chatUserName = chatModel[indexPath.row].partnerName
         let chatUserProfile = chatModel[indexPath.row].partnerProfileImageUrl
-        ChattingRoomViewController.chatUserName = chatUserName
-        ChattingRoomViewController.partnerProfileImageUrl = chatUserProfile
-        navigationController?.pushViewController(ChattingRoomViewController, animated: true)
-            // 선택된 셀의 선택을 해제합니다.
+        chattingRoomViewController.chatUserName = chatUserName
+        chattingRoomViewController.partnerProfileImageUrl = chatUserProfile
+        navigationController?.pushViewController(chattingRoomViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
-        }
+    }
 }
-
-// MARK: - Extensions
-// Extend UITableViewCell to create a custom cell

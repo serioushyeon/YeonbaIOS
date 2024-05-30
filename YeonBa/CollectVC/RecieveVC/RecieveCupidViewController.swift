@@ -56,8 +56,15 @@ class RecieveCupidViewController: UIViewController, APIReloadable {
     }
 
     func apiRecieveList(page: Int) {
-        guard !isLoading && page < totalPage else { return }
+        guard !isLoading && page < totalPage else {
+            if page >= totalPage {
+                print("Reached the last page.")
+            }
+            return
+        }
         isLoading = true
+        loadingIndicator.startAnimating()
+        
         let userListRequest = UserListRequest(type: "ARROW_SENDERS", page: page)
         NetworkService.shared.otherProfileService.userList(bodyDTO: userListRequest) { [weak self] response in
             guard let self = self else { return }
@@ -177,9 +184,7 @@ extension RecieveCupidViewController: UICollectionViewDelegateFlowLayout {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.size.height
 
-        if offsetY > contentHeight - height * 2, currentPage < totalPage - 1, !isLoading {
-            currentPage += 1
-            loadingIndicator.startAnimating()
+        if offsetY > contentHeight - height - 100 {
             apiRecieveList(page: currentPage)
         }
     }
