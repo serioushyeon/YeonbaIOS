@@ -20,6 +20,9 @@
 		3CE9A4EB2C0850BF00257FC5 /* ProfilePhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */; };
 		3CE9A4ED2C0850E900257FC5 /* PhotoEditRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A4EC2C0850E900257FC5 /* PhotoEditRequest.swift */; };
 		3CE9A5122C0863EA00257FC5 /* NotificationAcceptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A5112C0863EA00257FC5 /* NotificationAcceptResponse.swift */; };
+		3CE9A5202C087EFD00257FC5 /* ProfileVoiceEditPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A51C2C087EFD00257FC5 /* ProfileVoiceEditPopUp.swift */; };
+		3CE9A5212C087EFD00257FC5 /* ProfileVoiceEditPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A51D2C087EFD00257FC5 /* ProfileVoiceEditPopUpViewController.swift */; };
+		3CE9A5222C087EFD00257FC5 /* ProfileVoiceEditRecodingviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9A51E2C087EFD00257FC5 /* ProfileVoiceEditRecodingviceController.swift */; };
 		580AAD2C2BA9375200672050 /* LocationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580AAD2B2BA9375200672050 /* LocationModalViewController.swift */; };
 		58294B7B2C06F1FE00E7C198 /* PermissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */; };
 		58294B7D2C0707F400E7C198 /* BlockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B7C2C0707F400E7C198 /* BlockResponse.swift */; };
@@ -314,6 +317,9 @@
 		3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoEditViewController.swift; sourceTree = "<group>"; };
 		3CE9A4EC2C0850E900257FC5 /* PhotoEditRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditRequest.swift; sourceTree = "<group>"; };
 		3CE9A5112C0863EA00257FC5 /* NotificationAcceptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAcceptResponse.swift; sourceTree = "<group>"; };
+		3CE9A51C2C087EFD00257FC5 /* ProfileVoiceEditPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVoiceEditPopUp.swift; sourceTree = "<group>"; };
+		3CE9A51D2C087EFD00257FC5 /* ProfileVoiceEditPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVoiceEditPopUpViewController.swift; sourceTree = "<group>"; };
+		3CE9A51E2C087EFD00257FC5 /* ProfileVoiceEditRecodingviceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVoiceEditRecodingviceController.swift; sourceTree = "<group>"; };
 		467FFFB042D2F5079A139D08 /* Pods-YeonBa-YeonBaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YeonBa-YeonBaUITests.release.xcconfig"; path = "Target Support Files/Pods-YeonBa-YeonBaUITests/Pods-YeonBa-YeonBaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		580AAD2B2BA9375200672050 /* LocationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModalViewController.swift; sourceTree = "<group>"; };
 		58294B7A2C06F1FE00E7C198 /* PermissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionResponse.swift; sourceTree = "<group>"; };
@@ -651,6 +657,16 @@
 				3CE9A4E02C0850BF00257FC5 /* ProfilePhotoEditViewController.swift */,
 			);
 			path = ProfilePhotoEditVC;
+			sourceTree = "<group>";
+		};
+		3CE9A51F2C087EFD00257FC5 /* ProfileVoiceEditVC */ = {
+			isa = PBXGroup;
+			children = (
+				3CE9A51C2C087EFD00257FC5 /* ProfileVoiceEditPopUp.swift */,
+				3CE9A51D2C087EFD00257FC5 /* ProfileVoiceEditPopUpViewController.swift */,
+				3CE9A51E2C087EFD00257FC5 /* ProfileVoiceEditRecodingviceController.swift */,
+			);
+			path = ProfileVoiceEditVC;
 			sourceTree = "<group>";
 		};
 		44FA544D8692B790EA8732E3 /* Pods */ = {
@@ -1746,6 +1762,7 @@
 		58E88F872BFCB47700775F06 /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
+				3CE9A51F2C087EFD00257FC5 /* ProfileVoiceEditVC */,
 				3CE9A4E12C0850BF00257FC5 /* ProfilePhotoEditVC */,
 				58294B832C070DDF00E7C198 /* RechargeVC */,
 				58294B802C070AE800E7C198 /* BlockVC */,
@@ -2113,6 +2130,7 @@
 				58580F022BE13E490055F3E8 /* MbtiMode.swift in Sources */,
 				58580F0F2BE1420E0055F3E8 /* RecieveCupidCollectionViewCell.swift in Sources */,
 				58BB85D52BB3B02900F90050 /* OtherProfile.swift in Sources */,
+				3CE9A5202C087EFD00257FC5 /* ProfileVoiceEditPopUp.swift in Sources */,
 				58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */,
 				58580F002BE13E490055F3E8 /* AgeMode.swift in Sources */,
 				58E8C3E12C0426930034E761 /* Ad3ViewController.swift in Sources */,
@@ -2147,6 +2165,7 @@
 				58580EEE2BE13E490055F3E8 /* FavoriteAnimalPresentationController.swift in Sources */,
 				58E88E152BF7896300775F06 /* BlockRequest.swift in Sources */,
 				58E88E192BF7896300775F06 /* ReportRequest.swift in Sources */,
+				3CE9A5222C087EFD00257FC5 /* ProfileVoiceEditRecodingviceController.swift in Sources */,
 				3CE9A4E32C0850BF00257FC5 /* AlbumViewController.swift in Sources */,
 				58D138122BEE720D0048C228 /* LoginResponse.swift in Sources */,
 				583F035A2C06C96B00D68DA9 /* ProfileEditRequest.swift in Sources */,
@@ -2208,6 +2227,7 @@
 				58580EF62BE13E490055F3E8 /* FavoriteMbtiDelegate.swift in Sources */,
 				582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */,
 				58E88E312BF7896E00775F06 /* HomeService.swift in Sources */,
+				3CE9A5212C087EFD00257FC5 /* ProfileVoiceEditPopUpViewController.swift in Sources */,
 				589CDD662BE7E78400BA332F /* NetworkService.swift in Sources */,
 				58D138E42BF219B70048C228 /* NicknameRequest.swift in Sources */,
 				58580EF22BE13E490055F3E8 /* FavoriteBodyViewController.swift in Sources */,
