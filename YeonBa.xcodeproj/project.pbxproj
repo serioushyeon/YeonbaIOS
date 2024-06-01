@@ -30,6 +30,8 @@
 		58294B822C070B1D00E7C198 /* UserBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */; };
 		58294B852C07112400E7C198 /* BlcokUserIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */; };
 		58294B892C0856DA00E7C198 /* ChatResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B882C0856DA00E7C198 /* ChatResponseMessage.swift */; };
+		58294B8C2C0956A800E7C198 /* EditTallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B8B2C0956A800E7C198 /* EditTallViewController.swift */; };
+		58294B8F2C0958C600E7C198 /* EditAgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58294B8E2C0958C600E7C198 /* EditAgeViewController.swift */; };
 		582DB1782BBE89E500600EA7 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */; };
 		582DB17B2BBE89F800600EA7 /* ArrowNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */; };
 		582DB17F2BBE8A0A00600EA7 /* ChatRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */; };
@@ -328,6 +330,8 @@
 		58294B812C070B1D00E7C198 /* UserBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBlockTableViewCell.swift; sourceTree = "<group>"; };
 		58294B842C07112400E7C198 /* BlcokUserIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlcokUserIdRequest.swift; sourceTree = "<group>"; };
 		58294B882C0856DA00E7C198 /* ChatResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseMessage.swift; sourceTree = "<group>"; };
+		58294B8B2C0956A800E7C198 /* EditTallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTallViewController.swift; sourceTree = "<group>"; };
+		58294B8E2C0958C600E7C198 /* EditAgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAgeViewController.swift; sourceTree = "<group>"; };
 		582DB1772BBE89E500600EA7 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		582DB17A2BBE89F800600EA7 /* ArrowNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowNotificationCell.swift; sourceTree = "<group>"; };
 		582DB17E2BBE8A0900600EA7 /* ChatRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRequestCell.swift; sourceTree = "<group>"; };
@@ -700,6 +704,22 @@
 				58E8C3E22C0426EB0034E761 /* ArrowRechargeViewController.swift */,
 			);
 			path = RechargeVC;
+			sourceTree = "<group>";
+		};
+		58294B8A2C09568600E7C198 /* TallEdit */ = {
+			isa = PBXGroup;
+			children = (
+				58294B8B2C0956A800E7C198 /* EditTallViewController.swift */,
+			);
+			path = TallEdit;
+			sourceTree = "<group>";
+		};
+		58294B8D2C0958AA00E7C198 /* AgeEdit */ = {
+			isa = PBXGroup;
+			children = (
+				58294B8E2C0958C600E7C198 /* EditAgeViewController.swift */,
+			);
+			path = AgeEdit;
 			sourceTree = "<group>";
 		};
 		582DB1762BBE89CB00600EA7 /* AlaramVC */ = {
@@ -1743,6 +1763,8 @@
 		58E88F792BFCB47700775F06 /* ProfileEdit */ = {
 			isa = PBXGroup;
 			children = (
+				58294B8D2C0958AA00E7C198 /* AgeEdit */,
+				58294B8A2C09568600E7C198 /* TallEdit */,
 				58E88F6D2BFCB47700775F06 /* BodyEditViewController.swift */,
 				58E88F6E2BFCB47700775F06 /* FaceEditViewController.swift */,
 				58E88F6F2BFCB47700775F06 /* HeightEditDelegate.swift */,
@@ -2295,6 +2317,7 @@
 				58E88E212BF7896300775F06 /* OtherProfileService.swift in Sources */,
 				3CE9A4E52C0850BF00257FC5 /* EditSimilarityProgressViewController.swift in Sources */,
 				58580F052BE13E490055F3E8 /* SignWeightMode.swift in Sources */,
+				58294B8F2C0958C600E7C198 /* EditAgeViewController.swift in Sources */,
 				584DCF722B9FF1040081149F /* SendCupidCollectionViewCell.swift in Sources */,
 				589CDD012BE51D8300BA332F /* SignDataManager.swift in Sources */,
 				58E88FC42BFDB6FC00775F06 /* ChatAcceptanceCell.swift in Sources */,
@@ -2327,6 +2350,7 @@
 				58580EB52BE0BA080055F3E8 /* JobSelectionViewController.swift in Sources */,
 				589CDCFB2BE5091800BA332F /* TargetType.swift in Sources */,
 				58BB85DB2BB4230B00F90050 /* HomeCollectionViewCell.swift in Sources */,
+				58294B8C2C0956A800E7C198 /* EditTallViewController.swift in Sources */,
 				58580EB92BE0BA120055F3E8 /* NicknameSettingViewController.swift in Sources */,
 				58E88E6A2BF892D400775F06 /* ChatContentRequest.swift in Sources */,
 				589CDD642BE7E74400BA332F /* YeonBaRequestInterceptor.swift in Sources */,

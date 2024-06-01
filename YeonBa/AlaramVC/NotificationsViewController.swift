@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
-class NotificationsViewController: UIViewController, ArrowNotificationCellDelegate, ChatRequestNotificationCellDelegate, ChatGoingNotificationCellDelegate, ChatRefuseNotificationCellDelegate {
+class NotificationsViewController: UIViewController, ArrowNotificationCellDelegate, ChatRequestNotificationCellDelegate, ChatGoingNotificationCellDelegate {
     
     
     // MARK: - UI Components
@@ -205,7 +205,6 @@ extension NotificationsViewController: UITableViewDelegate,UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatRequestCell", for: indexPath) as! ChatRequestCell
             cell.selectionStyle = .none
             cell.delegate = self
-            cell.refuseDelegate = self
             cell.configure(with: notifications)
             return cell
         case "CHATTING_REQUEST_ACCEPTED":
